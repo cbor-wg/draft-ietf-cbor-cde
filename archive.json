@@ -1,0 +1,103 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-10-05T00:57:55.426065+00:00",
+  "repo": "cabo/det",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOJ8fYd85vANwe",
+      "title": "det: more use cases",
+      "url": "https://github.com/cabo/det/issues/1",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Use Wolf's list of use cases <https://mailarchive.ietf.org/arch/msg/cbor/RaZfA5XLMRQ65kKu_XstEPwMK2k>\r\nto generate a more complete list in det.",
+      "createdAt": "2023-08-22T23:26:34Z",
+      "updatedAt": "2023-08-22T23:26:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOJ8fYd85vJJEG",
+      "title": "det: Add pseudocode for preferred encoding and numeric reduction",
+      "url": "https://github.com/cabo/det/issues/2",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-08-24T08:28:54Z",
+      "updatedAt": "2023-08-24T08:28:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOJ8fYd85vJLtU",
+      "title": "terminology: f16, float16, binary16",
+      "url": "https://github.com/cabo/det/issues/3",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Do not mix up these terms:\r\n\r\n* f16 (Rust name for a platform level storage type),\r\n* float16 (CDDL name for a floating point precision and range), and \r\n* binary16 (IEEE 754 name for a binary representation of floating point values).\r\n\r\n(and 32, 64).",
+      "createdAt": "2023-08-24T08:35:49Z",
+      "updatedAt": "2023-08-24T08:35:49Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": []
+}
