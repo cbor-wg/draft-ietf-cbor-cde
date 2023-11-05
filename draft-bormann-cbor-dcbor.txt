@@ -4,18 +4,23 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Experimental                               24 July 2023
-Expires: 25 January 2024
+Intended status: Experimental                            5 November 2023
+Expires: 8 May 2024
 
 
-dCBOR – an Application Profile for Use with CBOR Deterministic Encoding
+                The CDE-based Application Profile dCBOR
                     draft-bormann-cbor-dcbor-latest
 
 Abstract
 
    CBOR (STD 94, RFC 8949) defines "Deterministically Encoded CBOR" in
-   its Section 4.2.  The present document provides the application
-   profile "dCBOR" that can be used with Deterministic Encoding.
+   its Section 4.2, providing some flexibility for application specific
+   decisions.  The CBOR Common Deterministic Encoding (CDE) Profile
+   provides a more detail common base for Deterministic Encoding,
+   facilitating it be offered as a selectable feature of generic
+   encoders, as well as the concept of Application Profiles that are
+   layered on top of CDE.  This document defines the application profile
+   "dCBOR" as an example of such an application profile.
 
 About This Document
 
@@ -48,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 January 2024.
+   This Internet-Draft will expire on 8 May 2024.
 
 Copyright Notice
 
@@ -68,30 +73,44 @@ Table of Contents
 
    1.  Introduction
      1.1.  Conventions and Definitions
-   2.  Application Profile
-     2.1.  Numeric reduction
-   3.  Implementation Status
-     3.1.  TypeScript
-     3.2.  Swift
-     3.3.  Rust
-     3.4.  Ruby
-   4.  Security Considerations
-   5.  IANA Considerations
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+   2.  Gordian dCBOR
+     2.1.  Removing Simple Values
+     2.2.  Removing Integer Values
+     2.3.  Numeric Reduction of Floating-Point Values
+   3.  Extensibility
+     3.1.  dCBOR-wide1
+     3.2.  dCBOR-wide2
+   4.  CDDL support
+   5.  Implementation Status
+     5.1.  Gordian dCBOR Application Profile
+       5.1.1.  TypeScript
+       5.1.2.  Swift
+       5.1.3.  Rust
+       5.1.4.  Ruby
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Acknowledgments
    Contributors
    Author's Address
 
 1.  Introduction
 
-   CBOR ([STD94], also RFC 8949) defines "Deterministically Encoded
-   CBOR" in its Section 4.2.  The present document provides the
-   application profile "dCBOR" that can be used with Deterministic
-   Encoding.
+   CBOR (STD 94, RFC 8949) defines "Deterministically Encoded CBOR" in
+   its Section 4.2, providing some flexibility for application specific
+   decisions.  The CBOR Common Deterministic Encoding (CDE) Profile
+   provides a more detail common base for Deterministic Encoding,
+   facilitating it be offered as a selectable feature of generic
+   encoders, as well as the concept of Application Profiles that are
+   layered on top of CDE.  This document defines the application profile
+   "dCBOR" as an example of such an application profile.
 
 1.1.  Conventions and Definitions
+
+   The definitions of [STD94] and the Common Deterministic Encoding
+   (CDE) Profile [I-D.bormann-cbor-cde] apply.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -99,37 +118,46 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Application Profile
+2.  Gordian dCBOR
 
-   The dCBOR Application Profile specifies the use of Deterministic
-   Encoding as defined in Section 4.2 of [STD94] (see also
-   [I-D.bormann-cbor-det] for more information) together with some
-   application-level rules specified in this section.
+   Gordian dCBOR [I-D.mcnally-deterministic-cbor] provides an
+   application profile that requires encoders to produce valid CBOR in
+   deterministic encoding as defined in CDE).  Gordian dCBOR also
+   requires dCBOR decoders to reject CBOR data items that were not
+   deterministically encoded.
 
-   The application-level rules specified here do not "fork" CBOR.  A
-   dCBOR implementation produces well-formed, deterministically encoded
-   CBOR according to [STD94], and existing generic CBOR decoders will
-   therefore be able to decode it, including those that check for
-   Deterministic Encoding.  Similarly, generic CBOR encoders will be
-   able to produce valid dCBOR if handed dCBOR conforming data model
-   level information from an application.
+   Beyond CDE, dCBOR imposes certain limitations on the CBOR basic
+   generic data model.  Some items that can be represented in the CBOR
+   basic generic data model are entirely outlawed by this application
+   profile.  Other items are represented by what are considered
+   equivalent data items by the dCBOR equivalence model, so a recipient
+   application might receive data that may not be the same data in the
+   CBOR equivalence model as the ones the generating application
+   produced.
 
-   Please note that the separation between standard CBOR processing and
-   the processing required by the dCBOR application profile is a
-   conceptual one: Both dCBOR processing and standard CBOR processing
-   can be combined into a special dCBOR/CBOR encoder/decoder.
+   These restrictions mainly are about numeric values, which are
+   therefore the subject of the main subsection of this section.
 
-   This application profile is intended to be used in conjunction with
-   an application, which typically will use a subset of CBOR, which in
-   turn influences which subset of the application profile is used.  As
-   a result, this application profile places no direct requirement on
-   what subset of CBOR is implemented.  For instance, there is no
-   requirement that dCBOR implementations support floating point numbers
-   (or any other kind of number, such as arbitrary precision integers or
-   64-bit negative integers) when they are used with applications that
-   do not use them.
+2.1.  Removing Simple Values
 
-2.1.  Numeric reduction
+   Only the three simple values false (0xf4), true (0xf5), and null
+   (0xf6) are allowed at the application level; the remaining 253 values
+   must be rejected.
+
+2.2.  Removing Integer Values
+
+   Only the integer values in range [-2^63, 2^64-1] can be expressed in
+   dCBOR ("basic dCBOR integers").  Note that the range is asymmetric,
+   with only 2^63 negative values, but 2^64 unsigned (non-negative)
+   values, creating an (approximately) 64.6 bit integer.
+
+   This maps to a choice between a platform 64-bit two's complement
+   signed integer (often called int64) and a 64-bit unsigned integer
+   (uint64).  (Specific applications will, of course, further restrict
+   ranges of integers that are considered valid for the application,
+   based on their position and semantics in the CBOR data item.)
+
+2.3.  Numeric Reduction of Floating-Point Values
 
    dCBOR implementations that do support floating point numbers MUST
    perform the following two reductions of numeric values when
@@ -137,15 +165,16 @@ Table of Contents
 
    1.  When representing integral floating point values (floating point
        values with a zero fractional part), check whether the
-       mathematically identical value can be represented as a basic
-       (major type 0/1) integer value.  If that is the case, convert the
-       integral floating point to that mathematically identical integer
-       value before encoding it.  (Deterministic Encoding will then
-       ensure the shortest length encoding is used.)  This means that if
-       a floating point value has a non-zero fractional part, or an
-       exponent that takes it out of the range of basic integers, the
-       original floating point value is used for encoding.
-       (Specifically, conversion to a bignum is never considered.)
+       mathematically identical value can be represented as a dCBOR
+       integer value, i.e., is in the range [-2^63, 2^64-1] given above.
+       If that is the case, convert the integral floating point to that
+       mathematically identical integer value before encoding it.
+       (Deterministic Encoding will then ensure the shortest length
+       encoding is used.)  This means that if a floating point value has
+       a non-zero fractional part, or an exponent that takes it out of
+       the given range of basic dCBOR integers, the original floating
+       point value is used for encoding.  (Specifically, conversion to a
+       bignum is never considered.)
 
        This also means that the three representations of a zero number
        in CBOR (0, 0.0, -0.0 in diagnostic notation) are all reduced to
@@ -163,15 +192,15 @@ Table of Contents
        prevent the creation of maps that would turn invalid in dCBOR
        processing.
 
-   2.  In addition, represent all NaN values by using the quiet NaN
-       value having the half-width CBOR representation 0xf97e00 before
-       encoding.
+   2.  In addition, before encoding, represent all NaN values by using
+       the quiet NaN value having the half-width CBOR representation
+       0xf97e00.
 
    dCBOR-based applications MUST accept these "reduced" numbers in place
    of the original value, e.g., a dCBOR-based application that expects a
-   floating point value needs to accept a basic integer value in its
-   place (and, if needed, convert it to a floating point value for
-   further processing).
+   floating point value needs to accept a basic dCBOR integer in its
+   place (and, if needed, convert it to a floating point value for its
+   own further processing).
 
    dCBOR-based applications MUST NOT accept numbers that have not been
    reduced as specified in this section, except maybe by making the
@@ -180,7 +209,208 @@ Table of Contents
    flag mentioned in Section 5.1 (API Considerations) of
    [I-D.bormann-cbor-det] being set by default.
 
-3.  Implementation Status
+3.  Extensibility
+
+   [I-D.mcnally-deterministic-cbor] does not discuss extensibility.  A
+   meaningful way to handle extensibility in this application profile
+   would be to lift value range restrictions, keeping the profile-
+   specific equivalence rules shown here intact and possibly adding
+   equivalences as needed for newly allowed values.
+
+   This subsection presents two speculative extensions of dCBOR, called
+   dCBOR-wide1 and dCBOR-wide2, to point out different objectives that
+   can lead the development of an extension.
+
+3.1.  dCBOR-wide1
+
+   This speculative extension of dCBOR attempts to meet two objectives:
+
+   1.  All instances that meet dCBOR are also instances of dCBOR-wide1;
+       due to the nature of deterministic serialization this also means
+       that dCBOR-wide1 instances that only use application data model
+       values that are allowed by dCBOR are also dCBOR instances.
+
+   2.  The range of integers that can be provided by an application and
+       can be interchanged as exact numbers is expanded to [-2^127,
+       2^128-1], now also covering the types i128 and u128 in Rust
+       [i128][u128].
+
+   This extension is achieved by simply removing the integers in the
+   extended range from the exclusion range of dCBOR.  The numeric
+   reduction rule is not changed, so it still applies only to integral-
+   valued floating-point numbers in the range [-2^63, 2^64-1].
+
+   Examples for the application-to-CDE mapping of dCBOR-wide1 are shown
+   in Table 1.  In the dCBOR column, items that are not excluded in
+   dCBOR are marked ✓, items that are excluded in dCBOR and therefore
+   are new in dCBOR-wide1 are marked 👎.
+
+           +==========================================+========+
+           | Application data                         | dCBOR? |
+           | Numeric reduction (if any)               |        |
+           | Encoding via CDE                         |        |
+           +==========================================+========+
+           | 0                                        | ✓      |
+           | —                                        |        |
+           | 00                                       |        |
+           +------------------------------------------+--------+
+           | 0.0                                      | ✓      |
+           | 0                                        |        |
+           | 00                                       |        |
+           +------------------------------------------+--------+
+           | -0.0                                     | ✓      |
+           | 0                                        |        |
+           | 00                                       |        |
+           +------------------------------------------+--------+
+           | 4.0                                      | ✓      |
+           | 4                                        |        |
+           | 04                                       |        |
+           +------------------------------------------+--------+
+           | -4.0                                     | ✓      |
+           | -4                                       |        |
+           | 23                                       |        |
+           +------------------------------------------+--------+
+           | 1.0e+19                                  | ✓      |
+           | 10000000000000000000                     |        |
+           | 1B8AC7230489E80000                       |        |
+           +------------------------------------------+--------+
+           | -1.0e+19                                 | ✓      |
+           | —                                        |        |
+           | FBC3E158E460913D00                       |        |
+           +------------------------------------------+--------+
+           | 10000000000000000000                     | ✓      |
+           | —                                        |        |
+           | 1B8AC7230489E80000                       |        |
+           +------------------------------------------+--------+
+           | -10000000000000000000                    | 👎      |
+           | —                                        |        |
+           | 3B8AC7230489E7FFFF                       |        |
+           +------------------------------------------+--------+
+           | 1.0e+38                                  | ✓      |
+           | —                                        |        |
+           | FB47D2CED32A16A1B1                       |        |
+           +------------------------------------------+--------+
+           | -1.0e+38                                 | ✓      |
+           | —                                        |        |
+           | FBC7D2CED32A16A1B1                       |        |
+           +------------------------------------------+--------+
+           | 100000000000000000000000000000000000000  | 👎      |
+           | —                                        |        |
+           | C2504B3B4CA85A86C47A098A224000000000     |        |
+           +------------------------------------------+--------+
+           | -100000000000000000000000000000000000000 | 👎      |
+           | —                                        |        |
+           | C3504B3B4CA85A86C47A098A223FFFFFFFFF     |        |
+           +------------------------------------------+--------+
+
+               Table 1: Speculative "dCBOR-wide1" application
+                                  profile
+
+   This speculative extended profile does not meet a potential objective
+   number 3 that unextended dCBOR does meet:
+
+   3.  All integral-valued floating point numbers coming from an
+       application that fit into an integer representation allowed by
+       the application profile are represented as such.
+
+   Objective 1 prevents numeric reduction from being applied to values
+   that are not excluded in dCBOR but do to receive numeric reduction
+   there.
+
+3.2.  dCBOR-wide2
+
+   The speculative dCBOR-wide2 extension of dCBOR attempts to meet
+   objectives 2 and 3 mentioned in Section 3.1.  It cannot meet
+   objective 1: items in Table 2 marked with a 💣 character are allows in
+   dCBOR but have different serializations.
+
+           +==========================================+========+
+           | Application data                         | dCBOR? |
+           | Numeric reduction (if any)               |        |
+           | Encoding via CDE                         |        |
+           +==========================================+========+
+           | 0                                        | ✓      |
+           | —                                        |        |
+           | 00                                       |        |
+           +------------------------------------------+--------+
+           | 0.0                                      | ✓      |
+           | 0                                        |        |
+           | 00                                       |        |
+           +------------------------------------------+--------+
+           | -0.0                                     | ✓      |
+           | 0                                        |        |
+           | 00                                       |        |
+           +------------------------------------------+--------+
+           | 4.0                                      | ✓      |
+           | 4                                        |        |
+           | 04                                       |        |
+           +------------------------------------------+--------+
+           | -4.0                                     | ✓      |
+           | -4                                       |        |
+           | 23                                       |        |
+           +------------------------------------------+--------+
+           | 1.0e+19                                  | ✓      |
+           | 10000000000000000000                     |        |
+           | 1B8AC7230489E80000                       |        |
+           +------------------------------------------+--------+
+           | -1.0e+19                                 | ✓      |
+           | -10000000000000000000                    | 💣      |
+           | 3B8AC7230489E7FFFF                       |        |
+           +------------------------------------------+--------+
+           | 10000000000000000000                     | ✓      |
+           | —                                        |        |
+           | 1B8AC7230489E80000                       |        |
+           +------------------------------------------+--------+
+           | -10000000000000000000                    | 👎      |
+           | —                                        |        |
+           | 3B8AC7230489E7FFFF                       |        |
+           +------------------------------------------+--------+
+           | 1.0e+38                                  | ✓      |
+           | 99999999999999997748809823456034029568   | 💣      |
+           | C2504B3B4CA85A86C4000000000000000000     |        |
+           +------------------------------------------+--------+
+           | -1.0e+38                                 | ✓      |
+           | -99999999999999997748809823456034029568  | 💣      |
+           | C3504B3B4CA85A86C3FFFFFFFFFFFFFFFFFF     |        |
+           +------------------------------------------+--------+
+           | 100000000000000000000000000000000000000  | 👎      |
+           | —                                        |        |
+           | C2504B3B4CA85A86C47A098A224000000000     |        |
+           +------------------------------------------+--------+
+           | -100000000000000000000000000000000000000 | 👎      |
+           | —                                        |        |
+           | C3504B3B4CA85A86C47A098A223FFFFFFFFF     |        |
+           +------------------------------------------+--------+
+
+               Table 2: Speculative "dCBOR-wide2" application
+                                  profile
+
+   This extension is achieved by removing the integers in the extended
+   range from the exclusion range of dCBOR, and by adding the extended
+   range to the target range of numeric reduction.
+
+4.  CDDL support
+
+   Similar to the CDDL [RFC8610] support in [I-D.bormann-cbor-cde], this
+   specification adds two CDDL control operators that can be used to
+   specify that the data items should be encoded in CBOR Common
+   Deterministic Encoding (CDE), with the dCBOR application profile
+   applied as well.
+
+   The control operators .dcbor and .dcborseq are exactly like .cde and
+   .cdeseq except that they also require the encoded data item(s) to
+   conform to the dCBOR application profile.
+
+   For example, the normative comment in Section 3 of
+   [I-D.draft-mcnally-envelope-03]:
+
+   leaf = #6.24(bytes)  ; MUST be dCBOR
+
+   ...can now be formalized as:
+
+   leaf = #6.24(bytes .dcbor any)
+
+5.  Implementation Status
 
    This section is to be removed before publishing as an RFC.
 
@@ -206,7 +436,9 @@ Table of Contents
    It is up to the individual working groups to use this information as
    they see fit".
 
-3.1.  TypeScript
+5.1.  Gordian dCBOR Application Profile
+
+5.1.1.  TypeScript
 
    *  Implementation Location: [bc-dcbor-ts]
 
@@ -220,7 +452,7 @@ Table of Contents
 
    *  Licensing:
 
-3.2.  Swift
+5.1.2.  Swift
 
    *  Implementation Location: [BCSwiftDCBOR]
 
@@ -234,7 +466,7 @@ Table of Contents
 
    *  Licensing: BSD-2-Clause-Patent
 
-3.3.  Rust
+5.1.3.  Rust
 
    *  Implementation Location: [bc-dcbor-rust]
 
@@ -248,7 +480,7 @@ Table of Contents
 
    *  Licensing: Custom
 
-3.4.  Ruby
+5.1.4.  Ruby
 
    *  Implementation Location: [cbor-dcbor]
 
@@ -258,23 +490,45 @@ Table of Contents
 
    *  Coverage: Complete specification; complemented by CBOR encoder/
       decoder and command line interface from [cbor-diag] and
-      deterministic encoding from [cbor-deterministic]
+      deterministic encoding from [cbor-deterministic].  Checking of
+      dCBOR exclusions not yet implemented.
 
-   *  Testing:
+   *  Testing: Also available at https://cbor.me (https://cbor.me)
 
    *  Licensing: Apache-2.0
 
-4.  Security Considerations
+6.  Security Considerations
 
    TODO Security
 
-5.  IANA Considerations
+7.  IANA Considerations
 
-   This document has no IANA actions.
 
-6.  References
+   // RFC Editor: please replace RFCXXXX with the RFC number of this RFC
+   // and remove this note.
 
-6.1.  Normative References
+   This document requests IANA to register the contents of Table 3 into
+   the registry "CDDL Control Operators" of [IANA.cddl]:
+
+                         +===========+===========+
+                         | Name      | Reference |
+                         +===========+===========+
+                         | .dcbor    | [RFCXXXX] |
+                         +-----------+-----------+
+                         | .dcborseq | [RFCXXXX] |
+                         +-----------+-----------+
+
+                            Table 3: New control
+                              operators to be
+                                 registered
+
+8.  References
+
+8.1.  Normative References
+
+   [IANA.cddl]
+              IANA, "Concise Data Definition Language (CDDL)",
+              <http://www.iana.org/assignments/cddl>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -285,12 +539,18 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
+
    [STD94]    Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", STD 94, RFC 8949,
               DOI 10.17487/RFC8949, December 2020,
               <https://www.rfc-editor.org/rfc/rfc8949>.
 
-6.2.  Informative References
+8.2.  Informative References
 
    [bc-dcbor-rust]
               "Blockchain Commons Deterministic CBOR ("dCBOR") for
@@ -320,23 +580,43 @@ Table of Contents
               Bormann, C., "CBOR diagnostic utilities", n.d.,
               <https://github.com/cabo/cbor-diag>.
 
+   [I-D.bormann-cbor-cde]
+              Bormann, C., "CBOR Common Deterministic Encoding (CDE)",
+              Work in Progress, Internet-Draft, draft-bormann-cbor-cde-
+              00, 5 November 2023,
+              <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
+              cde-00>.
+
    [I-D.bormann-cbor-det]
               Bormann, C., "CBOR: On Deterministic Encoding", Work in
-              Progress, Internet-Draft, draft-bormann-cbor-det-00, 23
-              July 2023, <https://datatracker.ietf.org/doc/html/draft-
-              bormann-cbor-det-00>.
+              Progress, Internet-Draft, draft-bormann-cbor-det-01, 9
+              August 2023, <https://datatracker.ietf.org/doc/html/draft-
+              bormann-cbor-det-01>.
+
+   [I-D.draft-mcnally-envelope-03]
+              McNally, W. and C. Allen, "The Gordian Envelope Structured
+              Data Format", Work in Progress, Internet-Draft, draft-
+              mcnally-envelope-03, 17 August 2023,
+              <https://datatracker.ietf.org/doc/html/draft-mcnally-
+              envelope-03>.
 
    [I-D.mcnally-deterministic-cbor]
-              McNally, W. and C. Allen, "Gordian dCBOR: Deterministic
-              CBOR Implementation Practices", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-01, 4 May
-              2023, <https://datatracker.ietf.org/doc/html/draft-
-              mcnally-deterministic-cbor-01>.
+              McNally, W. and C. Allen, "Gordian dCBOR: A Deterministic
+              CBOR Application Profile", Work in Progress, Internet-
+              Draft, draft-mcnally-deterministic-cbor-05, 8 August 2023,
+              <https://datatracker.ietf.org/doc/html/draft-mcnally-
+              deterministic-cbor-05>.
+
+   [i128]     "Primitive Type i128", n.d.,
+              <https://doc.rust-lang.org/std/primitive.i128.html>.
 
    [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
               Code: The Implementation Status Section", BCP 205,
               RFC 7942, DOI 10.17487/RFC7942, July 2016,
               <https://www.rfc-editor.org/rfc/rfc7942>.
+
+   [u128]     "Primitive Type u128", n.d.,
+              <https://doc.rust-lang.org/std/primitive.u128.html>.
 
 Acknowledgments
 
