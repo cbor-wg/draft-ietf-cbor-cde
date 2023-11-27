@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                           5 November 2023
-Expires: 8 May 2024
+Intended status: Informational                          27 November 2023
+Expires: 30 May 2024
 
 
                     CBOR: On Deterministic Encoding
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2024.
+   This Internet-Draft will expire on 30 May 2024.
 
 Copyright Notice
 
@@ -758,9 +758,9 @@ Table of Contents
               Bormann, C., "CBOR Extended Diagnostic Notation (EDN):
               Application-Oriented Literals, ABNF, and Media Type", Work
               in Progress, Internet-Draft, draft-ietf-cbor-edn-literals-
-              05, 17 October 2023,
+              06, 20 November 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              edn-literals-05>.
+              edn-literals-06>.
 
    [I-D.ietf-mediaman-suffixes]
               Sporny, M. and A. Guy, "Media Types with Multiple

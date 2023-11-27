@@ -4,12 +4,12 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                   5 November 2023
-Expires: 8 May 2024
+Intended status: Best Current Practice                  27 November 2023
+Expires: 30 May 2024
 
 
                 CBOR Common Deterministic Encoding (CDE)
-                     draft-bormann-cbor-cde-latest
+                       draft-ietf-cbor-cde-latest
 
 Abstract
 
@@ -32,7 +32,7 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-bormann-cbor-cde/.
+   https://datatracker.ietf.org/doc/draft-ietf-cbor-cde/.
 
    Discussion of this document takes place on the Concise Binary Object
    Representation Maintenance and Extensions (CBOR) Working Group
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2024.
+   This Internet-Draft will expire on 30 May 2024.
 
 Copyright Notice
 
