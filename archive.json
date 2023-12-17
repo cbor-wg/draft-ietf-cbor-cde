@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-14T01:00:36.880082+00:00",
+  "timestamp": "2023-12-17T01:05:28.318595+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -95,6 +95,22 @@
       "body": "Do not mix up these terms:\r\n\r\n* f16 (Rust name for a platform level storage type),\r\n* float16 (CDDL name for a floating point precision and range), and \r\n* binary16 (IEEE 754 name for a binary representation of floating point values).\r\n\r\n(and 32, 64).",
       "createdAt": "2023-08-24T08:35:49Z",
       "updatedAt": "2023-08-24T08:35:49Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOJ8fYd8553fNd",
+      "title": "additional information in integers vs doubles",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/4",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In the section on reducing floating point numbers to integers, I believe it would be appropriate to clearly specify behavior of other floating point reductions, e.g. reducing 0.5 from double to a half-width float.\r\n\r\nIn addition, I believe the behavior needs to be defined as to what an application should do when conversion of an integer to a floating point number is in itself lossy, e.g. what to do if an application expects a double but the CBOR value received is the decimal 9007199254740993. Silent truncation would make the round-trip non-deterministic.",
+      "createdAt": "2023-12-16T03:42:40Z",
+      "updatedAt": "2023-12-16T03:42:40Z",
       "closedAt": null,
       "comments": []
     }
