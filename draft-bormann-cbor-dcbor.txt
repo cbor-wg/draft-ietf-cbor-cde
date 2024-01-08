@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Experimental                           27 November 2023
-Expires: 30 May 2024
+Intended status: Experimental                             8 January 2024
+Expires: 11 July 2024
 
 
                 The CDE-based Application Profile dCBOR
@@ -53,11 +53,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 May 2024.
+   This Internet-Draft will expire on 11 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -601,11 +601,11 @@ Table of Contents
               envelope-03>.
 
    [I-D.mcnally-deterministic-cbor]
-              McNally, W. and C. Allen, "Gordian dCBOR: A Deterministic
-              CBOR Application Profile", Work in Progress, Internet-
-              Draft, draft-mcnally-deterministic-cbor-05, 8 August 2023,
-              <https://datatracker.ietf.org/doc/html/draft-mcnally-
-              deterministic-cbor-05>.
+              McNally, W., Allen, C., and C. Bormann, "dCBOR: A
+              Deterministic CBOR Application Profile", Work in Progress,
+              Internet-Draft, draft-mcnally-deterministic-cbor-06, 4
+              January 2024, <https://datatracker.ietf.org/doc/html/
+              draft-mcnally-deterministic-cbor-06>.
 
    [i128]     "Primitive Type i128", n.d.,
               <https://doc.rust-lang.org/std/primitive.i128.html>.
