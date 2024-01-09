@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-07T01:06:31.230956+00:00",
+  "timestamp": "2024-01-09T01:02:17.129234+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -115,5 +115,34 @@
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 5,
+      "id": "PR_kwDOJ8fYd85jg4_G",
+      "title": "Prepare -01",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/5",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* b850713 Add some security considerations\r\n* 0c91f68 Further clarifications\r\n* 4731cab Clarify representation of NaNs\r\n* 2190787 RECOMMENDS is not an RFC 2119 keyword\r\n* 45bdbdc Do section references into STD documents as pioneered in RFC 9485\r\n* cf3b06f Remove reference to I-D.bormann-cbor-dcbor\r\n",
+      "createdAt": "2024-01-08T20:22:42Z",
+      "updatedAt": "2024-01-08T20:23:37Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "8b29daf1dd4fca2098b3579b594755f538302506",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "prepare-01",
+      "headRefOid": "b8507139bd5ce994446b3bd9d914c42168ecb727",
+      "closedAt": "2024-01-08T20:23:37Z",
+      "mergedAt": "2024-01-08T20:23:37Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "f93dd82df8d813506329995a4527749aa990c3f1"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
