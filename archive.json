@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-23T01:03:30.450555+00:00",
+  "timestamp": "2024-01-25T01:03:28.145317+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -78,9 +78,17 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-08-24T08:28:54Z",
-      "updatedAt": "2023-08-24T08:28:54Z",
+      "updatedAt": "2024-01-24T19:35:01Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "hildjj",
+          "authorAssociation": "NONE",
+          "body": "Is this issue overcome by events?",
+          "createdAt": "2024-01-24T19:35:00Z",
+          "updatedAt": "2024-01-24T19:35:00Z"
+        }
+      ]
     },
     {
       "number": 3,
@@ -94,9 +102,17 @@
       "labels": [],
       "body": "Do not mix up these terms:\r\n\r\n* f16 (Rust name for a platform level storage type),\r\n* float16 (CDDL name for a floating point precision and range), and \r\n* binary16 (IEEE 754 name for a binary representation of floating point values).\r\n\r\n(and 32, 64).",
       "createdAt": "2023-08-24T08:35:49Z",
-      "updatedAt": "2023-08-24T08:35:49Z",
+      "updatedAt": "2024-01-24T19:34:42Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "hildjj",
+          "authorAssociation": "NONE",
+          "body": "Is this issue overcome by events?",
+          "createdAt": "2024-01-24T19:34:41Z",
+          "updatedAt": "2024-01-24T19:34:41Z"
+        }
+      ]
     },
     {
       "number": 4,
@@ -110,9 +126,17 @@
       "labels": [],
       "body": "In the section on reducing floating point numbers to integers, I believe it would be appropriate to clearly specify behavior of other floating point reductions, e.g. reducing 0.5 from double to a half-width float.\r\n\r\nIn addition, I believe the behavior needs to be defined as to what an application should do when conversion of an integer to a floating point number is in itself lossy, e.g. what to do if an application expects a double but the CBOR value received is the decimal 9007199254740993. Silent truncation would make the round-trip non-deterministic.",
       "createdAt": "2023-12-16T03:42:40Z",
-      "updatedAt": "2023-12-16T03:42:40Z",
+      "updatedAt": "2024-01-24T19:33:41Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "hildjj",
+          "authorAssociation": "NONE",
+          "body": "See the section on [preferred serialization](https://www.rfc-editor.org/rfc/rfc8949.html#name-preferred-serialization) in RFC8949, and read the dCBOR [draft](https://www.ietf.org/archive/id/draft-mcnally-deterministic-cbor-07.html), then see what else this spec needs?",
+          "createdAt": "2024-01-24T19:33:40Z",
+          "updatedAt": "2024-01-24T19:33:40Z"
+        }
+      ]
     }
   ],
   "pulls": [
