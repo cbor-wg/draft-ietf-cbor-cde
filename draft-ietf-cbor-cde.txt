@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                    8 January 2024
-Expires: 11 July 2024
+Intended status: Best Current Practice                   25 January 2024
+Expires: 28 July 2024
 
 
                 CBOR Common Deterministic Encoding (CDE)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2024.
+   This Internet-Draft will expire on 28 July 2024.
 
 Copyright Notice
 
@@ -372,9 +372,9 @@ Table of Contents
    [I-D.mcnally-deterministic-cbor]
               McNally, W., Allen, C., and C. Bormann, "dCBOR: A
               Deterministic CBOR Application Profile", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-06, 4
+              Internet-Draft, draft-mcnally-deterministic-cbor-07, 9
               January 2024, <https://datatracker.ietf.org/doc/html/
-              draft-mcnally-deterministic-cbor-06>.
+              draft-mcnally-deterministic-cbor-07>.
 
 Acknowledgments
 
