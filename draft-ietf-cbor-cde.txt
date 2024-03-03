@@ -489,7 +489,7 @@ Appendix A.  Implementers' Checklists
 
    *  Preferred serialization and CDE only affect serialization.  They
       do not place any requirements, exclusions, mappings or such on the
-      data model layer.  Application profiles such as dCBOR are
+      data model level.  Application profiles such as dCBOR are
       different as they can affect the data model by restricting some
       values and ranges.
 
