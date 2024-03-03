@@ -402,14 +402,13 @@ Appendix A.  Implementers' Checklists
       [STD94].  The purpose of the restatement is to aid the work of
       implementers, not to redefine anything.
 
-   *  Duplicate map keys are never valid in CBOR at all (see, for
-      instance, list item "Major type 5" in Section 3.1 of RFC 8949
-      [STD94]) no matter what sort of serialization is used.  Of the
-      various strategies listed in Section 5.6 of RFC 8949 [STD94],
-      detecting duplicates and handling them as an error instead of
-      passing invalid data to the application is the most robust one;
-      achieving this level of robustness is a mark of quality of
-      implementation.
+   *  Duplicate map keys are never valid in CBOR at all (see list item
+      "Major type 5" in Section 3.1 of RFC 8949 [STD94]) no matter what
+      sort of serialization is used.  Of the various strategies listed
+      in Section 5.6 of RFC 8949 [STD94], detecting duplicates and
+      handling them as an error instead of passing invalid data to the
+      application is the most robust one; achieving this level of
+      robustness is a mark of quality of implementation.
 
    *  Preferred Serialization and CDE only affect serialization.  They
       do not place any requirements, exclusions, mappings or such on the
