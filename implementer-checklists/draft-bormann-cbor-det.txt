@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                            8 January 2024
-Expires: 11 July 2024
+Intended status: Informational                              3 March 2024
+Expires: 4 September 2024
 
 
                     CBOR: On Deterministic Encoding
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2024.
+   This Internet-Draft will expire on 4 September 2024.
 
 Copyright Notice
 
@@ -758,16 +758,16 @@ Table of Contents
               Bormann, C., "CBOR Extended Diagnostic Notation (EDN):
               Application-Oriented Literals, ABNF, and Media Type", Work
               in Progress, Internet-Draft, draft-ietf-cbor-edn-literals-
-              07, 21 December 2023,
+              08, 1 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              edn-literals-07>.
+              edn-literals-08>.
 
    [I-D.ietf-mediaman-suffixes]
               Sporny, M. and A. Guy, "Media Types with Multiple
               Suffixes", Work in Progress, Internet-Draft, draft-ietf-
-              mediaman-suffixes-06, 5 November 2023,
+              mediaman-suffixes-07, 2 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-
-              mediaman-suffixes-06>.
+              mediaman-suffixes-07>.
 
    [I-D.ietf-sedate-datetime-extended]
               Sharma, U. and C. Bormann, "Date and Time on the Internet:
@@ -779,9 +779,9 @@ Table of Contents
    [I-D.mcnally-deterministic-cbor]
               McNally, W., Allen, C., and C. Bormann, "dCBOR: A
               Deterministic CBOR Application Profile", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-06, 4
+              Internet-Draft, draft-mcnally-deterministic-cbor-07, 9
               January 2024, <https://datatracker.ietf.org/doc/html/
-              draft-mcnally-deterministic-cbor-06>.
+              draft-mcnally-deterministic-cbor-07>.
 
    [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
               Std 754-2019, DOI 10.1109/IEEESTD.2019.8766229,
