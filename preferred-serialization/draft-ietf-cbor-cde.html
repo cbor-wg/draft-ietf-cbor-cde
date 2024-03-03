@@ -1187,10 +1187,10 @@ Application Profiles are defined in separate documents.<a href="#section-abstrac
                 <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-preferred-serialization" class="internal xref">Preferred Serialization</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.1">
-                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#appendix-A.1.1" class="auto internal xref">A.1.1</a>.  <a href="#name-preferred-serialization-enc" class="internal xref">Preferred serialization encoders</a></p>
+                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#appendix-A.1.1" class="auto internal xref">A.1.1</a>.  <a href="#name-preferred-serialization-enc" class="internal xref">Preferred Serialization Encoders</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.2">
-                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#appendix-A.1.2" class="auto internal xref">A.1.2</a>.  <a href="#name-preferred-serialization-dec" class="internal xref">Preferred serialization decoders</a></p>
+                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#appendix-A.1.2" class="auto internal xref">A.1.2</a>.  <a href="#name-preferred-serialization-dec" class="internal xref">Preferred Serialization Decoders</a></p>
 </li>
                 </ul>
 </li>
@@ -1285,7 +1285,7 @@ types 0/1 in a seamless way.
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> recommends handling this transition the same
 way as with the transition between different integer representation
 lengths in the basic generic data model, i.e., by mandating the
-Preferred Serialization (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-2-5" class="pilcrow">¶</a></p>
+preferred serialization for all integers (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2-6">
 <li id="section-2-6.1">
           <p id="section-2-6.1.1">The CBOR Common Deterministic Encoding Profile (CDE) turns this
@@ -1583,20 +1583,20 @@ achieving this level of robustness is a mark of quality of
 implementation.<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.3">
-          <p id="appendix-A-3.3.1">Preferred Serialization and CDE only affect serialization.
+          <p id="appendix-A-3.3.1">Preferred serialization and CDE only affect serialization.
 They do not place any requirements, exclusions, mappings or such on
 the data model layer.
 Application profiles such as dCBOR are different as they can affect
 the data model by restricting some values and ranges.<a href="#appendix-A-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.4">
-          <p id="appendix-A-3.4.1">CBOR decoders in general are not required to check for Preferred
-Serialization or CDE and reject inputs that do not do not fulfill
+          <p id="appendix-A-3.4.1">CBOR decoders in general are not required to check for preferred
+serialization or CDE and reject inputs that do not do not fulfill
 their requirements..
 However, in an environment that employs deterministic encoding, this
 negates many of its benefits.
-Decoder implementations that advertise "support" for Preferred
-Serialization or CDE need to check the encoding and reject
+Decoder implementations that advertise "support" for preferred
+serialization or CDE need to check the encoding and reject
 input that is not encoded to the encoding specification in use.
 Again, application profiles such as dCBOR may pose additional
 requirements, such as requiring rejection of non-conforming inputs.<a href="#appendix-A-3.4.1" class="pilcrow">¶</a></p>
@@ -1615,10 +1615,10 @@ the original input.<a href="#appendix-A-3.4.2" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-1">In the following, the abbreviation "ai" will be used for the 5-bit
 additional information field in the first byte of an encoded CBOR data
 item, which follows the 3-bit field for the major type.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<div id="preferred-serialization-encoders">
+<div id="pse">
 <section id="appendix-A.1.1">
           <h4 id="name-preferred-serialization-enc">
-<a href="#appendix-A.1.1" class="section-number selfRef">A.1.1. </a><a href="#name-preferred-serialization-enc" class="section-name selfRef">Preferred serialization encoders</a>
+<a href="#appendix-A.1.1" class="section-number selfRef">A.1.1. </a><a href="#name-preferred-serialization-enc" class="section-name selfRef">Preferred Serialization Encoders</a>
           </h4>
 <ol start="1" type="1" class="normal type-1" id="appendix-A.1.1-1">
 <li id="appendix-A.1.1-1.1">
@@ -1691,10 +1691,10 @@ NaN payload to a half-precision quiet NaN.)<a href="#appendix-A.1.1-1.4.2.2.2" c
           </ol>
 </section>
 </div>
-<div id="preferred-serialization-decoders">
+<div id="psd">
 <section id="appendix-A.1.2">
           <h4 id="name-preferred-serialization-dec">
-<a href="#appendix-A.1.2" class="section-number selfRef">A.1.2. </a><a href="#name-preferred-serialization-dec" class="section-name selfRef">Preferred serialization decoders</a>
+<a href="#appendix-A.1.2" class="section-number selfRef">A.1.2. </a><a href="#name-preferred-serialization-dec" class="section-name selfRef">Preferred Serialization Decoders</a>
           </h4>
 <ol start="1" type="1" class="normal type-1" id="appendix-A.1.2-1">
 <li id="appendix-A.1.2-1.1">
@@ -1744,14 +1744,14 @@ constrained environments.<a href="#appendix-A.1.2-1.4.2.2.1" class="pilcrow">¶<
           </h4>
 <ol start="1" type="1" class="normal type-1" id="appendix-A.2.1-1">
 <li id="appendix-A.2.1-1.1">
-              <p id="appendix-A.2.1-1.1.1">CDE encoders <span class="bcp14">MUST</span> only emit CBOR fulfilling the Preferred
-Serialization rules described above.<a href="#appendix-A.2.1-1.1.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.1-1.1.1">CDE encoders <span class="bcp14">MUST</span> only emit CBOR fulfilling the preferred
+serialization rules (<a href="#pse" class="auto internal xref">Appendix A.1.1</a>).<a href="#appendix-A.2.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="appendix-A.2.1-1.2">
               <p id="appendix-A.2.1-1.2.1">CDE encoders <span class="bcp14">MUST</span> sort maps by the CBOR representation of the map
 key.
 The sorting is byte-wise lexicographic order of the encoded map
-keys.<a href="#appendix-A.2.1-1.2.1" class="pilcrow">¶</a></p>
+key data items.<a href="#appendix-A.2.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
@@ -1763,7 +1763,8 @@ keys.<a href="#appendix-A.2.1-1.2.1" class="pilcrow">¶</a></p>
           </h4>
 <ol start="1" type="1" class="normal type-1" id="appendix-A.2.2-1">
 <li id="appendix-A.2.2-1.1">
-              <p id="appendix-A.2.2-1.1.1">CDE decoders <span class="bcp14">MUST</span> follow the rules for Preferred Serialization Decoders.<a href="#appendix-A.2.2-1.1.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.2-1.1.1">CDE decoders <span class="bcp14">MUST</span> follow the rules for preferred serialization
+decoders (<a href="#psd" class="auto internal xref">Appendix A.1.2</a>).<a href="#appendix-A.2.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>

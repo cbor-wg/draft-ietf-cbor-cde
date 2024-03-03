@@ -87,8 +87,8 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Implementers' Checklists
      A.1.  Preferred Serialization
-       A.1.1.  Preferred serialization encoders
-       A.1.2.  Preferred serialization decoders
+       A.1.1.  Preferred Serialization Encoders
+       A.1.2.  Preferred Serialization Decoders
      A.2.  CDE
        A.2.1.  CDE Encoders
        A.2.2.  CDE Decoders
@@ -154,8 +154,8 @@ Table of Contents
    seamless way.  Section 4.2.2 of RFC 8949 [STD94] recommends handling
    this transition the same way as with the transition between different
    integer representation lengths in the basic generic data model, i.e.,
-   by mandating the Preferred Serialization (Section 3.4.3 of RFC 8949
-   [STD94]).
+   by mandating the preferred serialization for all integers
+   (Section 3.4.3 of RFC 8949 [STD94]).
 
    1.  The CBOR Common Deterministic Encoding Profile (CDE) turns this
        recommendation into a mandate: Integers that can be represented
@@ -410,18 +410,18 @@ Appendix A.  Implementers' Checklists
       application is the most robust one; achieving this level of
       robustness is a mark of quality of implementation.
 
-   *  Preferred Serialization and CDE only affect serialization.  They
+   *  Preferred serialization and CDE only affect serialization.  They
       do not place any requirements, exclusions, mappings or such on the
       data model layer.  Application profiles such as dCBOR are
       different as they can affect the data model by restricting some
       values and ranges.
 
-   *  CBOR decoders in general are not required to check for Preferred
-      Serialization or CDE and reject inputs that do not do not fulfill
+   *  CBOR decoders in general are not required to check for preferred
+      serialization or CDE and reject inputs that do not do not fulfill
       their requirements.. However, in an environment that employs
       deterministic encoding, this negates many of its benefits.
-      Decoder implementations that advertise "support" for Preferred
-      Serialization or CDE need to check the encoding and reject input
+      Decoder implementations that advertise "support" for preferred
+      serialization or CDE need to check the encoding and reject input
       that is not encoded to the encoding specification in use.  Again,
       application profiles such as dCBOR may pose additional
       requirements, such as requiring rejection of non-conforming
@@ -438,7 +438,7 @@ A.1.  Preferred Serialization
    additional information field in the first byte of an encoded CBOR
    data item, which follows the 3-bit field for the major type.
 
-A.1.1.  Preferred serialization encoders
+A.1.1.  Preferred Serialization Encoders
 
    1.  Shortest-form encoding of the argument MUST be used for all major
        types.  Major type 7 is used for floating-point and simple
@@ -488,7 +488,7 @@ A.1.1.  Preferred serialization encoders
           a double or single quiet NaN with a zero NaN payload to a
           half-precision quiet NaN.)
 
-A.1.2.  Preferred serialization decoders
+A.1.2.  Preferred Serialization Decoders
 
    1.  Decoders MUST accept shortest-form encoded arguments.
 
@@ -515,17 +515,17 @@ A.2.  CDE
 
 A.2.1.  CDE Encoders
 
-   1.  CDE encoders MUST only emit CBOR fulfilling the Preferred
-       Serialization rules described above.
+   1.  CDE encoders MUST only emit CBOR fulfilling the preferred
+       serialization rules (Appendix A.1.1).
 
    2.  CDE encoders MUST sort maps by the CBOR representation of the map
        key.  The sorting is byte-wise lexicographic order of the encoded
-       map keys.
+       map key data items.
 
 A.2.2.  CDE Decoders
 
-   1.  CDE decoders MUST follow the rules for Preferred Serialization
-       Decoders.
+   1.  CDE decoders MUST follow the rules for preferred serialization
+       decoders (Appendix A.1.2).
 
 Acknowledgments
 
