@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T01:00:07.778541+00:00",
+  "timestamp": "2024-03-05T00:56:57.027935+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -167,6 +167,22 @@
       "updatedAt": "2024-01-25T13:08:08Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOJ8fYd86BE0uZ",
+      "title": "Terminology: preferred serialization or preferred encoding",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/8",
+      "state": "CLOSED",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\"preferred serialization\" (lower case) is used 23 times in RFC 8949.\r\n\r\n\"preferred encoding\" (lower case) is used once parenthetically in RFC 8949.\r\n\r\nThis draft uses \"preferred encoding\" (upper and lower case) 6 times.\r\n\r\nThis draft uses \"preferred serialization\" once, plus some use in PRs.\r\n\r\nProbably this draft should exclusively use \"preferred serialization\" in lower case. We did a go around in RATS/EAT about upper/lower case and even though RATS architecture uses upper case, EAT switched to lower case as much more readable.",
+      "createdAt": "2024-03-03T19:40:47Z",
+      "updatedAt": "2024-03-03T20:17:53Z",
+      "closedAt": "2024-03-03T20:17:53Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -197,6 +213,273 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOJ8fYd85og4Is",
+      "title": "Add proposed \"Implementers' Checklists\" Appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/7",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-03T15:13:32Z",
+      "updatedAt": "2024-03-03T19:44:22Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "1f0644ea5ca4a7c24267b3b40c585b1566e60a60",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "implementer-checklists",
+      "headRefOid": "1f34190ae6d17106d0ec8df499c4f4bb29f92840",
+      "closedAt": "2024-03-03T19:44:22Z",
+      "mergedAt": "2024-03-03T19:44:22Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "8d4d3064774695856a166b6409b53a6c19cad14d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ8fYd85yBwgG",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Hi Carsten, looks generally good. Thank you kindly for including. I made some comments, but am fine with merging as is.",
+          "createdAt": "2024-03-03T19:00:14Z",
+          "updatedAt": "2024-03-03T19:30:34Z",
+          "comments": [
+            {
+              "originalPosition": 78,
+              "body": "Type 7 described in 8949 is deterministic without further specification. In particular, the text for simple values requires shortest-form. That's the reason I said all but type 7 and didn't call out an exemption for floats.\r\n\r\nBut, yes in the obvious implementation, the exception is floats.\r\n\r\nI'm fine either way with the text.",
+              "createdAt": "2024-03-03T19:00:14Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "Duplicate sentence.",
+              "createdAt": "2024-03-03T19:02:19Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "I would remove \"for instance\". That text in 3.1 is _the_ normative unequivocal statement that duplicate map keys are not allowed. I kind of wish that text in 8949 was stronger.\r\n\r\nUnderstand that some decoders might not detect this and that we have to allow such decoders, but that doesn't change the hard requirement that duplicate map keys are never allowed, right?",
+              "createdAt": "2024-03-03T19:10:28Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "The text \"support\" is kind of being used as a form of 2119 SHOULD here. I'd much prefer saying decoders MAY support checking.  I don't think it is a SHOULD and would prefer to stick with 2119 terminology.",
+              "createdAt": "2024-03-03T19:22:36Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 138,
+              "body": "I like this wording. I was trying to figure out something like this myself.",
+              "createdAt": "2024-03-03T19:23:48Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 53,
+              "body": "But, it doesn't negate the main benefit of Preferred which is interoperability nor the main benefit of CDE which is determinism.\r\n\r\nHaving spent a year plus trying to understand benefit and negatives of stuff in COSE and HPKE, I'd much prefer explicit statement of negatives and benefits.",
+              "createdAt": "2024-03-03T19:29:16Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB5vg",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:34:42Z",
+          "updatedAt": "2024-03-03T19:34:42Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Yes!  That is the point...  We really mean this.",
+              "createdAt": "2024-03-03T19:34:42Z",
+              "updatedAt": "2024-03-03T19:34:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB50O",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:36:45Z",
+          "updatedAt": "2024-03-03T19:36:45Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "Correct, at least if you want to have valid encoded data items.\r\nRemoved the \"for instance\", but there are of course other places in 8949 that add information to this.\r\nBut citing them all here does not make sense, indeed.\r\n",
+              "createdAt": "2024-03-03T19:36:45Z",
+              "updatedAt": "2024-03-03T19:36:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB53A",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:38:03Z",
+          "updatedAt": "2024-03-03T19:38:03Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "This is really a \"truth of advertising\" statement, not a SHOULD.\r\nSo it is phrased as a factual \"need to\".\r\n",
+              "createdAt": "2024-03-03T19:38:03Z",
+              "updatedAt": "2024-03-03T19:38:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB57u",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:40:07Z",
+          "updatedAt": "2024-03-03T19:40:08Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "Not checking removes some security properties.\r\n\r\nSection 5 (security considerations):\r\n\r\n```\r\nHowever, this effect only accrues if the decoder actually checks that\r\ndeterministic encoding was applied correctly.\r\n```\r\n\r\nThis is just restated here...",
+              "createdAt": "2024-03-03T19:40:07Z",
+              "updatedAt": "2024-03-03T19:40:08Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOJ8fYd85ohQ9f",
+      "title": "Use \"preferred serialization\" consistently.",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/9",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Close #8",
+      "createdAt": "2024-03-03T19:49:14Z",
+      "updatedAt": "2024-03-03T20:17:52Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "8d4d3064774695856a166b6409b53a6c19cad14d",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "preferred-serialization",
+      "headRefOid": "f60ce32c7ff107582741691089eac39dbce032ba",
+      "closedAt": "2024-03-03T20:17:52Z",
+      "mergedAt": "2024-03-03T20:17:52Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "ac3c2e7bef3887b55c35e7e6bf0e3f97f4aab710"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ8fYd85yB6dv",
+          "commit": {
+            "abbreviatedOid": "3a270c7"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:55:19Z",
+          "updatedAt": "2024-03-03T19:56:28Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Isn't this section 4.1 of 8949?  I assumed preferred serialization is capitalized here because it is the title of the section.",
+              "createdAt": "2024-03-03T19:55:19Z",
+              "updatedAt": "2024-03-03T19:56:28Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "I think I'd make this not capitalized.",
+              "createdAt": "2024-03-03T19:56:05Z",
+              "updatedAt": "2024-03-03T19:56:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB6v4",
+          "commit": {
+            "abbreviatedOid": "3a270c7"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T20:03:08Z",
+          "updatedAt": "2024-03-03T20:03:08Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "This was specifically about encoding of integers, 3.4.3:\r\n\r\n```\r\nThe preferred serialization of an integer that can\r\n   be represented using major type 0 or 1 is to encode it this way\r\n   instead of as a bignum (which means that the empty string never\r\n   occurs in a bignum when using preferred serialization)\r\n```\r\n\r\nFixed the case, added \"for all integers\".",
+              "createdAt": "2024-03-03T20:03:08Z",
+              "updatedAt": "2024-03-03T20:03:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB7PK",
+          "commit": {
+            "abbreviatedOid": "3a270c7"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T20:14:13Z",
+          "updatedAt": "2024-03-03T20:14:13Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Sorry, emacs global substitute keeps the case; fixed this below.\r\nNow mostly downcased.",
+              "createdAt": "2024-03-03T20:14:13Z",
+              "updatedAt": "2024-03-03T20:14:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB7Wy",
+          "commit": {
+            "abbreviatedOid": "f60ce32"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-03T20:17:08Z",
+          "updatedAt": "2024-03-03T20:17:08Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
