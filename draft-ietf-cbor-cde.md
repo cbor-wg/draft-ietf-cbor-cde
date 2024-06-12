@@ -57,54 +57,34 @@ informative:
 
 --- abstract
 
-[^abs1-]
-
-[^abs1-]:
-    CBOR (STD 94, RFC 8949) defines "Deterministically Encoded CBOR" in
-    its Section 4.2, providing some flexibility for application specific
-    decisions.
-    To facilitate Deterministic Encoding to be offered as a selectable
-    feature of generic encoders, the present document defines a
-    CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
-    large set of applications with potentially diverging detailed
-    requirements.
-
-    This document also introduces the concept of Application Profiles,
-    which are layered on top of the CBOR CDE Profile and can address
-    more application specific requirements.
-    Application Profiles are defined in separate documents.
+CBOR (RFC 8949) defines the concept of "Deterministically Encoded CBOR", an
+application-defined set of encoding constraints ensuring one way to encode a
+particular CBOR value. This document defines Application Profiles of CBOR
+and one subset of Deterministically Encoded CBOR called "Common
+Deterministic Encoding" (CDE), which can be shared by many applications with
+potentially diverging requirements.
 
 --- middle
 
 # Introduction
 
-[^abs1-]
-{{-dcbor-orig}} is an example for such a document.
-
-## Conventions and Definitions
-
-{::boilerplate bcp14-tagged}
-
-# CBOR Common Deterministic Encoding Profile (CDE) {#dep}
-
-This specification defines the *CBOR Common Deterministic Encoding
-Profile* (CDE) based on the _Core Deterministic Encoding
-Requirements_ defined for CBOR in
-{{Section 4.2.1 of RFC8949@-cbor}}.
-
 In many cases, CBOR provides more than one way to encode a data item,
 but also provides a recommendation for a *Preferred Serialization*.
-The *CoRE Deterministic Encoding Requirements* generally pick the
-preferred serializations as mandatory; they also pick additional choices
-such as definite-length encoding.
-Finally, it defines a map ordering based on lexicographic ordering of
-the (deterministically) encoded map keys.
+The concept of *Deterministically Encoded CBOR* is described in {{Section 4.2 of CBOR !RFC8949}}, an application-defined set of encoding constraints
+ensuring one way to encode a particular CBOR value.
+
+The *Core Deterministic Encoding (CDE)* Requirements described in {{Section
+4.2.1 of !RFC8949}} generally make the preferred serializations mandatory;
+make additional choices such as definite-length encoding, and finally define
+map ordering based on lexicographic ordering of the (deterministically)
+encoded map keys.
 
 Note that this specific set of requirements is elective — in
 principle, other variants of deterministic encoding can be defined
 (and have been, now being phased out slowly, as detailed in {{Section 4.2.3
 of RFC8949@-cbor}}).
-In many applications of CBOR today, deterministic encoding is not used
+
+In many applications of CBOR, deterministic encoding is not used
 at all, as its restriction of choices can create some additional
 performance cost and code complexity.
 
@@ -123,36 +103,59 @@ way as with the transition between different integer representation
 lengths in the basic generic data model, i.e., by mandating the
 preferred serialization for all integers ({{Section 3.4.3 of RFC8949@-cbor}}).
 
-{: group="1"}
-1. The CBOR Common Deterministic Encoding Profile (CDE) turns this
-   recommendation into a mandate: Integers that can be represented by
-   basic major type 0 and 1 are encoded using the deterministic
-   encoding defined for them, and integers outside this range are
-   encoded using the preferred serialization ({{Section 3.4.3 of
-   RFC8949@-cbor}}) of tag 2 and 3 (i.e., no leading zero bytes).
+To facilitate Deterministic Encoding offered as a selectable
+feature of generic encoders, this document defines a
+CBOR Common Deterministic Encoding (CDE) Profile based on the
+{{Section 4.2.1 of RFC8949@-cbor}}.
 
-Most tags capture more specific application semantics and therefore
-may be harder to define a deterministic encoding for.
+This document also introduces the concept of other Application Profiles,
+which have additional rules beyond the CBOR CDE Profile and can address
+different application-specific requirements.
+
+Other Application Profiles are defined in separate documents, for
+example {{-dcbor-orig}}.
+
+# Scope of Determinism
+
+Most tags capture specific application semantics and therefore
+may be challenging to define a generic deterministic encoding for.
 While the deterministic encoding of their tag internals is often
-covered by the _Core Deterministic Encoding Requirements_, the mapping
-of diverging platform application data types on the tag contents may
+covered by the CDE profile, the mapping
+of diverging platform application data types onto the tag contents may
 be hard to do in a deterministic way; see {{Section 3.2 of -det}} for
 more explanation as well as examples.
-As the CDE would continually
-need to address additional issues raised by the registration of new
-tags, this specification recommends that new tag registrations address
+New tag registrations need to address
 deterministic encoding in the context of this Profile.
 
 A particularly difficult field to obtain deterministic encoding for is
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See {{Section 3.2.2 of -det}} for more details.
-{{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices, which need to
-be made to obtain a CBOR Common Deterministic Encoding Profile (CDE).
-Specifically, CDE specifies (in the order of the bullet list at the end of {{Section
-4.2.2 of RFC8949@-cbor}}):
+{{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices, which need to specified when defining a Deterministic CBOR application profile.
 
-{: group="1"}
+Likewise, an application profile can decide that it only ever allows a
+single NaN value that would encoded as 0xf97e00, so a profile
+implementation focusing on this application profile would not need to
+provide processing for other NaN values.
+Basing the definition of both CDE and Application Profiles on the
+generic data model of CBOR also means that there is no effect on CDDL
+{{-cddl}}, except where the data description documents encoding decision
+for byte strings carrying embedded CBOR.
+
+# Conventions and Definitions
+
+{::boilerplate bcp14-tagged}
+
+# CBOR Common Deterministic Encoding Profile (CDE) {#dep}
+
+Encoding behavior for the *CBOR Common Deterministic Encoding Profile*
+is described in the numbered items below.
+
+1. Integers that can be represented by
+   basic major type 0 and 1 are encoded using the deterministic
+   encoding defined for them, and integers outside this range are
+   encoded using the preferred serialization ({{Section 3.4.3 of
+   RFC8949@-cbor}}) of tag 2 and 3 (i.e., no leading zero bytes).
 2. Besides the mandated use of preferred serialization, there is no further
    specific action for the two different zero values, e.g., an encoder
    that is asked by an application to represent a negative floating
@@ -161,7 +164,7 @@ Specifically, CDE specifies (in the order of the bullet list at the end of {{Sec
    i.e., all floating point values are encoded as the preferred
    floating-point representation that accurately represents the value,
    independent of whether the floating point value is, mathematically,
-   an integral value (choice 2 of the second bullet).
+   an integral value.
 4. There is no special handling of NaN values, except that the
    preferred serialization rules also apply to NaNs with payloads, using
    the canonical encoding of NaNs as defined in {{IEEE754}}.
@@ -179,17 +182,6 @@ Specifically, CDE specifies (in the order of the bullet list at the end of {{Sec
 6. The CBOR Common Deterministic Encoding Profile does not presume
    equivalence of basic floating point values with floating point
    values using other representations (e.g., tag 4/5).
-
-The main intent here is to preserve the basic generic data model, so
-Application Profiles can make their own decisions within that data model.
-E.g., an application profile can decide that it only ever allows a
-single NaN value that would encoded as 0xf97e00, so a CDE
-implementation focusing on this application profile would not need to
-provide processing for other NaN values.
-Basing the definition of both CDE and Application Profiles on the
-generic data model of CBOR also means that there is no effect on CDDL
-{{-cddl}}, except where the data description documents encoding decision
-for byte strings carrying embedded CBOR.
 
 # Application Profiles
 
