@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-20T01:03:23.896652+00:00",
+  "timestamp": "2024-06-23T01:08:51.722985+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -505,6 +505,47 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOJ8fYd85zQWJX",
+      "title": "Add NaN Appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/11",
+      "state": "CLOSED",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-22T18:05:21Z",
+      "updatedAt": "2024-06-22T18:21:36Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
+      "headRepository": "laurencelundblade/draft-ietf-cbor-cde",
+      "headRefName": "NaNPayload",
+      "headRefOid": "af61b4885a89b19f523b4b32d92d8f7c9e4c55c9",
+      "closedAt": "2024-06-22T18:08:57Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Oops. Not ready yet.",
+          "createdAt": "2024-06-22T18:08:57Z",
+          "updatedAt": "2024-06-22T18:08:57Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "You can keep it as a draft PR",
+          "createdAt": "2024-06-22T18:21:34Z",
+          "updatedAt": "2024-06-22T18:21:34Z"
+        }
+      ],
       "reviews": []
     }
   ]
