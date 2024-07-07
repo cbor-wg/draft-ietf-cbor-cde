@@ -20,22 +20,21 @@ which are layered on top of the CBOR CDE Profile and can address
 more application specific requirements.
 Application Profiles are defined in separate documents. 
     ' name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.22.0" name="generator">
 <meta content="draft-ietf-cbor-cde-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.8
+  xml2rfc 3.22.0
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
-    requests 2.31.0
-    setuptools 68.2.2
-    six 1.16.0
+    requests 2.32.3
+    setuptools 69.5.1
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-cbor-cde.xml" rel="alternate" type="application/rfc+xml">
@@ -1035,11 +1034,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">March 2024</td>
+<td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 4 September 2024</td>
+<td class="center">Expires 8 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1051,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-03-03" class="published">3 March 2024</time>
+<time datetime="2024-07-07" class="published">7 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-04">4 September 2024</time></dd>
+<dd class="expires"><time datetime="2025-01-08">8 January 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1096,7 +1095,7 @@ Application Profiles are defined in separate documents.<a href="#section-abstrac
         which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/cbor/">https://mailarchive.ietf.org/arch/browse/cbor/</a></span>.
         Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/cbor/">https://www.ietf.org/mailman/listinfo/cbor/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/cabo/det">https://github.com/cabo/det</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/cbor-wg/draft-ietf-cbor-cde">https://github.com/cbor-wg/draft-ietf-cbor-cde</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1117,7 +1116,7 @@ Application Profiles are defined in separate documents.<a href="#section-abstrac
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1187,10 +1186,10 @@ Application Profiles are defined in separate documents.<a href="#section-abstrac
                 <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-preferred-serialization" class="internal xref">Preferred Serialization</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.1">
-                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#appendix-A.1.1" class="auto internal xref">A.1.1</a>.  <a href="#name-preferred-serialization-enc" class="internal xref">Preferred serialization encoders</a></p>
+                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#appendix-A.1.1" class="auto internal xref">A.1.1</a>.  <a href="#name-preferred-serialization-enc" class="internal xref">Preferred Serialization Encoders</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.2">
-                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#appendix-A.1.2" class="auto internal xref">A.1.2</a>.  <a href="#name-preferred-serialization-dec" class="internal xref">Preferred serialization decoders</a></p>
+                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#appendix-A.1.2" class="auto internal xref">A.1.2</a>.  <a href="#name-preferred-serialization-dec" class="internal xref">Preferred Serialization Decoders</a></p>
 </li>
                 </ul>
 </li>
@@ -1261,9 +1260,9 @@ Profile</em> (CDE) based on the <em>Core Deterministic Encoding
 Requirements</em> defined for CBOR in
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">In many cases, CBOR provides more than one way to encode a data item,
-but also provides a recommendation for a <em>Preferred Encoding</em>.
+but also provides a recommendation for a <em>Preferred Serialization</em>.
 The <em>CoRE Deterministic Encoding Requirements</em> generally pick the
-preferred encodings as mandatory; they also pick additional choices
+preferred serializations as mandatory; they also pick additional choices
 such as definite-length encoding.
 Finally, it defines a map ordering based on lexicographic ordering of
 the (deterministically) encoded map keys.<a href="#section-2-2" class="pilcrow">¶</a></p>
@@ -1285,7 +1284,7 @@ types 0/1 in a seamless way.
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> recommends handling this transition the same
 way as with the transition between different integer representation
 lengths in the basic generic data model, i.e., by mandating the
-Preferred Encoding (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-2-5" class="pilcrow">¶</a></p>
+preferred serialization for all integers (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2-6">
 <li id="section-2-6.1">
           <p id="section-2-6.1.1">The CBOR Common Deterministic Encoding Profile (CDE) turns this
@@ -1300,7 +1299,7 @@ may be harder to define a deterministic encoding for.
 While the deterministic encoding of their tag internals is often
 covered by the <em>Core Deterministic Encoding Requirements</em>, the mapping
 of diverging platform application data types on the tag contents may
-be hard to do in a deterministic way; see <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-01#section-3.2" class="relref">Section 3.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for
+be hard to do in a deterministic way; see <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-02#section-3.2" class="relref">Section 3.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for
 more explanation as well as examples.
 As the CDE would continually
 need to address additional issues raised by the registration of new
@@ -1309,13 +1308,13 @@ deterministic encoding in the context of this Profile.<a href="#section-2-7" cla
 <p id="section-2-8">A particularly difficult field to obtain deterministic encoding for is
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
-See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-01#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
+See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-02#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices, which need to
 be made to obtain a CBOR Common Deterministic Encoding Profile (CDE).
 Specifically, CDE specifies (in the order of the bullet list at the end of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>):<a href="#section-2-8" class="pilcrow">¶</a></p>
 <ol start="2" type="1" class="normal type-1" id="section-2-9">
 <li id="section-2-9.1">
-          <p id="section-2-9.1.1">Besides the mandated use of preferred encoding, there is no further
+          <p id="section-2-9.1.1">Besides the mandated use of preferred serialization, there is no further
 specific action for the two different zero values, e.g., an encoder
 that is asked by an application to represent a negative floating
 point zero will generate 0xf98000.<a href="#section-2-9.1.1" class="pilcrow">¶</a></p>
@@ -1329,7 +1328,7 @@ an integral value (choice 2 of the second bullet).<a href="#section-2-9.2.1" cla
 </li>
         <li id="section-2-9.3">
           <p id="section-2-9.3.1">There is no special handling of NaN values, except that the
-preferred encoding rules also apply to NaNs with payloads, using
+preferred serialization rules also apply to NaNs with payloads, using
 the canonical encoding of NaNs as defined in <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>.
 Specifically, this means that shorter forms of encodings for a NaN
 are used when that can be achieved by only removing trailing zeros
@@ -1351,14 +1350,16 @@ values using other representations (e.g., tag 4/5).<a href="#section-2-9.5.1" cl
 </li>
       </ol>
 <p id="section-2-10">The main intent here is to preserve the basic generic data model, so
-Application Profiles can make their own decisions within that data model.
-E.g., an application profile can decide that it only ever allows a
+applications (or Application Profiles, see <a href="#application-profiles" class="auto internal xref">Section 3</a>) can
+make their own decisions within that data model.
+E.g., an application (profile) can decide that it only ever allows a
 single NaN value that would encoded as 0xf97e00, so a CDE
-implementation focusing on this application profile would not need to
+implementation focusing on this application (profile) would not need to
 provide processing for other NaN values.
 Basing the definition of both CDE and Application Profiles on the
-generic data model of CBOR also means that there is no effect on CDDL
-<span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>, except where the data description documents encoding decision
+generic data model of CBOR also means that there is no effect on the
+Concise Data Definition Language (CDDL)
+<span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>, except where the data description documents encoding decisions
 for byte strings carrying embedded CBOR.<a href="#section-2-10" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1385,7 +1386,8 @@ encoder/decoder implementations.<a href="#section-3-3" class="pilcrow">¶</a></p
 <p id="section-3-4">An Application Profile implementation produces well-formed,
 deterministically encoded CBOR according to <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, and existing
 generic CBOR decoders will therefore be able to decode it, including
-those that check for Deterministic Encoding.
+those that check for Deterministic Encoding ("CDE decoders", see also
+<a href="#impcheck" class="auto internal xref">Appendix A</a>).
 Similarly, generic CBOR encoders will be able to produce valid CBOR
 that can be processed by Application Profile implementations, if
 handed Application Profile conforming data model level information
@@ -1451,7 +1453,7 @@ and are encouraged to do so.<a href="#section-4-8" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-5-1">The security considerations in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-10" class="relref">10</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> apply.
 The use of deterministic encoding can mitigate issues arising out of
-the use of non-preferred encodings specially crafted by an attacker.
+the use of non-preferred serializations specially crafted by an attacker.
 However, this effect only accrues if the decoder actually checks that
 deterministic encoding was applied correctly.
 More generally, additional security properties of deterministic
@@ -1543,11 +1545,11 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dl class="references">
 <dt id="I-D.bormann-cbor-det">[I-D.bormann-cbor-det]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR: On Deterministic Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-det-01</span>, <time datetime="2023-08-09" class="refDate">9 August 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-01">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR: On Deterministic Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-det-02</span>, <time datetime="2024-03-03" class="refDate">3 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-02">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
       <dd>
-<span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-07</span>, <time datetime="2024-01-09" class="refDate">9 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-07">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-07</a>&gt;</span>. </dd>
+<span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-10</span>, <time datetime="2024-06-10" class="refDate">10 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1583,20 +1585,20 @@ achieving this level of robustness is a mark of quality of
 implementation.<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.3">
-          <p id="appendix-A-3.3.1">Preferred Serialization and CDE only affect serialization.
+          <p id="appendix-A-3.3.1">Preferred serialization and CDE only affect serialization.
 They do not place any requirements, exclusions, mappings or such on
-the data model layer.
+the data model level.
 Application profiles such as dCBOR are different as they can affect
 the data model by restricting some values and ranges.<a href="#appendix-A-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-3.4">
-          <p id="appendix-A-3.4.1">CBOR decoders in general are not required to check for Preferred
-Serialization or CDE and reject inputs that do not do not fulfill
-their requirements..
+          <p id="appendix-A-3.4.1">CBOR decoders in general are not required to check for preferred
+serialization or CDE and reject inputs that do not do not fulfill
+their requirements.
 However, in an environment that employs deterministic encoding, this
 negates many of its benefits.
-Decoder implementations that advertise "support" for Preferred
-Serialization or CDE need to check the encoding and reject
+Decoder implementations that advertise "support" for preferred
+serialization or CDE need to check the encoding and reject
 input that is not encoded to the encoding specification in use.
 Again, application profiles such as dCBOR may pose additional
 requirements, such as requiring rejection of non-conforming inputs.<a href="#appendix-A-3.4.1" class="pilcrow">¶</a></p>
@@ -1615,10 +1617,10 @@ the original input.<a href="#appendix-A-3.4.2" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-1">In the following, the abbreviation "ai" will be used for the 5-bit
 additional information field in the first byte of an encoded CBOR data
 item, which follows the 3-bit field for the major type.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<div id="preferred-serialization-encoders">
+<div id="pse">
 <section id="appendix-A.1.1">
           <h4 id="name-preferred-serialization-enc">
-<a href="#appendix-A.1.1" class="section-number selfRef">A.1.1. </a><a href="#name-preferred-serialization-enc" class="section-name selfRef">Preferred serialization encoders</a>
+<a href="#appendix-A.1.1" class="section-number selfRef">A.1.1. </a><a href="#name-preferred-serialization-enc" class="section-name selfRef">Preferred Serialization Encoders</a>
           </h4>
 <ol start="1" type="1" class="normal type-1" id="appendix-A.1.1-1">
 <li id="appendix-A.1.1-1.1">
@@ -1691,10 +1693,10 @@ NaN payload to a half-precision quiet NaN.)<a href="#appendix-A.1.1-1.4.2.2.2" c
           </ol>
 </section>
 </div>
-<div id="preferred-serialization-decoders">
+<div id="psd">
 <section id="appendix-A.1.2">
           <h4 id="name-preferred-serialization-dec">
-<a href="#appendix-A.1.2" class="section-number selfRef">A.1.2. </a><a href="#name-preferred-serialization-dec" class="section-name selfRef">Preferred serialization decoders</a>
+<a href="#appendix-A.1.2" class="section-number selfRef">A.1.2. </a><a href="#name-preferred-serialization-dec" class="section-name selfRef">Preferred Serialization Decoders</a>
           </h4>
 <ol start="1" type="1" class="normal type-1" id="appendix-A.1.2-1">
 <li id="appendix-A.1.2-1.1">
@@ -1744,14 +1746,20 @@ constrained environments.<a href="#appendix-A.1.2-1.4.2.2.1" class="pilcrow">¶<
           </h4>
 <ol start="1" type="1" class="normal type-1" id="appendix-A.2.1-1">
 <li id="appendix-A.2.1-1.1">
-              <p id="appendix-A.2.1-1.1.1">CDE encoders <span class="bcp14">MUST</span> only emit CBOR fulfilling the Preferred
-Serialization rules described above.<a href="#appendix-A.2.1-1.1.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.1-1.1.1">CDE encoders <span class="bcp14">MUST</span> only emit CBOR fulfilling the preferred
+serialization rules (<a href="#pse" class="auto internal xref">Appendix A.1.1</a>).<a href="#appendix-A.2.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="appendix-A.2.1-1.2">
               <p id="appendix-A.2.1-1.2.1">CDE encoders <span class="bcp14">MUST</span> sort maps by the CBOR representation of the map
 key.
 The sorting is byte-wise lexicographic order of the encoded map
-keys.<a href="#appendix-A.2.1-1.2.1" class="pilcrow">¶</a></p>
+key data items.<a href="#appendix-A.2.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="appendix-A.2.1-1.3">
+              <p id="appendix-A.2.1-1.3.1">CDE encoders <span class="bcp14">MUST</span> generate CBOR that fulfills basic validity
+(Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.3.1" class="relref">5.3.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).  Note that this includes not
+emitting duplicate keys in a major type 5 map as well as invalid
+UTF-8 in major type 3 text strings.<a href="#appendix-A.2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
@@ -1761,9 +1769,17 @@ keys.<a href="#appendix-A.2.1-1.2.1" class="pilcrow">¶</a></p>
           <h4 id="name-cde-decoders">
 <a href="#appendix-A.2.2" class="section-number selfRef">A.2.2. </a><a href="#name-cde-decoders" class="section-name selfRef">CDE Decoders</a>
           </h4>
-<ol start="1" type="1" class="normal type-1" id="appendix-A.2.2-1">
-<li id="appendix-A.2.2-1.1">
-              <p id="appendix-A.2.2-1.1.1">CDE decoders <span class="bcp14">MUST</span> follow the rules for Preferred Serialization Decoders.<a href="#appendix-A.2.2-1.1.1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2-1">The term "CDE Decoder" is a shorthand for a CBOR decoder that
+advertises <em>supporting</em> CDE (see the start of this appendix).<a href="#appendix-A.2.2-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-A.2.2-2">
+<li id="appendix-A.2.2-2.1">
+              <p id="appendix-A.2.2-2.1.1">CDE decoders <span class="bcp14">MUST</span> follow the rules for preferred serialization
+decoders (<a href="#psd" class="auto internal xref">Appendix A.1.2</a>).<a href="#appendix-A.2.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="appendix-A.2.2-2.2">
+              <p id="appendix-A.2.2-2.2.1">CDE decoders <span class="bcp14">MUST</span> check for ordering map keys and for basic
+validity of the CBOR encoding (see Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.3.1" class="relref">5.3.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, which includes a check against duplicate map keys
+and invalid UTF-8).<a href="#appendix-A.2.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>

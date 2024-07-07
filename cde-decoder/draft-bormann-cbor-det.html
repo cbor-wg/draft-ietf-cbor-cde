@@ -12,22 +12,21 @@ its Section 4.2.  The present document provides additional information
 about use cases, deployment considerations, and implementation choices
 for Deterministic Encoding. 
     ' name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.22.0" name="generator">
 <meta content="draft-bormann-cbor-det-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.8
+  xml2rfc 3.22.0
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
-    requests 2.31.0
-    setuptools 68.2.2
-    six 1.16.0
+    requests 2.32.3
+    setuptools 69.5.1
     wcwidth 0.2.13
 -->
 <link href="draft-bormann-cbor-det.xml" rel="alternate" type="application/rfc+xml">
@@ -1026,12 +1025,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">Deterministic Encoding</td>
-<td class="right">March 2024</td>
+<td class="center">On Deterministic Encoding</td>
+<td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 4 September 2024</td>
+<td class="center">Expires 8 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-cbor-det-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-03-03" class="published">3 March 2024</time>
+<time datetime="2024-07-07" class="published">7 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-04">4 September 2024</time></dd>
+<dd class="expires"><time datetime="2025-01-08">8 January 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1080,7 +1079,7 @@ for Deterministic Encoding.<a href="#section-abstract-1" class="pilcrow">¶</a><
         which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/cbor/">https://mailarchive.ietf.org/arch/browse/cbor/</a></span>.
         Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/cbor/">https://www.ietf.org/mailman/listinfo/cbor/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/cabo/det">https://github.com/cabo/det</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/cbor-wg/draft-ietf-cbor-cde">https://github.com/cbor-wg/draft-ietf-cbor-cde</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1101,7 +1100,7 @@ for Deterministic Encoding.<a href="#section-abstract-1" class="pilcrow">¶</a><
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1197,7 +1196,10 @@ for Deterministic Encoding.<a href="#section-abstract-1" class="pilcrow">¶</a><
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-application-profiles-of-det" class="internal xref">Application Profiles of Deterministic Encoding</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-numeric-reduction-in-dcbor" class="internal xref">Numeric Reduction in dCBOR</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-the-need-for-cbor-common-de" class="internal xref">The need for CBOR Common Deterministic Encoding (CDE)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-numeric-reduction-in-dcbor" class="internal xref">Numeric Reduction in dCBOR</a></p>
 </li>
             </ul>
 </li>
@@ -1248,10 +1250,10 @@ is most practical for it (with the constraint, of course, that the
 data need to fit).
 For most encoders, it is natural to always choose the shortest form
 available (essentially avoiding leading zeros).
-Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">Preferred Serialization</a>)</span> of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> names this practice
+Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">Preferred Serialization</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> names this practice
 and provides additional guidance for CBOR implementations; another
 term in use is "Preferred Encoding".<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">Deterministically Encoded CBOR</a>)</span> of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> goes beyond
+<p id="section-1-3">Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">Deterministically Encoded CBOR</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> goes beyond
 the Preferred Serialization practice by providing rules for
 <em>Deterministic Encoding</em>.
 The objective of Deterministic Encoding is to, deterministically,
@@ -1261,21 +1263,26 @@ To achieve this, Preferred Serialization is mandated, an encoding choice
 intended for incremental encoding
 (indefinite length encoding) is disabled, and additional effort is
 expended for encoding key/value pairs in maps (the order of which
-does not matter semantically) in a deterministic order anyway.<a href="#section-1-3" class="pilcrow">¶</a></p>
+does not matter semantically) in a deterministic order.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Given that additional effort needs to be expended and/or implementation
 choices are taken away, neither Preferred Serialization nor
 Deterministic Encoding are mandatory in CBOR.
-(Contrast this with UTF-8 (<span><a href="https://rfc-editor.org/rfc/rfc3629#section-3" class="relref">Section 3</a> of [<a href="#STD63" class="cite xref">STD63</a>]</span>), which is always treating as
+(Contrast this with UTF-8 (Section <a href="https://rfc-editor.org/rfc/rfc3629#section-3" class="relref">3</a> of RFC 3629 <span>[<a href="#STD63" class="cite xref">STD63</a>]</span>), which is always treating as
 "invalid" any encoding variants that are longer than necessary.)<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">Deterministic Encoding is defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">Section 4.2</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> (note
-that <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">Section 4.2.3</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> defines a variant that was needed at
+<p id="section-1-5">Deterministic Encoding is defined in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> (note
+that Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">4.2.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> defines a variant that was needed at
 the time for backward compatibility and will not be discussed further
 in this document).
 The present document elaborates on this normative definition by
 providing additional information about use cases, deployment
 considerations, and implementation choices for Deterministic Encoding;
 it is an informational document that however may still be cited where a
-single reference for Deterministic Encoding is convenient.<a href="#section-1-5" class="pilcrow">¶</a></p>
+single reference for the background of Deterministic Encoding is convenient.
+This document is intended to be used in conjunction with CBOR Common
+Deterministic Encoding (CDE, <span>[<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span>), a normative specification for a
+deterministic encoding profile that was developed in order to allow
+generic CBOR implementations to provide common support for a variety
+of applications of deterministic encoding.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <div id="conventions-and-definitions">
 <section id="section-1.1">
         <h3 id="name-conventions-and-definitions">
@@ -1283,7 +1290,7 @@ single reference for Deterministic Encoding is convenient.<a href="#section-1-5"
         </h3>
 <p id="section-1.1-1">The definitions of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> apply.
 Readers are expected to be familiar with CBOR, and particularly so with
-Sections <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> and <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+Sections <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> and <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">The following terms introduced in the text of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> receive their own
 separate definitions here:<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-1.1-3">
@@ -1293,10 +1300,10 @@ separate definitions here:<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 leads to shortest-form encodings where a choice of encoding lengths
 is available, without expending additional effort on converting
 between different kinds of data item.
-See <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">Section 4.1</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> and the terms defined in that section.
+See Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> and the terms defined in that section.
 The Preferred Encoding rules for data items in the Basic Generic
 Data Model may be augmented by rules for specific Tags, see for
-instance <span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">Section 3.4.3</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
+instance Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.3">Preferred Encoding:</dt>
@@ -1311,12 +1318,12 @@ additional decisions to always (deterministically) lead to the
 exact same encoding for equivalent inputs at the data model level.
 Similar to Preferred Serialization, the equivalence model as defined
 for the Basic Generic Data Model may be augmented by equivalence
-rules defined for specific Tags (see also <span><a href="https://rfc-editor.org/rfc/rfc8949#section-2.1" class="relref">Section 2.1</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
+rules defined for specific Tags (see also Section <a href="https://rfc-editor.org/rfc/rfc8949#section-2.1" class="relref">2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-1.1-4">CBOR data items at the data model level are represented in the CBOR
-diagnostic notation (<span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> as extended by <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>,
+<p id="section-1.1-4">In this document, CBOR data items at the data model level are
+represented in the CBOR diagnostic notation (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">8</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> as extended by <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>,
 further elaborated in <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>), abbreviated with "EDN" (extended
 diagnostic notation).<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 <p id="section-1.1-5">While this document is informative, it does use certain keywords to
@@ -1396,7 +1403,7 @@ could be benign, but also could be specifically evoked by an active
 attacker to degrade a system.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.2-4">As usual for deterministically encoded data, not all forms of
 application equivalence imply equivalence at the data model level, so
-some equivalence processing (deterministic representation) may be
+some equivalence processing (<em>deterministic representation</em>) may be
 required at the application level as well,
 to achieve equivalent representations and thus a good cache hit rate.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 </section>
@@ -1411,13 +1418,17 @@ Message Authentication Code, MAC) information in
 the form in which it
 has actually been interchanged, making representation variants
 less relevant.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">However, in some cases, the signing input for a signature or a MAC may
+<p id="section-2.3-2">(Note that Section <a href="https://rfc-editor.org/rfc/rfc9052#section-9" class="relref">9</a> of RFC 9052 <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> defines deterministic encoding
+rules for its own derivation of signing inputs from interchange data
+and additional cryptographic parameters; these are a compatible subset
+of the Core Deterministic Encoding Requirements specified in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> and thus of CDE.)<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">However, in some cases, the signing input for a signature or a MAC may
 need to be derived from data at rest and/or specific transformations of
 the data that was interchanged.  Such a transformation is fraught with
 perils at the application level that may be exploited by attackers;
 this problem is outside the scope of the present document.
 Deterministic Encoding may remove one potential source of variability
-that might make signatures or MACs useless between systems.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+that might make signatures or MACs useless between systems.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1444,7 +1455,7 @@ flags, switches, etc.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-1">There is some expectation that, barring any particular constraints
 that would make this more difficult than normally, a CBOR encoder will
 use Preferred Encoding, in particular generic encoders.
-Deterministic Encoding, however, will be switched on explicitly in
+Deterministic Encoding, however, will need to be switched on explicitly in
 most implementations.
 Note that Preferred Encoding, while using the shortest form available
 for the specific data item to be encoded, doesn't have that shortness
@@ -1465,9 +1476,10 @@ process can be more efficient.<a href="#section-3.1-2" class="pilcrow">¶</a></p
 implementations is <span class="bcp14">RECOMMENDED</span> to be provided by a flag to switch on
 (or separate function that enables) Deterministic Encoding.
 Similarly, generic decoders are <span class="bcp14">RECOMMENDED</span> to have a flag to switch
-on/separate function to enable checking, whether that is efficiently
+on/separate function to enable checking for Deterministic Encoding,
+whether that is efficiently
 implemented during decoding or less efficiently by comparing
-re-encoding.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+a re-encoding.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="tags">
@@ -1476,7 +1488,7 @@ re-encoding.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-application-requirements-an" class="section-name selfRef">Application Requirements and Tags</a>
         </h3>
 <p id="section-3.2-1">The definition of Deterministic Encoding can become more complicated
-with the addition of Tags (<span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4" class="relref">Section 3.4</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span><span>[<a href="#IANA.cbor-tags" class="cite xref">IANA.cbor-tags</a>]</span>).
+with the addition of Tags (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4" class="relref">3.4</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span><span>[<a href="#IANA.cbor-tags" class="cite xref">IANA.cbor-tags</a>]</span>).
 Not all tags come with a strong equivalence model.
 Worse, the equivalence model may be more
 application specific than for basic Deterministic Encoding.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
@@ -1499,7 +1511,7 @@ semantics, they should all be represented as
 <code>0("2013-10-23T21:52:23Z")</code> in Deterministic Encoding as that is the
 shortest form.
 However, they carry additional semantics that may be incidental or
-intentional (the Mail from which this date/time example was taken originated
+intentional (the e-mail message from which this date/time example was taken originated
 from California, which then was at a time zone the time offset of
 which is expressed by the <code>-07:00</code>).
 Whether the first two are exactly equivalent or not is the subject of
@@ -1544,7 +1556,7 @@ Preferred Encoding always chooses the shortest one.<a href="#section-3.2.2-3.1.2
 <p id="section-3.2.2-3.2.2">
 These provide for a variable-length representation of arbitrarily
 large unsigned (Tag 2) or negative (Tag 3) integer numbers.
-According to <span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">Section 3.4.3</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span>,
+According to Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>,
 the Preferred Encoding of an integer that fits into major type 0 or
 1 is just that, i.e., the boundary between regular integers and
 bignums is intentionally thin.  This means that, in Preferred
@@ -1560,7 +1572,7 @@ could provide a 64-bit signed integer range separate from a bignum-based
 arbitrary size integer range that is outside 64-bit signed space, and
 would map half of the 65-bit space into the arbitrary size range.<a href="#section-3.2.2-3.2.3" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-3.2.4">
-Note that, accordingly, Preferred Encoding as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">Section 3.4.3</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> selects the shortest encoding in major type 0/1
+Note that, accordingly, Preferred Encoding as defined in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> selects the shortest encoding in major type 0/1
 space if that is available and the shortest encoding (no leading
 zero bytes) in Tag 2/3 space only if the former is not available.
 This means that the integer number 65 536 000 000 in preferred
@@ -1585,8 +1597,8 @@ the latter is shorter by two bytes.<a href="#section-3.2.2-3.2.8" class="pilcrow
               <p id="section-3.2.2-3.3.1">Major type 7<a href="#section-3.2.2-3.3.1" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-3.3.2">
 CBOR directly provides the <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> types binary16, binary32, and
-binary64, colloquially known as half precision, single precision,
-and double precision floating point.  Note that other <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>
+binary64, colloquially known as half-precision, single-precision,
+and double-precision floating point.  Note that other <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>
 binary floating types are indirectly supported via Tag 4, as well as
 decimal fractions via Tag 5.<a href="#section-3.2.2-3.3.2" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-3.3.3">
@@ -1635,7 +1647,7 @@ Instead of adopting further formats such as decimal64 or binary128 from
 precision representation: Tag 5 for general binary floating point
 numbers ("bigfloats") and Tag 4 for general decimal floating point
 (decimal fractions).
- <span><a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.4" class="relref">Section 3.4.4</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> also states that "Bigfloats may also be used by constrained
+ Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.4" class="relref">3.4.4</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> also states that "Bigfloats may also be used by constrained
 applications that need some basic binary floating-point capability
 without the need for supporting IEEE 754", while decimal fractions
 "are most useful if an application needs the exact representation of
@@ -1687,7 +1699,7 @@ processing of the underlying data representation format, and any ASN.1
 BER (Basic Encoding Rules) processor (<code>+ber</code>) can also process a
 <code>+der</code> instance, which is not apparent from the <code>+der</code> suffix.
 (This was maybe mitigated by introducing both SSS at the same time.)
-Similarly, any CBOR decoder today can process a deterministically
+Similarly, any CBOR decoder today can process deterministically
 encoded data items as plain CBOR data items (without any mitigation of
 having introduced a related suffix at the same time), so the SSS
 should be the usual <code>+cbor</code>/<code>+cbor-seq</code>.
@@ -1765,10 +1777,10 @@ inputs were properly ordered by the application.<a href="#section-5.1-4" class="
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-map-key-ordering" class="section-name selfRef">Map Key Ordering</a>
         </h3>
 <p id="section-5.2-1">Generating deterministically encoded data items requires arranging
-key/value pairs in maps into an order defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">Section 4.2.1</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+key/value pairs in maps into an order defined in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">This map is ordered by the byte-wise lexicographic ordering of the
 deterministically encoded map keys.
-<span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">Section 4.2.1</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> notes:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> notes:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <blockquote id="section-5.2-3">
           <p id="section-5.2-3.1">Implementation note: the self-delimiting nature of the CBOR
 encoding means that there are no two well-formed CBOR encoded
@@ -1827,82 +1839,94 @@ a map key to perform the overall map content ordering.<a href="#section-5.2-6" c
 applications are encouraged to define rules for representing
 application information in the CBOR generic data model that enable
 the use of Preferred Encoding on that level as well.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">Applications can also define their own deterministic encoding rules,
+<div id="the-need-for-cbor-common-deterministic-encoding-cde">
+<section id="section-6.1">
+        <h3 id="name-the-need-for-cbor-common-de">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-the-need-for-cbor-common-de" class="section-name selfRef">The need for CBOR Common Deterministic Encoding (CDE)</a>
+        </h3>
+<p id="section-6.1-1">Applications can also define their own deterministic encoding rules,
 as for instance FIDO CTAP2 (Client to Authenticator Protocol <span>[<a href="#CTAP2" class="cite xref">CTAP2</a>]</span>)
 does with the <em>CTAP2 canonical CBOR encoding form</em> (Section 6 of <span>[<a href="#CTAP2" class="cite xref">CTAP2</a>]</span>).
 Its description appears
-to be derived from an equivalent of <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">Section 4.2.3</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span>.
+to be derived from an equivalent of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">4.2.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
 (The actual
 structure of CTAP2 limits its use to cases where that is compatible
-with standard Deterministic Encoding; there is text in the
+with standard Deterministic Encoding and thus CDE; there is text in the
 specification that calls for revisiting the definition when this would no
-longer be the case.)<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">Application-specific deterministic encoding rules can make it
+longer be the case.)<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">Application-specific deterministic encoding rules can make it
 difficult to use existing generic encoders and may therefore diminish
-the value of using a standard representation format.
-However, applications can also define transformations of their data
+the value of using a standard representation format.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Instead, applications can define transformations of their data
 into a more limited data model that reduces the cases the
 Deterministic Encoding rules have to implement.
-This allows both the following implementation choices:<a href="#section-6-3" class="pilcrow">¶</a></p>
+This allows both the following implementation choices:<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6-4.1">
-          <p id="section-6-4.1.1">the use of generic encoders with standard Deterministic Encoding
-rule implementations after some application processing, or<a href="#section-6-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1-4.1">
+            <p id="section-6.1-4.1.1">the use of generic encoders with standard Deterministic Encoding
+rule implementations after some application processing, or<a href="#section-6.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-6-4.2">
-          <p id="section-6-4.2.1">the use of specialized encoders which combine encoding with the
-implementation of the application transformations.<a href="#section-6-4.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-6.1-4.2">
+            <p id="section-6.1-4.2.1">the use of specialized encoders which combine encoding with the
+implementation of the application transformations.<a href="#section-6.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-      </ul>
-<p id="section-6-5">This section describes some of the considerations that led to one such
-application profile for Deterministic Encoding.<a href="#section-6-5" class="pilcrow">¶</a></p>
+        </ul>
+<p id="section-6.1-5">The next subsection describes some of the considerations that led to
+one such application profile for Deterministic Encoding.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
 <div id="reduction">
-<section id="section-6.1">
+<section id="section-6.2">
         <h3 id="name-numeric-reduction-in-dcbor">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-numeric-reduction-in-dcbor" class="section-name selfRef">Numeric Reduction in dCBOR</a>
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-numeric-reduction-in-dcbor" class="section-name selfRef">Numeric Reduction in dCBOR</a>
         </h3>
-<p id="section-6.1-1">The dCBOR specification (originally in <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>, with a condensed form
-proposed in <span>[<a href="#I-D.bormann-cbor-dcbor" class="cite xref">I-D.bormann-cbor-dcbor</a>]</span>) describes the pervasive use of Deterministic
+<p id="section-6.2-1">The dCBOR specification <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span> describes the pervasive use of Deterministic
 Encoding throughout an application.  It also defines a simplified
 application data model of numbers, where there no longer is a distinction
 between integers and floating point numbers at the application data
 model level — all numbers are of a
 single numeric type, and the choice of integer or floating point
-representations is made based on value:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+representations is made based on value:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.1-2.1">
-            <p id="section-6.1-2.1.1">integral numbers that fit into Major Type 0 and 1 are represented in
-this way even if they were originally represented as floating point values;<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.2-2.1">
+            <p id="section-6.2-2.1.1">integral numbers that fit into Major Type 0 and 1 are represented in
+this way even if they were originally represented as floating point values;<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-6.1-2.2">
-            <p id="section-6.1-2.2.1">all other numbers are represented as floating point
-values (and all NaN values are mapped to a single quiet NAN).<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-6.2-2.2">
+            <p id="section-6.2-2.2.1">all other numbers are represented as floating point
+values (and all NaN values are mapped to a single quiet NAN).<a href="#section-6.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-6.1-3">The underlying CBOR Deterministic Encoding rules ensure that, in both
-cases, the shortest form for the case will then be used for encoding.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1-4">Reducing the separate integer and floating point spaces to a single
+<p id="section-6.2-3">The underlying CBOR Deterministic Encoding rules ensure that, in both
+cases, the shortest form for the case will then be used for encoding.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Reducing the separate integer and floating point spaces to a single
 numeric space is particularly attractive in implementation languages that
 also only have a single such space, such as JavaScript <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>.
 (While JavaScript recently has acquired a separate integer type, it is much
 less well integrated into the language and existing libraries than the
-general numeric type.)<a href="#section-6.1-4" class="pilcrow">¶</a></p>
-<p id="section-6.1-5">The original specification <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span> restated much of <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">Section 4.2</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> and
-added a rule that doesn't allow compatibility with Deterministic
-Encoding (disallowing the interchange of basic negative integers in the range
-<code>-2</code><sup>64</sup> to -<code>2</code><sup>63</sup><code>-1</code>).<a href="#section-6.1-5" class="pilcrow">¶</a></p>
-<p id="section-6.1-6">It also had a mention as future work of subnormal values <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, which
-work fine for interchange (even with Deterministic Encoding) in
-<span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
+more well-established general numeric type.)<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-5">Within the CBOR working group of the IETF, the dCBOR specification
+prompted a discussion about profiles for deterministic encoding, which
+led to the CBOR Common Deterministic Encoding (CDE) specification
+<span>[<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span> and the concept of a deterministic encoding <em>application
+profile</em> (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span>).
+Without help of the CDE specification at the time, an early version of
+the dCBOR specification restated much of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> and added a rule that gets in the way of compatibility
+with Deterministic Encoding (disallowing the interchange of basic
+negative integers in the range <code>-2</code><sup>64</sup> to
+-<code>2</code><sup>63</sup><code>-1</code>).<a href="#section-6.2-5" class="pilcrow">¶</a></p>
+<aside id="section-6.2-6">
+          <p id="section-6.2-6.1">Early dCBOR specifications also had a mention as future work of
+subnormal values <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, which work fine for interchange (even with
+Deterministic Encoding) in <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
 Note that specific values may not be available to applications that
 employ floating point hardware implementing the FTZ ("flush to zero")
 and/or DAZ ("denormals are zero") strategies.
 These may then require special handling in the application data model.
 It is generally difficult to
 rely on exact equality of floating point values, which however is what
-Deterministic Encoding requires.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
-<p id="section-6.1-7">A streamlined specification of the dCBOR numeric-reduction based
-application profile is proposed in <span>[<a href="#I-D.bormann-cbor-dcbor" class="cite xref">I-D.bormann-cbor-dcbor</a>]</span>.<a href="#section-6.1-7" class="pilcrow">¶</a></p>
+Deterministic Encoding requires.<a href="#section-6.2-6.1" class="pilcrow">¶</a></p>
+</aside>
 </section>
 </div>
 </section>
@@ -1918,18 +1942,18 @@ Deterministically Encoded CBOR provides an attractive solution to that
 as it is already well-defined.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">While the data model of JSON is not well-defined, I-JSON provides one
 interpretation that is generally accepted <span>[<a href="#RFC7493" class="cite xref">RFC7493</a>]</span>.
-Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">6.2</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">Converting from JSON to CBOR</a>)</span> of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> provides a way
+Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">6.2</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">Converting from JSON to CBOR</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> provides a way
 to transform JSON data that conform to this data model to CBOR.
 When used with its default parameters, the combination of (1) I-JSON,
 (2) the
 JSON-to-CBOR transformation, and (3) the rules for CBOR Deterministic
 Encoding provide a well-defined Deterministic Encoding for JSON data.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">Transforming decoded CBOR data after interchange back to data-model
-level JSON data can be done with the inverse of <span><a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">Section 6.2</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span>
-(the full generality of Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-6.1" class="relref">6.1</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-6.1" class="relref">Converting from CBOR to JSON</a>)</span> of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> is obviously not required as only the JSON subset of the CBOR
+level JSON data can be done with the inverse of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">6.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>
+(the full generality of Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-6.1" class="relref">6.1</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-6.1" class="relref">Converting from CBOR to JSON</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> is obviously not required as only the JSON subset of the CBOR
 generic data model is used).<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">Comparing the handling of numeric data in the JSON-to-CBOR
-transformation to that reported in <a href="#reduction" class="auto internal xref">Section 6.1</a>, the main difference is
+transformation to that reported in <a href="#reduction" class="auto internal xref">Section 6.2</a>, the main difference is
 that the former only maps integral values between
 <code>-2</code><sup>53</sup><code>+1</code> and <code>2</code><sup>53</sup><code>-1</code> to basic CBOR integers
 and leaves the others in floating point form.
@@ -1950,7 +1974,7 @@ available at the model level.
 Any transformation error from the application data to the CBOR model
 level and then to deterministic encoding can lead to a potential exploit
 by an attacker.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">TODO further Security Considerations<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-2">Pertinent Security Considerations are further discussed <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span>.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1971,6 +1995,10 @@ by an attacker.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-cbor-cde">[I-D.ietf-cbor-cde]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Common Deterministic Encoding (CDE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-cde-02</span>, <time datetime="2024-03-03" class="refDate">3 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="IANA.cbor-tags">[IANA.cbor-tags]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags"</span>, <span>&lt;<a href="http://www.iana.org/assignments/cbor-tags">http://www.iana.org/assignments/cbor-tags</a>&gt;</span>. </dd>
@@ -1989,7 +2017,11 @@ by an attacker.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="STD94">[STD94]</dt>
       <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>&gt;</span>. </dd>
+<div class="refInstance">Internet Standard 94, <span>&lt;<a href="https://www.rfc-editor.org/info/std94">https://www.rfc-editor.org/info/std94</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC8949">
+            <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8949">https://www.rfc-editor.org/info/rfc8949</a>&gt;</span>. </div>
+</dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2008,17 +2040,13 @@ by an attacker.<a href="#section-8-1" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Ecma International</span>, <span class="refTitle">"ECMAScript 2020 Language Specification"</span>, <span class="refContent">Standard ECMA-262, 11th Edition</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.ecma-international.org/publications/standards/Ecma-262.htm">https://www.ecma-international.org/publications/standards/Ecma-262.htm</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.bormann-cbor-dcbor">[I-D.bormann-cbor-dcbor]</dt>
-        <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"The CDE-based Application Profile dCBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-dcbor-04</span>, <time datetime="2023-11-05" class="refDate">5 November 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-dcbor-04">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-dcbor-04</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN): Application-Oriented Literals, ABNF, and Media Type"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-08</span>, <time datetime="2024-02-01" class="refDate">1 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-08">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-10</span>, <time datetime="2024-07-04" class="refDate">4 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-10">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-mediaman-suffixes">[I-D.ietf-mediaman-suffixes]</dt>
         <dd>
-<span class="refAuthor">Sporny, M.</span> and <span class="refAuthor">A. Guy</span>, <span class="refTitle">"Media Types with Multiple Suffixes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-mediaman-suffixes-07</span>, <time datetime="2024-03-02" class="refDate">2 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-mediaman-suffixes-07">https://datatracker.ietf.org/doc/html/draft-ietf-mediaman-suffixes-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Sporny, M.</span> and <span class="refAuthor">A. Guy</span>, <span class="refTitle">"Media Type Suffixes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-mediaman-suffixes-08</span>, <time datetime="2024-06-19" class="refDate">19 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-mediaman-suffixes-08">https://datatracker.ietf.org/doc/html/draft-ietf-mediaman-suffixes-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-sedate-datetime-extended">[I-D.ietf-sedate-datetime-extended]</dt>
         <dd>
@@ -2026,7 +2054,7 @@ by an attacker.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
         <dd>
-<span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-07</span>, <time datetime="2024-01-09" class="refDate">9 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-07">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-07</a>&gt;</span>. </dd>
+<span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-10</span>, <time datetime="2024-06-10" class="refDate">10 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IEEE754">[IEEE754]</dt>
         <dd>
@@ -2054,11 +2082,29 @@ by an attacker.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="STD63">[STD63]</dt>
         <dd>
-<span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3629">https://www.rfc-editor.org/rfc/rfc3629</a>&gt;</span>. </dd>
+<div class="refInstance">Internet Standard 63, <span>&lt;<a href="https://www.rfc-editor.org/info/std63">https://www.rfc-editor.org/info/std63</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC3629">
+            <span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3629">https://www.rfc-editor.org/info/rfc3629</a>&gt;</span>. </div>
+</dd>
 <dd class="break"></dd>
 <dt id="STD90">[STD90]</dt>
+        <dd>
+<div class="refInstance">Internet Standard 90, <span>&lt;<a href="https://www.rfc-editor.org/info/std90">https://www.rfc-editor.org/info/std90</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC8259">
+            <span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+<dt id="STD96">[STD96]</dt>
       <dd>
-<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a>&gt;</span>. </dd>
+<div class="refInstance">Internet Standard 96, <span>&lt;<a href="https://www.rfc-editor.org/info/std96">https://www.rfc-editor.org/info/std96</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC9052">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9052">https://www.rfc-editor.org/info/rfc9052</a>&gt;</span>. </div>
+<div class="refInstance" id="RFC9338">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Countersignatures"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9338</span>, <span class="seriesInfo">DOI 10.17487/RFC9338</span>, <time datetime="2022-12" class="refDate">December 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9338">https://www.rfc-editor.org/info/rfc9338</a>&gt;</span>. </div>
+</dd>
 <dd class="break"></dd>
 </dl>
 </section>

@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                              3 March 2024
-Expires: 4 September 2024
+Intended status: Informational                               7 July 2024
+Expires: 8 January 2025
 
 
                     CBOR: On Deterministic Encoding
@@ -32,7 +32,7 @@ About This Document
    https://www.ietf.org/mailman/listinfo/cbor/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/cabo/det.
+   https://github.com/cbor-wg/draft-ietf-cbor-cde.
 
 Status of This Memo
 
@@ -49,7 +49,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2024.
+   This Internet-Draft will expire on 8 January 2025.
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 1]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
 Copyright Notice
 
@@ -67,34 +74,45 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction
-     1.1.  Conventions and Definitions
-   2.  Use Cases for Deterministic Encoding
-     2.1.  Diagnostics
-     2.2.  Caching
-     2.3.  Security: Signing Inputs
-   3.  Support by Generic Encoders and Decoders
-     3.1.  Basic Support
-     3.2.  Application Requirements and Tags
-       3.2.1.  Example with Tags 0 and 1 (Date/Time)
-       3.2.2.  Example with Major Types 0, 1, and 7, and Tags 2 and 3
-   4.  Specification Considerations
-     4.1.  Media Type Considerations
-     4.2.  The Need for Maps
-   5.  Implementation Considerations for Deterministic Encoding
-     5.1.  API Considerations
-     5.2.  Map Key Ordering
-   6.  Application Profiles of Deterministic Encoding
-     6.1.  Numeric Reduction in dCBOR
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Conventions and Definitions . . . . . . . . . . . . . . .   4
+   2.  Use Cases for Deterministic Encoding  . . . . . . . . . . . .   5
+     2.1.  Diagnostics . . . . . . . . . . . . . . . . . . . . . . .   5
+     2.2.  Caching . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     2.3.  Security: Signing Inputs  . . . . . . . . . . . . . . . .   6
+   3.  Support by Generic Encoders and Decoders  . . . . . . . . . .   7
+     3.1.  Basic Support . . . . . . . . . . . . . . . . . . . . . .   7
+     3.2.  Application Requirements and Tags . . . . . . . . . . . .   8
+       3.2.1.  Example with Tags 0 and 1 (Date/Time) . . . . . . . .   8
+       3.2.2.  Example with Major Types 0, 1, and 7, and Tags 2 and
+               3 . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+   4.  Specification Considerations  . . . . . . . . . . . . . . . .  11
+     4.1.  Media Type Considerations . . . . . . . . . . . . . . . .  11
+     4.2.  The Need for Maps . . . . . . . . . . . . . . . . . . . .  12
+   5.  Implementation Considerations for Deterministic Encoding  . .  12
+     5.1.  API Considerations  . . . . . . . . . . . . . . . . . . .  12
+     5.2.  Map Key Ordering  . . . . . . . . . . . . . . . . . . . .  13
+   6.  Application Profiles of Deterministic Encoding  . . . . . . .  14
+     6.1.  The need for CBOR Common Deterministic Encoding (CDE) . .  14
+     6.2.  Numeric Reduction in dCBOR  . . . . . . . . . . . . . . .  14
    7.  Using Deterministically Encoded CBOR as a Deterministic
-           Encoding of JSON
-   8.  Security Considerations
-   9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
-   Acknowledgments
-   Author's Address
+           Encoding of JSON  . . . . . . . . . . . . . . . . . . . .  15
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  16
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  17
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  19
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  19
+
+
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 2]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
 1.  Introduction
 
@@ -109,12 +127,12 @@ Table of Contents
    most practical for it (with the constraint, of course, that the data
    need to fit).  For most encoders, it is natural to always choose the
    shortest form available (essentially avoiding leading zeros).
-   Section 4.1 (Preferred Serialization) of [STD94] names this practice
-   and provides additional guidance for CBOR implementations; another
-   term in use is "Preferred Encoding".
+   Section 4.1 (Preferred Serialization) of RFC 8949 [STD94] names this
+   practice and provides additional guidance for CBOR implementations;
+   another term in use is "Preferred Encoding".
 
-   Section 4.2 (Deterministically Encoded CBOR) of [STD94] goes beyond
-   the Preferred Serialization practice by providing rules for
+   Section 4.2 (Deterministically Encoded CBOR) of RFC 8949 [STD94] goes
+   beyond the Preferred Serialization practice by providing rules for
    _Deterministic Encoding_. The objective of Deterministic Encoding is
    to, deterministically, always produce the same encoding for data
    items that are equivalent at the data model level.  To achieve this,
@@ -122,30 +140,56 @@ Table of Contents
    incremental encoding (indefinite length encoding) is disabled, and
    additional effort is expended for encoding key/value pairs in maps
    (the order of which does not matter semantically) in a deterministic
-   order anyway.
+   order.
 
    Given that additional effort needs to be expended and/or
    implementation choices are taken away, neither Preferred
    Serialization nor Deterministic Encoding are mandatory in CBOR.
-   (Contrast this with UTF-8 (Section 3 of [STD63]), which is always
-   treating as "invalid" any encoding variants that are longer than
-   necessary.)
+   (Contrast this with UTF-8 (Section 3 of RFC 3629 [STD63]), which is
+   always treating as "invalid" any encoding variants that are longer
+   than necessary.)
 
-   Deterministic Encoding is defined in Section 4.2 of [STD94] (note
-   that Section 4.2.3 of [STD94] defines a variant that was needed at
-   the time for backward compatibility and will not be discussed further
-   in this document).  The present document elaborates on this normative
-   definition by providing additional information about use cases,
-   deployment considerations, and implementation choices for
-   Deterministic Encoding; it is an informational document that however
-   may still be cited where a single reference for Deterministic
-   Encoding is convenient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 3]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
+   Deterministic Encoding is defined in Section 4.2 of RFC 8949 [STD94]
+   (note that Section 4.2.3 of RFC 8949 [STD94] defines a variant that
+   was needed at the time for backward compatibility and will not be
+   discussed further in this document).  The present document elaborates
+   on this normative definition by providing additional information
+   about use cases, deployment considerations, and implementation
+   choices for Deterministic Encoding; it is an informational document
+   that however may still be cited where a single reference for the
+   background of Deterministic Encoding is convenient.  This document is
+   intended to be used in conjunction with CBOR Common Deterministic
+   Encoding (CDE, [I-D.ietf-cbor-cde]), a normative specification for a
+   deterministic encoding profile that was developed in order to allow
+   generic CBOR implementations to provide common support for a variety
+   of applications of deterministic encoding.
 
 1.1.  Conventions and Definitions
 
    The definitions of [STD94] apply.  Readers are expected to be
    familiar with CBOR, and particularly so with Sections 4.1 and 4.2 of
-   [STD94].
+   RFC 8949 [STD94].
 
    The following terms introduced in the text of [STD94] receive their
    own separate definitions here:
@@ -154,10 +198,10 @@ Table of Contents
       (Encoding) that generally leads to shortest-form encodings where a
       choice of encoding lengths is available, without expending
       additional effort on converting between different kinds of data
-      item.  See Section 4.1 of [STD94] and the terms defined in that
-      section.  The Preferred Encoding rules for data items in the Basic
-      Generic Data Model may be augmented by rules for specific Tags,
-      see for instance Section 3.4.3 of [STD94].
+      item.  See Section 4.1 of RFC 8949 [STD94] and the terms defined
+      in that section.  The Preferred Encoding rules for data items in
+      the Basic Generic Data Model may be augmented by rules for
+      specific Tags, see for instance Section 3.4.3 of RFC 8949 [STD94].
 
    Preferred Encoding:  Preferred Serialization
 
@@ -167,12 +211,20 @@ Table of Contents
       inputs at the data model level.  Similar to Preferred
       Serialization, the equivalence model as defined for the Basic
       Generic Data Model may be augmented by equivalence rules defined
-      for specific Tags (see also Section 2.1 of [STD94]).
+      for specific Tags (see also Section 2.1 of RFC 8949 [STD94]).
 
-   CBOR data items at the data model level are represented in the CBOR
-   diagnostic notation (Section 8 of [STD94] as extended by Appendix G
-   of [RFC8610], further elaborated in [I-D.ietf-cbor-edn-literals]),
-   abbreviated with "EDN" (extended diagnostic notation).
+   In this document, CBOR data items at the data model level are
+   represented in the CBOR diagnostic notation (Section 8 of RFC 8949
+   [STD94] as extended by Appendix G of [RFC8610], further elaborated in
+   [I-D.ietf-cbor-edn-literals]), abbreviated with "EDN" (extended
+   diagnostic notation).
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 4]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
    While this document is informative, it does use certain keywords to
    indicate practical requirements for interoperability.  The key words
@@ -219,6 +271,17 @@ Table of Contents
       and more useful if there is only one form of representation for
       the interchanged data.
 
+
+
+
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 5]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
 2.2.  Caching
 
    Many systems cache (memoize) results of a request so they can reply
@@ -237,7 +300,7 @@ Table of Contents
 
    As usual for deterministically encoded data, not all forms of
    application equivalence imply equivalence at the data model level, so
-   some equivalence processing (deterministic representation) may be
+   some equivalence processing (_deterministic representation_) may be
    required at the application level as well, to achieve equivalent
    representations and thus a good cache hit rate.
 
@@ -248,6 +311,12 @@ Table of Contents
    which it has actually been interchanged, making representation
    variants less relevant.
 
+   (Note that Section 9 of RFC 9052 [STD96] defines deterministic
+   encoding rules for its own derivation of signing inputs from
+   interchange data and additional cryptographic parameters; these are a
+   compatible subset of the Core Deterministic Encoding Requirements
+   specified in Section 4.2.1 of RFC 8949 [STD94] and thus of CDE.)
+
    However, in some cases, the signing input for a signature or a MAC
    may need to be derived from data at rest and/or specific
    transformations of the data that was interchanged.  Such a
@@ -256,6 +325,18 @@ Table of Contents
    the present document.  Deterministic Encoding may remove one
    potential source of variability that might make signatures or MACs
    useless between systems.
+
+
+
+
+
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 6]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
 3.  Support by Generic Encoders and Decoders
 
@@ -274,14 +355,14 @@ Table of Contents
    There is some expectation that, barring any particular constraints
    that would make this more difficult than normally, a CBOR encoder
    will use Preferred Encoding, in particular generic encoders.
-   Deterministic Encoding, however, will be switched on explicitly in
-   most implementations.  Note that Preferred Encoding, while using the
-   shortest form available for the specific data item to be encoded,
-   doesn't have that shortness as the overriding objective: Conversions
-   of a data item into a different one to achieve shorted encoding are
-   not part of the processing labeled "Preferred Encoding".  (This is
-   particularly relevant for CBOR's different numeric systems; see
-   Section 3.2.2 below.)
+   Deterministic Encoding, however, will need to be switched on
+   explicitly in most implementations.  Note that Preferred Encoding,
+   while using the shortest form available for the specific data item to
+   be encoded, doesn't have that shortness as the overriding objective:
+   Conversions of a data item into a different one to achieve shorted
+   encoding are not part of the processing labeled "Preferred Encoding".
+   (This is particularly relevant for CBOR's different numeric systems;
+   see Section 3.2.2 below.)
 
    Some applications will also want to check that an encoded input
    actually satisfies the requirements for Deterministic Encoding.  By
@@ -295,17 +376,31 @@ Table of Contents
    implementations is RECOMMENDED to be provided by a flag to switch on
    (or separate function that enables) Deterministic Encoding.
    Similarly, generic decoders are RECOMMENDED to have a flag to switch
-   on/separate function to enable checking, whether that is efficiently
-   implemented during decoding or less efficiently by comparing re-
-   encoding.
+   on/separate function to enable checking for Deterministic Encoding,
+   whether that is efficiently implemented during decoding or less
+   efficiently by comparing a re-encoding.
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 7]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
 3.2.  Application Requirements and Tags
 
    The definition of Deterministic Encoding can become more complicated
-   with the addition of Tags (Section 3.4 of [STD94][IANA.cbor-tags]).
-   Not all tags come with a strong equivalence model.  Worse, the
-   equivalence model may be more application specific than for basic
-   Deterministic Encoding.
+   with the addition of Tags (Section 3.4 of RFC 8949
+   [STD94][IANA.cbor-tags]).  Not all tags come with a strong
+   equivalence model.  Worse, the equivalence model may be more
+   application specific than for basic Deterministic Encoding.
 
 3.2.1.  Example with Tags 0 and 1 (Date/Time)
 
@@ -320,11 +415,11 @@ Table of Contents
    application semantics, they should all be represented as
    0("2013-10-23T21:52:23Z") in Deterministic Encoding as that is the
    shortest form.  However, they carry additional semantics that may be
-   incidental or intentional (the Mail from which this date/time example
-   was taken originated from California, which then was at a time zone
-   the time offset of which is expressed by the -07:00).  Whether the
-   first two are exactly equivalent or not is the subject of Section 2
-   of [I-D.ietf-sedate-datetime-extended].
+   incidental or intentional (the e-mail message from which this date/
+   time example was taken originated from California, which then was at
+   a time zone the time offset of which is expressed by the -07:00).
+   Whether the first two are exactly equivalent or not is the subject of
+   Section 2 of [I-D.ietf-sedate-datetime-extended].
 
    If the additional semantics conveyed by the time-offset (Section 5.6
    of [RFC3339]) is not relevant to the application, an application-
@@ -347,6 +442,14 @@ Table of Contents
 
    CBOR has four different sets of numeric representations:
 
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 8]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
    *  Major types 0 and 1.
 
       These provide for a variable-length representation of 64-bit
@@ -359,13 +462,14 @@ Table of Contents
 
       These provide for a variable-length representation of arbitrarily
       large unsigned (Tag 2) or negative (Tag 3) integer numbers.
-      According to Section 3.4.3 of [STD94], the Preferred Encoding of
-      an integer that fits into major type 0 or 1 is just that, i.e.,
-      the boundary between regular integers and bignums is intentionally
-      thin.  This means that, in Preferred Encoding, the value space of
-      integral numbers is cleanly split into basic integers (64-bit
-      unsigned integers or 64-bit negative integers) and bignums (Tag
-      2/3 integers that fit into neither of the two 64-bit forms).
+      According to Section 3.4.3 of RFC 8949 [STD94], the Preferred
+      Encoding of an integer that fits into major type 0 or 1 is just
+      that, i.e., the boundary between regular integers and bignums is
+      intentionally thin.  This means that, in Preferred Encoding, the
+      value space of integral numbers is cleanly split into basic
+      integers (64-bit unsigned integers or 64-bit negative integers)
+      and bignums (Tag 2/3 integers that fit into neither of the two
+      64-bit forms).
 
       As a result, an application may want to place any distinctions it
       needs in the area of integer numbers not on the representation as
@@ -376,11 +480,11 @@ Table of Contents
       the arbitrary size range.
 
       Note that, accordingly, Preferred Encoding as defined in
-      Section 3.4.3 of [STD94] selects the shortest encoding in major
-      type 0/1 space if that is available and the shortest encoding (no
-      leading zero bytes) in Tag 2/3 space only if the former is not
-      available.  This means that the integer number 65 536 000 000 in
-      preferred representation is encoded as (9 bytes)
+      Section 3.4.3 of RFC 8949 [STD94] selects the shortest encoding in
+      major type 0/1 space if that is available and the shortest
+      encoding (no leading zero bytes) in Tag 2/3 space only if the
+      former is not available.  This means that the integer number
+      65 536 000 000 in preferred representation is encoded as (9 bytes)
 
       1b 00 00 00 0f 42 40 00 00
 
@@ -393,9 +497,18 @@ Table of Contents
 
    *  Major type 7
 
+
+
+
+
+Bormann                  Expires 8 January 2025                 [Page 9]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
       CBOR directly provides the [IEEE754] types binary16, binary32, and
-      binary64, colloquially known as half precision, single precision,
-      and double precision floating point.  Note that other [IEEE754]
+      binary64, colloquially known as half-precision, single-precision,
+      and double-precision floating point.  Note that other [IEEE754]
       binary floating types are indirectly supported via Tag 4, as well
       as decimal fractions via Tag 5.
 
@@ -436,15 +549,24 @@ Table of Contents
       from [IEEE754], CBOR defines two generalized tags that can be used
       for extended precision representation: Tag 5 for general binary
       floating point numbers ("bigfloats") and Tag 4 for general decimal
-      floating point (decimal fractions).  Section 3.4.4 of [STD94] also
-      states that "Bigfloats may also be used by constrained
-      applications that need some basic binary floating-point capability
-      without the need for supporting IEEE 754", while decimal fractions
-      "are most useful if an application needs the exact representation
-      of a decimal fraction such as 1.1 because there is no exact
-      representation for many decimal fractions in binary floating-point
-      representations", as might occur when representing literal JSON
-      [STD90] instead of I-JSON-interpreted JSON [RFC7493].
+      floating point (decimal fractions).  Section 3.4.4 of RFC 8949
+      [STD94] also states that "Bigfloats may also be used by
+      constrained applications that need some basic binary floating-
+      point capability without the need for supporting IEEE 754", while
+      decimal fractions "are most useful if an application needs the
+
+
+
+Bormann                  Expires 8 January 2025                [Page 10]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
+      exact representation of a decimal fraction such as 1.1 because
+      there is no exact representation for many decimal fractions in
+      binary floating-point representations", as might occur when
+      representing literal JSON [STD90] instead of I-JSON-interpreted
+      JSON [RFC7493].
 
       Neither bigfloats nor decimal fractions provide rules for
       preferred encoding, except implicitly by providing a choice
@@ -479,16 +601,23 @@ Table of Contents
    processor (+ber) can also process a +der instance, which is not
    apparent from the +der suffix.  (This was maybe mitigated by
    introducing both SSS at the same time.)  Similarly, any CBOR decoder
-   today can process a deterministically encoded data items as plain
-   CBOR data items (without any mitigation of having introduced a
-   related suffix at the same time), so the SSS should be the usual
-   +cbor/+cbor-seq.  (The additional processing that would be enabled by
-   identifying data items as deterministically encoded appears rather
-   limited.)
+   today can process deterministically encoded data items as plain CBOR
+   data items (without any mitigation of having introduced a related
+   suffix at the same time), so the SSS should be the usual +cbor/+cbor-
+   seq.  (The additional processing that would be enabled by identifying
+   data items as deterministically encoded appears rather limited.)
 
    Alternatively, instead of replacing +cbor, an indication of
    Deterministic Encoding could be provided by adding multiple suffixes
    to the SSS concept.  There is an ongoing effort to define a more
+
+
+
+Bormann                  Expires 8 January 2025                [Page 11]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
    complex structure of media type suffixes, as documented in
    [I-D.ietf-mediaman-suffixes].  In general, the combination of
    multiple SSS in one media type name raises similar questions to the
@@ -536,14 +665,24 @@ Table of Contents
    it is RECOMMENDED that the encoder not simply rely on the assumption
    that inputs were properly ordered by the application.
 
+
+
+
+
+Bormann                  Expires 8 January 2025                [Page 12]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
 5.2.  Map Key Ordering
 
    Generating deterministically encoded data items requires arranging
-   key/value pairs in maps into an order defined in Section 4.2.1 of
-   [STD94].
+   key/value pairs in maps into an order defined in Section 4.2.1 of RFC
+   8949 [STD94].
 
    This map is ordered by the byte-wise lexicographic ordering of the
-   deterministically encoded map keys.  Section 4.2.1 of [STD94] notes:
+   deterministically encoded map keys.  Section 4.2.1 of RFC 8949
+   [STD94] notes:
 
    |  Implementation note: the self-delimiting nature of the CBOR
    |  encoding means that there are no two well-formed CBOR encoded data
@@ -581,6 +720,16 @@ Table of Contents
    necessary to actually build a deterministically encoded data item for
    a map key to perform the overall map content ordering.
 
+
+
+
+
+
+Bormann                  Expires 8 January 2025                [Page 13]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
 6.  Application Profiles of Deterministic Encoding
 
    To enable the use of generic encoders, applications are encouraged to
@@ -588,19 +737,23 @@ Table of Contents
    generic data model that enable the use of Preferred Encoding on that
    level as well.
 
+6.1.  The need for CBOR Common Deterministic Encoding (CDE)
+
    Applications can also define their own deterministic encoding rules,
    as for instance FIDO CTAP2 (Client to Authenticator Protocol [CTAP2])
    does with the _CTAP2 canonical CBOR encoding form_ (Section 6 of
    [CTAP2]).  Its description appears to be derived from an equivalent
-   of Section 4.2.3 of [STD94].  (The actual structure of CTAP2 limits
-   its use to cases where that is compatible with standard Deterministic
-   Encoding; there is text in the specification that calls for
-   revisiting the definition when this would no longer be the case.)
+   of Section 4.2.3 of RFC 8949 [STD94].  (The actual structure of CTAP2
+   limits its use to cases where that is compatible with standard
+   Deterministic Encoding and thus CDE; there is text in the
+   specification that calls for revisiting the definition when this
+   would no longer be the case.)
 
    Application-specific deterministic encoding rules can make it
    difficult to use existing generic encoders and may therefore diminish
-   the value of using a standard representation format.  However,
-   applications can also define transformations of their data into a
+   the value of using a standard representation format.
+
+   Instead, applications can define transformations of their data into a
    more limited data model that reduces the cases the Deterministic
    Encoding rules have to implement.  This allows both the following
    implementation choices:
@@ -611,20 +764,27 @@ Table of Contents
    *  the use of specialized encoders which combine encoding with the
       implementation of the application transformations.
 
-   This section describes some of the considerations that led to one
-   such application profile for Deterministic Encoding.
+   The next subsection describes some of the considerations that led to
+   one such application profile for Deterministic Encoding.
 
-6.1.  Numeric Reduction in dCBOR
+6.2.  Numeric Reduction in dCBOR
 
-   The dCBOR specification (originally in
-   [I-D.mcnally-deterministic-cbor], with a condensed form proposed in
-   [I-D.bormann-cbor-dcbor]) describes the pervasive use of
-   Deterministic Encoding throughout an application.  It also defines a
-   simplified application data model of numbers, where there no longer
-   is a distinction between integers and floating point numbers at the
-   application data model level — all numbers are of a single numeric
-   type, and the choice of integer or floating point representations is
-   made based on value:
+   The dCBOR specification [I-D.mcnally-deterministic-cbor] describes
+   the pervasive use of Deterministic Encoding throughout an
+   application.  It also defines a simplified application data model of
+   numbers, where there no longer is a distinction between integers and
+   floating point numbers at the application data model level — all
+   numbers are of a single numeric type, and the choice of integer or
+   floating point representations is made based on value:
+
+
+
+
+
+Bormann                  Expires 8 January 2025                [Page 14]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
    *  integral numbers that fit into Major Type 0 and 1 are represented
       in this way even if they were originally represented as floating
@@ -641,26 +801,30 @@ Table of Contents
    that also only have a single such space, such as JavaScript
    [ECMA262].  (While JavaScript recently has acquired a separate
    integer type, it is much less well integrated into the language and
-   existing libraries than the general numeric type.)
+   existing libraries than the more well-established general numeric
+   type.)
 
-   The original specification [I-D.mcnally-deterministic-cbor] restated
-   much of Section 4.2 of [STD94] and added a rule that doesn't allow
-   compatibility with Deterministic Encoding (disallowing the
-   interchange of basic negative integers in the range -2^64 to
-   -2^63-1).
+   Within the CBOR working group of the IETF, the dCBOR specification
+   prompted a discussion about profiles for deterministic encoding,
+   which led to the CBOR Common Deterministic Encoding (CDE)
+   specification [I-D.ietf-cbor-cde] and the concept of a deterministic
+   encoding _application profile_ (Section 3 of [I-D.ietf-cbor-cde]).
+   Without help of the CDE specification at the time, an early version
+   of the dCBOR specification restated much of Section 4.2 of RFC 8949
+   [STD94] and added a rule that gets in the way of compatibility with
+   Deterministic Encoding (disallowing the interchange of basic negative
+   integers in the range -2^64 to -2^63-1).
 
-   It also had a mention as future work of subnormal values [IEEE754],
-   which work fine for interchange (even with Deterministic Encoding) in
-   [STD94].  Note that specific values may not be available to
-   applications that employ floating point hardware implementing the FTZ
-   ("flush to zero") and/or DAZ ("denormals are zero") strategies.
-   These may then require special handling in the application data
-   model.  It is generally difficult to rely on exact equality of
-   floating point values, which however is what Deterministic Encoding
-   requires.
-
-   A streamlined specification of the dCBOR numeric-reduction based
-   application profile is proposed in [I-D.bormann-cbor-dcbor].
+      |  Early dCBOR specifications also had a mention as future work of
+      |  subnormal values [IEEE754], which work fine for interchange
+      |  (even with Deterministic Encoding) in [STD94].  Note that
+      |  specific values may not be available to applications that
+      |  employ floating point hardware implementing the FTZ ("flush to
+      |  zero") and/or DAZ ("denormals are zero") strategies.  These may
+      |  then require special handling in the application data model.
+      |  It is generally difficult to rely on exact equality of floating
+      |  point values, which however is what Deterministic Encoding
+      |  requires.
 
 7.  Using Deterministically Encoded CBOR as a Deterministic Encoding of
     JSON
@@ -669,22 +833,32 @@ Table of Contents
    JSON [STD90] data.  Deterministically Encoded CBOR provides an
    attractive solution to that as it is already well-defined.
 
+
+
+
+
+Bormann                  Expires 8 January 2025                [Page 15]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
    While the data model of JSON is not well-defined, I-JSON provides one
    interpretation that is generally accepted [RFC7493].  Section 6.2
-   (Converting from JSON to CBOR) of [STD94] provides a way to transform
-   JSON data that conform to this data model to CBOR.  When used with
-   its default parameters, the combination of (1) I-JSON, (2) the JSON-
-   to-CBOR transformation, and (3) the rules for CBOR Deterministic
-   Encoding provide a well-defined Deterministic Encoding for JSON data.
+   (Converting from JSON to CBOR) of RFC 8949 [STD94] provides a way to
+   transform JSON data that conform to this data model to CBOR.  When
+   used with its default parameters, the combination of (1) I-JSON, (2)
+   the JSON-to-CBOR transformation, and (3) the rules for CBOR
+   Deterministic Encoding provide a well-defined Deterministic Encoding
+   for JSON data.
 
    Transforming decoded CBOR data after interchange back to data-model
-   level JSON data can be done with the inverse of Section 6.2 of
-   [STD94] (the full generality of Section 6.1 (Converting from CBOR to
-   JSON) of [STD94] is obviously not required as only the JSON subset of
-   the CBOR generic data model is used).
+   level JSON data can be done with the inverse of Section 6.2 of RFC
+   8949 [STD94] (the full generality of Section 6.1 (Converting from
+   CBOR to JSON) of RFC 8949 [STD94] is obviously not required as only
+   the JSON subset of the CBOR generic data model is used).
 
    Comparing the handling of numeric data in the JSON-to-CBOR
-   transformation to that reported in Section 6.1, the main difference
+   transformation to that reported in Section 6.2, the main difference
    is that the former only maps integral values between -2^53+1 and
    2^53-1 to basic CBOR integers and leaves the others in floating point
    form.  (The rationale is that only this range is injective
@@ -700,7 +874,8 @@ Table of Contents
    application data to the CBOR model level and then to deterministic
    encoding can lead to a potential exploit by an attacker.
 
-   TODO further Security Considerations
+   Pertinent Security Considerations are further discussed Section 8 of
+   [I-D.ietf-cbor-cde].
 
 9.  IANA Considerations
 
@@ -709,6 +884,19 @@ Table of Contents
 10.  References
 
 10.1.  Normative References
+
+   [I-D.ietf-cbor-cde]
+              Bormann, C., "CBOR Common Deterministic Encoding (CDE)",
+              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-02,
+              3 March 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-cde-02>.
+
+
+
+Bormann                  Expires 8 January 2025                [Page 16]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
@@ -729,10 +917,14 @@ Table of Contents
               JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
               June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
 
-   [STD94]    Bormann, C. and P. Hoffman, "Concise Binary Object
+   [STD94]    Internet Standard 94,
+              <https://www.rfc-editor.org/info/std94>.
+              At the time of writing, this STD comprises the following:
+
+              Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", STD 94, RFC 8949,
               DOI 10.17487/RFC8949, December 2020,
-              <https://www.rfc-editor.org/rfc/rfc8949>.
+              <https://www.rfc-editor.org/info/rfc8949>.
 
 10.2.  Informative References
 
@@ -747,27 +939,26 @@ Table of Contents
               2020, <https://www.ecma-
               international.org/publications/standards/Ecma-262.htm>.
 
-   [I-D.bormann-cbor-dcbor]
-              Bormann, C., "The CDE-based Application Profile dCBOR",
-              Work in Progress, Internet-Draft, draft-bormann-cbor-
-              dcbor-04, 5 November 2023,
-              <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
-              dcbor-04>.
-
    [I-D.ietf-cbor-edn-literals]
-              Bormann, C., "CBOR Extended Diagnostic Notation (EDN):
-              Application-Oriented Literals, ABNF, and Media Type", Work
-              in Progress, Internet-Draft, draft-ietf-cbor-edn-literals-
-              08, 1 February 2024,
+              Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
+              Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
+              literals-10, 4 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              edn-literals-08>.
+              edn-literals-10>.
+
+
+
+
+Bormann                  Expires 8 January 2025                [Page 17]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
 
    [I-D.ietf-mediaman-suffixes]
-              Sporny, M. and A. Guy, "Media Types with Multiple
-              Suffixes", Work in Progress, Internet-Draft, draft-ietf-
-              mediaman-suffixes-07, 2 March 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-
-              mediaman-suffixes-07>.
+              Sporny, M. and A. Guy, "Media Type Suffixes", Work in
+              Progress, Internet-Draft, draft-ietf-mediaman-suffixes-08,
+              19 June 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-mediaman-suffixes-08>.
 
    [I-D.ietf-sedate-datetime-extended]
               Sharma, U. and C. Bormann, "Date and Time on the Internet:
@@ -779,9 +970,9 @@ Table of Contents
    [I-D.mcnally-deterministic-cbor]
               McNally, W., Allen, C., and C. Bormann, "dCBOR: A
               Deterministic CBOR Application Profile", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-07, 9
-              January 2024, <https://datatracker.ietf.org/doc/html/
-              draft-mcnally-deterministic-cbor-07>.
+              Internet-Draft, draft-mcnally-deterministic-cbor-10, 10
+              June 2024, <https://datatracker.ietf.org/doc/html/draft-
+              mcnally-deterministic-cbor-10>.
 
    [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
               Std 754-2019, DOI 10.1109/IEEESTD.2019.8766229,
@@ -809,14 +1000,44 @@ Table of Contents
               DOI 10.17487/RFC8746, February 2020,
               <https://www.rfc-editor.org/rfc/rfc8746>.
 
-   [STD63]    Yergeau, F., "UTF-8, a transformation format of ISO
-              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
-              2003, <https://www.rfc-editor.org/rfc/rfc3629>.
+   [STD63]    Internet Standard 63,
+              <https://www.rfc-editor.org/info/std63>.
 
-   [STD90]    Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+
+
+Bormann                  Expires 8 January 2025                [Page 18]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
+              At the time of writing, this STD comprises the following:
+
+              Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
+              2003, <https://www.rfc-editor.org/info/rfc3629>.
+
+   [STD90]    Internet Standard 90,
+              <https://www.rfc-editor.org/info/std90>.
+              At the time of writing, this STD comprises the following:
+
+              Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", STD 90, RFC 8259,
               DOI 10.17487/RFC8259, December 2017,
-              <https://www.rfc-editor.org/rfc/rfc8259>.
+              <https://www.rfc-editor.org/info/rfc8259>.
+
+   [STD96]    Internet Standard 96,
+              <https://www.rfc-editor.org/info/std96>.
+              At the time of writing, this STD comprises the following:
+
+              Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Structures and Process", STD 96, RFC 9052,
+              DOI 10.17487/RFC9052, August 2022,
+              <https://www.rfc-editor.org/info/rfc9052>.
+
+              Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Countersignatures", STD 96, RFC 9338,
+              DOI 10.17487/RFC9338, December 2022,
+              <https://www.rfc-editor.org/info/rfc9338>.
 
 Acknowledgments
 
@@ -836,3 +1057,8 @@ Author's Address
    Germany
    Phone: +49-421-218-63921
    Email: cabo@tzi.org
+
+
+
+
+Bormann                  Expires 8 January 2025                [Page 19]
