@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                              3 March 2024
-Expires: 4 September 2024
+Intended status: Informational                               8 July 2024
+Expires: 9 January 2025
 
 
                     CBOR: On Deterministic Encoding
@@ -49,13 +49,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2024.
+   This Internet-Draft will expire on 9 January 2025.
 
 
 
-Bormann                 Expires 4 September 2024                [Page 1]
+Bormann                  Expires 9 January 2025                 [Page 1]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bormann                 Expires 4 September 2024                [Page 2]
+Bormann                  Expires 9 January 2025                 [Page 2]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024                [Page 3]
+Bormann                  Expires 9 January 2025                 [Page 3]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    Deterministic Encoding is defined in Section 4.2 of RFC 8949 [STD94]
@@ -221,9 +221,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024                [Page 4]
+Bormann                  Expires 9 January 2025                 [Page 4]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    While this document is informative, it does use certain keywords to
@@ -277,9 +277,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024                [Page 5]
+Bormann                  Expires 9 January 2025                 [Page 5]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
 2.2.  Caching
@@ -333,9 +333,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024                [Page 6]
+Bormann                  Expires 9 January 2025                 [Page 6]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
 3.  Support by Generic Encoders and Decoders
@@ -389,9 +389,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024                [Page 7]
+Bormann                  Expires 9 January 2025                 [Page 7]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
 3.2.  Application Requirements and Tags
@@ -445,9 +445,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024                [Page 8]
+Bormann                  Expires 9 January 2025                 [Page 8]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    *  Major types 0 and 1.
@@ -501,9 +501,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024                [Page 9]
+Bormann                  Expires 9 January 2025                 [Page 9]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
       CBOR directly provides the [IEEE754] types binary16, binary32, and
@@ -557,9 +557,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024               [Page 10]
+Bormann                  Expires 9 January 2025                [Page 10]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
       exact representation of a decimal fraction such as 1.1 because
@@ -613,9 +613,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024               [Page 11]
+Bormann                  Expires 9 January 2025                [Page 11]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    complex structure of media type suffixes, as documented in
@@ -669,9 +669,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024               [Page 12]
+Bormann                  Expires 9 January 2025                [Page 12]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
 5.2.  Map Key Ordering
@@ -725,9 +725,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024               [Page 13]
+Bormann                  Expires 9 January 2025                [Page 13]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
 6.  Application Profiles of Deterministic Encoding
@@ -781,9 +781,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024               [Page 14]
+Bormann                  Expires 9 January 2025                [Page 14]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    *  integral numbers that fit into Major Type 0 and 1 are represented
@@ -837,9 +837,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
 
 
-Bormann                 Expires 4 September 2024               [Page 15]
+Bormann                  Expires 9 January 2025                [Page 15]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    While the data model of JSON is not well-defined, I-JSON provides one
@@ -887,15 +887,15 @@ Internet-Draft          On Deterministic Encoding             March 2024
 
    [I-D.ietf-cbor-cde]
               Bormann, C., "CBOR Common Deterministic Encoding (CDE)",
-              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-01,
-              8 January 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-cbor-cde-01>.
+              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-02,
+              3 March 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-cde-02>.
 
 
 
-Bormann                 Expires 4 September 2024               [Page 16]
+Bormann                  Expires 9 January 2025                [Page 16]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    [IANA.cbor-tags]
@@ -940,26 +940,25 @@ Internet-Draft          On Deterministic Encoding             March 2024
               international.org/publications/standards/Ecma-262.htm>.
 
    [I-D.ietf-cbor-edn-literals]
-              Bormann, C., "CBOR Extended Diagnostic Notation (EDN):
-              Application-Oriented Literals, ABNF, and Media Type", Work
-              in Progress, Internet-Draft, draft-ietf-cbor-edn-literals-
-              08, 1 February 2024,
+              Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
+              Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
+              literals-10, 4 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              edn-literals-08>.
+              edn-literals-10>.
 
 
 
-Bormann                 Expires 4 September 2024               [Page 17]
+
+Bormann                  Expires 9 January 2025                [Page 17]
 
-Internet-Draft          On Deterministic Encoding             March 2024
+Internet-Draft          On Deterministic Encoding              July 2024
 
 
    [I-D.ietf-mediaman-suffixes]
-              Sporny, M. and A. Guy, "Media Types with Multiple
-              Suffixes", Work in Progress, Internet-Draft, draft-ietf-
-              mediaman-suffixes-07, 2 March 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-
-              mediaman-suffixes-07>.
+              Sporny, M. and A. Guy, "Media Type Suffixes", Work in
+              Progress, Internet-Draft, draft-ietf-mediaman-suffixes-08,
+              19 June 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-mediaman-suffixes-08>.
 
    [I-D.ietf-sedate-datetime-extended]
               Sharma, U. and C. Bormann, "Date and Time on the Internet:
@@ -971,9 +970,9 @@ Internet-Draft          On Deterministic Encoding             March 2024
    [I-D.mcnally-deterministic-cbor]
               McNally, W., Allen, C., and C. Bormann, "dCBOR: A
               Deterministic CBOR Application Profile", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-07, 9
-              January 2024, <https://datatracker.ietf.org/doc/html/
-              draft-mcnally-deterministic-cbor-07>.
+              Internet-Draft, draft-mcnally-deterministic-cbor-10, 10
+              June 2024, <https://datatracker.ietf.org/doc/html/draft-
+              mcnally-deterministic-cbor-10>.
 
    [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
               Std 754-2019, DOI 10.1109/IEEESTD.2019.8766229,
@@ -1001,17 +1000,16 @@ Internet-Draft          On Deterministic Encoding             March 2024
               DOI 10.17487/RFC8746, February 2020,
               <https://www.rfc-editor.org/rfc/rfc8746>.
 
-
-
-
-
-Bormann                 Expires 4 September 2024               [Page 18]
-
-Internet-Draft          On Deterministic Encoding             March 2024
-
-
    [STD63]    Internet Standard 63,
               <https://www.rfc-editor.org/info/std63>.
+
+
+
+Bormann                  Expires 9 January 2025                [Page 18]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
               At the time of writing, this STD comprises the following:
 
               Yergeau, F., "UTF-8, a transformation format of ISO
@@ -1058,63 +1056,9 @@ Author's Address
    D-28359 Bremen
    Germany
    Phone: +49-421-218-63921
-
-
-
-Bormann                 Expires 4 September 2024               [Page 19]
-
-Internet-Draft          On Deterministic Encoding             March 2024
-
-
    Email: cabo@tzi.org
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann                 Expires 4 September 2024               [Page 20]
+Bormann                  Expires 9 January 2025                [Page 19]
