@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-07T01:11:19.878966+00:00",
+  "timestamp": "2024-07-09T01:06:31.033343+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -157,15 +157,15 @@
       "id": "I_kwDOJ8fYd859MRmz",
       "title": "CDE: More explicitly disallow equivalent map keys",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Make the requirement that a CDE-encoded data item does not contain duplicate (or equivalent) keys in its maps more explicit.\r\n\r\nArchived-At: <https://mailarchive.ietf.org/arch/msg/cbor/bRgglMTgXsdpkKvxToNSjLt4-Qo>\r\n",
       "createdAt": "2024-01-25T13:08:08Z",
-      "updatedAt": "2024-01-25T13:08:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-08T23:40:53Z",
+      "closedAt": "2024-07-08T23:40:53Z",
       "comments": []
     },
     {
@@ -493,7 +493,7 @@
       "labels": [],
       "body": "Simplify Abstract; Move motivation to Introduction",
       "createdAt": "2024-06-12T19:22:23Z",
-      "updatedAt": "2024-06-12T19:22:23Z",
+      "updatedAt": "2024-07-08T23:47:59Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
@@ -504,7 +504,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you!  I think I like what I'm seeing, but some assembly is still required.\r\nUnfortunately, I ran out of time integrating this change; I plan to have this as part of -04 on 2024-07-21.",
+          "createdAt": "2024-07-08T23:47:58Z",
+          "updatedAt": "2024-07-08T23:47:58Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -544,6 +552,82 @@
           "body": "You can keep it as a draft PR",
           "createdAt": "2024-06-22T18:21:34Z",
           "updatedAt": "2024-06-22T18:21:34Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOJ8fYd850neV8",
+      "title": "Clarify concept of a CDE decoder and what it MUST do",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/12",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-07T16:54:42Z",
+      "updatedAt": "2024-07-08T23:40:52Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "cde-decoder",
+      "headRefOid": "742f49e4c1a54751d1d02fb18d1464db90317f7c",
+      "closedAt": "2024-07-08T23:40:52Z",
+      "mergedAt": "2024-07-08T23:40:52Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "20b187cf85fd317042f75bd3129b4241d9476325"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOJ8fYd850nvaA",
+      "title": "NaN appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/13",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It takes week or so to implement basic CBOR integer and float encoding. I\u2019m not as smart as some here, but I get by\u2026 It took me many many months to figure out NaN payloads. I\u2019ve put what I learned in a NaN Appendix to the CDE draft to save others these months.\r\n\r\nIt\u2019s a fairly long addition, but it seems worthwhile to me to cover the details explicitly. It\u2019s an appendix, not the main document, which signals to the reader that they don\u2019t have to read it.\r\n\r\nIt makes a recommendation that protocol designers not use NaN payloads because there are better ways to accomplish the same.",
+      "createdAt": "2024-07-07T21:06:24Z",
+      "updatedAt": "2024-07-08T23:43:15Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
+      "headRepository": "laurencelundblade/draft-ietf-cbor-cde",
+      "headRefName": "NaNAppendix",
+      "headRefOid": "0dded2b7285049bc2c7b1710055367daaec099ee",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks!  I think the most valuable part here is the table at the end.\r\nThe explanation probably should first explain that CBOR supports IEEE 754, what a NaN is, that a NaN always has a payload, and which payload values aren't available because they would mean something different than a NaN.  A quick discussion of the quiet/signaling bit, the fact that IEEE 754 doesn't define it, but there is a de facto standard needs to follow, and then we can introduce the \"basic\" NaN with sign 0, quiet bit 1, all other payload bits zero.  The reason why some applications are not using `foo = float / null` or `foo = float / payload` where payload can be anything but float.  Then a quick discussion of implementation considerations for preferred serialization, including the weirdness that two NaNs do not compare equal in most platforms, even if they are equal wrt to their payloads.\r\n\r\nI'm not sure this shouldn't be a separate draft, to which CDE could refer for information.\r\nIt's night here already, but I could turn your input and the above outline into a draft about NaN and CBOR.",
+          "createdAt": "2024-07-07T21:22:40Z",
+          "updatedAt": "2024-07-07T21:22:40Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "<https://mailarchive.ietf.org/arch/msg/cbor/KA7ma_UIESnM11SODvmoium9Uqc>",
+          "createdAt": "2024-07-07T21:34:54Z",
+          "updatedAt": "2024-07-07T21:34:54Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Now became part of https://datatracker.ietf.org/doc/draft-bormann-cbor-numbers/\r\nStill needs to be referenced properly; ran out of time.\r\n",
+          "createdAt": "2024-07-08T23:43:14Z",
+          "updatedAt": "2024-07-08T23:43:14Z"
         }
       ],
       "reviews": []
