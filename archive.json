@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-11T01:07:19.461496+00:00",
+  "timestamp": "2024-07-14T01:12:17.966567+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -182,6 +182,22 @@
       "createdAt": "2024-03-03T19:40:47Z",
       "updatedAt": "2024-03-03T20:17:53Z",
       "closedAt": "2024-03-03T20:17:53Z",
+      "comments": []
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOJ8fYd86PeNE_",
+      "title": "Remove Application Profiles",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/14",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Application Profiles seem like an unnecessary complexity to me in an area that (I think) we're trying to make simpler.\r\n\r\nI look at this draft as a really useful rewording of some important stuff in section 4 and 5 of RFC 8949. Those sections of 8949 are a bit complicated for readers, so this draft should be simple.\r\n\r\nSo far the only proposed profile is dCBOR. I think dCBOR exists just fine without the notion of application profiles, just like CDE exists just fine on top of preferred serialization.\r\n\r\nTo justify the complexity application profiles add, I think we'd want to have three solid use cases for them.\r\n\r\nApplication profiles are only for variations of CDE. They are not for variations of preferred serialization or a general profile mechanism for all of CBOR. This makes them much much less useful.",
+      "createdAt": "2024-07-13T17:12:03Z",
+      "updatedAt": "2024-07-13T17:12:03Z",
+      "closedAt": null,
       "comments": []
     }
   ],
