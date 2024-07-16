@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-14T01:12:17.966567+00:00",
+  "timestamp": "2024-07-16T01:08:09.889907+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -196,9 +196,52 @@
       "labels": [],
       "body": "Application Profiles seem like an unnecessary complexity to me in an area that (I think) we're trying to make simpler.\r\n\r\nI look at this draft as a really useful rewording of some important stuff in section 4 and 5 of RFC 8949. Those sections of 8949 are a bit complicated for readers, so this draft should be simple.\r\n\r\nSo far the only proposed profile is dCBOR. I think dCBOR exists just fine without the notion of application profiles, just like CDE exists just fine on top of preferred serialization.\r\n\r\nTo justify the complexity application profiles add, I think we'd want to have three solid use cases for them.\r\n\r\nApplication profiles are only for variations of CDE. They are not for variations of preferred serialization or a general profile mechanism for all of CBOR. This makes them much much less useful.",
       "createdAt": "2024-07-13T17:12:03Z",
-      "updatedAt": "2024-07-13T17:12:03Z",
+      "updatedAt": "2024-07-15T19:27:20Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Can you explain how giving the concept a name adds complexity?\r\n",
+          "createdAt": "2024-07-14T05:04:15Z",
+          "updatedAt": "2024-07-14T05:04:15Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Doesn't the burden of justification for something in a document lie with the proponent of the something?\r\n\r\nA short answer to your question is that for us careful implementors every concept in a document must be read, digested, thought through and understood to be sure of correctness and completeness.\r\n\r\nBut, I don't think things should go in documents unless there is justification.",
+          "createdAt": "2024-07-14T18:58:59Z",
+          "updatedAt": "2024-07-14T18:58:59Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Of course.  The most recent mail where I tried to explain the reason for them is Archived-At: <https://mailarchive.ietf.org/arch/msg/cbor/7CAgHZxvj34Rf4rcXFGeFwBzv_M>\r\n\r\nTo make a decision, it is necessary not only to understand the benefit, but also the cost of the feature.\r\nTo me it seems it creates zero cost for those who do not implement it.\r\nIf you think you do not need it, I would not implement it.\r\n",
+          "createdAt": "2024-07-14T19:17:08Z",
+          "updatedAt": "2024-07-14T19:17:08Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "I don't see how the cost is zero. You have to understand it to know that you don't have to implement it.\r\n\r\nThere's a cost to protocol designers too. They have to understand it to know whether they should use it or not use it.\r\n\r\nThere's also some cost to the WG, the IESG and the RFC editor to review.\r\n",
+          "createdAt": "2024-07-14T19:23:50Z",
+          "updatedAt": "2024-07-14T19:23:50Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We could improve the text to make this easier to understand.\r\n\r\nThe cost of *not* having the feature is immense.\r\nPeople will notice that their application data model does not map one-to-one to CDE and will do exactly what dCBOR did in the outset -- reinvent a incompatible variant of CDE because their application data model isn't identical to the generic data model of CBOR.\r\n\r\nSo it is absolutely worth massive effort to have application profiles as a concept in place.\r\nI still believe the actual effort is minimal, and I would like to understand what text in CDE creates complexity for you, and how we could minimize the discovery cost for those whose actual cost is zero because they don't need it.",
+          "createdAt": "2024-07-14T20:31:59Z",
+          "updatedAt": "2024-07-14T20:33:02Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "The justification I am looking for is the description of some more compelling use cases to sit along side dCBOR. I don't think any have been described.\r\n\r\nI don't see immensity here. If there was immensity, then there would be at least a couple of examples of bad variants of CDE. So far we only have one variant of CDE which IMO isn't too bad (other opinions aside).\r\n\r\nAlso, can you say why application profiles are justified for CDE, but not preferred serialization or a general profile mechanism for all of CBOR?",
+          "createdAt": "2024-07-15T19:27:18Z",
+          "updatedAt": "2024-07-15T19:27:18Z"
+        }
+      ]
     }
   ],
   "pulls": [
