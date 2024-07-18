@@ -1,0 +1,736 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-07-18T01:05:55.463392+00:00",
+  "repo": "cbor-wg/draft-ietf-cbor-cde",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOJ8fYd85vANwe",
+      "title": "det: more use cases",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/1",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Use Wolf's list of use cases <https://mailarchive.ietf.org/arch/msg/cbor/RaZfA5XLMRQ65kKu_XstEPwMK2k>\r\nto generate a more complete list in det.",
+      "createdAt": "2023-08-22T23:26:34Z",
+      "updatedAt": "2023-08-22T23:26:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOJ8fYd85vJJEG",
+      "title": "det: Add pseudocode for preferred encoding and numeric reduction",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/2",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-08-24T08:28:54Z",
+      "updatedAt": "2024-01-25T12:57:14Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "hildjj",
+          "authorAssociation": "NONE",
+          "body": "Is this issue overcome by events?",
+          "createdAt": "2024-01-24T19:35:00Z",
+          "updatedAt": "2024-01-24T19:35:00Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I do think that we want to have some such pseudocode.\r\nThe question is whether it belongs into the normative document for CDE or in the determinism explainer (\"det\").\r\nWe also haven't decided on any role that the explainer could play in the WG.",
+          "createdAt": "2024-01-25T12:57:12Z",
+          "updatedAt": "2024-01-25T12:57:12Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOJ8fYd85vJLtU",
+      "title": "terminology: f16, float16, binary16",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/3",
+      "state": "CLOSED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Do not mix up these terms:\r\n\r\n* f16 (Rust name for a platform level storage type),\r\n* float16 (CDDL name for a floating point precision and range), and \r\n* binary16 (IEEE 754 name for a binary representation of floating point values).\r\n\r\n(and 32, 64).",
+      "createdAt": "2023-08-24T08:35:49Z",
+      "updatedAt": "2024-01-25T12:54:17Z",
+      "closedAt": "2024-01-25T12:54:17Z",
+      "comments": [
+        {
+          "author": "hildjj",
+          "authorAssociation": "NONE",
+          "body": "Is this issue overcome by events?",
+          "createdAt": "2024-01-24T19:34:41Z",
+          "updatedAt": "2024-01-24T19:34:41Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CDE currently doesn't mention these different concepts.\r\nThe explainer does, but I don't find any place that needs immediate attention.\r\n(Obviously, we want to keep the principle in mind.)",
+          "createdAt": "2024-01-25T12:54:17Z",
+          "updatedAt": "2024-01-25T12:54:17Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOJ8fYd8553fNd",
+      "title": "additional information in integers vs doubles",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/4",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In the section on reducing floating point numbers to integers, I believe it would be appropriate to clearly specify behavior of other floating point reductions, e.g. reducing 0.5 from double to a half-width float.\r\n\r\nIn addition, I believe the behavior needs to be defined as to what an application should do when conversion of an integer to a floating point number is in itself lossy, e.g. what to do if an application expects a double but the CBOR value received is the decimal 9007199254740993. Silent truncation would make the round-trip non-deterministic.",
+      "createdAt": "2023-12-16T03:42:40Z",
+      "updatedAt": "2024-01-24T19:33:41Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "hildjj",
+          "authorAssociation": "NONE",
+          "body": "See the section on [preferred serialization](https://www.rfc-editor.org/rfc/rfc8949.html#name-preferred-serialization) in RFC8949, and read the dCBOR [draft](https://www.ietf.org/archive/id/draft-mcnally-deterministic-cbor-07.html), then see what else this spec needs?",
+          "createdAt": "2024-01-24T19:33:40Z",
+          "updatedAt": "2024-01-24T19:33:40Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOJ8fYd859MRmz",
+      "title": "CDE: More explicitly disallow equivalent map keys",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/6",
+      "state": "CLOSED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Make the requirement that a CDE-encoded data item does not contain duplicate (or equivalent) keys in its maps more explicit.\r\n\r\nArchived-At: <https://mailarchive.ietf.org/arch/msg/cbor/bRgglMTgXsdpkKvxToNSjLt4-Qo>\r\n",
+      "createdAt": "2024-01-25T13:08:08Z",
+      "updatedAt": "2024-07-08T23:40:53Z",
+      "closedAt": "2024-07-08T23:40:53Z",
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOJ8fYd86BE0uZ",
+      "title": "Terminology: preferred serialization or preferred encoding",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/8",
+      "state": "CLOSED",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\"preferred serialization\" (lower case) is used 23 times in RFC 8949.\r\n\r\n\"preferred encoding\" (lower case) is used once parenthetically in RFC 8949.\r\n\r\nThis draft uses \"preferred encoding\" (upper and lower case) 6 times.\r\n\r\nThis draft uses \"preferred serialization\" once, plus some use in PRs.\r\n\r\nProbably this draft should exclusively use \"preferred serialization\" in lower case. We did a go around in RATS/EAT about upper/lower case and even though RATS architecture uses upper case, EAT switched to lower case as much more readable.",
+      "createdAt": "2024-03-03T19:40:47Z",
+      "updatedAt": "2024-03-03T20:17:53Z",
+      "closedAt": "2024-03-03T20:17:53Z",
+      "comments": []
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOJ8fYd86PeNE_",
+      "title": "Remove Application Profiles",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/14",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Application Profiles seem like an unnecessary complexity to me in an area that (I think) we're trying to make simpler.\r\n\r\nI look at this draft as a really useful rewording of some important stuff in section 4 and 5 of RFC 8949. Those sections of 8949 are a bit complicated for readers, so this draft should be simple.\r\n\r\nSo far the only proposed profile is dCBOR. I think dCBOR exists just fine without the notion of application profiles, just like CDE exists just fine on top of preferred serialization.\r\n\r\nTo justify the complexity application profiles add, I think we'd want to have three solid use cases for them.\r\n\r\nApplication profiles are only for variations of CDE. They are not for variations of preferred serialization or a general profile mechanism for all of CBOR. This makes them much much less useful.",
+      "createdAt": "2024-07-13T17:12:03Z",
+      "updatedAt": "2024-07-16T19:24:41Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Can you explain how giving the concept a name adds complexity?\r\n",
+          "createdAt": "2024-07-14T05:04:15Z",
+          "updatedAt": "2024-07-14T05:04:15Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Doesn't the burden of justification for something in a document lie with the proponent of the something?\r\n\r\nA short answer to your question is that for us careful implementors every concept in a document must be read, digested, thought through and understood to be sure of correctness and completeness.\r\n\r\nBut, I don't think things should go in documents unless there is justification.",
+          "createdAt": "2024-07-14T18:58:59Z",
+          "updatedAt": "2024-07-14T18:58:59Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Of course.  The most recent mail where I tried to explain the reason for them is Archived-At: <https://mailarchive.ietf.org/arch/msg/cbor/7CAgHZxvj34Rf4rcXFGeFwBzv_M>\r\n\r\nTo make a decision, it is necessary not only to understand the benefit, but also the cost of the feature.\r\nTo me it seems it creates zero cost for those who do not implement it.\r\nIf you think you do not need it, I would not implement it.\r\n",
+          "createdAt": "2024-07-14T19:17:08Z",
+          "updatedAt": "2024-07-14T19:17:08Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "I don't see how the cost is zero. You have to understand it to know that you don't have to implement it.\r\n\r\nThere's a cost to protocol designers too. They have to understand it to know whether they should use it or not use it.\r\n\r\nThere's also some cost to the WG, the IESG and the RFC editor to review.\r\n",
+          "createdAt": "2024-07-14T19:23:50Z",
+          "updatedAt": "2024-07-14T19:23:50Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We could improve the text to make this easier to understand.\r\n\r\nThe cost of *not* having the feature is immense.\r\nPeople will notice that their application data model does not map one-to-one to CDE and will do exactly what dCBOR did in the outset -- reinvent a incompatible variant of CDE because their application data model isn't identical to the generic data model of CBOR.\r\n\r\nSo it is absolutely worth massive effort to have application profiles as a concept in place.\r\nI still believe the actual effort is minimal, and I would like to understand what text in CDE creates complexity for you, and how we could minimize the discovery cost for those whose actual cost is zero because they don't need it.",
+          "createdAt": "2024-07-14T20:31:59Z",
+          "updatedAt": "2024-07-14T20:33:02Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "The justification I am looking for is the description of some more compelling use cases to sit along side dCBOR. I don't think any have been described.\r\n\r\nI don't see immensity here. If there was immensity, then there would be at least a couple of examples of bad variants of CDE. So far we only have one variant of CDE which IMO isn't too bad (other opinions aside).\r\n\r\nAlso, can you say why application profiles are justified for CDE, but not preferred serialization or a general profile mechanism for all of CBOR?",
+          "createdAt": "2024-07-15T19:27:18Z",
+          "updatedAt": "2024-07-15T19:27:18Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR #15 should address most of your concerns, without removing the concept of Application Profiles entirely.",
+          "createdAt": "2024-07-16T19:24:40Z",
+          "updatedAt": "2024-07-16T19:24:40Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 5,
+      "id": "PR_kwDOJ8fYd85jg4_G",
+      "title": "Prepare -01",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/5",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* b850713 Add some security considerations\r\n* 0c91f68 Further clarifications\r\n* 4731cab Clarify representation of NaNs\r\n* 2190787 RECOMMENDS is not an RFC 2119 keyword\r\n* 45bdbdc Do section references into STD documents as pioneered in RFC 9485\r\n* cf3b06f Remove reference to I-D.bormann-cbor-dcbor\r\n",
+      "createdAt": "2024-01-08T20:22:42Z",
+      "updatedAt": "2024-01-08T20:23:37Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "8b29daf1dd4fca2098b3579b594755f538302506",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "prepare-01",
+      "headRefOid": "b8507139bd5ce994446b3bd9d914c42168ecb727",
+      "closedAt": "2024-01-08T20:23:37Z",
+      "mergedAt": "2024-01-08T20:23:37Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "f93dd82df8d813506329995a4527749aa990c3f1"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOJ8fYd85og4Is",
+      "title": "Add proposed \"Implementers' Checklists\" Appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/7",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-03T15:13:32Z",
+      "updatedAt": "2024-03-03T19:44:22Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "1f0644ea5ca4a7c24267b3b40c585b1566e60a60",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "implementer-checklists",
+      "headRefOid": "1f34190ae6d17106d0ec8df499c4f4bb29f92840",
+      "closedAt": "2024-03-03T19:44:22Z",
+      "mergedAt": "2024-03-03T19:44:22Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "8d4d3064774695856a166b6409b53a6c19cad14d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ8fYd85yBwgG",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Hi Carsten, looks generally good. Thank you kindly for including. I made some comments, but am fine with merging as is.",
+          "createdAt": "2024-03-03T19:00:14Z",
+          "updatedAt": "2024-03-03T19:30:34Z",
+          "comments": [
+            {
+              "originalPosition": 78,
+              "body": "Type 7 described in 8949 is deterministic without further specification. In particular, the text for simple values requires shortest-form. That's the reason I said all but type 7 and didn't call out an exemption for floats.\r\n\r\nBut, yes in the obvious implementation, the exception is floats.\r\n\r\nI'm fine either way with the text.",
+              "createdAt": "2024-03-03T19:00:14Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "Duplicate sentence.",
+              "createdAt": "2024-03-03T19:02:19Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "I would remove \"for instance\". That text in 3.1 is _the_ normative unequivocal statement that duplicate map keys are not allowed. I kind of wish that text in 8949 was stronger.\r\n\r\nUnderstand that some decoders might not detect this and that we have to allow such decoders, but that doesn't change the hard requirement that duplicate map keys are never allowed, right?",
+              "createdAt": "2024-03-03T19:10:28Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "The text \"support\" is kind of being used as a form of 2119 SHOULD here. I'd much prefer saying decoders MAY support checking.  I don't think it is a SHOULD and would prefer to stick with 2119 terminology.",
+              "createdAt": "2024-03-03T19:22:36Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 138,
+              "body": "I like this wording. I was trying to figure out something like this myself.",
+              "createdAt": "2024-03-03T19:23:48Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            },
+            {
+              "originalPosition": 53,
+              "body": "But, it doesn't negate the main benefit of Preferred which is interoperability nor the main benefit of CDE which is determinism.\r\n\r\nHaving spent a year plus trying to understand benefit and negatives of stuff in COSE and HPKE, I'd much prefer explicit statement of negatives and benefits.",
+              "createdAt": "2024-03-03T19:29:16Z",
+              "updatedAt": "2024-03-03T19:30:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB5vg",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:34:42Z",
+          "updatedAt": "2024-03-03T19:34:42Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Yes!  That is the point...  We really mean this.",
+              "createdAt": "2024-03-03T19:34:42Z",
+              "updatedAt": "2024-03-03T19:34:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB50O",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:36:45Z",
+          "updatedAt": "2024-03-03T19:36:45Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "Correct, at least if you want to have valid encoded data items.\r\nRemoved the \"for instance\", but there are of course other places in 8949 that add information to this.\r\nBut citing them all here does not make sense, indeed.\r\n",
+              "createdAt": "2024-03-03T19:36:45Z",
+              "updatedAt": "2024-03-03T19:36:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB53A",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:38:03Z",
+          "updatedAt": "2024-03-03T19:38:03Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "This is really a \"truth of advertising\" statement, not a SHOULD.\r\nSo it is phrased as a factual \"need to\".\r\n",
+              "createdAt": "2024-03-03T19:38:03Z",
+              "updatedAt": "2024-03-03T19:38:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB57u",
+          "commit": {
+            "abbreviatedOid": "61b2b65"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:40:07Z",
+          "updatedAt": "2024-03-03T19:40:08Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "Not checking removes some security properties.\r\n\r\nSection 5 (security considerations):\r\n\r\n```\r\nHowever, this effect only accrues if the decoder actually checks that\r\ndeterministic encoding was applied correctly.\r\n```\r\n\r\nThis is just restated here...",
+              "createdAt": "2024-03-03T19:40:07Z",
+              "updatedAt": "2024-03-03T19:40:08Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOJ8fYd85ohQ9f",
+      "title": "Use \"preferred serialization\" consistently.",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/9",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Close #8",
+      "createdAt": "2024-03-03T19:49:14Z",
+      "updatedAt": "2024-03-03T20:17:52Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "8d4d3064774695856a166b6409b53a6c19cad14d",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "preferred-serialization",
+      "headRefOid": "f60ce32c7ff107582741691089eac39dbce032ba",
+      "closedAt": "2024-03-03T20:17:52Z",
+      "mergedAt": "2024-03-03T20:17:52Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "ac3c2e7bef3887b55c35e7e6bf0e3f97f4aab710"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ8fYd85yB6dv",
+          "commit": {
+            "abbreviatedOid": "3a270c7"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T19:55:19Z",
+          "updatedAt": "2024-03-03T19:56:28Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Isn't this section 4.1 of 8949?  I assumed preferred serialization is capitalized here because it is the title of the section.",
+              "createdAt": "2024-03-03T19:55:19Z",
+              "updatedAt": "2024-03-03T19:56:28Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "I think I'd make this not capitalized.",
+              "createdAt": "2024-03-03T19:56:05Z",
+              "updatedAt": "2024-03-03T19:56:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB6v4",
+          "commit": {
+            "abbreviatedOid": "3a270c7"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T20:03:08Z",
+          "updatedAt": "2024-03-03T20:03:08Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "This was specifically about encoding of integers, 3.4.3:\r\n\r\n```\r\nThe preferred serialization of an integer that can\r\n   be represented using major type 0 or 1 is to encode it this way\r\n   instead of as a bignum (which means that the empty string never\r\n   occurs in a bignum when using preferred serialization)\r\n```\r\n\r\nFixed the case, added \"for all integers\".",
+              "createdAt": "2024-03-03T20:03:08Z",
+              "updatedAt": "2024-03-03T20:03:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB7PK",
+          "commit": {
+            "abbreviatedOid": "3a270c7"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T20:14:13Z",
+          "updatedAt": "2024-03-03T20:14:13Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Sorry, emacs global substitute keeps the case; fixed this below.\r\nNow mostly downcased.",
+              "createdAt": "2024-03-03T20:14:13Z",
+              "updatedAt": "2024-03-03T20:14:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd85yB7Wy",
+          "commit": {
+            "abbreviatedOid": "f60ce32"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-03T20:17:08Z",
+          "updatedAt": "2024-03-03T20:17:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOJ8fYd85yRyds",
+      "title": "Separate motivation (for the Introduction) and what an implementer needs to do",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/10",
+      "state": "OPEN",
+      "author": "rohanmahy",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Simplify Abstract; Move motivation to Introduction",
+      "createdAt": "2024-06-12T19:22:23Z",
+      "updatedAt": "2024-07-08T23:47:59Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
+      "headRepository": "rohanmahy/draft-ietf-cbor-cde",
+      "headRefName": "rohan/intro",
+      "headRefOid": "217ded4bd47176b7e9b165f698d9afadd28cdcdb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you!  I think I like what I'm seeing, but some assembly is still required.\r\nUnfortunately, I ran out of time integrating this change; I plan to have this as part of -04 on 2024-07-21.",
+          "createdAt": "2024-07-08T23:47:58Z",
+          "updatedAt": "2024-07-08T23:47:58Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOJ8fYd85zQWJX",
+      "title": "Add NaN Appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/11",
+      "state": "CLOSED",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-22T18:05:21Z",
+      "updatedAt": "2024-06-22T18:21:36Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
+      "headRepository": "laurencelundblade/draft-ietf-cbor-cde",
+      "headRefName": "NaNPayload",
+      "headRefOid": "af61b4885a89b19f523b4b32d92d8f7c9e4c55c9",
+      "closedAt": "2024-06-22T18:08:57Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Oops. Not ready yet.",
+          "createdAt": "2024-06-22T18:08:57Z",
+          "updatedAt": "2024-06-22T18:08:57Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "You can keep it as a draft PR",
+          "createdAt": "2024-06-22T18:21:34Z",
+          "updatedAt": "2024-06-22T18:21:34Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOJ8fYd850neV8",
+      "title": "Clarify concept of a CDE decoder and what it MUST do",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/12",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-07T16:54:42Z",
+      "updatedAt": "2024-07-08T23:40:52Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "cde-decoder",
+      "headRefOid": "742f49e4c1a54751d1d02fb18d1464db90317f7c",
+      "closedAt": "2024-07-08T23:40:52Z",
+      "mergedAt": "2024-07-08T23:40:52Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "20b187cf85fd317042f75bd3129b4241d9476325"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOJ8fYd850nvaA",
+      "title": "NaN appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/13",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It takes week or so to implement basic CBOR integer and float encoding. I\u2019m not as smart as some here, but I get by\u2026 It took me many many months to figure out NaN payloads. I\u2019ve put what I learned in a NaN Appendix to the CDE draft to save others these months.\r\n\r\nIt\u2019s a fairly long addition, but it seems worthwhile to me to cover the details explicitly. It\u2019s an appendix, not the main document, which signals to the reader that they don\u2019t have to read it.\r\n\r\nIt makes a recommendation that protocol designers not use NaN payloads because there are better ways to accomplish the same.",
+      "createdAt": "2024-07-07T21:06:24Z",
+      "updatedAt": "2024-07-08T23:43:15Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
+      "headRepository": "laurencelundblade/draft-ietf-cbor-cde",
+      "headRefName": "NaNAppendix",
+      "headRefOid": "0dded2b7285049bc2c7b1710055367daaec099ee",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks!  I think the most valuable part here is the table at the end.\r\nThe explanation probably should first explain that CBOR supports IEEE 754, what a NaN is, that a NaN always has a payload, and which payload values aren't available because they would mean something different than a NaN.  A quick discussion of the quiet/signaling bit, the fact that IEEE 754 doesn't define it, but there is a de facto standard needs to follow, and then we can introduce the \"basic\" NaN with sign 0, quiet bit 1, all other payload bits zero.  The reason why some applications are not using `foo = float / null` or `foo = float / payload` where payload can be anything but float.  Then a quick discussion of implementation considerations for preferred serialization, including the weirdness that two NaNs do not compare equal in most platforms, even if they are equal wrt to their payloads.\r\n\r\nI'm not sure this shouldn't be a separate draft, to which CDE could refer for information.\r\nIt's night here already, but I could turn your input and the above outline into a draft about NaN and CBOR.",
+          "createdAt": "2024-07-07T21:22:40Z",
+          "updatedAt": "2024-07-07T21:22:40Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "<https://mailarchive.ietf.org/arch/msg/cbor/KA7ma_UIESnM11SODvmoium9Uqc>",
+          "createdAt": "2024-07-07T21:34:54Z",
+          "updatedAt": "2024-07-07T21:34:54Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Now became part of https://datatracker.ietf.org/doc/draft-bormann-cbor-numbers/\r\nStill needs to be referenced properly; ran out of time.\r\n",
+          "createdAt": "2024-07-08T23:43:14Z",
+          "updatedAt": "2024-07-08T23:43:14Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOJ8fYd851jZ7-",
+      "title": "Application profile appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/15",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Move the application profile section to an appendix.\r\n\r\nClarify the relationship between CDE and application\r\nprotocols/profiles some more.\r\nAdd \"Structure of This Document\".\r\n",
+      "createdAt": "2024-07-16T19:23:37Z",
+      "updatedAt": "2024-07-16T19:45:32Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "20b187cf85fd317042f75bd3129b4241d9476325",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "application-profile-appendix",
+      "headRefOid": "fc56cc475f806d3fc82bec19b9d83e6672335f53",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "And while we are waiting for Martin Thomson's I-D template to catch up to recent tool changes:\r\n\r\nhttps://tzi.org/~cabo/application-profile-appendix/\r\n\r\n",
+          "createdAt": "2024-07-16T19:45:31Z",
+          "updatedAt": "2024-07-16T19:45:31Z"
+        }
+      ],
+      "reviews": []
+    }
+  ]
+}

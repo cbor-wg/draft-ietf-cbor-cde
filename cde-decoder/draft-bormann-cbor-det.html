@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>CBOR: On Deterministic Encoding</title>
+<meta content="Carsten Bormann" name="author">
+<meta content='
+       CBOR (STD 94, RFC 8949) defines "Deterministically Encoded CBOR" in
+its Section 4.2.  The present document provides additional information
+about use cases, deployment considerations, and implementation choices
+for Deterministic Encoding. 
+    ' name="description">
+<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="draft-bormann-cbor-det-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.22.0
+    Python 3.12.3
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
+    intervaltree 3.1.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.32.3
+    setuptools 69.5.1
+    wcwidth 0.2.13
+-->
+<link href="draft-bormann-cbor-det.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">On Deterministic Encoding</td>
+<td class="right">July 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Bormann</td>
+<td class="center">Expires 8 January 2025</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">CBOR</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-bormann-cbor-det-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-07-07" class="published">7 July 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-01-08">8 January 2025</time></dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">C. Bormann</div>
+<div class="org">Universität Bremen TZI</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">CBOR: On Deterministic Encoding</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">CBOR (STD 94, RFC 8949) defines "Deterministically Encoded CBOR" in
+its Section 4.2.  The present document provides additional information
+about use cases, deployment considerations, and implementation choices
+for Deterministic Encoding.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-bormann-cbor-det/">https://datatracker.ietf.org/doc/draft-bormann-cbor-det/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Concise Binary Object Representation Maintenance and Extensions (CBOR) Working Group mailing list (<span><a href="mailto:cbor@ietf.org">mailto:cbor@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/cbor/">https://mailarchive.ietf.org/arch/browse/cbor/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/cbor/">https://www.ietf.org/mailman/listinfo/cbor/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/cbor-wg/draft-ietf-cbor-cde">https://github.com/cbor-wg/draft-ietf-cbor-cde</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 8 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-use-cases-for-deterministic" class="internal xref">Use Cases for Deterministic Encoding</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-diagnostics" class="internal xref">Diagnostics</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-caching" class="internal xref">Caching</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-security-signing-inputs" class="internal xref">Security: Signing Inputs</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-support-by-generic-encoders" class="internal xref">Support by Generic Encoders and Decoders</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-basic-support" class="internal xref">Basic Support</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-application-requirements-an" class="internal xref">Application Requirements and Tags</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-example-with-tags-0-and-1-d" class="internal xref">Example with Tags 0 and 1 (Date/Time)</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-example-with-major-types-0-" class="internal xref">Example with Major Types 0, 1, and 7, and Tags 2 and 3</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-specification-consideration" class="internal xref">Specification Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-media-type-considerations" class="internal xref">Media Type Considerations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-the-need-for-maps" class="internal xref">The Need for Maps</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations for Deterministic Encoding</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-api-considerations" class="internal xref">API Considerations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-map-key-ordering" class="internal xref">Map Key Ordering</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-application-profiles-of-det" class="internal xref">Application Profiles of Deterministic Encoding</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-the-need-for-cbor-common-de" class="internal xref">The need for CBOR Common Deterministic Encoding (CDE)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-numeric-reduction-in-dcbor" class="internal xref">Numeric Reduction in dCBOR</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-using-deterministically-enc" class="internal xref">Using Deterministically Encoded CBOR as a Deterministic Encoding of JSON</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The Concise Binary Object Representation (CBOR, <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> as documented
+in RFC 8949) is a data format whose design goals include the
+possibility of extremely small code size, fairly small message size,
+and extensibility without the need for version negotiation.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">In many cases, CBOR allows some information to be encoded in several
+variants, which provide different amounts of space and thus lengths in
+Bytes.
+The encoder is generally free to choose the length that
+is most practical for it (with the constraint, of course, that the
+data need to fit).
+For most encoders, it is natural to always choose the shortest form
+available (essentially avoiding leading zeros).
+Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">Preferred Serialization</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> names this practice
+and provides additional guidance for CBOR implementations; another
+term in use is "Preferred Encoding".<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">Deterministically Encoded CBOR</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> goes beyond
+the Preferred Serialization practice by providing rules for
+<em>Deterministic Encoding</em>.
+The objective of Deterministic Encoding is to, deterministically,
+always produce the same encoding for data items that are equivalent at
+the data model level.
+To achieve this, Preferred Serialization is mandated, an encoding choice
+intended for incremental encoding
+(indefinite length encoding) is disabled, and additional effort is
+expended for encoding key/value pairs in maps (the order of which
+does not matter semantically) in a deterministic order.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">Given that additional effort needs to be expended and/or implementation
+choices are taken away, neither Preferred Serialization nor
+Deterministic Encoding are mandatory in CBOR.
+(Contrast this with UTF-8 (Section <a href="https://rfc-editor.org/rfc/rfc3629#section-3" class="relref">3</a> of RFC 3629 <span>[<a href="#STD63" class="cite xref">STD63</a>]</span>), which is always treating as
+"invalid" any encoding variants that are longer than necessary.)<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">Deterministic Encoding is defined in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> (note
+that Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">4.2.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> defines a variant that was needed at
+the time for backward compatibility and will not be discussed further
+in this document).
+The present document elaborates on this normative definition by
+providing additional information about use cases, deployment
+considerations, and implementation choices for Deterministic Encoding;
+it is an informational document that however may still be cited where a
+single reference for the background of Deterministic Encoding is convenient.
+This document is intended to be used in conjunction with CBOR Common
+Deterministic Encoding (CDE, <span>[<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span>), a normative specification for a
+deterministic encoding profile that was developed in order to allow
+generic CBOR implementations to provide common support for a variety
+of applications of deterministic encoding.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<div id="conventions-and-definitions">
+<section id="section-1.1">
+        <h3 id="name-conventions-and-definitions">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+        </h3>
+<p id="section-1.1-1">The definitions of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> apply.
+Readers are expected to be familiar with CBOR, and particularly so with
+Sections <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> and <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">The following terms introduced in the text of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> receive their own
+separate definitions here:<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-1.1-3">
+          <dt id="section-1.1-3.1">Preferred Serialization:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.2">
+            <p id="section-1.1-3.2.1">a set of choices made during Serialization (Encoding) that generally
+leads to shortest-form encodings where a choice of encoding lengths
+is available, without expending additional effort on converting
+between different kinds of data item.
+See Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> and the terms defined in that section.
+The Preferred Encoding rules for data items in the Basic Generic
+Data Model may be augmented by rules for specific Tags, see for
+instance Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.3">Preferred Encoding:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.4">
+            <p id="section-1.1-3.4.1">Preferred Serialization<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.5">Deterministic Encoding:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.6">
+            <p id="section-1.1-3.6.1">An encoding process that employs Preferred Serialization and makes
+additional decisions to always (deterministically) lead to the
+exact same encoding for equivalent inputs at the data model level.
+Similar to Preferred Serialization, the equivalence model as defined
+for the Basic Generic Data Model may be augmented by equivalence
+rules defined for specific Tags (see also Section <a href="https://rfc-editor.org/rfc/rfc8949#section-2.1" class="relref">2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-1.1-4">In this document, CBOR data items at the data model level are
+represented in the CBOR diagnostic notation (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">8</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> as extended by <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>,
+further elaborated in <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>), abbreviated with "EDN" (extended
+diagnostic notation).<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">While this document is informative, it does use certain keywords to
+indicate practical requirements for interoperability.
+The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="use-cases-for-deterministic-encoding">
+<section id="section-2">
+      <h2 id="name-use-cases-for-deterministic">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-use-cases-for-deterministic" class="section-name selfRef">Use Cases for Deterministic Encoding</a>
+      </h2>
+<p id="section-2-1">Before discussing further details of Deterministic Encoding, we would
+like to point out three areas of use cases, which differ enough in the
+resulting objectives that it is worth to have terminology for them.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<div id="diagnostics">
+<section id="section-2.1">
+        <h3 id="name-diagnostics">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-diagnostics" class="section-name selfRef">Diagnostics</a>
+        </h3>
+<p id="section-2.1-1">In many cases, diagnostic procedures benefit from having available a
+single, easily comparable representation of some data:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.1-2.1">
+            <p id="section-2.1-2.1.1">Comparing outputs of a test or validation suite during development<a href="#section-2.1-2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.1-2.1.2.1">
+                <p id="section-2.1-2.1.2.1.1">CI (Continuous Integration) may capture Deterministically Encoded copies of process output,
+of data in flight or data at rest, of specific test output etc.
+Being able to compare them over time or between systems without
+differences occurring as false positives can help indicate the presence or absence of
+certain problems.<a href="#section-2.1-2.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-2.1-2.1.2.2">
+                <p id="section-2.1-2.1.2.2.1">Test vectors and other kinds of tests often represent some input
+and desired output of a transformation.
+By making sure the output is deterministically
+encoded, a simple bytewise comparison can find out whether the
+transformation was performed successfully.<a href="#section-2.1-2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-2.1-2.2">
+            <p id="section-2.1-2.2.1">Improving the presentation of diagnostic information to humans<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.2.2">
+By minimizing inconsequential differences between representations of
+similar data, humans may be faster in finding information they are
+interested in.  In particular inconsistent map ordering can easily
+hide information that would have been useful for diagnostic purposes.
+Transformation to human-readable forms may be easier and more useful
+if there is
+only one form of representation for the interchanged data.<a href="#section-2.1-2.2.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="caching">
+<section id="section-2.2">
+        <h3 id="name-caching">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-caching" class="section-name selfRef">Caching</a>
+        </h3>
+<p id="section-2.2-1">Many systems cache (memoize) results of a request so they can reply
+with the cached result when the same request comes in again and the
+context of the reply has not changed.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">If two requests that are semantically the same also have the same
+representation, the representation (or its hash) can serve as an
+efficient cache key.  If the request is already encoded
+deterministically, this is by definition the case; alternatively, the
+recipient can re-encode a request with Deterministic Encoding.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">Were the Deterministic Encoding to fail, this could lead to cache failures, which
+could be benign, but also could be specifically evoked by an active
+attacker to degrade a system.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">As usual for deterministically encoded data, not all forms of
+application equivalence imply equivalence at the data model level, so
+some equivalence processing (<em>deterministic representation</em>) may be
+required at the application level as well,
+to achieve equivalent representations and thus a good cache hit rate.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-signing-inputs">
+<section id="section-2.3">
+        <h3 id="name-security-signing-inputs">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-security-signing-inputs" class="section-name selfRef">Security: Signing Inputs</a>
+        </h3>
+<p id="section-2.3-1">Security Frameworks such as COSE and JOSE sign or MAC (authenticate with a
+Message Authentication Code, MAC) information in
+the form in which it
+has actually been interchanged, making representation variants
+less relevant.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-2">(Note that Section <a href="https://rfc-editor.org/rfc/rfc9052#section-9" class="relref">9</a> of RFC 9052 <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> defines deterministic encoding
+rules for its own derivation of signing inputs from interchange data
+and additional cryptographic parameters; these are a compatible subset
+of the Core Deterministic Encoding Requirements specified in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> and thus of CDE.)<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">However, in some cases, the signing input for a signature or a MAC may
+need to be derived from data at rest and/or specific transformations of
+the data that was interchanged.  Such a transformation is fraught with
+perils at the application level that may be exploited by attackers;
+this problem is outside the scope of the present document.
+Deterministic Encoding may remove one potential source of variability
+that might make signatures or MACs useless between systems.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="support-by-generic-encoders-and-decoders">
+<section id="section-3">
+      <h2 id="name-support-by-generic-encoders">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-support-by-generic-encoders" class="section-name selfRef">Support by Generic Encoders and Decoders</a>
+      </h2>
+<p id="section-3-1">CBOR implementations can be specific to a particular application, or
+they can be <em>Generic</em>.  There is a strong incentive to be able to use
+a Generic encoder/decoder across the spectrum of CBOR applications;
+CBOR applications that require specific support from an
+encoder/decoder can considerably reduce the wide implementation
+support CBOR enjoys from existing generic implementations.  So, as a
+general best practice, we want to minimize the number of ways an
+application may need to influence a generic coder/decoder by options,
+flags, switches, etc.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<div id="basic-support">
+<section id="section-3.1">
+        <h3 id="name-basic-support">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-basic-support" class="section-name selfRef">Basic Support</a>
+        </h3>
+<p id="section-3.1-1">There is some expectation that, barring any particular constraints
+that would make this more difficult than normally, a CBOR encoder will
+use Preferred Encoding, in particular generic encoders.
+Deterministic Encoding, however, will need to be switched on explicitly in
+most implementations.
+Note that Preferred Encoding, while using the shortest form available
+for the specific data item to be encoded, doesn't have that shortness
+as the overriding objective: Conversions of a data item into a
+different one to achieve shorted encoding are not part of the
+processing labeled "Preferred Encoding".
+(This is particularly relevant for CBOR's different numeric systems;
+see <a href="#numeric" class="auto internal xref">Section 3.2.2</a> below.)<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Some applications will also want to check that an encoded input actually
+satisfies the requirements for Deterministic Encoding.
+By the definition of Deterministic Encoding, this can be done after
+decoding a data item by
+deterministically encoding the just decoded data item and comparing
+the result with the decoding input.
+However, specific support for checking immediately in the decoding
+process can be more efficient.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">As a result, support for Deterministic Encoding in generic encoder
+implementations is <span class="bcp14">RECOMMENDED</span> to be provided by a flag to switch on
+(or separate function that enables) Deterministic Encoding.
+Similarly, generic decoders are <span class="bcp14">RECOMMENDED</span> to have a flag to switch
+on/separate function to enable checking for Deterministic Encoding,
+whether that is efficiently
+implemented during decoding or less efficiently by comparing
+a re-encoding.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="tags">
+<section id="section-3.2">
+        <h3 id="name-application-requirements-an">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-application-requirements-an" class="section-name selfRef">Application Requirements and Tags</a>
+        </h3>
+<p id="section-3.2-1">The definition of Deterministic Encoding can become more complicated
+with the addition of Tags (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4" class="relref">3.4</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span><span>[<a href="#IANA.cbor-tags" class="cite xref">IANA.cbor-tags</a>]</span>).
+Not all tags come with a strong equivalence model.
+Worse, the equivalence model may be more
+application specific than for basic Deterministic Encoding.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<div id="example-with-tags-0-and-1-datetime">
+<section id="section-3.2.1">
+          <h4 id="name-example-with-tags-0-and-1-d">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-example-with-tags-0-and-1-d" class="section-name selfRef">Example with Tags 0 and 1 (Date/Time)</a>
+          </h4>
+<p id="section-3.2.1-1">For instance, are the following Tag 0 timestamps (expressed in CBOR
+diagnostic notation) equivalent?<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.2.1-2">
+<pre>
+0("2013-10-23T21:52:23Z")
+0("2013-10-23T21:52:23+00:00")
+0("2013-10-23T14:52:23-07:00")
+</pre><a href="#section-3.2.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.1-3">They all denote the same instance in time, so if that is the relevant application
+semantics, they should all be represented as
+<code>0("2013-10-23T21:52:23Z")</code> in Deterministic Encoding as that is the
+shortest form.
+However, they carry additional semantics that may be incidental or
+intentional (the e-mail message from which this date/time example was taken originated
+from California, which then was at a time zone the time offset of
+which is expressed by the <code>-07:00</code>).
+Whether the first two are exactly equivalent or not is the subject of
+<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-sedate-datetime-extended-11#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-sedate-datetime-extended" class="cite xref">I-D.ietf-sedate-datetime-extended</a>]</span>.<a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-4">If the additional semantics conveyed by the <code>time-offset</code> (<span><a href="https://rfc-editor.org/rfc/rfc3339#section-5.6" class="relref">Section 5.6</a> of [<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>) is not relevant to the application, an
+application-specific rule may be needed to convert text-based
+timestamps into the "Z" form before encoding.
+Some applications may also process this timestamp as <code>1(1382565143)</code>,
+losing the additional semantics as well, and using a quite different form.
+Is that maybe an even better Deterministic Encoding?
+(Note that <code>0("2016-12-31T23:59:60Z")</code> does not have an equivalent
+form with Tag 1, so the application can either decide to never use
+such a date/time, or to exceptionally encode the rare leap second with Tag 0.)<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="numeric">
+<section id="section-3.2.2">
+          <h4 id="name-example-with-major-types-0-">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-example-with-major-types-0-" class="section-name selfRef">Example with Major Types 0, 1, and 7, and Tags 2 and 3</a>
+          </h4>
+<aside id="section-3.2.2-1">
+            <p id="section-3.2.2-1.1">In some of the following examples, we will use the number
+65 536 000 000 (or its floating-point form, 65536000000.0, in
+diagnostic notation), as it has
+both binary and non-binary (decimal) factors: it is equal to
+<code>2</code><sup>16</sup>⋅<code>10</code><sup>6</sup> (and thus to
+<code>2</code><sup>22</sup>⋅<code>5</code><sup>6</sup>).<a href="#section-3.2.2-1.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-3.2.2-2">CBOR has four different sets of numeric representations:<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2.2-3.1">
+              <p id="section-3.2.2-3.1.1">Major types 0 and 1.<a href="#section-3.2.2-3.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.1.2">
+These provide for a variable-length representation of 64-bit
+unsigned integer numbers (major type 0) or negative numbers (major
+type 1) and, by combining these, of 65-bit signed integer numbers.
+The various lengths are intended to be semantically without meaning; the
+Preferred Encoding always chooses the shortest one.<a href="#section-3.2.2-3.1.2" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.2-3.2">
+              <p id="section-3.2.2-3.2.1">Tags 2 and 3 ("bignums")<a href="#section-3.2.2-3.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.2.2">
+These provide for a variable-length representation of arbitrarily
+large unsigned (Tag 2) or negative (Tag 3) integer numbers.
+According to Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>,
+the Preferred Encoding of an integer that fits into major type 0 or
+1 is just that, i.e., the boundary between regular integers and
+bignums is intentionally thin.  This means that, in Preferred
+Encoding, the value space of integral numbers is cleanly split into
+basic integers (64-bit unsigned integers or 64-bit negative
+integers) and bignums (Tag 2/3 integers that fit into neither of the
+two 64-bit forms).<a href="#section-3.2.2-3.2.2" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.2.3">
+As a result, an application may want to place any distinctions it
+needs in the area of integer numbers not on the representation as a
+regular integer or a bignum, but on the value: e.g., an application
+could provide a 64-bit signed integer range separate from a bignum-based
+arbitrary size integer range that is outside 64-bit signed space, and
+would map half of the 65-bit space into the arbitrary size range.<a href="#section-3.2.2-3.2.3" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.2.4">
+Note that, accordingly, Preferred Encoding as defined in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> selects the shortest encoding in major type 0/1
+space if that is available and the shortest encoding (no leading
+zero bytes) in Tag 2/3 space only if the former is not available.
+This means that the integer number 65 536 000 000 in preferred
+representation is encoded as (9 bytes)<a href="#section-3.2.2-3.2.4" class="pilcrow">¶</a></p>
+<div class="lang-cbor-pretty sourcecode" id="section-3.2.2-3.2.5">
+<pre>
+1b 00 00 00 0f 42 40 00 00
+</pre><a href="#section-3.2.2-3.2.5" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.2-3.2.6">
+and not as (7 bytes)<a href="#section-3.2.2-3.2.6" class="pilcrow">¶</a></p>
+<div class="lang-cbor-pretty sourcecode" id="section-3.2.2-3.2.7">
+<pre>
+c2 45 0f 42 40 00 00
+</pre><a href="#section-3.2.2-3.2.7" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.2-3.2.8">
+(<code>2(h'0f 42 40 00 00')</code> in diagnostic notation), even though
+the latter is shorter by two bytes.<a href="#section-3.2.2-3.2.8" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.2-3.3">
+              <p id="section-3.2.2-3.3.1">Major type 7<a href="#section-3.2.2-3.3.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.3.2">
+CBOR directly provides the <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> types binary16, binary32, and
+binary64, colloquially known as half-precision, single-precision,
+and double-precision floating point.  Note that other <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>
+binary floating types are indirectly supported via Tag 4, as well as
+decimal fractions via Tag 5.<a href="#section-3.2.2-3.3.2" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.3.3">
+The set of values that binary32 and binary64 can represent are
+proper supersets of the value sets of the binary16 and binary32,
+respectively.  These sets have CDDL names of float16, float32, and
+float64 (<span><a href="https://rfc-editor.org/rfc/rfc8610#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>).
+Again, preferred encoding chooses the smallest of the encodings;
+e.g., an application float64 such as 1.5 will be represented in a
+binary16 (0xf93e00) because that representation is the shortest floating
+point that provides the range and precision needed for this value.
+(Bulk encoding of floating point values, where the need for detection of this
+situation might cause a performance limitation, is handled by
+tagged arrays <span>[<a href="#RFC8746" class="cite xref">RFC8746</a>]</span>.)<a href="#section-3.2.2-3.3.3" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.3.4">
+While the three major type 7 floating point representations are
+semantically equivalent among each other in the same way as the major type 0/1
+integer representations are to each other, implementers have
+indicated that between these
+two groups, numbers need to be kept separated into integers and
+floating point numbers at the generic data model level.<a href="#section-3.2.2-3.3.4" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.3.5">
+This means that the integer number 65 536 000 000 in preferred
+representation is encoded as (9 bytes)<a href="#section-3.2.2-3.3.5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.2.2-3.3.6">
+<pre>
+1b 00 00 00 0f 42 40 00 00
+</pre><a href="#section-3.2.2-3.3.6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.2-3.3.7">
+and not as (5 bytes)<a href="#section-3.2.2-3.3.7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.2.2-3.3.8">
+<pre>
+fa 51 74 24 00
+</pre><a href="#section-3.2.2-3.3.8" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.2-3.3.9">
+which would be considered to be the semantically separate floating point value
+65536000000.0 (CBOR diagnostic notation).<a href="#section-3.2.2-3.3.9" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-3.2.2-3.4">
+              <p id="section-3.2.2-3.4.1">Tag 4 and 5 (decimal fractions, "bigfloats")<a href="#section-3.2.2-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.4.2">
+Instead of adopting further formats such as decimal64 or binary128 from
+<span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, CBOR defines two generalized tags that can be used for extended
+precision representation: Tag 5 for general binary floating point
+numbers ("bigfloats") and Tag 4 for general decimal floating point
+(decimal fractions).
+ Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.4" class="relref">3.4.4</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> also states that "Bigfloats may also be used by constrained
+applications that need some basic binary floating-point capability
+without the need for supporting IEEE 754", while decimal fractions
+"are most useful if an application needs the exact representation of
+a decimal fraction such as 1.1 because there is no exact
+representation for many decimal fractions in binary floating-point
+representations", as might occur when representing literal JSON
+<span>[<a href="#STD90" class="cite xref">STD90</a>]</span> instead of I-JSON-interpreted JSON <span>[<a href="#RFC7493" class="cite xref">RFC7493</a>]</span>.<a href="#section-3.2.2-3.4.2" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3.4.3">
+Neither bigfloats nor decimal fractions provide rules for preferred
+encoding, except implicitly by providing a choice between basic
+integer and bignum representation for the mantissa value that will
+in turn
+be governed by the preferred encoding rules for integers.
+Beyond that, the assumption is that these Tags create separate
+number spaces, and that any deterministic representation of numbers
+via these tags is shaped by application rules for the use of Tag 4
+and 5.<a href="#section-3.2.2-3.4.3" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="specification-considerations">
+<section id="section-4">
+      <h2 id="name-specification-consideration">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-specification-consideration" class="section-name selfRef">Specification Considerations</a>
+      </h2>
+<p id="section-4-1">In many specifications, asserting that interchange is based on
+deterministically encoded data items (and specifying what has to
+happen if that is not the case) is all that is needed.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<div id="media-type-considerations">
+<section id="section-4.1">
+        <h3 id="name-media-type-considerations">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-media-type-considerations" class="section-name selfRef">Media Type Considerations</a>
+        </h3>
+<p id="section-4.1-1">Some specifications define a media type for their interchange formats.
+This definition is a good place to reiterate that a deterministically
+encoded data item is required for instances of that media type.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">A question arises whether a Structured Syntax Suffix (SSS, <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>)
+should be defined for CBOR data items in Deterministic Encoding
+(and similarly for CBOR sequences <span>[<a href="#RFC8742" class="cite xref">RFC8742</a>]</span> of such).<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">There is precedent for this approach, as ASN.1 DER (Distinguished
+Encoding Rules) has an SSS, <code>+der</code>.
+However, this appears misguided as the purpose of an SSS is to enable
+processing of the underlying data representation format, and any ASN.1
+BER (Basic Encoding Rules) processor (<code>+ber</code>) can also process a
+<code>+der</code> instance, which is not apparent from the <code>+der</code> suffix.
+(This was maybe mitigated by introducing both SSS at the same time.)
+Similarly, any CBOR decoder today can process deterministically
+encoded data items as plain CBOR data items (without any mitigation of
+having introduced a related suffix at the same time), so the SSS
+should be the usual <code>+cbor</code>/<code>+cbor-seq</code>.
+(The additional processing that would be enabled by identifying data
+items as deterministically encoded appears rather limited.)<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">Alternatively, instead of replacing <code>+cbor</code>, an indication of
+Deterministic Encoding could be provided by adding multiple suffixes
+to the SSS concept.
+There is an ongoing effort to define a more complex structure of media
+type suffixes, as documented in <span>[<a href="#I-D.ietf-mediaman-suffixes" class="cite xref">I-D.ietf-mediaman-suffixes</a>]</span>.
+In general, the combination of multiple SSS in one media type name
+raises similar questions to the multiple inheritance problem in
+object-oriented programming languages, so it may not be easy to use
+such a mechanism in practice.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="the-need-for-maps">
+<section id="section-4.2">
+        <h3 id="name-the-need-for-maps">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-the-need-for-maps" class="section-name selfRef">The Need for Maps</a>
+        </h3>
+<p id="section-4.2-1">As an extension to JSON objects in JSON <span>[<a href="#STD90" class="cite xref">STD90</a>]</span>,
+maps are an important data structure in the CBOR generic data model to
+obtain extensibility of "struct"-like data (see <span><a href="https://rfc-editor.org/rfc/rfc8610#section-2" class="relref">Section 2</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>).
+Where this is not needed or can be provided in another way, expressing
+the entire data item without the use of maps can be an efficient
+option, avoiding any additional processing for Deterministic Encoding
+beyond that needed for Preferred Encoding.
+(This requires ensuring that a similar kind of uncertainty then does not occur
+at the application level, though.)<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="implementation-considerations-for-deterministic-encoding">
+<section id="section-5">
+      <h2 id="name-implementation-consideratio">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations for Deterministic Encoding</a>
+      </h2>
+<div id="api-considerations">
+<section id="section-5.1">
+        <h3 id="name-api-considerations">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-api-considerations" class="section-name selfRef">API Considerations</a>
+        </h3>
+<p id="section-5.1-1">Support for Deterministic Encoding can be added to an API for a
+generic CBOR encoder and decoder by adding one flag each:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-2.1">
+            <p id="section-5.1-2.1.1">a flag for the encoder to produce Deterministic Encoding<a href="#section-5.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-2.2">
+            <p id="section-5.1-2.2.1">a flag for the decoder to check for Deterministic Encoding (optional)<a href="#section-5.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.1-3">Additional elements could be added to a decoder API to give diagnostic
+information about inputs that were not deterministically encoded, e.g.,
+by flagging elements with error codes.  It is often useful to give the
+application full information about well-formed CBOR that is not
+deterministically encoded even when it should be.
+However, if a flag for checking is provided and switched on, there
+<span class="bcp14">SHOULD</span> be no chance that any other decoded data item is mistaken for
+one that was encoded deterministically.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">As reordering maps for Deterministic Encoding is relatively expensive,
+a generic encoder can also offer additional APIs for providing map
+content in a pre-ordered form.  If an encoder complies with Preferred
+Encoding and maps can be supplied in ordered form, an explicit
+Deterministic Encoding flag may not be required.  If it is, it is
+<span class="bcp14">RECOMMENDED</span> that the encoder not simply rely on the assumption that
+inputs were properly ordered by the application.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="map-key-ordering">
+<section id="section-5.2">
+        <h3 id="name-map-key-ordering">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-map-key-ordering" class="section-name selfRef">Map Key Ordering</a>
+        </h3>
+<p id="section-5.2-1">Generating deterministically encoded data items requires arranging
+key/value pairs in maps into an order defined in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">This map is ordered by the byte-wise lexicographic ordering of the
+deterministically encoded map keys.
+Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> notes:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<blockquote id="section-5.2-3">
+          <p id="section-5.2-3.1">Implementation note: the self-delimiting nature of the CBOR
+encoding means that there are no two well-formed CBOR encoded
+data items where one is a prefix of the other.
+The bytewise lexicographic comparison of deterministic encodings of
+different map keys therefore always ends in a position where the byte
+differs between the keys, before the end of a key is reached.<a href="#section-5.2-3.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-5.2-4">Also, an implementation may be able to make use of the property that
+map keys in Deterministic Encodings are ordered by the following
+information, in order of precedence:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-5.1">
+            <p id="section-5.2-5.1.1">the key's major type<a href="#section-5.2-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-5.2">
+            <p id="section-5.2-5.2.1">the numeric value of the argument of the key<a href="#section-5.2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-5.3">
+            <p id="section-5.2-5.3.1">any content of the key data item, such as<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-5.3.2.1">
+                <p id="section-5.2-5.3.2.1.1">the string value in a byte or text string key<a href="#section-5.2-5.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.2-5.3.2.2">
+                <p id="section-5.2-5.3.2.2.1">the elements of an array key, in order<a href="#section-5.2-5.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.2-5.3.2.3">
+                <p id="section-5.2-5.3.2.3.1">the key/value pairs of a map-shaped key, deterministically ordered<a href="#section-5.2-5.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-5.2-5.3.2.4">
+                <p id="section-5.2-5.3.2.4.1">the tag content of a tagged key<a href="#section-5.2-5.3.2.4.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+</li>
+        </ul>
+<p id="section-5.2-6">I may be expeditious to use this property, e.g. by processing integers
+first, starting with unsigned integers in ascending order and then
+negative integers in descending order, and then strings (byte strings
+first), ordered by their length in bytes (encoded in the argument) and
+then the string content, arrays ordered by length and then content,
+and maps ordered by length and then content.
+Often, and particularly with integer and string keys, it may not be
+necessary to actually build a deterministically encoded data item for
+a map key to perform the overall map content ordering.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="application-profiles-of-deterministic-encoding">
+<section id="section-6">
+      <h2 id="name-application-profiles-of-det">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-application-profiles-of-det" class="section-name selfRef">Application Profiles of Deterministic Encoding</a>
+      </h2>
+<p id="section-6-1">To enable the use of generic encoders,
+applications are encouraged to define rules for representing
+application information in the CBOR generic data model that enable
+the use of Preferred Encoding on that level as well.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<div id="the-need-for-cbor-common-deterministic-encoding-cde">
+<section id="section-6.1">
+        <h3 id="name-the-need-for-cbor-common-de">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-the-need-for-cbor-common-de" class="section-name selfRef">The need for CBOR Common Deterministic Encoding (CDE)</a>
+        </h3>
+<p id="section-6.1-1">Applications can also define their own deterministic encoding rules,
+as for instance FIDO CTAP2 (Client to Authenticator Protocol <span>[<a href="#CTAP2" class="cite xref">CTAP2</a>]</span>)
+does with the <em>CTAP2 canonical CBOR encoding form</em> (Section 6 of <span>[<a href="#CTAP2" class="cite xref">CTAP2</a>]</span>).
+Its description appears
+to be derived from an equivalent of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">4.2.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
+(The actual
+structure of CTAP2 limits its use to cases where that is compatible
+with standard Deterministic Encoding and thus CDE; there is text in the
+specification that calls for revisiting the definition when this would no
+longer be the case.)<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">Application-specific deterministic encoding rules can make it
+difficult to use existing generic encoders and may therefore diminish
+the value of using a standard representation format.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Instead, applications can define transformations of their data
+into a more limited data model that reduces the cases the
+Deterministic Encoding rules have to implement.
+This allows both the following implementation choices:<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-4.1">
+            <p id="section-6.1-4.1.1">the use of generic encoders with standard Deterministic Encoding
+rule implementations after some application processing, or<a href="#section-6.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.1-4.2">
+            <p id="section-6.1-4.2.1">the use of specialized encoders which combine encoding with the
+implementation of the application transformations.<a href="#section-6.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.1-5">The next subsection describes some of the considerations that led to
+one such application profile for Deterministic Encoding.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reduction">
+<section id="section-6.2">
+        <h3 id="name-numeric-reduction-in-dcbor">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-numeric-reduction-in-dcbor" class="section-name selfRef">Numeric Reduction in dCBOR</a>
+        </h3>
+<p id="section-6.2-1">The dCBOR specification <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span> describes the pervasive use of Deterministic
+Encoding throughout an application.  It also defines a simplified
+application data model of numbers, where there no longer is a distinction
+between integers and floating point numbers at the application data
+model level — all numbers are of a
+single numeric type, and the choice of integer or floating point
+representations is made based on value:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-2.1">
+            <p id="section-6.2-2.1.1">integral numbers that fit into Major Type 0 and 1 are represented in
+this way even if they were originally represented as floating point values;<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.2-2.2">
+            <p id="section-6.2-2.2.1">all other numbers are represented as floating point
+values (and all NaN values are mapped to a single quiet NAN).<a href="#section-6.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.2-3">The underlying CBOR Deterministic Encoding rules ensure that, in both
+cases, the shortest form for the case will then be used for encoding.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Reducing the separate integer and floating point spaces to a single
+numeric space is particularly attractive in implementation languages that
+also only have a single such space, such as JavaScript <span>[<a href="#ECMA262" class="cite xref">ECMA262</a>]</span>.
+(While JavaScript recently has acquired a separate integer type, it is much
+less well integrated into the language and existing libraries than the
+more well-established general numeric type.)<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-5">Within the CBOR working group of the IETF, the dCBOR specification
+prompted a discussion about profiles for deterministic encoding, which
+led to the CBOR Common Deterministic Encoding (CDE) specification
+<span>[<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span> and the concept of a deterministic encoding <em>application
+profile</em> (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span>).
+Without help of the CDE specification at the time, an early version of
+the dCBOR specification restated much of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2" class="relref">4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> and added a rule that gets in the way of compatibility
+with Deterministic Encoding (disallowing the interchange of basic
+negative integers in the range <code>-2</code><sup>64</sup> to
+-<code>2</code><sup>63</sup><code>-1</code>).<a href="#section-6.2-5" class="pilcrow">¶</a></p>
+<aside id="section-6.2-6">
+          <p id="section-6.2-6.1">Early dCBOR specifications also had a mention as future work of
+subnormal values <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, which work fine for interchange (even with
+Deterministic Encoding) in <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
+Note that specific values may not be available to applications that
+employ floating point hardware implementing the FTZ ("flush to zero")
+and/or DAZ ("denormals are zero") strategies.
+These may then require special handling in the application data model.
+It is generally difficult to
+rely on exact equality of floating point values, which however is what
+Deterministic Encoding requires.<a href="#section-6.2-6.1" class="pilcrow">¶</a></p>
+</aside>
+</section>
+</div>
+</section>
+</div>
+<div id="using-deterministically-encoded-cbor-as-a-deterministic-encoding-of-json">
+<section id="section-7">
+      <h2 id="name-using-deterministically-enc">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-using-deterministically-enc" class="section-name selfRef">Using Deterministically Encoded CBOR as a Deterministic Encoding of JSON</a>
+      </h2>
+<p id="section-7-1">Certain applications could make use of a Deterministic Encoding for
+JSON <span>[<a href="#STD90" class="cite xref">STD90</a>]</span> data.
+Deterministically Encoded CBOR provides an attractive solution to that
+as it is already well-defined.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">While the data model of JSON is not well-defined, I-JSON provides one
+interpretation that is generally accepted <span>[<a href="#RFC7493" class="cite xref">RFC7493</a>]</span>.
+Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">6.2</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">Converting from JSON to CBOR</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> provides a way
+to transform JSON data that conform to this data model to CBOR.
+When used with its default parameters, the combination of (1) I-JSON,
+(2) the
+JSON-to-CBOR transformation, and (3) the rules for CBOR Deterministic
+Encoding provide a well-defined Deterministic Encoding for JSON data.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">Transforming decoded CBOR data after interchange back to data-model
+level JSON data can be done with the inverse of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-6.2" class="relref">6.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>
+(the full generality of Section <span><a href="https://rfc-editor.org/rfc/rfc8949#section-6.1" class="relref">6.1</a> (<a href="https://rfc-editor.org/rfc/rfc8949#section-6.1" class="relref">Converting from CBOR to JSON</a>)</span> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> is obviously not required as only the JSON subset of the CBOR
+generic data model is used).<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">Comparing the handling of numeric data in the JSON-to-CBOR
+transformation to that reported in <a href="#reduction" class="auto internal xref">Section 6.2</a>, the main difference is
+that the former only maps integral values between
+<code>-2</code><sup>53</sup><code>+1</code> and <code>2</code><sup>53</sup><code>-1</code> to basic CBOR integers
+and leaves the others in floating point form.
+(The rationale is that only this range is injective ("unambiguous" or
+"exact") in the mapping of integers to binary64 floating point
+values, which may be a desirable property beyond the use in JSON
+encoding.)<a href="#section-7-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-8">
+      <h2 id="name-security-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-8-1">One of the major use cases of Deterministic Encoding is in security,
+namely in the derivation of signing inputs from some CBOR data only
+available at the model level.
+Any transformation error from the application data to the CBOR model
+level and then to deterministic encoding can lead to a potential exploit
+by an attacker.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Pertinent Security Considerations are further discussed <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-cbor-cde" class="cite xref">I-D.ietf-cbor-cde</a>]</span>.<a href="#section-8-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-9">
+      <h2 id="name-iana-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-9-1">This document has no IANA actions.<a href="#section-9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-10">
+      <h2 id="name-references">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-10.1">
+        <h3 id="name-normative-references">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-cbor-cde">[I-D.ietf-cbor-cde]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Common Deterministic Encoding (CDE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-cde-02</span>, <time datetime="2024-03-03" class="refDate">3 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA.cbor-tags">[IANA.cbor-tags]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags"</span>, <span>&lt;<a href="http://www.iana.org/assignments/cbor-tags">http://www.iana.org/assignments/cbor-tags</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8610">[RFC8610]</dt>
+        <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8610">https://www.rfc-editor.org/rfc/rfc8610</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="STD94">[STD94]</dt>
+      <dd>
+<div class="refInstance">Internet Standard 94, <span>&lt;<a href="https://www.rfc-editor.org/info/std94">https://www.rfc-editor.org/info/std94</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC8949">
+            <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8949">https://www.rfc-editor.org/info/rfc8949</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-10.2">
+        <h3 id="name-informative-references">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="CTAP2">[CTAP2]</dt>
+        <dd>
+<span class="refAuthor">FIDO Alliance</span>, <span class="refTitle">"Client to Authenticator Protocol (CTAP)"</span>, <span class="refContent">CTAP2 canonical CBOR encoding form (in Section 6)</span>, <time datetime="2018-02-27" class="refDate">27 February 2018</time>, <span>&lt;<a href="https://fidoalliance.org/specs/fido-v2.0-id-20180227/fido-client-to-authenticator-protocol-v2.0-id-20180227.html#ctap2-canonical-cbor-encoding-form">https://fidoalliance.org/specs/fido-v2.0-id-20180227/fido-client-to-authenticator-protocol-v2.0-id-20180227.html#ctap2-canonical-cbor-encoding-form</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ECMA262">[ECMA262]</dt>
+        <dd>
+<span class="refAuthor">Ecma International</span>, <span class="refTitle">"ECMAScript 2020 Language Specification"</span>, <span class="refContent">Standard ECMA-262, 11th Edition</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.ecma-international.org/publications/standards/Ecma-262.htm">https://www.ecma-international.org/publications/standards/Ecma-262.htm</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-10</span>, <time datetime="2024-07-04" class="refDate">4 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-10">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-10</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-mediaman-suffixes">[I-D.ietf-mediaman-suffixes]</dt>
+        <dd>
+<span class="refAuthor">Sporny, M.</span> and <span class="refAuthor">A. Guy</span>, <span class="refTitle">"Media Type Suffixes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-mediaman-suffixes-08</span>, <time datetime="2024-06-19" class="refDate">19 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-mediaman-suffixes-08">https://datatracker.ietf.org/doc/html/draft-ietf-mediaman-suffixes-08</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-sedate-datetime-extended">[I-D.ietf-sedate-datetime-extended]</dt>
+        <dd>
+<span class="refAuthor">Sharma, U.</span> and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps with additional information"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sedate-datetime-extended-11</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-sedate-datetime-extended-11">https://datatracker.ietf.org/doc/html/draft-ietf-sedate-datetime-extended-11</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
+        <dd>
+<span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-10</span>, <time datetime="2024-06-10" class="refDate">10 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IEEE754">[IEEE754]</dt>
+        <dd>
+<span class="refAuthor">IEEE</span>, <span class="refTitle">"IEEE Standard for Floating-Point Arithmetic"</span>, <span class="seriesInfo">IEEE Std 754-2019</span>, <span class="seriesInfo">DOI 10.1109/IEEESTD.2019.8766229</span>, <span>&lt;<a href="https://ieeexplore.ieee.org/document/8766229">https://ieeexplore.ieee.org/document/8766229</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3339">[RFC3339]</dt>
+        <dd>
+<span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3339">https://www.rfc-editor.org/rfc/rfc3339</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6838">[RFC6838]</dt>
+        <dd>
+<span class="refAuthor">Freed, N.</span>, <span class="refAuthor">Klensin, J.</span>, and <span class="refAuthor">T. Hansen</span>, <span class="refTitle">"Media Type Specifications and Registration Procedures"</span>, <span class="seriesInfo">BCP 13</span>, <span class="seriesInfo">RFC 6838</span>, <span class="seriesInfo">DOI 10.17487/RFC6838</span>, <time datetime="2013-01" class="refDate">January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6838">https://www.rfc-editor.org/rfc/rfc6838</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7493">[RFC7493]</dt>
+        <dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7493">https://www.rfc-editor.org/rfc/rfc7493</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8742">[RFC8742]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Sequences"</span>, <span class="seriesInfo">RFC 8742</span>, <span class="seriesInfo">DOI 10.17487/RFC8742</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8742">https://www.rfc-editor.org/rfc/rfc8742</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8746">[RFC8746]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C., Ed.</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags for Typed Arrays"</span>, <span class="seriesInfo">RFC 8746</span>, <span class="seriesInfo">DOI 10.17487/RFC8746</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8746">https://www.rfc-editor.org/rfc/rfc8746</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="STD63">[STD63]</dt>
+        <dd>
+<div class="refInstance">Internet Standard 63, <span>&lt;<a href="https://www.rfc-editor.org/info/std63">https://www.rfc-editor.org/info/std63</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC3629">
+            <span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3629">https://www.rfc-editor.org/info/rfc3629</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+<dt id="STD90">[STD90]</dt>
+        <dd>
+<div class="refInstance">Internet Standard 90, <span>&lt;<a href="https://www.rfc-editor.org/info/std90">https://www.rfc-editor.org/info/std90</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC8259">
+            <span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+<dt id="STD96">[STD96]</dt>
+      <dd>
+<div class="refInstance">Internet Standard 96, <span>&lt;<a href="https://www.rfc-editor.org/info/std96">https://www.rfc-editor.org/info/std96</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC9052">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9052">https://www.rfc-editor.org/info/rfc9052</a>&gt;</span>. </div>
+<div class="refInstance" id="RFC9338">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Countersignatures"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9338</span>, <span class="seriesInfo">DOI 10.17487/RFC9338</span>, <time datetime="2022-12" class="refDate">December 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9338">https://www.rfc-editor.org/info/rfc9338</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+<div id="acknowledgments">
+<section id="appendix-A">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-A-1">This document was motivated by the work of Wolf McNally and
+Christopher Allen as documented in <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span> and discussed in 2023
+in the CBOR working group.
+It collects information that is present in the apps-discuss and CBOR
+WG mailing list discussions since 2013, but not necessarily easy to
+find.
+The author is grateful to the many contributors to these discussions.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Carsten Bormann</span></div>
+<div dir="auto" class="left"><span class="org">Universität Bremen TZI</span></div>
+<div dir="auto" class="left"><span class="street-address">Postfach 330440</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">D-28359</span> <span class="locality">Bremen</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="tel">
+<span>Phone:</span>
+<a href="tel:+49-421-218-63921" class="tel">+49-421-218-63921</a>
+</div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:cabo@tzi.org" class="email">cabo@tzi.org</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
