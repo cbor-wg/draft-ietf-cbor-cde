@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-16T01:08:09.889907+00:00",
+  "timestamp": "2024-07-18T01:05:55.463392+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -196,7 +196,7 @@
       "labels": [],
       "body": "Application Profiles seem like an unnecessary complexity to me in an area that (I think) we're trying to make simpler.\r\n\r\nI look at this draft as a really useful rewording of some important stuff in section 4 and 5 of RFC 8949. Those sections of 8949 are a bit complicated for readers, so this draft should be simple.\r\n\r\nSo far the only proposed profile is dCBOR. I think dCBOR exists just fine without the notion of application profiles, just like CDE exists just fine on top of preferred serialization.\r\n\r\nTo justify the complexity application profiles add, I think we'd want to have three solid use cases for them.\r\n\r\nApplication profiles are only for variations of CDE. They are not for variations of preferred serialization or a general profile mechanism for all of CBOR. This makes them much much less useful.",
       "createdAt": "2024-07-13T17:12:03Z",
-      "updatedAt": "2024-07-15T19:27:20Z",
+      "updatedAt": "2024-07-16T19:24:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -240,6 +240,13 @@
           "body": "The justification I am looking for is the description of some more compelling use cases to sit along side dCBOR. I don't think any have been described.\r\n\r\nI don't see immensity here. If there was immensity, then there would be at least a couple of examples of bad variants of CDE. So far we only have one variant of CDE which IMO isn't too bad (other opinions aside).\r\n\r\nAlso, can you say why application profiles are justified for CDE, but not preferred serialization or a general profile mechanism for all of CBOR?",
           "createdAt": "2024-07-15T19:27:18Z",
           "updatedAt": "2024-07-15T19:27:18Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "PR #15 should address most of your concerns, without removing the concept of Application Profiles entirely.",
+          "createdAt": "2024-07-16T19:24:40Z",
+          "updatedAt": "2024-07-16T19:24:40Z"
         }
       ]
     }
@@ -687,6 +694,40 @@
           "body": "Now became part of https://datatracker.ietf.org/doc/draft-bormann-cbor-numbers/\r\nStill needs to be referenced properly; ran out of time.\r\n",
           "createdAt": "2024-07-08T23:43:14Z",
           "updatedAt": "2024-07-08T23:43:14Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOJ8fYd851jZ7-",
+      "title": "Application profile appendix",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/15",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Move the application profile section to an appendix.\r\n\r\nClarify the relationship between CDE and application\r\nprotocols/profiles some more.\r\nAdd \"Structure of This Document\".\r\n",
+      "createdAt": "2024-07-16T19:23:37Z",
+      "updatedAt": "2024-07-16T19:45:32Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "20b187cf85fd317042f75bd3129b4241d9476325",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "application-profile-appendix",
+      "headRefOid": "fc56cc475f806d3fc82bec19b9d83e6672335f53",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "And while we are waiting for Martin Thomson's I-D template to catch up to recent tool changes:\r\n\r\nhttps://tzi.org/~cabo/application-profile-appendix/\r\n\r\n",
+          "createdAt": "2024-07-16T19:45:31Z",
+          "updatedAt": "2024-07-16T19:45:31Z"
         }
       ],
       "reviews": []
