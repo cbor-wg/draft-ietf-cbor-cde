@@ -91,17 +91,17 @@ Table of Contents
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
      6.2.  Informative References  . . . . . . . . . . . . . . . . .   8
-   Appendix A.  Application Profiles . . . . . . . . . . . . . . . .   8
+   Appendix A.  Application Profiles . . . . . . . . . . . . . . . .   9
    Appendix B.  Implementers' Checklists . . . . . . . . . . . . . .  10
      B.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  11
        B.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  11
        B.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  12
-     B.2.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  12
-       B.2.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  12
+     B.2.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  13
+       B.2.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  13
        B.2.2.  CDE Decoders  . . . . . . . . . . . . . . . . . . . .  13
    Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  13
    Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  13
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  13
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  14
 
 
 
@@ -259,20 +259,20 @@ Internet-Draft                  CBOR CDE                       July 2024
        mathematically, an integral value (choice 2 of the second
        bullet).
 
-   4.  There is no special handling of NaN values, except that the
-       preferred serialization rules also apply to NaNs with payloads,
-       using the canonical encoding of NaNs as defined in [IEEE754].
-       Specifically, this means that shorter forms of encodings for a
-       NaN are used when that can be achieved by only removing trailing
-       zeros in the payload.  Further clarifying a "should"-level
-       statement in Section 6.2.1 of [IEEE754], the CBOR encoding uses a
-       leading bit of 1 in the significand to encode a quiet NaN;
-       encoding of signaling NaN is NOT RECOMMENDED but is achieved by
-       using a leading bit of 0.
-
-       Typically, most applications that employ NaNs in their storage
-       and communication interfaces will only use a quiet NaN with
-       payload 0, which therefore deterministically encodes as 0xf97e00.
+   4.  Apart from finite and infinite numbers, [IEEE754] floating point
+       values include NaN (not a number) values
+       [I-D.bormann-cbor-numbers].  In CDE, there is no special handling
+       of NaN values, except that the preferred serialization rules also
+       apply to NaNs (with zero or non-zero payloads), using the
+       canonical encoding of NaNs as defined in Section 6.2.1 of
+       [IEEE754].  Specifically, this means that shorter forms of
+       encodings for a NaN are used when that can be achieved by only
+       removing trailing zeros in the NaN payload.  Further clarifying a
+       "should"-level statement in Section 6.2.1 of [IEEE754], the CBOR
+       encoding always uses a leading bit of 1 in the significand to
+       encode a quiet NaN; the use of signaling NaNs by application
+       protocols is NOT RECOMMENDED but when presented by an application
+       these are encoded by using a leading bit of 0.
 
 
 
@@ -281,6 +281,10 @@ Bormann                  Expires 22 January 2025                [Page 5]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
+
+       Typically, most applications that employ NaNs in their storage
+       and communication interfaces will only use a quiet NaN with
+       payload 0, which therefore deterministically encodes as 0xf97e00.
 
    5.  There is no special handling of subnormal values.
 
@@ -326,10 +330,6 @@ Internet-Draft                  CBOR CDE                       July 2024
    specific structure, this can be expressed by the right-hand side
    (instead of using the most general CDDL type any here).
 
-   (Note that the .cborseq control operator does not enable specifying
-   different deterministic encoding requirements for the elements of the
-   sequence.  If a use case for such a feature becomes known, it could
-   be added.)
 
 
 
@@ -337,6 +337,11 @@ Bormann                  Expires 22 January 2025                [Page 6]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
+
+   (Note that the .cborseq control operator does not enable specifying
+   different deterministic encoding requirements for the elements of the
+   sequence.  If a use case for such a feature becomes known, it could
+   be added.)
 
    Obviously, Application Profiles can define related control operators
    that also embody the processing required by the Application Profile,
@@ -359,7 +364,8 @@ Internet-Draft                  CBOR CDE                       July 2024
    // and remove this note.
 
    This document requests IANA to register the contents of Table 1 into
-   the registry "CDDL Control Operators" of [IANA.cddl]:
+   the registry "CDDL Control Operators" of the [IANA.cddl] registry
+   group:
 
                           +=========+===========+
                           | Name    | Reference |
@@ -381,18 +387,17 @@ Internet-Draft                  CBOR CDE                       July 2024
               <https://www.rfc-editor.org/info/bcp14>.
               At the time of writing, this BCP comprises the following:
 
-              Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
-
-
 
 
 Bormann                  Expires 22 January 2025                [Page 7]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
+
+              Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
               Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -429,16 +434,11 @@ Internet-Draft                  CBOR CDE                       July 2024
               March 2024, <https://datatracker.ietf.org/doc/html/draft-
               bormann-cbor-det-02>.
 
-   [I-D.mcnally-deterministic-cbor]
-              McNally, W., Allen, C., and C. Bormann, "dCBOR: A
-              Deterministic CBOR Application Profile", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-10, 10
-              June 2024, <https://datatracker.ietf.org/doc/html/draft-
-              mcnally-deterministic-cbor-10>.
-
-Appendix A.  Application Profiles
-
-   This appendix is informative.
+   [I-D.bormann-cbor-numbers]
+              Bormann, C., "On Numbers in CBOR", Work in Progress,
+              Internet-Draft, draft-bormann-cbor-numbers-00, 8 July
+              2024, <https://datatracker.ietf.org/doc/html/draft-
+              bormann-cbor-numbers-00>.
 
 
 
@@ -449,6 +449,17 @@ Bormann                  Expires 22 January 2025                [Page 8]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
+
+   [I-D.mcnally-deterministic-cbor]
+              McNally, W., Allen, C., and C. Bormann, "dCBOR: A
+              Deterministic CBOR Application Profile", Work in Progress,
+              Internet-Draft, draft-mcnally-deterministic-cbor-10, 10
+              June 2024, <https://datatracker.ietf.org/doc/html/draft-
+              mcnally-deterministic-cbor-10>.
+
+Appendix A.  Application Profiles
+
+   This appendix is informative.
 
    While the CBOR Common Deterministic Encoding Profile (CDE) provides
    for commonality between different applications of CBOR, it can be
@@ -487,17 +498,6 @@ Internet-Draft                  CBOR CDE                       July 2024
    profile is used.  As a result, an Application Profile itself places
    no direct requirement on what minimum subset of CBOR is implemented.
    For instance, an application profile might define rules for the
-   processing of floating point values, but there is no requirement that
-   implementations of that Application Profile support floating point
-   numbers (or any other kind of number, such as arbitrary precision
-   integers or 64-bit negative integers) when they are used with
-   applications that do not use them.
-
-
-
-
-
-
 
 
 
@@ -505,6 +505,12 @@ Bormann                  Expires 22 January 2025                [Page 9]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
+
+   processing of floating point values, but there is no requirement that
+   implementations of that Application Profile support floating point
+   numbers (or any other kind of number, such as arbitrary precision
+   integers or 64-bit negative integers) when they are used with
+   applications that do not use them.
 
 Appendix B.  Implementers' Checklists
 
@@ -519,6 +525,10 @@ Appendix B.  Implementers' Checklists
    *  This is largely a restatement of parts of Section 4 of RFC 8949
       [STD94].  The purpose of the restatement is to aid the work of
       implementers, not to redefine anything.
+
+      Preferred Serialization Encoders and Decoders as well as CDE
+      Encoders and Decoders have certain properties that are expressed
+      using RFC2119 keywords in this appendix.
 
    *  Duplicate map keys are never valid in CBOR at all (see list item
       "Major type 5" in Section 3.1 of RFC 8949 [STD94]) no matter what
@@ -545,22 +555,17 @@ Appendix B.  Implementers' Checklists
       as dCBOR may pose additional requirements, such as requiring
       rejection of non-conforming inputs.
 
-      If a generic decoder needs to be used that does not "support" CDE,
-      a simple (but somewhat clumsy) way to check for proper CDE
-      encoding is to re-encode the decoded data and check for bit-to-bit
-      equality with the original input.
-
-
-
-
-
-
 
 
 Bormann                  Expires 22 January 2025               [Page 10]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
+
+      If a generic decoder needs to be used that does not "support" CDE,
+      a simple (but somewhat clumsy) way to check for proper CDE
+      encoding is to re-encode the decoded data and check for bit-to-bit
+      equality with the original input.
 
 B.1.  Preferred Serialization
 
@@ -602,14 +607,9 @@ B.1.1.  Preferred Serialization Encoders
           preserve the precision of the value to be encoded, only the
           shortest form of these MUST be emitted.  That is, encoders
           MUST support half-precision and single-precision floating
-          point.  Positive and negative infinity and zero MUST be
-          represented in half-precision floating point.
+          point.
 
-       *  NaNs, and thus NaN payloads MUST be supported.
 
-          As with all floating point numbers, NaNs with payloads MUST be
-          reduced to the shortest of double, single or half precision
-          that preserves the NaN payload.  The reduction is performed by
 
 
 
@@ -618,13 +618,27 @@ Bormann                  Expires 22 January 2025               [Page 11]
 Internet-Draft                  CBOR CDE                       July 2024
 
 
-          removing the rightmost N bits of the payload, where N is the
-          difference in the number of bits in the significand (mantissa)
-          between the original format and the reduced format.  The
-          reduction is performed only (preserves the value only) if all
-          the rightmost bits removed are zero.  (This will always reduce
-          a double or single quiet NaN with a zero NaN payload to a
-          half-precision quiet NaN.)
+       *  [IEEE754] Infinites and NaNs, and thus NaN payloads, MUST be
+          supported, to the extent possible on the platform.
+
+          As with all floating point numbers, Infinites and NaNs MUST be
+          encoded in the shortest of double, single or half precision
+          that preserves the value:
+
+          -  Positive and negative infinity and zero MUST be represented
+             in half-precision floating point.
+
+          -  For NaNs, the value to be preserved includes the sign bit,
+             the quiet bit, and the NaN payload (whether zero or non-
+             zero).  The shortest form is obtained by removing the
+             rightmost N bits of the payload, where N is the difference
+             in the number of bits in the significand (mantissa
+             representation) between the original format and the
+             shortest format.  This trimming is performed only
+             (preserves the value only) if all the rightmost bits
+             removed are zero.  (This will always represent a double or
+             single quiet NaN with a zero NaN payload in a half-
+             precision quiet NaN.)
 
 B.1.2.  Preferred Serialization Decoders
 
@@ -647,7 +661,18 @@ B.1.2.  Preferred Serialization Decoders
        *  If double-precision values are accepted, single-precision
           values MUST be accepted.
 
-       *  NaNs, and thus NaN payloads, MUST be accepted.
+       *  Infinites and NaNs, and thus NaN payloads, MUST be accepted
+          and presented to the application (not necessarily in the
+          platform number format, if that doesn't support those values).
+
+
+
+
+
+Bormann                  Expires 22 January 2025               [Page 12]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
 
 B.2.  CDE
 
@@ -664,15 +689,6 @@ B.2.1.  CDE Encoders
        (Section 5.3.1 of RFC 8949 [STD94]).  Note that this includes not
        emitting duplicate keys in a major type 5 map as well as emitting
        only valid UTF-8 in major type 3 text strings.
-
-
-
-
-
-Bormann                  Expires 22 January 2025               [Page 12]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
 
 B.2.2.  CDE Decoders
 
@@ -707,6 +723,13 @@ Contributors
 
    Laurence provided the text that became Appendix B.
 
+
+
+Bormann                  Expires 22 January 2025               [Page 13]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
 Author's Address
 
    Carsten Bormann
@@ -725,4 +748,37 @@ Author's Address
 
 
 
-Bormann                  Expires 22 January 2025               [Page 13]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 22 January 2025               [Page 14]
