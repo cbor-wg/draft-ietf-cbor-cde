@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                               8 July 2024
-Expires: 9 January 2025
+Intended status: Informational                              21 July 2024
+Expires: 22 January 2025
 
 
                     CBOR: On Deterministic Encoding
@@ -49,11 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2025.
+   This Internet-Draft will expire on 22 January 2025.
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 1]
+Bormann                  Expires 22 January 2025                [Page 1]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 2]
+Bormann                  Expires 22 January 2025                [Page 2]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 3]
+Bormann                  Expires 22 January 2025                [Page 3]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 4]
+Bormann                  Expires 22 January 2025                [Page 4]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -230,8 +230,8 @@ Internet-Draft          On Deterministic Encoding              July 2024
    indicate practical requirements for interoperability.  The key words
    "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
    "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL"
-   in this document are to be interpreted as described in BCP 14
-   [RFC2119] [RFC8174] when, and only when, they appear in all capitals,
+   in this document are to be interpreted as described in [BCP14]
+   (RFC2119) (RFC8174) when, and only when, they appear in all capitals,
    as shown here.
 
 2.  Use Cases for Deterministic Encoding
@@ -277,7 +277,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 5]
+Bormann                  Expires 22 January 2025                [Page 5]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 6]
+Bormann                  Expires 22 January 2025                [Page 6]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 7]
+Bormann                  Expires 22 January 2025                [Page 7]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -419,7 +419,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
    time example was taken originated from California, which then was at
    a time zone the time offset of which is expressed by the -07:00).
    Whether the first two are exactly equivalent or not is the subject of
-   Section 2 of [I-D.ietf-sedate-datetime-extended].
+   Section 2 of [RFC9557].
 
    If the additional semantics conveyed by the time-offset (Section 5.6
    of [RFC3339]) is not relevant to the application, an application-
@@ -445,7 +445,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 8]
+Bormann                  Expires 22 January 2025                [Page 8]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 9]
+Bormann                  Expires 22 January 2025                [Page 9]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                [Page 10]
+Bormann                  Expires 22 January 2025               [Page 10]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -613,7 +613,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                [Page 11]
+Bormann                  Expires 22 January 2025               [Page 11]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -669,7 +669,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                [Page 12]
+Bormann                  Expires 22 January 2025               [Page 12]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                [Page 13]
+Bormann                  Expires 22 January 2025               [Page 13]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -781,7 +781,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                [Page 14]
+Bormann                  Expires 22 January 2025               [Page 14]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -837,7 +837,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 9 January 2025                [Page 15]
+Bormann                  Expires 22 January 2025               [Page 15]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -885,31 +885,38 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 10.1.  Normative References
 
-   [I-D.ietf-cbor-cde]
-              Bormann, C., "CBOR Common Deterministic Encoding (CDE)",
-              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-02,
-              3 March 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-cbor-cde-02>.
+   [BCP14]    Best Current Practice 14,
+              <https://www.rfc-editor.org/info/bcp14>.
+              At the time of writing, this BCP comprises the following:
 
 
 
-Bormann                  Expires 9 January 2025                [Page 16]
+
+
+Bormann                  Expires 22 January 2025               [Page 16]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
 
-   [IANA.cbor-tags]
-              IANA, "Concise Binary Object Representation (CBOR) Tags",
-              <http://www.iana.org/assignments/cbor-tags>.
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
+              <https://www.rfc-editor.org/info/rfc2119>.
 
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [I-D.ietf-cbor-cde]
+              Bormann, C., "CBOR Common Deterministic Encoding (CDE)",
+              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-03,
+              8 July 2024, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-cbor-cde-03>.
+
+   [IANA.cbor-tags]
+              IANA, "Concise Binary Object Representation (CBOR) Tags",
+              19 September 2013,
+              <https://www.iana.org/assignments/cbor-tags>.
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
@@ -939,6 +946,14 @@ Internet-Draft          On Deterministic Encoding              July 2024
               2020, <https://www.ecma-
               international.org/publications/standards/Ecma-262.htm>.
 
+
+
+
+Bormann                  Expires 22 January 2025               [Page 17]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
    [I-D.ietf-cbor-edn-literals]
               Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
               Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
@@ -946,26 +961,11 @@ Internet-Draft          On Deterministic Encoding              July 2024
               <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
               edn-literals-10>.
 
-
-
-
-Bormann                  Expires 9 January 2025                [Page 17]
-
-Internet-Draft          On Deterministic Encoding              July 2024
-
-
    [I-D.ietf-mediaman-suffixes]
               Sporny, M. and A. Guy, "Media Type Suffixes", Work in
               Progress, Internet-Draft, draft-ietf-mediaman-suffixes-08,
               19 June 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-mediaman-suffixes-08>.
-
-   [I-D.ietf-sedate-datetime-extended]
-              Sharma, U. and C. Bormann, "Date and Time on the Internet:
-              Timestamps with additional information", Work in Progress,
-              Internet-Draft, draft-ietf-sedate-datetime-extended-11, 23
-              October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-sedate-datetime-extended-11>.
 
    [I-D.mcnally-deterministic-cbor]
               McNally, W., Allen, C., and C. Bormann, "dCBOR: A
@@ -1000,16 +1000,23 @@ Internet-Draft          On Deterministic Encoding              July 2024
               DOI 10.17487/RFC8746, February 2020,
               <https://www.rfc-editor.org/rfc/rfc8746>.
 
-   [STD63]    Internet Standard 63,
-              <https://www.rfc-editor.org/info/std63>.
 
 
 
-Bormann                  Expires 9 January 2025                [Page 18]
+
+
+Bormann                  Expires 22 January 2025               [Page 18]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
 
+   [RFC9557]  Sharma, U. and C. Bormann, "Date and Time on the Internet:
+              Timestamps with Additional Information", RFC 9557,
+              DOI 10.17487/RFC9557, April 2024,
+              <https://www.rfc-editor.org/rfc/rfc9557>.
+
+   [STD63]    Internet Standard 63,
+              <https://www.rfc-editor.org/info/std63>.
               At the time of writing, this STD comprises the following:
 
               Yergeau, F., "UTF-8, a transformation format of ISO
@@ -1050,6 +1057,15 @@ Acknowledgments
 
 Author's Address
 
+
+
+
+
+Bormann                  Expires 22 January 2025               [Page 19]
+
+Internet-Draft          On Deterministic Encoding              July 2024
+
+
    Carsten Bormann
    Universität Bremen TZI
    Postfach 330440
@@ -1061,4 +1077,44 @@ Author's Address
 
 
 
-Bormann                  Expires 9 January 2025                [Page 19]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 22 January 2025               [Page 20]
