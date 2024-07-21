@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                       8 July 2024
-Expires: 9 January 2025
+Intended status: Best Current Practice                      21 July 2024
+Expires: 22 January 2025
 
 
                 CBOR Common Deterministic Encoding (CDE)
@@ -20,11 +20,6 @@ Abstract
    a CBOR Common Deterministic Encoding (CDE) Profile that can be shared
    by a large set of applications with potentially diverging detailed
    requirements.
-
-   This document also introduces the concept of Application Profiles,
-   which are layered on top of the CBOR CDE Profile and can address more
-   application specific requirements.  Application Profiles are defined
-   in separate documents.
 
 About This Document
 
@@ -47,28 +42,28 @@ Status of This Memo
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
 
-
-
-
-
-
-
-Bormann                  Expires 9 January 2025                 [Page 1]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
-
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+
+
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 1]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2025.
+   This Internet-Draft will expire on 22 January 2025.
 
 Copyright Notice
 
@@ -87,29 +82,34 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.1.  Conventions and Definitions . . . . . . . . . . . . . . .   3
+     1.1.  Structure of This Document  . . . . . . . . . . . . . . .   3
+     1.2.  Conventions and Definitions . . . . . . . . . . . . . . .   3
    2.  CBOR Common Deterministic Encoding Profile (CDE)  . . . . . .   3
-   3.  Application Profiles  . . . . . . . . . . . . . . . . . . . .   5
-   4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Appendix A.  Implementers' Checklists . . . . . . . . . . . . . .   9
-     A.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  10
-       A.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  10
-       A.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  11
-     A.2.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  11
-       A.2.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  11
-       A.2.2.  CDE Decoders  . . . . . . . . . . . . . . . . . . . .  12
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  12
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  12
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  12
+   3.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .   6
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
+   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+     6.2.  Informative References  . . . . . . . . . . . . . . . . .   8
+   Appendix A.  Application Profiles . . . . . . . . . . . . . . . .   8
+   Appendix B.  Implementers' Checklists . . . . . . . . . . . . . .  10
+     B.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  11
+       B.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  11
+       B.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  12
+     B.2.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  12
+       B.2.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  12
+       B.2.2.  CDE Decoders  . . . . . . . . . . . . . . . . . . . .  13
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  13
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  13
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  13
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 2]
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 2]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
@@ -124,18 +124,30 @@ Internet-Draft                  CBOR CDE                       July 2024
    by a large set of applications with potentially diverging detailed
    requirements.
 
-   This document also introduces the concept of Application Profiles,
-   which are layered on top of the CBOR CDE Profile and can address more
-   application specific requirements.  Application Profiles are defined
-   in separate documents.  [I-D.mcnally-deterministic-cbor] is an
-   example for such a document.
+1.1.  Structure of This Document
 
-1.1.  Conventions and Definitions
+   After introductory material, Section 2 defines the CBOR Common
+   Deterministic Encoding Profile (CDE).  Section 3 defines Concise Data
+   Definition Language (CDDL) support for indicating the use of CDE.
+   This is followed by the conventional sections for Security
+   Considerations (4), IANA Considerations (5), and References (6).
+
+   The informative Appendix A introduces the concept of Application
+   Profiles, which are layered on top of the CBOR CDE Profile and can
+   address recurring requirements on deterministic representation of
+   application data where these requirements are specific to a set of
+   applications.  (Application Profiles themselves, if needed, are
+   defined in separate documents.)
+
+   The informative Appendix B provides brief checklists that
+   implementers can use to check their CDE implementations.
+
+1.2.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   [BCP14] (RFC2119) (RFC8174) when, and only when, they appear in all
    capitals, as shown here.
 
 2.  CBOR Common Deterministic Encoding Profile (CDE)
@@ -144,11 +156,25 @@ Internet-Draft                  CBOR CDE                       July 2024
    Profile_ (CDE) based on the _Core Deterministic Encoding
    Requirements_ defined for CBOR in Section 4.2.1 of RFC 8949 [STD94].
 
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 3]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
    In many cases, CBOR provides more than one way to encode a data item,
    but also provides a recommendation for a _Preferred Serialization_.
    The _CoRE Deterministic Encoding Requirements_ generally pick the
    preferred serializations as mandatory; they also pick additional
-   choices such as definite-length encoding.  Finally, it defines a map
+   choices such as definite-length encoding.  Finally, they define a map
    ordering based on lexicographic ordering of the (deterministically)
    encoded map keys.
 
@@ -159,16 +185,6 @@ Internet-Draft                  CBOR CDE                       July 2024
    today, deterministic encoding is not used at all, as its restriction
    of choices can create some additional performance cost and code
    complexity.
-
-
-
-
-
-
-Bormann                  Expires 9 January 2025                 [Page 3]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
 
    [STD94]'s core requirements are designed to provide well-understood
    and easy-to-implement rules while maximizing coverage, i.e., the
@@ -192,16 +208,35 @@ Internet-Draft                  CBOR CDE                       July 2024
        encoded using the preferred serialization (Section 3.4.3 of RFC
        8949 [STD94]) of tag 2 and 3 (i.e., no leading zero bytes).
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 4]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
    Most tags capture more specific application semantics and therefore
    may be harder to define a deterministic encoding for.  While the
    deterministic encoding of their tag internals is often covered by the
    _Core Deterministic Encoding Requirements_, the mapping of diverging
-   platform application data types on the tag contents may be hard to do
-   in a deterministic way; see Section 3.2 of [I-D.bormann-cbor-det] for
-   more explanation as well as examples.  As the CDE would continually
-   need to address additional issues raised by the registration of new
-   tags, this specification recommends that new tag registrations
-   address deterministic encoding in the context of this Profile.
+   platform application data types onto the tag contents may require
+   additional attention to perform it in a deterministic way; see
+   Section 3.2 of [I-D.bormann-cbor-det] for more explanation as well as
+   examples.  As the CDE would continually need to address additional
+   issues raised by the registration of new tags, this specification
+   recommends that new tag registrations address deterministic encoding
+   in the context of this Profile.
 
    A particularly difficult field to obtain deterministic encoding for
    is floating point numbers, partially because they themselves are
@@ -217,15 +252,6 @@ Internet-Draft                  CBOR CDE                       July 2024
        an encoder that is asked by an application to represent a
        negative floating point zero will generate 0xf98000.
 
-
-
-
-
-Bormann                  Expires 9 January 2025                 [Page 4]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
-
    3.  There is no attempt to mix integers and floating point numbers,
        i.e., all floating point values are encoded as the preferred
        floating-point representation that accurately represents the
@@ -238,56 +264,202 @@ Internet-Draft                  CBOR CDE                       July 2024
        using the canonical encoding of NaNs as defined in [IEEE754].
        Specifically, this means that shorter forms of encodings for a
        NaN are used when that can be achieved by only removing trailing
-       zeros in the payload.  Further clarifying [IEEE754], the CBOR
-       encoding uses a leading bit of 1 to encode a quiet NaN; encoding
-       of signaling NaN is NOT RECOMMENDED but is achieved by using a
-       leading bit of 0.
+       zeros in the payload.  Further clarifying a "should"-level
+       statement in Section 6.2.1 of [IEEE754], the CBOR encoding uses a
+       leading bit of 1 in the significand to encode a quiet NaN;
+       encoding of signaling NaN is NOT RECOMMENDED but is achieved by
+       using a leading bit of 0.
 
        Typically, most applications that employ NaNs in their storage
-       and communication interfaces will only use the NaN with payload
-       0, which therefore deterministically encodes as 0xf97e00.
+       and communication interfaces will only use a quiet NaN with
+       payload 0, which therefore deterministically encodes as 0xf97e00.
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 5]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
 
    5.  There is no special handling of subnormal values.
 
    6.  The CBOR Common Deterministic Encoding Profile does not presume
        equivalence of basic floating point values with floating point
-       values using other representations (e.g., tag 4/5).
+       values using other representations (e.g., tag 4/5).  Such
+       equivalences and related deterministic representation rules can
+       be added at the application (profile) level if desired.
 
    The main intent here is to preserve the basic generic data model, so
-   applications (or Application Profiles, see Section 3) can make their
+   applications (or Application Profiles, see Appendix A) can make their
    own decisions within that data model.  E.g., an application (profile)
-   can decide that it only ever allows a single NaN value that would
+   can decide that it only ever allows a single NaN value that would be
    encoded as 0xf97e00, so a CDE implementation focusing on this
    application (profile) would not need to provide processing for other
    NaN values.  Basing the definition of both CDE and Application
    Profiles on the generic data model of CBOR also means that there is
    no effect on the Concise Data Definition Language (CDDL) [RFC8610],
    except where the data description documents encoding decisions for
-   byte strings carrying embedded CBOR.
+   byte strings that carry embedded CBOR.
 
-3.  Application Profiles
+3.  CDDL support
 
-   While the CBOR Common Deterministic Encoding Profile (CDE) provides
-   for commonality between different applications of CBOR, it is useful
-   to further constrain the set of data items handled in a group of
-   applications (_exclusions_) and to define further mappings
-   (_reductions_) that help the applications in such a group get by with
-   the exclusions.
+   [RFC8610] defines control operators to indicate that the contents of
+   a byte string carries a CBOR-encoded data item (.cbor) or a sequence
+   of CBOR-encoded data items (.cborseq).
+
+   CDDL specifications may want to specify that the data items should be
+   encoded in Common CBOR Deterministic Encoding.  The present
+   specification adds two CDDL control operators that can be used for
+   this.
+
+   The control operators .cde and .cdeseq are exactly like .cbor and
+   .cborseq except that they also require the encoded data item(s) to be
+   encoded according to CDE.
+
+   For example, a byte string of embedded CBOR that is to be encoded
+   according to CDE can be formalized as:
+
+   leaf = #6.24(bytes .cde any)
+
+   More importantly, if the encoded data item also needs to have a
+   specific structure, this can be expressed by the right-hand side
+   (instead of using the most general CDDL type any here).
+
+   (Note that the .cborseq control operator does not enable specifying
+   different deterministic encoding requirements for the elements of the
+   sequence.  If a use case for such a feature becomes known, it could
+   be added.)
 
 
 
-
-Bormann                  Expires 9 January 2025                 [Page 5]
+Bormann                  Expires 22 January 2025                [Page 6]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
 
-   For example, the dCBOR Application Profile specifies the use of
-   Deterministic Encoding as defined in Section 4.2 of RFC 8949 [STD94]
-   (see also [I-D.bormann-cbor-det] for more information) together with
-   some application-level rules.  See [I-D.mcnally-deterministic-cbor]
-   for a definition of the dCBOR Application Profile that makes use of
-   CDE.
+   Obviously, Application Profiles can define related control operators
+   that also embody the processing required by the Application Profile,
+   and are encouraged to do so.
+
+4.  Security Considerations
+
+   The security considerations in Section 10 of RFC 8949 [STD94] apply.
+   The use of deterministic encoding can mitigate issues arising out of
+   the use of non-preferred serializations specially crafted by an
+   attacker.  However, this effect only accrues if the decoder actually
+   checks that deterministic encoding was applied correctly.  More
+   generally, additional security properties of deterministic encoding
+   can rely on this check being performed properly.
+
+5.  IANA Considerations
+
+
+   // RFC Editor: please replace RFCXXXX with the RFC number of this RFC
+   // and remove this note.
+
+   This document requests IANA to register the contents of Table 1 into
+   the registry "CDDL Control Operators" of [IANA.cddl]:
+
+                          +=========+===========+
+                          | Name    | Reference |
+                          +=========+===========+
+                          | .cde    | [RFCXXXX] |
+                          +---------+-----------+
+                          | .cdeseq | [RFCXXXX] |
+                          +---------+-----------+
+
+                            Table 1: New control
+                              operators to be
+                                 registered
+
+6.  References
+
+6.1.  Normative References
+
+   [BCP14]    Best Current Practice 14,
+              <https://www.rfc-editor.org/info/bcp14>.
+              At the time of writing, this BCP comprises the following:
+
+              Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 7]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
+              Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [IANA.cddl]
+              IANA, "Concise Data Definition Language (CDDL)", 28 March
+              2019, <https://www.iana.org/assignments/cddl>.
+
+   [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
+              Std 754-2019, DOI 10.1109/IEEESTD.2019.8766229,
+              <https://ieeexplore.ieee.org/document/8766229>.
+
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
+
+   [STD94]    Internet Standard 94,
+              <https://www.rfc-editor.org/info/std94>.
+              At the time of writing, this STD comprises the following:
+
+              Bormann, C. and P. Hoffman, "Concise Binary Object
+              Representation (CBOR)", STD 94, RFC 8949,
+              DOI 10.17487/RFC8949, December 2020,
+              <https://www.rfc-editor.org/info/rfc8949>.
+
+6.2.  Informative References
+
+   [I-D.bormann-cbor-det]
+              Bormann, C., "CBOR: On Deterministic Encoding", Work in
+              Progress, Internet-Draft, draft-bormann-cbor-det-02, 3
+              March 2024, <https://datatracker.ietf.org/doc/html/draft-
+              bormann-cbor-det-02>.
+
+   [I-D.mcnally-deterministic-cbor]
+              McNally, W., Allen, C., and C. Bormann, "dCBOR: A
+              Deterministic CBOR Application Profile", Work in Progress,
+              Internet-Draft, draft-mcnally-deterministic-cbor-10, 10
+              June 2024, <https://datatracker.ietf.org/doc/html/draft-
+              mcnally-deterministic-cbor-10>.
+
+Appendix A.  Application Profiles
+
+   This appendix is informative.
+
+
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 8]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
+   While the CBOR Common Deterministic Encoding Profile (CDE) provides
+   for commonality between different applications of CBOR, it can be
+   useful to further constrain the set of data items handled in a group
+   of applications (_exclusions_) and to define further mappings
+   (_reductions_) that help the applications in such a group get by with
+   the exclusions.
+
+   For example, the dCBOR Application Profile specifies the use of CDE
+   together with some application-level rules
+   [I-D.mcnally-deterministic-cbor].
 
    In general, the application-level rules specified by an Application
    Profile are based on the shared CBOR Common Deterministic Encoding
@@ -298,7 +470,7 @@ Internet-Draft                  CBOR CDE                       July 2024
    deterministically encoded CBOR according to [STD94], and existing
    generic CBOR decoders will therefore be able to decode it, including
    those that check for Deterministic Encoding ("CDE decoders", see also
-   Appendix A).  Similarly, generic CBOR encoders will be able to
+   Appendix B).  Similarly, generic CBOR encoders will be able to
    produce valid CBOR that can be processed by Application Profile
    implementations, if handed Application Profile conforming data model
    level information from an application.
@@ -321,157 +493,26 @@ Internet-Draft                  CBOR CDE                       July 2024
    integers or 64-bit negative integers) when they are used with
    applications that do not use them.
 
-4.  CDDL support
-
-   [RFC8610] defines control operators to indicate that the contents of
-   a byte string carries a CBOR-encoded data item (.cbor) or a sequence
-   of CBOR-encoded data items (.cborseq).
-
-   CDDL specifications may want to specify that the data items should be
-   encoded in Common CBOR Deterministic Encoding.  This specification
-   adds two CDDL control operators that can be used for this.
 
 
 
-Bormann                  Expires 9 January 2025                 [Page 6]
+
+
+
+
+
+Bormann                  Expires 22 January 2025                [Page 9]
 
 Internet-Draft                  CBOR CDE                       July 2024
 
 
-   The control operators .cde and .cdeseq are exactly like .cbor and
-   .cborseq except that they also require the encoded data item(s) to be
-   in Common CBOR Deterministic Encoding.
-
-   For example, a byte string of embedded CBOR that is to be encoded
-   according to CDE can be formalized as:
-
-   leaf = #6.24(bytes .cde any)
-
-   More importantly, if the encoded data item also needs to have a
-   specific structure, this can be expressed by the right hand side
-   (instead of using the most general CDDL type any here).
-
-   (Note that the .cborseq control operator does not enable specifying
-   different deterministic encoding requirements for the elements of the
-   sequence.  If a use case for such a feature becomes known, it could
-   be added.)
-
-   Obviously, Application Profiles can define similar control operators
-   that also embody the processing required by the Application Profile,
-   and are encouraged to do so.
-
-5.  Security Considerations
-
-   The security considerations in Section 10 of RFC 8949 [STD94] apply.
-   The use of deterministic encoding can mitigate issues arising out of
-   the use of non-preferred serializations specially crafted by an
-   attacker.  However, this effect only accrues if the decoder actually
-   checks that deterministic encoding was applied correctly.  More
-   generally, additional security properties of deterministic encoding
-   can rely on this check being performed properly.
-
-6.  IANA Considerations
-
-
-   // RFC Editor: please replace RFCXXXX with the RFC number of this RFC
-   // and remove this note.
-
-   This document requests IANA to register the contents of Table 1 into
-   the registry "CDDL Control Operators" of [IANA.cddl]:
-
-
-
-
-
-
-
-
-
-
-
-Bormann                  Expires 9 January 2025                 [Page 7]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
-
-                          +=========+===========+
-                          | Name    | Reference |
-                          +=========+===========+
-                          | .cde    | [RFCXXXX] |
-                          +---------+-----------+
-                          | .cdeseq | [RFCXXXX] |
-                          +---------+-----------+
-
-                            Table 1: New control
-                              operators to be
-                                 registered
-
-7.  References
-
-7.1.  Normative References
-
-   [IANA.cddl]
-              IANA, "Concise Data Definition Language (CDDL)",
-              <http://www.iana.org/assignments/cddl>.
-
-   [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
-              Std 754-2019, DOI 10.1109/IEEESTD.2019.8766229,
-              <https://ieeexplore.ieee.org/document/8766229>.
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
-              Definition Language (CDDL): A Notational Convention to
-              Express Concise Binary Object Representation (CBOR) and
-              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
-              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
-
-   [STD94]    Internet Standard 94,
-              <https://www.rfc-editor.org/info/std94>.
-              At the time of writing, this STD comprises the following:
-
-              Bormann, C. and P. Hoffman, "Concise Binary Object
-              Representation (CBOR)", STD 94, RFC 8949,
-              DOI 10.17487/RFC8949, December 2020,
-              <https://www.rfc-editor.org/info/rfc8949>.
-
-
-
-
-Bormann                  Expires 9 January 2025                 [Page 8]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
-
-7.2.  Informative References
-
-   [I-D.bormann-cbor-det]
-              Bormann, C., "CBOR: On Deterministic Encoding", Work in
-              Progress, Internet-Draft, draft-bormann-cbor-det-02, 3
-              March 2024, <https://datatracker.ietf.org/doc/html/draft-
-              bormann-cbor-det-02>.
-
-   [I-D.mcnally-deterministic-cbor]
-              McNally, W., Allen, C., and C. Bormann, "dCBOR: A
-              Deterministic CBOR Application Profile", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-10, 10
-              June 2024, <https://datatracker.ietf.org/doc/html/draft-
-              mcnally-deterministic-cbor-10>.
-
-Appendix A.  Implementers' Checklists
+Appendix B.  Implementers' Checklists
 
    This appendix is informative.  It provides brief checklists that
-   implementers can use to check their implementations.  It uses
-   [RFC2119] language, specifically the keyword MUST, to highlight the
-   specific items that implementers may want to check.  It does not
-   contain any normative mandates.  This appendix is informative.
+   implementers can use to check their implementations.  It uses RFC2119
+   language, specifically the keyword MUST, to highlight the specific
+   items that implementers may want to check.  It does not contain any
+   normative mandates.  This appendix is informative.
 
    Notes:
 
@@ -494,36 +535,40 @@ Appendix A.  Implementers' Checklists
       values and ranges.
 
    *  CBOR decoders in general are not required to check for preferred
-      serialization or CDE and reject inputs that do not do not fulfill
-      their requirements.  However, in an environment that employs
-      deterministic encoding, this negates many of its benefits.
-      Decoder implementations that advertise "support" for preferred
-
-
-
-Bormann                  Expires 9 January 2025                 [Page 9]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
-
-      serialization or CDE need to check the encoding and reject input
-      that is not encoded to the encoding specification in use.  Again,
-      application profiles such as dCBOR may pose additional
-      requirements, such as requiring rejection of non-conforming
-      inputs.
+      serialization or CDE and reject inputs that do not fulfill their
+      requirements.  However, in an environment that employs
+      deterministic encoding, employing non-checking CBOR decoders
+      negates many of its benefits.  Decoder implementations that
+      advertise "support" for preferred serialization or CDE need to
+      check the encoding and reject input that is not encoded to the
+      encoding specification in use.  Again, application profiles such
+      as dCBOR may pose additional requirements, such as requiring
+      rejection of non-conforming inputs.
 
       If a generic decoder needs to be used that does not "support" CDE,
       a simple (but somewhat clumsy) way to check for proper CDE
       encoding is to re-encode the decoded data and check for bit-to-bit
       equality with the original input.
 
-A.1.  Preferred Serialization
+
+
+
+
+
+
+
+Bormann                  Expires 22 January 2025               [Page 10]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
+B.1.  Preferred Serialization
 
    In the following, the abbreviation "ai" will be used for the 5-bit
    additional information field in the first byte of an encoded CBOR
    data item, which follows the 3-bit field for the major type.
 
-A.1.1.  Preferred Serialization Encoders
+B.1.1.  Preferred Serialization Encoders
 
    1.  Shortest-form encoding of the argument MUST be used for all major
        types.  Major type 7 is used for floating-point and simple
@@ -554,14 +599,6 @@ A.1.1.  Preferred Serialization Encoders
        *  The length of the argument indicates half (binary16, ai =
           0x19), single (binary32, ai = 0x1a) and double (binary64, ai =
           0x1b) precision encoding.  If multiple of these encodings
-
-
-
-Bormann                  Expires 9 January 2025                [Page 10]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
-
           preserve the precision of the value to be encoded, only the
           shortest form of these MUST be emitted.  That is, encoders
           MUST support half-precision and single-precision floating
@@ -573,6 +610,14 @@ Internet-Draft                  CBOR CDE                       July 2024
           As with all floating point numbers, NaNs with payloads MUST be
           reduced to the shortest of double, single or half precision
           that preserves the NaN payload.  The reduction is performed by
+
+
+
+Bormann                  Expires 22 January 2025               [Page 11]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
           removing the rightmost N bits of the payload, where N is the
           difference in the number of bits in the significand (mantissa)
           between the original format and the reduced format.  The
@@ -581,7 +626,7 @@ Internet-Draft                  CBOR CDE                       July 2024
           a double or single quiet NaN with a zero NaN payload to a
           half-precision quiet NaN.)
 
-A.1.2.  Preferred Serialization Decoders
+B.1.2.  Preferred Serialization Decoders
 
    1.  Decoders MUST accept shortest-form encoded arguments.
 
@@ -604,19 +649,12 @@ A.1.2.  Preferred Serialization Decoders
 
        *  NaNs, and thus NaN payloads, MUST be accepted.
 
-A.2.  CDE
+B.2.  CDE
 
-A.2.1.  CDE Encoders
+B.2.1.  CDE Encoders
 
    1.  CDE encoders MUST only emit CBOR fulfilling the preferred
-       serialization rules (Appendix A.1.1).
-
-
-
-Bormann                  Expires 9 January 2025                [Page 11]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
+       serialization rules (Appendix B.1.1).
 
    2.  CDE encoders MUST sort maps by the CBOR representation of the map
        key.  The sorting is byte-wise lexicographic order of the encoded
@@ -627,13 +665,22 @@ Internet-Draft                  CBOR CDE                       July 2024
        emitting duplicate keys in a major type 5 map as well as emitting
        only valid UTF-8 in major type 3 text strings.
 
-A.2.2.  CDE Decoders
+
+
+
+
+Bormann                  Expires 22 January 2025               [Page 12]
+
+Internet-Draft                  CBOR CDE                       July 2024
+
+
+B.2.2.  CDE Decoders
 
    The term "CDE Decoder" is a shorthand for a CBOR decoder that
    advertises _supporting_ CDE (see the start of this appendix).
 
    1.  CDE decoders MUST follow the rules for preferred serialization
-       decoders (Appendix A.1.2).
+       decoders (Appendix B.1.2).
 
    2.  CDE decoders MUST check for ordering map keys and for basic
        validity of the CBOR encoding (see Section 5.3.1 of RFC 8949
@@ -658,21 +705,9 @@ Contributors
    Email: lgl@securitytheory.com
 
 
-   Laurence provided the text that became Appendix A.
+   Laurence provided the text that became Appendix B.
 
 Author's Address
-
-
-
-
-
-
-
-
-Bormann                  Expires 9 January 2025                [Page 12]
-
-Internet-Draft                  CBOR CDE                       July 2024
-
 
    Carsten Bormann
    Universität Bremen TZI
@@ -690,39 +725,4 @@ Internet-Draft                  CBOR CDE                       July 2024
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann                  Expires 9 January 2025                [Page 13]
+Bormann                  Expires 22 January 2025               [Page 13]
