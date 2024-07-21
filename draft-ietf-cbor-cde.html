@@ -1341,15 +1341,20 @@ independent of whether the floating point value is, mathematically,
 an integral value (choice 2 of the second bullet).<a href="#section-2-9.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-9.3">
-          <p id="section-2-9.3.1">There is no special handling of NaN values, except that the
-preferred serialization rules also apply to NaNs with payloads, using
-the canonical encoding of NaNs as defined in <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>.
+          <p id="section-2-9.3.1">Apart from finite and infinite numbers, <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> floating point
+values include NaN (not a number) values <span>[<a href="#I-D.bormann-cbor-numbers" class="cite xref">I-D.bormann-cbor-numbers</a>]</span>.
+In CDE, there is no special handling of NaN values, except that the
+preferred serialization rules also apply to NaNs (with zero or
+non-zero payloads), using the canonical encoding of NaNs as defined
+in Section 6.2.1 of <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>.
 Specifically, this means that shorter forms of encodings for a NaN
 are used when that can be achieved by only removing trailing zeros
-in the payload.
+in the NaN payload.
 Further clarifying a "should"-level statement in Section 6.2.1 of
-<span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, the CBOR encoding uses a leading bit of 1 in the
-significand to encode a quiet NaN; encoding of signaling NaN is <span class="bcp14">NOT RECOMMENDED</span> but is achieved by using a leading bit of 0.<a href="#section-2-9.3.1" class="pilcrow">¶</a></p>
+<span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, the CBOR encoding always uses a leading bit of 1 in the
+significand to encode a quiet NaN; the use of signaling NaNs by
+application protocols is <span class="bcp14">NOT RECOMMENDED</span> but when presented by an
+application these are encoded by using a leading bit of 0.<a href="#section-2-9.3.1" class="pilcrow">¶</a></p>
 <p id="section-2-9.3.2">
 Typically, most applications that employ NaNs in their storage and
 communication interfaces will only use a quiet NaN with payload 0,
@@ -1437,7 +1442,8 @@ encoding can rely on this check being performed properly.<a href="#section-4-1" 
 number of this RFC and remove this note.</span><a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">This document requests IANA to register the contents of
 <a href="#tbl-iana-reqs" class="auto internal xref">Table 1</a> into the registry
-"<a href="https://www.iana.org/assignments/cddl#cddl-control-operators" class="relref">CDDL Control Operators</a>" of <span>[<a href="#IANA.cddl" class="cite xref">IANA.cddl</a>]</span>:<a href="#section-5-2" class="pilcrow">¶</a></p>
+"<a href="https://www.iana.org/assignments/cddl#cddl-control-operators" class="relref">CDDL Control Operators</a>" of the
+<span>[<a href="#IANA.cddl" class="cite xref">IANA.cddl</a>]</span> registry group:<a href="#section-5-2" class="pilcrow">¶</a></p>
 <span id="name-new-control-operators-to-be"></span><div id="tbl-iana-reqs">
 <table class="center" id="table-1">
         <caption>
@@ -1518,6 +1524,10 @@ number of this RFC and remove this note.</span><a href="#section-5-1" class="pil
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR: On Deterministic Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-det-02</span>, <time datetime="2024-03-03" class="refDate">3 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-02">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.bormann-cbor-numbers">[I-D.bormann-cbor-numbers]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"On Numbers in CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-numbers-00</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-00">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
       <dd>
 <span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-10</span>, <time datetime="2024-06-10" class="refDate">10 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-10</a>&gt;</span>. </dd>
@@ -1592,6 +1602,10 @@ This appendix is informative.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
           <p id="appendix-B-3.1.1">This is largely a restatement of parts of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4" class="relref">4</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
 The purpose of the restatement is to aid the work of implementers,
 not to redefine anything.<a href="#appendix-B-3.1.1" class="pilcrow">¶</a></p>
+<p id="appendix-B-3.1.2">
+Preferred Serialization Encoders and Decoders as well as CDE
+Encoders and Decoders have certain properties that are expressed
+using <a href="#RFC2119" class="auto internal xref">RFC2119</a> keywords in this appendix.<a href="#appendix-B-3.1.2" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-3.2">
           <p id="appendix-B-3.2.1">Duplicate map keys are never valid in CBOR at all (see
@@ -1688,24 +1702,33 @@ If multiple of these encodings preserve the precision of the
 value to be encoded, only the shortest form of these <span class="bcp14">MUST</span> be
 emitted.
 That is, encoders <span class="bcp14">MUST</span> support half-precision and
-single-precision floating point.
-Positive and negative infinity and zero <span class="bcp14">MUST</span> be represented in
-half-precision floating point.<a href="#appendix-B.1.1-1.4.2.1.1" class="pilcrow">¶</a></p>
+single-precision floating point.<a href="#appendix-B.1.1-1.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="appendix-B.1.1-1.4.2.2">
-                  <p id="appendix-B.1.1-1.4.2.2.1">NaNs, and thus NaN payloads <span class="bcp14">MUST</span> be supported.<a href="#appendix-B.1.1-1.4.2.2.1" class="pilcrow">¶</a></p>
+                  <p id="appendix-B.1.1-1.4.2.2.1"><span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> Infinites and NaNs, and thus NaN payloads, <span class="bcp14">MUST</span> be
+supported, to the extent possible on the platform.<a href="#appendix-B.1.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-B.1.1-1.4.2.2.2">
-As with all floating point numbers, NaNs with payloads <span class="bcp14">MUST</span> be
-reduced to the shortest of double, single or half precision that
-preserves the NaN payload.
-The reduction is performed by removing the rightmost N bits of the
+As with all floating point numbers, Infinites and NaNs <span class="bcp14">MUST</span> be
+encoded in the shortest of double, single or half precision that
+preserves the value:<a href="#appendix-B.1.1-1.4.2.2.2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B.1.1-1.4.2.2.3.1">
+                      <p id="appendix-B.1.1-1.4.2.2.3.1.1">Positive and negative infinity and zero <span class="bcp14">MUST</span> be represented in
+half-precision floating point.<a href="#appendix-B.1.1-1.4.2.2.3.1.1" class="pilcrow">¶</a></p>
+</li>
+                    <li class="normal" id="appendix-B.1.1-1.4.2.2.3.2">
+                      <p id="appendix-B.1.1-1.4.2.2.3.2.1">For NaNs, the value to be preserved includes the sign bit,
+the quiet bit, and the NaN payload (whether zero or non-zero).
+The shortest form is obtained by removing the rightmost N bits of the
 payload, where N is the difference in the number of bits in the
-significand (mantissa) between the original format and the
-reduced format.
-The reduction is performed only (preserves the value only) if all the
+significand (mantissa representation) between the original format
+and the shortest format.
+This trimming is performed only (preserves the value only) if all the
 rightmost bits removed are zero.
-(This will always reduce a double or single quiet NaN with a zero
-NaN payload to a half-precision quiet NaN.)<a href="#appendix-B.1.1-1.4.2.2.2" class="pilcrow">¶</a></p>
+(This will always represent a double or single quiet NaN with a zero
+NaN payload in a half-precision quiet NaN.)<a href="#appendix-B.1.1-1.4.2.2.3.2.1" class="pilcrow">¶</a></p>
+</li>
+                  </ul>
 </li>
               </ul>
 </li>
@@ -1744,7 +1767,9 @@ constrained environments.<a href="#appendix-B.1.2-1.4.2.2.1" class="pilcrow">¶<
 <span class="bcp14">MUST</span> be accepted.<a href="#appendix-B.1.2-1.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="appendix-B.1.2-1.4.2.4">
-                  <p id="appendix-B.1.2-1.4.2.4.1">NaNs, and thus NaN payloads, <span class="bcp14">MUST</span> be accepted.<a href="#appendix-B.1.2-1.4.2.4.1" class="pilcrow">¶</a></p>
+                  <p id="appendix-B.1.2-1.4.2.4.1">Infinites and NaNs, and thus NaN payloads, <span class="bcp14">MUST</span> be accepted and
+presented to the application (not necessarily in the platform
+number format, if that doesn't support those values).<a href="#appendix-B.1.2-1.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
