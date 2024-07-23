@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T01:12:04.960216+00:00",
+  "timestamp": "2024-07-23T01:07:27.140304+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -249,6 +249,22 @@
           "updatedAt": "2024-07-16T19:24:40Z"
         }
       ]
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOJ8fYd86QVoxX",
+      "title": "Implementation checks require definite length when that is actually not required",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/17",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 2 has this right, items 2 and 3 of B.1.1 don\u2019t.\r\n",
+      "createdAt": "2024-07-21T20:33:19Z",
+      "updatedAt": "2024-07-21T20:33:19Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -703,33 +719,55 @@
       "id": "PR_kwDOJ8fYd851jZ7-",
       "title": "Application profile appendix",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/15",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Move the application profile section to an appendix.\r\n\r\nClarify the relationship between CDE and application\r\nprotocols/profiles some more.\r\nAdd \"Structure of This Document\".\r\n",
       "createdAt": "2024-07-16T19:23:37Z",
-      "updatedAt": "2024-07-16T19:45:32Z",
+      "updatedAt": "2024-07-21T11:37:01Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "20b187cf85fd317042f75bd3129b4241d9476325",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "application-profile-appendix",
       "headRefOid": "fc56cc475f806d3fc82bec19b9d83e6672335f53",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [
-        {
-          "author": "cabo",
-          "authorAssociation": "COLLABORATOR",
-          "body": "And while we are waiting for Martin Thomson's I-D template to catch up to recent tool changes:\r\n\r\nhttps://tzi.org/~cabo/application-profile-appendix/\r\n\r\n",
-          "createdAt": "2024-07-16T19:45:31Z",
-          "updatedAt": "2024-07-16T19:45:31Z"
-        }
-      ],
+      "closedAt": "2024-07-21T11:37:01Z",
+      "mergedAt": "2024-07-21T11:37:01Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "55cfa915053508f2c000dfb13c49e9855e1beb38"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOJ8fYd852AzBW",
+      "title": "Clarify120: CDE clarifications for IETF 120",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/16",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-21T12:37:24Z",
+      "updatedAt": "2024-07-21T12:43:53Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "55cfa915053508f2c000dfb13c49e9855e1beb38",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "clarify120",
+      "headRefOid": "a9b1067434d9dfd8a71c778c24c3c0c5db027421",
+      "closedAt": "2024-07-21T12:43:52Z",
+      "mergedAt": "2024-07-21T12:43:52Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "52c20a375fd36bffd5d704f49fed3567492a4a65"
+      },
+      "comments": [],
       "reviews": []
     }
   ]
