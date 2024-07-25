@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                              21 July 2024
-Expires: 22 January 2025
+Intended status: Informational                              25 July 2024
+Expires: 26 January 2025
 
 
                     CBOR: On Deterministic Encoding
@@ -49,11 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 January 2025.
+   This Internet-Draft will expire on 26 January 2025.
 
 
 
-Bormann                  Expires 22 January 2025                [Page 1]
+Bormann                  Expires 26 January 2025                [Page 1]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Bormann                  Expires 22 January 2025                [Page 2]
+Bormann                  Expires 26 January 2025                [Page 2]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025                [Page 3]
+Bormann                  Expires 26 January 2025                [Page 3]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025                [Page 4]
+Bormann                  Expires 26 January 2025                [Page 4]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025                [Page 5]
+Bormann                  Expires 26 January 2025                [Page 5]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025                [Page 6]
+Bormann                  Expires 26 January 2025                [Page 6]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025                [Page 7]
+Bormann                  Expires 26 January 2025                [Page 7]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -445,7 +445,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025                [Page 8]
+Bormann                  Expires 26 January 2025                [Page 8]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025                [Page 9]
+Bormann                  Expires 26 January 2025                [Page 9]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 10]
+Bormann                  Expires 26 January 2025               [Page 10]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -613,7 +613,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 11]
+Bormann                  Expires 26 January 2025               [Page 11]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -669,7 +669,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 12]
+Bormann                  Expires 26 January 2025               [Page 12]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 13]
+Bormann                  Expires 26 January 2025               [Page 13]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -781,7 +781,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 14]
+Bormann                  Expires 26 January 2025               [Page 14]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -837,7 +837,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 15]
+Bormann                  Expires 26 January 2025               [Page 15]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -893,7 +893,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 16]
+Bormann                  Expires 26 January 2025               [Page 16]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -909,13 +909,12 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
    [I-D.ietf-cbor-cde]
               Bormann, C., "CBOR Common Deterministic Encoding (CDE)",
-              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-03,
-              8 July 2024, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-cbor-cde-03>.
+              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-04,
+              21 July 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-cde-04>.
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
-              19 September 2013,
               <https://www.iana.org/assignments/cbor-tags>.
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
@@ -949,7 +948,8 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 17]
+
+Bormann                  Expires 26 January 2025               [Page 17]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -1005,7 +1005,7 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 18]
+Bormann                  Expires 26 January 2025               [Page 18]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -1061,7 +1061,7 @@ Author's Address
 
 
 
-Bormann                  Expires 22 January 2025               [Page 19]
+Bormann                  Expires 26 January 2025               [Page 19]
 
 Internet-Draft          On Deterministic Encoding              July 2024
 
@@ -1117,4 +1117,4 @@ Internet-Draft          On Deterministic Encoding              July 2024
 
 
 
-Bormann                  Expires 22 January 2025               [Page 20]
+Bormann                  Expires 26 January 2025               [Page 20]
