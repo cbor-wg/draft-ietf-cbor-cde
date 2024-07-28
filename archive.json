@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-25T01:07:21.030831+00:00",
+  "timestamp": "2024-07-28T01:12:31.683441+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -262,15 +262,15 @@
       "id": "I_kwDOJ8fYd86QVoxX",
       "title": "Implementation checks require definite length when that is actually not required",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/17",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Section 2 has this right, items 2 and 3 of B.1.1 don\u2019t.\r\n",
       "createdAt": "2024-07-21T20:33:19Z",
-      "updatedAt": "2024-07-21T20:33:19Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-25T23:48:02Z",
+      "closedAt": "2024-07-25T23:48:02Z",
       "comments": []
     },
     {
@@ -285,9 +285,17 @@
       "labels": [],
       "body": "Archived-At: <https://mailarchive.ietf.org/arch/msg/cbor/IwZBL1Q522pZA3pIJfo5WJ0YVtY>\r\n",
       "createdAt": "2024-07-24T20:45:16Z",
-      "updatedAt": "2024-07-24T20:45:16Z",
+      "updatedAt": "2024-07-25T23:49:06Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Let's check whether the changes in #19 suffice and we can close this",
+          "createdAt": "2024-07-25T23:49:04Z",
+          "updatedAt": "2024-07-25T23:49:04Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -789,6 +797,34 @@
       "mergedBy": "cabo",
       "mergeCommit": {
         "oid": "52c20a375fd36bffd5d704f49fed3567492a4a65"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOJ8fYd852fKCC",
+      "title": "Fix #17, address #18, add \"Basic Serialization\"",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/19",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Intended to replace draft-lundblade-cbor-cie-00.txt",
+      "createdAt": "2024-07-25T16:03:46Z",
+      "updatedAt": "2024-07-25T23:48:01Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "52c20a375fd36bffd5d704f49fed3567492a4a65",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "basic-serialization",
+      "headRefOid": "7a74d2e658b66db58d076dd5702d60f69bf2cdfb",
+      "closedAt": "2024-07-25T23:48:01Z",
+      "mergedAt": "2024-07-25T23:48:01Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "374be6737dff5e4fdf6c7cfad3b20a0ceea891fc"
       },
       "comments": [],
       "reviews": []
