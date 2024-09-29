@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-26T01:15:32.396653+00:00",
+  "timestamp": "2024-09-29T01:21:40.752642+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -296,6 +296,22 @@
           "updatedAt": "2024-07-25T23:49:04Z"
         }
       ]
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOJ8fYd86YPmhz",
+      "title": "Be more explicit that CDE does not require (or include) Unicode normalization (but application processing/profiles can).",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/20",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-At: <https://mailarchive.ietf.org/arch/msg/cbor/UXFWzGU5gCHem50gTQSss-YCoc8>\r\n",
+      "createdAt": "2024-09-28T13:36:07Z",
+      "updatedAt": "2024-09-28T13:36:07Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
