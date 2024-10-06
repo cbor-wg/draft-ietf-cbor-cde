@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-03T01:16:12.361591+00:00",
+  "timestamp": "2024-10-06T01:21:20.162230+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -196,7 +196,7 @@
       "labels": [],
       "body": "Application Profiles seem like an unnecessary complexity to me in an area that (I think) we're trying to make simpler.\r\n\r\nI look at this draft as a really useful rewording of some important stuff in section 4 and 5 of RFC 8949. Those sections of 8949 are a bit complicated for readers, so this draft should be simple.\r\n\r\nSo far the only proposed profile is dCBOR. I think dCBOR exists just fine without the notion of application profiles, just like CDE exists just fine on top of preferred serialization.\r\n\r\nTo justify the complexity application profiles add, I think we'd want to have three solid use cases for them.\r\n\r\nApplication profiles are only for variations of CDE. They are not for variations of preferred serialization or a general profile mechanism for all of CBOR. This makes them much much less useful.",
       "createdAt": "2024-07-13T17:12:03Z",
-      "updatedAt": "2024-07-24T17:50:14Z",
+      "updatedAt": "2024-10-05T06:06:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -254,6 +254,13 @@
           "body": "While moving to an appendix is an improvement, I still would like to see application profiles removed. I was waiting for the meeting on Friday before completing the review.",
           "createdAt": "2024-07-24T17:50:13Z",
           "updatedAt": "2024-07-24T17:50:13Z"
+        },
+        {
+          "author": "cyberphone",
+          "authorAssociation": "NONE",
+          "body": "1. Currently CBOR support (=profiles) is _implicitly_ or _explicitly_ specified as a part of applications and implementations. Deterministic encoding does IMO not motivate a change.\r\n\r\n2. Referencing dCBOR indirectly transcends Numeric Reduction into an \"IETF-standardized\" encoding method, although dCBOR was rejected as a WG item.  The dCBOR spec. can refer to CBOR-CDE without the application profile concept in the same way as CBOR-CDE refers to RFC 8949.\r\n",
+          "createdAt": "2024-10-05T06:06:26Z",
+          "updatedAt": "2024-10-05T06:06:26Z"
         }
       ]
     },
