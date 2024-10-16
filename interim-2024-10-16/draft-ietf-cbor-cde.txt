@@ -95,9 +95,9 @@ Table of Contents
    Appendix B.  Implementers' Checklists . . . . . . . . . . . . . .  10
      B.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  11
        B.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  11
-       B.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  12
+       B.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  13
      B.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  13
-       B.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  13
+       B.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  14
        B.2.2.  Basic Serialization Decoders  . . . . . . . . . . . .  14
      B.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  14
        B.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  14
@@ -450,6 +450,13 @@ Bormann                   Expires 19 April 2025                 [Page 8]
 Internet-Draft                  CBOR CDE                    October 2024
 
 
+   [I-D.bormann-dispatch-modern-network-unicode]
+              Bormann, C., "Modern Network Unicode", Work in Progress,
+              Internet-Draft, draft-bormann-dispatch-modern-network-
+              unicode-05, 30 August 2024,
+              <https://datatracker.ietf.org/doc/html/draft-bormann-
+              dispatch-modern-network-unicode-05>.
+
    [I-D.mcnally-deterministic-cbor]
               McNally, W., Allen, C., Bormann, C., and L. Lundblade,
               "dCBOR: A Deterministic CBOR Application Profile", Work in
@@ -457,6 +464,9 @@ Internet-Draft                  CBOR CDE                    October 2024
               cbor-11, 8 August 2024,
               <https://datatracker.ietf.org/doc/html/draft-mcnally-
               deterministic-cbor-11>.
+
+   [UAX-15]   "Unicode Normalization Forms", Unicode Standard Annex,
+              <https://unicode.org/reports/tr15/>.
 
 Appendix A.  Application Profiles
 
@@ -471,7 +481,8 @@ Appendix A.  Application Profiles
 
    For example, the dCBOR Application Profile specifies the use of CDE
    together with some application-level rules
-   [I-D.mcnally-deterministic-cbor].
+   [I-D.mcnally-deterministic-cbor], such as a requirement for all text
+   strings to be in Unicode Normalization Form C (NFC) [UAX-15].
 
    In general, the application-level rules specified by an Application
    Profile are based on the shared CBOR Common Deterministic Encoding
@@ -487,6 +498,14 @@ Appendix A.  Application Profiles
    implementations, if handed Application Profile conforming data model
    level information from an application.
 
+
+
+
+Bormann                   Expires 19 April 2025                 [Page 9]
+
+Internet-Draft                  CBOR CDE                    October 2024
+
+
    Please note that the separation between standard CBOR processing and
    the processing required by the Application Profile is a conceptual
    one: Instead of employing generic encoders/decoders, both Application
@@ -498,14 +517,6 @@ Appendix A.  Application Profiles
    data model, which in turn influences which subset of the application
    profile is used.  As a result, an Application Profile itself places
    no direct requirement on what minimum subset of CBOR is implemented.
-
-
-
-Bormann                   Expires 19 April 2025                 [Page 9]
-
-Internet-Draft                  CBOR CDE                    October 2024
-
-
    For instance, an application profile might define rules for the
    processing of floating point values, but there is no requirement that
    implementations of that Application Profile support floating point
@@ -539,17 +550,6 @@ Appendix B.  Implementers' Checklists
       application is the most robust one; achieving this level of
       robustness is a mark of quality of implementation.
 
-   *  Preferred serialization and CDE only affect serialization.  They
-      do not place any requirements, exclusions, mappings or such on the
-      data model level.  Application profiles such as dCBOR are
-      different as they can affect the data model by restricting some
-      values and ranges.
-
-
-
-
-
-
 
 
 
@@ -561,6 +561,12 @@ Bormann                   Expires 19 April 2025                [Page 10]
 
 Internet-Draft                  CBOR CDE                    October 2024
 
+
+   *  Preferred serialization and CDE only affect serialization.  They
+      do not place any requirements, exclusions, mappings or such on the
+      data model level.  Application profiles such as dCBOR are
+      different as they can affect the data model by restricting some
+      values and ranges.
 
    *  CBOR decoders in general are not required to check for preferred
       serialization or CDE and reject inputs that do not fulfill their
@@ -604,12 +610,6 @@ B.1.1.  Preferred Serialization Encoders
        *  65536 to 4294967295 and -65537 to -4294967296 MUST be encoded
           only with an additional four bytes (ai = 0x1a).
 
-   2.  If floating-point numbers are emitted, the following apply:
-
-       *  The length of the argument indicates half (binary16, ai =
-          0x19), single (binary32, ai = 0x1a) and double (binary64, ai =
-          0x1b) precision encoding.  If multiple of these encodings
-          preserve the precision of the value to be encoded, only the
 
 
 
@@ -618,6 +618,12 @@ Bormann                   Expires 19 April 2025                [Page 11]
 Internet-Draft                  CBOR CDE                    October 2024
 
 
+   2.  If floating-point numbers are emitted, the following apply:
+
+       *  The length of the argument indicates half (binary16, ai =
+          0x19), single (binary32, ai = 0x1a) and double (binary64, ai =
+          0x1b) precision encoding.  If multiple of these encodings
+          preserve the precision of the value to be encoded, only the
           shortest form of these MUST be emitted.  That is, encoders
           MUST support half-precision and single-precision floating
           point.
@@ -658,12 +664,6 @@ Internet-Draft                  CBOR CDE                    October 2024
        (This also applies to the use of tags 2 and 3 within other tags,
        such as 4 or 5.)
 
-B.1.2.  Preferred Serialization Decoders
-
-   There are no special requirements that CBOR decoders need to meet to
-   be a Preferred Serialization Decoder.  Partial decoder
-   implementations need to pay attention to at least the following
-   requirements:
 
 
 
@@ -673,6 +673,13 @@ Bormann                   Expires 19 April 2025                [Page 12]
 
 Internet-Draft                  CBOR CDE                    October 2024
 
+
+B.1.2.  Preferred Serialization Decoders
+
+   There are no special requirements that CBOR decoders need to meet to
+   be a Preferred Serialization Decoder.  Partial decoder
+   implementations need to pay attention to at least the following
+   requirements:
 
    1.  Decoders MUST accept shortest-form encoded arguments (see
        Section 3 of RFC 8949 [STD94]).
@@ -712,14 +719,7 @@ B.2.  Basic Serialization
    interoperability with partial (e.g., constrained) CBOR decoder
    implementations.
 
-B.2.1.  Basic Serialization Encoders
 
-   The Basic Serialization Encoder requirements are identical to the
-   Preferred Serialization Encoder requirements, with the following
-   additions:
-
-   1.  If maps or arrays are emitted, they MUST use definite-length
-       encoding (never indefinite-length).
 
 
 
@@ -729,6 +729,15 @@ Bormann                   Expires 19 April 2025                [Page 13]
 
 Internet-Draft                  CBOR CDE                    October 2024
 
+
+B.2.1.  Basic Serialization Encoders
+
+   The Basic Serialization Encoder requirements are identical to the
+   Preferred Serialization Encoder requirements, with the following
+   additions:
+
+   1.  If maps or arrays are emitted, they MUST use definite-length
+       encoding (never indefinite-length).
 
    2.  If text or byte strings are emitted, they MUST use definite-
        length encoding (never indefinite-length).
@@ -754,6 +763,12 @@ B.3.1.  CDE Encoders
        emitting duplicate keys in a major type 5 map as well as emitting
        only valid UTF-8 in major type 3 text strings.
 
+       Note also that CDE does NOT include a requirement for Unicode
+       normalization [UAX-15]; Appendix C of
+       [I-D.bormann-dispatch-modern-network-unicode] contains some
+       rationale that went into not requiring routine use of Unicode
+       normalization processes.
+
 B.3.2.  CDE Decoders
 
    The term "CDE Decoder" is a shorthand for a CBOR decoder that
@@ -761,6 +776,15 @@ B.3.2.  CDE Decoders
 
    1.  CDE decoders MUST follow the rules for preferred (and thus basic)
        serialization decoders (Appendix B.1.2).
+
+
+
+
+
+Bormann                   Expires 19 April 2025                [Page 14]
+
+Internet-Draft                  CBOR CDE                    October 2024
+
 
    2.  CDE decoders MUST check for ordering map keys and for basic
        validity of the CBOR encoding (see Section 5.3.1 of RFC 8949
@@ -771,20 +795,6 @@ B.3.2.  CDE Decoders
        application a decoded data item that fails one of these checks
        (except maybe via special diagnostic channels with no potential
        for confusion with a correctly CDE-decoded data item).
-
-
-
-
-
-
-
-
-
-
-Bormann                   Expires 19 April 2025                [Page 14]
-
-Internet-Draft                  CBOR CDE                    October 2024
-
 
 Acknowledgments
 
@@ -815,16 +825,6 @@ Author's Address
    Germany
    Phone: +49-421-218-63921
    Email: cabo@tzi.org
-
-
-
-
-
-
-
-
-
-
 
 
 

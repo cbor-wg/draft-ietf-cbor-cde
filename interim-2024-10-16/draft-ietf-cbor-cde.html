@@ -1558,9 +1558,17 @@ number of this RFC and remove this note.</span><a href="#section-5-1" class="pil
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"On Numbers in CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-numbers-00</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-00">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.bormann-dispatch-modern-network-unicode">[I-D.bormann-dispatch-modern-network-unicode]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Modern Network Unicode"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-dispatch-modern-network-unicode-05</span>, <time datetime="2024-08-30" class="refDate">30 August 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-05">https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">L. Lundblade</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-11</span>, <time datetime="2024-08-08" class="refDate">8 August 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-11">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-11</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="UAX-15">[UAX-15]</dt>
+      <dd>
+<span class="refTitle">"Unicode Normalization Forms"</span>, <span class="refContent">Unicode Standard Annex</span>, <span>&lt;<a href="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1579,8 +1587,10 @@ to further constrain the set of data items handled in a group of
 applications (<em>exclusions</em>) and to define further mappings
 (<em>reductions</em>) that help the applications in such a group get by with
 the exclusions.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
-<p id="appendix-A-3">For example, the dCBOR Application Profile specifies the use of
-CDE together with some application-level rules <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">For example, the dCBOR Application Profile specifies the use of CDE
+together with some application-level rules <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>, such as a
+requirement for all text strings to be in Unicode Normalization Form C
+(NFC) <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span>.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <p id="appendix-A-4">In general, the application-level rules specified by an Application Profile are
 based on the shared CBOR Common Deterministic Encoding Profile; they do
 not "fork" CBOR in the sense of requiring distinct generic
@@ -1893,6 +1903,11 @@ key data items.<a href="#appendix-B.3.1-1.2.1" class="pilcrow">¶</a></p>
 (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.3.1" class="relref">5.3.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).  Note that this includes not
 emitting duplicate keys in a major type 5 map as well as emitting
 only valid UTF-8 in major type 3 text strings.<a href="#appendix-B.3.1-1.3.1" class="pilcrow">¶</a></p>
+<p id="appendix-B.3.1-1.3.2">
+Note also that CDE does NOT include a requirement for Unicode
+normalization <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span>; <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-05#appendix-C" class="relref">Appendix C</a> of [<a href="#I-D.bormann-dispatch-modern-network-unicode" class="cite xref">I-D.bormann-dispatch-modern-network-unicode</a>]</span> contains some
+rationale that went into not requiring routine use of Unicode normalization
+processes.<a href="#appendix-B.3.1-1.3.2" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
