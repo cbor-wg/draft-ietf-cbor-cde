@@ -568,13 +568,14 @@ Internet-Draft                  CBOR CDE                    October 2024
       different as they can affect the data model by restricting some
       values and ranges.
 
-   *  CBOR decoders in general are not required to check for preferred
-      serialization or CDE and reject inputs that do not fulfill their
-      requirements.  However, in an environment that employs
-      deterministic encoding, employing non-checking CBOR decoders
-      negates many of its benefits.  Decoder implementations that
-      advertise "support" for preferred serialization or CDE need to
-      check the encoding and reject input that is not encoded to the
+   *  CBOR decoders in general (as opposed to "CDE decoders"
+      specifically advertised as supporting CDE) are not required to
+      check for preferred serialization or CDE and reject inputs that do
+      not fulfill their requirements.  However, in an environment that
+      employs deterministic encoding, employing non-checking CBOR
+      decoders negates many of its benefits.  Decoder implementations
+      that advertise "support" for preferred serialization or CDE need
+      to check the encoding and reject input that is not encoded to the
       encoding specification in use.  Again, application profiles such
       as dCBOR may pose additional requirements, such as requiring
       rejection of non-conforming inputs.
@@ -609,7 +610,6 @@ B.1.1.  Preferred Serialization Encoders
 
        *  65536 to 4294967295 and -65537 to -4294967296 MUST be encoded
           only with an additional four bytes (ai = 0x1a).
-
 
 
 
