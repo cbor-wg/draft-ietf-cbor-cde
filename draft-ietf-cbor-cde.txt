@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                      25 July 2024
-Expires: 26 January 2025
+Intended status: Best Current Practice                   16 October 2024
+Expires: 19 April 2025
 
 
                 CBOR Common Deterministic Encoding (CDE)
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Bormann                  Expires 26 January 2025                [Page 1]
+Bormann                   Expires 19 April 2025                 [Page 1]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft                  CBOR CDE                       July 2024
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 January 2025.
+   This Internet-Draft will expire on 19 April 2025.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bormann                  Expires 26 January 2025                [Page 2]
+Bormann                   Expires 19 April 2025                 [Page 2]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft                  CBOR CDE                       July 2024
 
 
 
-Bormann                  Expires 26 January 2025                [Page 3]
+Bormann                   Expires 19 April 2025                 [Page 3]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
 2.  CBOR Common Deterministic Encoding Profile (CDE)
@@ -221,9 +221,9 @@ Internet-Draft                  CBOR CDE                       July 2024
 
 
 
-Bormann                  Expires 26 January 2025                [Page 4]
+Bormann                   Expires 19 April 2025                 [Page 4]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
    platform application data types onto the tag contents may require
@@ -277,9 +277,9 @@ Internet-Draft                  CBOR CDE                       July 2024
 
 
 
-Bormann                  Expires 26 January 2025                [Page 5]
+Bormann                   Expires 19 April 2025                 [Page 5]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
    5.  There is no special handling of subnormal values.
@@ -333,9 +333,9 @@ Internet-Draft                  CBOR CDE                       July 2024
 
 
 
-Bormann                  Expires 26 January 2025                [Page 6]
+Bormann                   Expires 19 April 2025                 [Page 6]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
    Obviously, Application Profiles can define related control operators
@@ -389,9 +389,9 @@ Internet-Draft                  CBOR CDE                       July 2024
 
 
 
-Bormann                  Expires 26 January 2025                [Page 7]
+Bormann                   Expires 19 April 2025                 [Page 7]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
               Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
@@ -436,18 +436,18 @@ Internet-Draft                  CBOR CDE                       July 2024
               bormann-cbor-numbers-00>.
 
    [I-D.mcnally-deterministic-cbor]
-              McNally, W., Allen, C., and C. Bormann, "dCBOR: A
-              Deterministic CBOR Application Profile", Work in Progress,
-              Internet-Draft, draft-mcnally-deterministic-cbor-10, 10
-              June 2024, <https://datatracker.ietf.org/doc/html/draft-
-              mcnally-deterministic-cbor-10>.
+              McNally, W., Allen, C., Bormann, C., and L. Lundblade,
+              "dCBOR: A Deterministic CBOR Application Profile", Work in
+              Progress, Internet-Draft, draft-mcnally-deterministic-
+              cbor-11, 8 August 2024,
+              <https://datatracker.ietf.org/doc/html/draft-mcnally-
+              deterministic-cbor-11>.
 
 
 
-
-Bormann                  Expires 26 January 2025                [Page 8]
+Bormann                   Expires 19 April 2025                 [Page 8]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
 Appendix A.  Application Profiles
@@ -501,9 +501,9 @@ Appendix A.  Application Profiles
 
 
 
-Bormann                  Expires 26 January 2025                [Page 9]
+Bormann                   Expires 19 April 2025                 [Page 9]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
 Appendix B.  Implementers' Checklists
@@ -557,9 +557,9 @@ Appendix B.  Implementers' Checklists
 
 
 
-Bormann                  Expires 26 January 2025               [Page 10]
+Bormann                   Expires 19 April 2025                [Page 10]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
 B.1.  Preferred Serialization
@@ -613,9 +613,9 @@ B.1.1.  Preferred Serialization Encoders
 
 
 
-Bormann                  Expires 26 January 2025               [Page 11]
+Bormann                   Expires 19 April 2025                [Page 11]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
           -  For NaNs, the value to be preserved includes the sign bit,
@@ -638,7 +638,7 @@ Internet-Draft                  CBOR CDE                       July 2024
        *  Negative integers from -(2^64) to -1 MUST be encoded as a type
           1 integer.
 
-       *  Leading zeros MUST not be present in the byte string content
+       *  Leading zeros MUST NOT be present in the byte string content
           of tag 2 and 3.
 
        (This also applies to the use of tags 2 and 3 within other tags,
@@ -669,9 +669,9 @@ B.1.2.  Preferred Serialization Decoders
 
 
 
-Bormann                  Expires 26 January 2025               [Page 12]
+Bormann                   Expires 19 April 2025                [Page 12]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
        *  Double- and single-precision values SHOULD be accepted;
@@ -725,9 +725,9 @@ B.3.1.  CDE Encoders
 
 
 
-Bormann                  Expires 26 January 2025               [Page 13]
+Bormann                   Expires 19 April 2025                [Page 13]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
    2.  CDE encoders MUST sort maps by the CBOR representation of the map
@@ -781,9 +781,9 @@ Contributors
 
 
 
-Bormann                  Expires 26 January 2025               [Page 14]
+Bormann                   Expires 19 April 2025                [Page 14]
 
-Internet-Draft                  CBOR CDE                       July 2024
+Internet-Draft                  CBOR CDE                    October 2024
 
 
 Author's Address
@@ -837,4 +837,4 @@ Author's Address
 
 
 
-Bormann                  Expires 26 January 2025               [Page 15]
+Bormann                   Expires 19 April 2025                [Page 15]
