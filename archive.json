@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T01:16:58.012889+00:00",
+  "timestamp": "2024-10-17T01:16:12.971736+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -133,15 +133,15 @@
       "id": "I_kwDOJ8fYd8553fNd",
       "title": "additional information in integers vs doubles",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "In the section on reducing floating point numbers to integers, I believe it would be appropriate to clearly specify behavior of other floating point reductions, e.g. reducing 0.5 from double to a half-width float.\r\n\r\nIn addition, I believe the behavior needs to be defined as to what an application should do when conversion of an integer to a floating point number is in itself lossy, e.g. what to do if an application expects a double but the CBOR value received is the decimal 9007199254740993. Silent truncation would make the round-trip non-deterministic.",
       "createdAt": "2023-12-16T03:42:40Z",
-      "updatedAt": "2024-01-24T19:33:41Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-16T10:57:40Z",
+      "closedAt": "2024-10-16T10:57:40Z",
       "comments": [
         {
           "author": "hildjj",
@@ -149,6 +149,13 @@
           "body": "See the section on [preferred serialization](https://www.rfc-editor.org/rfc/rfc8949.html#name-preferred-serialization) in RFC8949, and read the dCBOR [draft](https://www.ietf.org/archive/id/draft-mcnally-deterministic-cbor-07.html), then see what else this spec needs?",
           "createdAt": "2024-01-24T19:33:40Z",
           "updatedAt": "2024-01-24T19:33:40Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Additional information about the use of numbers in CBOR has been captured in https://www.ietf.org/archive/id/draft-bormann-cbor-numbers-00.html -- I believe if we need any additional discussion of this, that should go there.",
+          "createdAt": "2024-10-16T10:57:40Z",
+          "updatedAt": "2024-10-16T10:57:40Z"
         }
       ]
     },
@@ -849,6 +856,32 @@
       "mergeCommit": {
         "oid": "374be6737dff5e4fdf6c7cfad3b20a0ceea891fc"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOJ8fYd85-zqBJ",
+      "title": "Prepare the 2024-10-16 interim.",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/21",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-16T10:29:47Z",
+      "updatedAt": "2024-10-16T12:17:54Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "5cb7ae377cd7ab3c673ff72c0c1573b726a8b028",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "interim-2024-10-16",
+      "headRefOid": "ca14c3f8a716e3225a852c7f2930a6b271c54fc8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
