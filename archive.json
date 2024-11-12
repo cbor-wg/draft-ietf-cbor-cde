@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-10T01:19:42.310209+00:00",
+  "timestamp": "2024-11-12T01:14:26.213200+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -325,6 +325,22 @@
       "createdAt": "2024-09-28T13:36:07Z",
       "updatedAt": "2024-11-03T16:15:47Z",
       "closedAt": "2024-11-03T16:15:47Z",
+      "comments": []
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOJ8fYd86d-XhT",
+      "title": "ALDR Comments",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/22",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "My understanding is that in moving away from Application Profiles to ALDR, the notion that there are many *classes* of application that will layer on top of CDE is no longer. I think this is good. There's no eCBOR and fCBOR follow-ons to dCBOR, each of which has dozens of applications in each class. \r\n\r\nSo ALDR is primarily about application-specific rules now.\r\n\r\nA question is why do applications that use CDE have any more need for rules than applications that use preferred serialization or any sort of serialization.\r\n\r\nPreferred Serialization of big numbers requires *reduction* of the range of big numbers from -(2^64) through (2^64)-1 to integers. This is an example of an ALDR-like rule outside of CDE.\r\n\r\nSince this is about application-specific rules, I'd say that every application protocol excludes something, usually a lot. For example most protocols exclude floating-point just by not using it.\r\n\r\nDescribing the notion of a reduction seems useful for some applications that want an expanded notion of determinism past serialization into the data model. My preference would be to describe it as an application design consideration in an appendix titled \"Reductions\" or such.\r\n\r\nA lot of the description about reduction would be why they are useful for determinism in some contexts.\r\n\r\nA lot of the text in Appendix A is still oriented such that there is going to be an eCBOR, fCBOR,... I'd like to see that reoriented. I think the dCBOR document shouldn't refer to itself as a profile anymore.\r\n\r\nI don't think we need the concept of ALDR. We didn't need a conceptual name to write RFC 8949 section 5, \"Creating CBOR-Based Protocols\".",
+      "createdAt": "2024-11-11T20:49:00Z",
+      "updatedAt": "2024-11-11T20:49:00Z",
+      "closedAt": null,
       "comments": []
     }
   ],
