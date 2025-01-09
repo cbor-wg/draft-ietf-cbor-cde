@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-07T01:17:02.906693+00:00",
+  "timestamp": "2025-01-09T01:16:26.027963+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -902,6 +902,53 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOJ8fYd86HC88a",
+      "title": "Avoid using the contentious word \"profile\" except for CDE itself.",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/23",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-08T09:38:05Z",
+      "updatedAt": "2025-01-08T14:04:21Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "b468eb16f12a6ab0e6e25c59e0ae8e2eae15219f",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "avoid-profile",
+      "headRefOid": "6325c7f4f3498862181a491c9e94f6bc82cadea1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ8fYd86XOy0a",
+          "commit": {
+            "abbreviatedOid": "6325c7f"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-08T14:04:21Z",
+          "updatedAt": "2025-01-08T14:04:21Z",
+          "comments": [
+            {
+              "originalPosition": 64,
+              "body": "CWT might be a stronger reference if you could use it to explain ALDR",
+              "createdAt": "2025-01-08T14:04:21Z",
+              "updatedAt": "2025-01-08T14:04:22Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
