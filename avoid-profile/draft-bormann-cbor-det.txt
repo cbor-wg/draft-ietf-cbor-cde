@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                            8 January 2025
-Expires: 12 July 2025
+Intended status: Informational                           18 January 2025
+Expires: 22 July 2025
 
 
                     CBOR: On Deterministic Encoding
@@ -49,11 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 July 2025.
+   This Internet-Draft will expire on 22 July 2025.
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 1]
+Bormann                   Expires 22 July 2025                  [Page 1]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 2]
+Bormann                   Expires 22 July 2025                  [Page 2]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -165,7 +165,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 3]
+Bormann                   Expires 22 July 2025                  [Page 3]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -221,7 +221,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 4]
+Bormann                   Expires 22 July 2025                  [Page 4]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -277,7 +277,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 5]
+Bormann                   Expires 22 July 2025                  [Page 5]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -333,7 +333,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 6]
+Bormann                   Expires 22 July 2025                  [Page 6]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -389,7 +389,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 7]
+Bormann                   Expires 22 July 2025                  [Page 7]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -445,7 +445,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 8]
+Bormann                   Expires 22 July 2025                  [Page 8]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -501,7 +501,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                  [Page 9]
+Bormann                   Expires 22 July 2025                  [Page 9]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -557,7 +557,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 10]
+Bormann                   Expires 22 July 2025                 [Page 10]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -613,7 +613,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 11]
+Bormann                   Expires 22 July 2025                 [Page 11]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -669,7 +669,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 12]
+Bormann                   Expires 22 July 2025                 [Page 12]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -725,7 +725,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 13]
+Bormann                   Expires 22 July 2025                 [Page 13]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -781,7 +781,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 14]
+Bormann                   Expires 22 July 2025                 [Page 14]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -837,7 +837,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 15]
+Bormann                   Expires 22 July 2025                 [Page 15]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -893,7 +893,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 16]
+Bormann                   Expires 22 July 2025                 [Page 16]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -949,7 +949,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 17]
+Bormann                   Expires 22 July 2025                 [Page 17]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -957,9 +957,9 @@ Internet-Draft          On Deterministic Encoding           January 2025
    [I-D.ietf-cbor-edn-literals]
               Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
               Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
-              literals-14, 9 December 2024,
+              literals-16, 8 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              edn-literals-14>.
+              edn-literals-16>.
 
    [I-D.ietf-mediaman-suffixes]
               Sporny, M. and A. Guy, "Media Type Suffixes", Work in
@@ -1005,7 +1005,7 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 18]
+Bormann                   Expires 22 July 2025                 [Page 18]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -1061,7 +1061,7 @@ Author's Address
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 19]
+Bormann                   Expires 22 July 2025                 [Page 19]
 
 Internet-Draft          On Deterministic Encoding           January 2025
 
@@ -1117,4 +1117,4 @@ Internet-Draft          On Deterministic Encoding           January 2025
 
 
 
-Bormann                   Expires 12 July 2025                 [Page 20]
+Bormann                   Expires 22 July 2025                 [Page 20]
