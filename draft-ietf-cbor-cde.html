@@ -20,19 +20,19 @@ potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders. 
     ' name="description">
-<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="xml2rfc 3.25.0" name="generator">
 <meta content="draft-ietf-cbor-cde-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.24.0
-    Python 3.12.7
+  xml2rfc 3.25.0
+    Python 3.12.8
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
+    Jinja2 3.1.5
     lxml 5.3.0
     platformdirs 4.3.6
-    pycountry 22.3.5
-    PyYAML 6.0.1
+    pycountry 24.6.1
+    PyYAML 6.0.2
     requests 2.32.3
     setuptools 70.3.0
     wcwidth 0.2.13
@@ -288,6 +288,12 @@ body {
 }
 
 /* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
   font-weight: 680;
@@ -319,6 +325,7 @@ h4, h5, h6 {
 /* general structure */
 .author {
   padding-bottom: 0.3em;
+  vertical-align: top;
 }
 #abstract+p {
   font-size: 18px;
@@ -396,25 +403,26 @@ svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
 ol, ul {
   padding: 0;
   margin: 0 0 0.5em 2em;
-}
-:is(ol, ul) :is(ol, ul) {
-  margin-left: 1em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
 }
 li {
   margin: 0 0 0.25em 0;
 }
-.ulCompact li {
-  margin: 0;
-}
 ul.empty, .ulEmpty {
   list-style-type: none;
-}
-ul.empty li, .ulEmpty li {
-  margin-top: 0.5em;
+  & li {
+    margin-top: 0.5em;
+  }
 }
 :is(ul, ol).compact, .ulCompact, .olCompact {
-  line-height: 1;
   margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
 }
 
 /* definition lists */
@@ -422,38 +430,39 @@ dl {
   clear: left;
   --indent: 3ch;
   /* --indent: attr(indent ch); not supported in any browser, but we can dream */
-}
-dl.olPercent {
-  --indent: 5ch;
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
 }
 dl > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
 }
-dl.dlNewline > dt {
-  float: none;
-}
 dl > dd {
   margin-bottom: .8em;
   margin-left: var(--indent) !important; /* stupid element overrides */
   min-height: 2ex;
 }
-dl.olPercent > dt {
-  min-width: calc(var(--indent) - 2ch);
-}
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
-}
-:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
-  margin-top: 0;
-}
-:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
-  margin-bottom: 0;
-}
-dl > dd > dl {
-  margin-top: 0.5em;
-  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
 }
 :is(dd, span).break {
   display: none;
@@ -517,6 +526,7 @@ figcaption, caption {
   font-style: italic;
   margin: 0.5em 1.5em;
   text-align: left;
+  caption-side: bottom;
 }
 @media screen {
   /* Auto-collapse boilerplate. */
@@ -534,7 +544,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -571,6 +585,7 @@ cite {
 
 /* tables */
 table {
+  width: auto;
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
@@ -585,6 +600,16 @@ table.center {
 table.left {
   margin-right: auto;
 }
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
 thead, tbody {
   border: 1px solid var(--line-color);
 }
@@ -615,9 +640,11 @@ a.pilcrow {
   margin-left: 3px;
   opacity: 0.2;
   user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
 }
-a.pilcrow[href] { color: var(--pilcrow-weak); }
-a.pilcrow[href]:hover { text-decoration: none; }
 @media not print {
   :hover > a.pilcrow {
     opacity: 1;
@@ -657,26 +684,28 @@ sub, sup {
   font-size: var(--small-font-size);
   line-height: 18px;
   --identifier-width: 15ch;
-}
-#identifiers dt {
-  width: var(--identifier-width);
-  min-width: var(--identifier-width);
-  clear: left;
-  float: left;
-  text-align: right;
-  margin-right: 1ch;
-}
-#identifiers dd {
-  margin: 0;
-  margin-left: calc(1em + var(--identifier-width)) !important;
-  min-width: 5em;
-}
-#identifiers .authors .author {
-  display: inline-block;
-  margin-right: 1.5em;
-}
-#identifiers .authors .org {
-  font-style: italic;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
 }
 
 /* The prepared/rendered info at the very bottom of the page */
@@ -687,9 +716,6 @@ sub, sup {
   margin-top: 2em;
 }
 .docInfo .prepared {
-  float: left;
-}
-.docInfo .prepared {
   float: right;
 }
 
@@ -697,53 +723,48 @@ sub, sup {
 #toc {
   padding: 0.75em 0 2em 0;
   margin-bottom: 1em;
-}
-@media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
   }
 }
-#toc nav ul {
-  margin: 0 0.5em 0 0;
-  padding: 0;
-  list-style: none;
-}
-#toc nav li {
-  line-height: 1.3em;
-  margin: 2px 0;
-  padding-left: 1.2em;
-  text-indent: -1.2em;
-}
-#toc a.xref {
-  white-space: normal;
-}
-/* references */
-.references dt {
-  text-align: right;
-  font-weight: bold;
-  min-width: 10ch;
-  margin-right: 1.5ch;
-}
-.references dt:target::before {
-  content: "⇒";
-  width: 15px;
-  margin: 0 10px 0 -25px;
-}
-.references dd {
-  margin-left: 12ch !important;
-  overflow: auto;
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
 }
 
-.refInstance {
-  margin-bottom: 1.25em;
-}
-
-.references .ascii {
-  margin-bottom: 0.25em;
-}
-
-/* index */
 #rfc\.index\.index + ul {
   margin-left: 0;
 }
@@ -751,21 +772,33 @@ sub, sup {
 /* authors */
 address.vcard {
   font-style: normal;
-  margin: 1em 0;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
 }
-address.vcard .nameRole {
-  font-weight: 700;
-  margin-left: 0;
-}
-address.vcard .label {
-  margin: 0.5em 0;
-}
-address.vcard .type {
-  display: none;
-}
-.alternative-contact {
-  margin: 1.5em 0 1em;
-}
+
 hr.addr {
   border-top: 1px dashed;
   margin: 0;
@@ -787,6 +820,7 @@ hr.addr {
   }
 }
 
+/* Comments */
 .rfcEditorRemove p:first-of-type {
   font-style: italic;
 }
@@ -797,7 +831,31 @@ hr.addr {
 .crefSource {
   font-style: italic;
 }
-/* alternative layout for smaller screens */
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
 @media screen and (max-width: 929px) {
   #toc {
     position: fixed;
@@ -808,9 +866,6 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc.active {
-      opacity: 1;
   }
   #toc h2 {
     margin: 0;
@@ -823,17 +878,17 @@ hr.addr {
     background-color: #444;
     color: white;
     cursor: pointer;
-  }
-  #toc h2::before { /* css hamburger */
-    float: right;
-    position: relative;
-    width: 1em;
-    height: 1px;
-    left: -164px;
-    margin: 8px 0 0 0;
-    background: white none repeat scroll 0 0;
-    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-    content: "";
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
   }
   #toc nav {
     display: none;
@@ -844,14 +899,13 @@ hr.addr {
     height: calc(100vh - 48px);
     border-left: 1px solid #ddd;
   }
-  #toc.active nav {
-    display: block;
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
   }
   /* Make the collapsed ToC header render white on gray also when it's a link */
   #toc h2 a,
-  #toc h2 a:link,
-  #toc h2 a:focus,
-  #toc h2 a:hover,
+  #toc h2 a:is(:link, :focus, :hover),
   #toc a.toplink,
   #toc a.toplink:hover {
     color: white;
@@ -859,11 +913,11 @@ hr.addr {
     text-decoration: none;
   }
   #toc a.toplink {
-    margin-top: 2px;
+    margin: 2px 0.5em 0;
   }
 }
 
-/* alternative layout for wide screens */
+/* TOC layout for wide screens */
 @media screen and (min-width: 930px) {
   body {
     padding-right: 360px;
@@ -892,20 +946,12 @@ hr.addr {
     overscroll-behavior: contain;
     scrollbar-width: thin;
   }
-  #toc nav > ul  {
-    margin-bottom: 2em;
-  }
-  #toc ul {
-    margin: 0 0 0 4px;
-    font-size: var(--small-font-size);
-  }
-  #toc ul :is(p, li) {
-    margin: 2px 0;
-    line-height: 22px;
-  }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
   }
 }
 
@@ -948,9 +994,6 @@ hr.addr {
   td {
     border-top: 1px solid #ddd;
   }
-  .toplink {
-    display: none;
-  }
 }
 
 @page :first {
@@ -973,82 +1016,6 @@ hr.addr {
   size: A4;
   margin-bottom: 45mm;
   padding-top: 20px;
-}
-
-/* Changes introduced to fix issues found during implementation */
-
-/* Separate body from document info even without intervening H1 */
-section {
-  clear: both;
-}
-
-/* Top align author divs, to avoid names without organization dropping level with org names */
-.author {
-  vertical-align: top;
-}
-
-/* Style section numbers with more space between number and title */
-.section-number {
-  padding-right: 0.5em;
-}
-
-/* Add styling for a link in the ToC that points to the top of the document */
-a.toplink {
-  float: right;
-  margin: 8px 0.5em 0;
-}
-
-/* Provide styling for table cell text alignment */
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
-}
-
-/* Make the alternative author contact information look less like just another
-   author, and group it closer with the primary author contact information */
-.alternative-contact {
-  margin: 0.5em 0 0.25em 0;
-}
-address .non-ascii {
-  margin: 0 0 0 2em;
-}
-
-/* With it being possible to set tables with alignment
-  left, center, and right, { width: 100%; } does not make sense */
-table {
-  width: auto;
-}
-
-/* Avoid reference text that sits in a block with very wide left margin,
-   because of a long floating dt label.*/
-.references dd {
-  overflow: visible;
-}
-
-/* Control caption placement */
-caption {
-  caption-side: bottom;
-}
-
-/* Limit the width of the author address vcard, so names in right-to-left
-   script don't end up on the other side of the page. */
-
-address.vcard {
-  max-width: 20em;
-  margin-right: auto;
-}
-
-/* For address alignment dependent on LTR or RTL scripts */
-address div.left {
-  text-align: left;
-}
-address div.right {
-  text-align: right;
 }
 
 /* Dark mode. */
@@ -1087,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">November 2024</td>
+<td class="right">January 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 7 May 2025</td>
+<td class="center">Expires 25 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1104,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-03" class="published">3 November 2024</time>
+<time datetime="2025-01-21" class="published">21 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-07">7 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-25">25 July 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1169,7 +1136,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1178,7 +1145,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1327,12 +1294,12 @@ CBOR decoder implementations.
 non-interoperable variants of CDE, this document identifies
 Application-level Deterministic Representation (ALDR) rules as a
 concept that is separate from CDE itself (<a href="#aldr" class="auto internal xref">Appendix A</a>).
-ALDR rules are layered on top of the CBOR CDE Profile and address
+ALDR rules are layered on top of the CDE and address
 requirements on deterministic representation of application data
 that are specific to an application or a set of applications.
 ALDR rules are often provided with a specification for a CBOR-based
 protocol, or, if needed, can be provided by referencing a shared "ALDR
-Profile" that is defined in a separate document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+ruleset" that is defined in a separate document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1395,7 +1362,7 @@ lengths in the basic generic data model, i.e., by mandating the
 preferred serialization for all integers (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2-6">
 <li id="section-2-6.1">
-          <p id="section-2-6.1.1">The CBOR Common Deterministic Encoding Profile (CDE) turns this
+          <p id="section-2-6.1.1">CDE turns this
 recommendation into a mandate: Integers that can be represented by
 basic major type 0 and 1 are encoded using the deterministic
 encoding defined for them, and integers outside this range are
@@ -1418,8 +1385,8 @@ deterministic encoding in the context of CDE.<a href="#section-2-7" class="pilcr
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-03#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
-Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices, which need to
-be made to obtain a CBOR Common Deterministic Encoding Profile (CDE).
+Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices; these need to
+be made to obtain the CBOR Common Deterministic Encoding Profile (CDE).
 Specifically, CDE specifies (in the order of the bullet list at the end of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>):<a href="#section-2-8" class="pilcrow">¶</a></p>
 <ol start="2" type="1" class="normal type-1" id="section-2-9">
 <li id="section-2-9.1">
@@ -1445,7 +1412,7 @@ in Section 6.2.1 of <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</sp
 Specifically, this means that shorter forms of encodings for a NaN
 are used when that can be achieved by only removing trailing zeros
 in the NaN payload (example serializations are available in
-<span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-00#appendix-A.1.2" class="relref">Appendix A.1.2</a> of [<a href="#I-D.bormann-cbor-numbers" class="cite xref">I-D.bormann-cbor-numbers</a>]</span>).
+<span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-01#appendix-A.1.2" class="relref">Appendix A.1.2</a> of [<a href="#I-D.bormann-cbor-numbers" class="cite xref">I-D.bormann-cbor-numbers</a>]</span>).
 Further clarifying a "should"-level statement in Section 6.2.1 of
 <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, the CBOR encoding always uses a leading bit of 1 in the
 significand to encode a quiet NaN; the use of signaling NaNs by
@@ -1470,7 +1437,8 @@ actually used by an application.<a href="#section-2-9.5.1" class="pilcrow">¶</a
 </li>
       </ol>
 <p id="section-2-10">The main intent here is to preserve the basic generic data model, so
-applications (in their ALDR rules or by referencing ALDR Profiles, see
+applications (in their ALDR rules or by referencing a separate ALDR
+ruleset document, see
 <a href="#aldr" class="auto internal xref">Appendix A</a>) can
 make their own decisions within that data model.
 E.g., an application's ALDR rules can decide that it only ever allows a
@@ -1637,7 +1605,7 @@ number of this RFC and remove this note.</span><a href="#section-5-1" class="pil
 <dd class="break"></dd>
 <dt id="I-D.bormann-cbor-numbers">[I-D.bormann-cbor-numbers]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"On Numbers in CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-numbers-00</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-00">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"On Numbers in CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-numbers-01</span>, <time datetime="2025-01-08" class="refDate">8 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-01">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.bormann-dispatch-modern-network-unicode">[I-D.bormann-dispatch-modern-network-unicode]</dt>
         <dd>
@@ -1646,6 +1614,14 @@ number of this RFC and remove this note.</span><a href="#section-5-1" class="pil
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
         <dd>
 <span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">L. Lundblade</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-11</span>, <time datetime="2024-08-08" class="refDate">8 August 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-11">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-11</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8392">[RFC8392]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9581">[RFC9581]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refAuthor">Gamari, B.</span>, and <span class="refAuthor">H. Birkholz</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags for Time, Duration, and Period"</span>, <span class="seriesInfo">RFC 9581</span>, <span class="seriesInfo">DOI 10.17487/RFC9581</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9581">https://www.rfc-editor.org/rfc/rfc9581</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="UAX-15">[UAX-15]</dt>
       <dd>
@@ -1662,45 +1638,81 @@ number of this RFC and remove this note.</span><a href="#section-5-1" class="pil
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-application-level-determini" class="section-name selfRef">Application-level Deterministic Representation Rules</a>
       </h2>
 <p id="appendix-A-1">This appendix is informative.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">While the CBOR Common Deterministic Encoding Profile (CDE) provides
-for commonality between different applications of CBOR, it can be useful
-to further constrain the set of data items handled in a group of
-applications (<em>exclusions</em>) and to define further mappings
-(<em>reductions</em>) that help the applications in such a group get by with
-the exclusions.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
-<p id="appendix-A-3">For example, the dCBOR ALDR Profile <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span> specifies the use of CDE
-together with some application-level rules, such as a
+<p id="appendix-A-2">CBOR application protocols are agreements about how to use CBOR for a
+specific application or set of applications.
+Application protocols make representation decisions in order to
+constrain the variety of ways in which some aspect of the information
+model could be represented in the CBOR data model for the application.
+For instance, there are several CBOR tags that can be used to
+represent a time stamp (such as 0, 1, 1001), each with some specific
+properties.
+Application protocols that need to represent a timestamp typically
+choose a specific tag and further constrain its use where necessary
+(e.g., tag 1001 was designed to cover a wide variety of applications
+<span>[<a href="#RFC9581" class="cite xref">RFC9581</a>]</span>).
+Where no tag is available, the application protocol can design its own
+format for some application data.
+Even where a tag is available, the application data can choose to use
+its definitions without actually encoding the tag (e.g., by using its
+content in specific places in an "unwrapped" form).
+For instance, CWT defines an application data type "NumericDate"
+which is formed by "unwrapping" tag 1 (see Sections <a href="https://rfc-editor.org/rfc/rfc8392#section-2" class="relref">2</a> and <a href="https://rfc-editor.org/rfc/rfc8392#section-5" class="relref">5</a> of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>).<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">CWT does not use deterministic encoding.
+Applications that do, and that derive CBOR data items from application data
+without maintaining a record of which choices are to be made when
+representing these application data, generally make rules for these
+choices as part of the application protocol.
+In this document, we speak about these choices as Application-Level
+Deterministic Representation Rules (ALDR for short).
+For example, a hypothetical variant of CWT that makes use of
+deterministic encoding will need to make an ALDR for NumericDate: the
+definition of tag 1 allows both integer and floating point numbers
+(Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.2" class="relref">3.4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>), and the application rules may
+choose to only use integers, or to always use integers when the
+numeric value can be represented as such without loss of information,
+or to always use floating point numbers, or some of these for some
+application data and different ones for other application data.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<p id="appendix-A-4">CDE provides for encoding commonality between different applications
+of CBOR once these application-level choices have been made.
+It can be useful for an application or a group of applications to
+document their choices aimed at deterministic representation of
+application data in a general way, constraining the set of data items
+handled (<em>exclusions</em>) and defining further mappings (<em>reductions</em>)
+that help the application(s) get by with the exclusions.
+This can be done in the application protocol specification (similar to
+the way CWT defines NumericDate) or as a separate document.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+<p id="appendix-A-5">For example, the dCBOR specification <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span> specifies the use of CDE
+together with some application-level rules, i.e., an ALDR ruleset, such as a
 requirement for all text strings to be in Unicode Normalization Form C
 (NFC) <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span> — this specific requirement is an example for an <em>exclusion</em> of
 non-NFC data at the application level, and it invites implementing a <em>reduction</em> by
-routine normalization of text strings.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
-<p id="appendix-A-4">ALDR rules (including those specified by an ALDR Profile) enable
-simply using the shared CBOR Common Deterministic Encoding Profile; they do not
+routine normalization of text strings.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
+<p id="appendix-A-6">ALDR rules (including rules specified in a ALDR ruleset document) enable
+simply using implementations of the common CDE; they do not
 "fork" CBOR in the sense of requiring distinct generic encoder/decoder
-implementations.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
-<p id="appendix-A-5">An implementation of specific ALDR rules combined with a CDE
+implementations.<a href="#appendix-A-6" class="pilcrow">¶</a></p>
+<p id="appendix-A-7">An implementation of specific ALDR rules combined with a CDE
 implementation produces well-formed,
 deterministically encoded CBOR according to <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, and existing
 generic CBOR decoders will therefore be able to decode it, including
 those that check for Deterministic Encoding ("CDE decoders", see also
 <a href="#impcheck" class="auto internal xref">Appendix B</a>).
 Similarly, generic CBOR encoders will be able to produce valid CBOR
-that can be processed by an implementation enforcing an application's
-ALDR rule set if the encoder was handed data model level information
-from an application that simply conformed to the application's ALDR rules.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
-<p id="appendix-A-6">Please note that the separation between standard CBOR processing and
+that can be ingested by an implementation that enforces an application's
+ALDR rules if the encoder was handed data model level information
+from an application that simply conformed to those ALDR rules.<a href="#appendix-A-7" class="pilcrow">¶</a></p>
+<p id="appendix-A-8">Please note that the separation between standard CBOR processing and
 the processing required by the ALDR rules is a conceptual one:
 Instead of employing generic encoders/decoders, both ALDR rule
-processing and standard CBOR processing can be combined into an
+processing and standard CBOR processing can be combined into a specialized
 encoder/decoder specifically designed for a particular set of ALDR
-rules (such as those required by a particular application or set of
-applications, possibly specified as an ALDR Profile).<a href="#appendix-A-6" class="pilcrow">¶</a></p>
-<p id="appendix-A-7">ALDR rules are intended to be used in conjunction with an
-application, which typically will use a subset of the CBOR generic
+rules.<a href="#appendix-A-8" class="pilcrow">¶</a></p>
+<p id="appendix-A-9">ALDR rules are intended to be used in conjunction with an
+application, which typically will naturally use a subset of the CBOR generic
 data model, which in turn
-influences which subset of the ALDR rules is used by the application
+influences which subset of the ALDR rules is used by the specific application
 (in particular if the application simply references a more general
-ALDR profile).
+ALDR ruleset document).
 As a result, ALDR rules themselves place no direct
 requirement on what minimum subset of CBOR is implemented.
 For instance, a set of ALDR rules might include rules for the
@@ -1708,7 +1720,7 @@ processing of floating point values, but there is no requirement that
 implementations of that set of ALDR rules support floating point
 numbers (or any other kind of number, such as arbitrary precision
 integers or 64-bit negative integers) when they are used with
-applications that do not use them.<a href="#appendix-A-7" class="pilcrow">¶</a></p>
+applications that do not use them.<a href="#appendix-A-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="impcheck">
@@ -1748,7 +1760,7 @@ implementation.<a href="#appendix-B-3.2.1" class="pilcrow">¶</a></p>
           <p id="appendix-B-3.3.1">Preferred serialization and CDE only affect serialization.
 They do not place any requirements, exclusions, mappings or such on
 the data model level.
-Sets of ALDR rules such as the dCBOR ALDR Profile are different as they can affect
+ALDR rules such as the ALDR ruleset defined by dCBOR are different as they can affect
 the data model by restricting some values and ranges.<a href="#appendix-B-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-3.4">
@@ -1762,7 +1774,7 @@ employing non-checking CBOR decoders negates many of its benefits.
 Decoder implementations that advertise "support" for preferred
 serialization or CDE need to check the encoding and reject
 input that is not encoded to the encoding specification in use.
-Again, ALDR Profiles such as dCBOR may pose additional
+Again, ALDR rules such as those in dCBOR may pose additional
 requirements, such as requiring rejection of non-conforming inputs.<a href="#appendix-B-3.4.1" class="pilcrow">¶</a></p>
 <p id="appendix-B-3.4.2">
 If a generic decoder needs to be used that does not "support" CDE, a
@@ -2037,10 +2049,10 @@ correctly CDE-decoded data item).<a href="#appendix-B.3.2-2.2.2" class="pilcrow"
       </h2>
 <p id="appendix-C-1">An earlier version of this document was based on the work of Wolf
 McNally and Christopher Allen as documented in <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>, which
-serves as an example for an ALDR Profile.
+serves as an example for an ALDR ruleset document.
 We would like to explicitly acknowledge that this work has
 contributed greatly to shaping the concept of a CBOR Common
-Deterministic Encoding and ALDR rules/Profiles on top of that.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+Deterministic Encoding and ALDR rules/rulesets on top of that.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
