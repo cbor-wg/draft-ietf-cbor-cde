@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-21T01:14:17.528001+00:00",
+  "timestamp": "2025-01-23T01:14:43.005088+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -908,24 +908,26 @@
       "id": "PR_kwDOJ8fYd86HC88a",
       "title": "Avoid using the contentious word \"profile\" except for CDE itself.",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/23",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-01-08T09:38:05Z",
-      "updatedAt": "2025-01-18T13:42:17Z",
+      "updatedAt": "2025-01-21T19:47:31Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "b468eb16f12a6ab0e6e25c59e0ae8e2eae15219f",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "avoid-profile",
       "headRefOid": "e09c6c93b5203a6ac9d494ae4dfed39d5b1afbc8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-21T19:47:31Z",
+      "mergedAt": "2025-01-21T19:47:31Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "e3a91df56b057027f6c15bc9b69294086d0b38ef"
+      },
       "comments": [],
       "reviews": [
         {
