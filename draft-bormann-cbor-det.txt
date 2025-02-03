@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                           21 January 2025
-Expires: 25 July 2025
+Intended status: Informational                           3 February 2025
+Expires: 7 August 2025
 
 
            CBOR: On Deterministic Encoding and Representation
@@ -49,13 +49,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 July 2025.
+   This Internet-Draft will expire on 7 August 2025.
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 1]
+Bormann                   Expires 7 August 2025                 [Page 1]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 2]
+Bormann                   Expires 7 August 2025                 [Page 2]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 3]
+Bormann                   Expires 7 August 2025                 [Page 3]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    Deterministic Encoding is defined in Section 4.2 of RFC 8949 [STD94]
@@ -221,9 +221,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 4]
+Bormann                   Expires 7 August 2025                 [Page 4]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    Deterministic Representation:  A representation process that employs
@@ -277,9 +277,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 5]
+Bormann                   Expires 7 August 2025                 [Page 5]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
       -  CI (Continuous Integration) may capture Deterministically
@@ -333,9 +333,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 6]
+Bormann                   Expires 7 August 2025                 [Page 6]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
 2.3.  Security: Signing Inputs
@@ -389,9 +389,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 7]
+Bormann                   Expires 7 August 2025                 [Page 7]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    Some applications will also want to check that an encoded input
@@ -445,9 +445,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 8]
+Bormann                   Expires 7 August 2025                 [Page 8]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    semantics as well, and using a quite different form.  Is that maybe
@@ -501,9 +501,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                  [Page 9]
+Bormann                   Expires 7 August 2025                 [Page 9]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
       encoding (no leading zero bytes) in Tag 2/3 space only if the
@@ -557,9 +557,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 10]
+Bormann                   Expires 7 August 2025                [Page 10]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
       which would be considered to be the semantically separate floating
@@ -613,9 +613,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 11]
+Bormann                   Expires 7 August 2025                [Page 11]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    There is precedent for this approach, as ASN.1 DER (Distinguished
@@ -669,9 +669,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 12]
+Bormann                   Expires 7 August 2025                [Page 12]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    Additional elements could be added to a decoder API to give
@@ -725,9 +725,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 13]
+Bormann                   Expires 7 August 2025                [Page 13]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
       -  the key/value pairs of a map-shaped key, deterministically
@@ -781,9 +781,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 14]
+Bormann                   Expires 7 August 2025                [Page 14]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    The next subsection describes some of the considerations that led to
@@ -837,9 +837,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 15]
+Bormann                   Expires 7 August 2025                [Page 15]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
       |  specific values may not be available to applications that
@@ -893,9 +893,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 16]
+Bormann                   Expires 7 August 2025                [Page 16]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    2^53-1 to basic CBOR integers and leaves the others in floating point
@@ -949,9 +949,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 17]
+Bormann                   Expires 7 August 2025                [Page 17]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
@@ -1005,9 +1005,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 18]
+Bormann                   Expires 7 August 2025                [Page 18]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
    [IEEE754]  IEEE, "IEEE Standard for Floating-Point Arithmetic", IEEE
@@ -1061,9 +1061,9 @@ Internet-Draft  On Deterministic Encoding/Representation    January 2025
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 19]
+Bormann                   Expires 7 August 2025                [Page 19]
 
-Internet-Draft  On Deterministic Encoding/Representation    January 2025
+Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
 
               Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
@@ -1117,4 +1117,4 @@ Author's Address
 
 
 
-Bormann                   Expires 25 July 2025                 [Page 20]
+Bormann                   Expires 7 August 2025                [Page 20]

@@ -20,10 +20,10 @@ potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders. 
     ' name="description">
-<meta content="xml2rfc 3.25.0" name="generator">
+<meta content="xml2rfc 3.26.0" name="generator">
 <meta content="draft-ietf-cbor-cde-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.25.0
+  xml2rfc 3.26.0
     Python 3.12.8
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">January 2025</td>
+<td class="right">February 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 25 July 2025</td>
+<td class="center">Expires 7 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-21" class="published">21 January 2025</time>
+<time datetime="2025-02-03" class="published">3 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-25">25 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-07">7 August 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1375,7 +1375,7 @@ While the deterministic encoding of their tag internals is often
 covered by the <em>Core Deterministic Encoding Requirements</em>, the mapping
 of diverging platform application data types onto the tag contents may
 require additional attention to perform it in a deterministic way; see
-<span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-03#section-3.2" class="relref">Section 3.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for
+<span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04#section-3.2" class="relref">Section 3.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for
 more explanation as well as examples.
 As the CDE would continually
 need to address additional issues raised by the registration of new
@@ -1384,7 +1384,7 @@ deterministic encoding in the context of CDE.<a href="#section-2-7" class="pilcr
 <p id="section-2-8">A particularly difficult field to obtain deterministic encoding for is
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
-See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-03#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
+See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices; these need to
 be made to obtain the CBOR Common Deterministic Encoding Profile (CDE).
 Specifically, CDE specifies (in the order of the bullet list at the end of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>):<a href="#section-2-8" class="pilcrow">¶</a></p>
@@ -1601,7 +1601,7 @@ number of this RFC and remove this note.</span><a href="#section-5-1" class="pil
 <dl class="references">
 <dt id="I-D.bormann-cbor-det">[I-D.bormann-cbor-det]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR: On Deterministic Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-det-03</span>, <time datetime="2024-07-21" class="refDate">21 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-03">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR: On Deterministic Encoding and Representation"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-det-04</span>, <time datetime="2025-01-21" class="refDate">21 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.bormann-cbor-numbers">[I-D.bormann-cbor-numbers]</dt>
         <dd>
