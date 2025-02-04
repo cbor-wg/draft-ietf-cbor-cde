@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:13:48.295334+00:00",
+  "timestamp": "2025-02-04T01:15:06.399272+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -951,6 +951,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOJ8fYd86J53_T",
+      "title": "Add new section 2 about encoding choices; fix up ALDR explanations",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/24",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-03T21:11:31Z",
+      "updatedAt": "2025-02-03T21:11:31Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "9ca66321203435f571e7b6999e6eafe12d5d7149",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "encoding-choices",
+      "headRefOid": "37c0ea1831cbc3276cf43b3113841931368e0c1f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
