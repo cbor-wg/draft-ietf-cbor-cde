@@ -198,11 +198,11 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 2.  Encoding Choices in CBOR
 
-   In many cases, CBOR provides more than one way to encode (serialize
-   into a sequence of bytes) a data item.  This flexibility can provide
-   convenience for the generator of the encoded data item, but handling
-   the resulting variation can also put an onus on the decoder.  There
-   is no one perfect encoding choice that is optimal for all
+   In many cases, CBOR provides more than one way to encode a data item,
+   i.e., serialize it into a sequence of bytes.  This flexibility can
+   provide convenience for the generator of the encoded data item, but
+   handling the resulting variation can also put an onus on the decoder.
+   There is no one perfect encoding choice that is optimal for all
    applications.  Choosing the right constraints on these encoding
    choices is one element of application protocol design.  Defining
    predefined sets of such choices is a useful way to reduce variation
