@@ -283,7 +283,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
    application defining rules for ALDR (see also Appendix A).  Where
-   Deterministic Representation is not actually needed, Application-
+   Deterministic Representation is not actually needed, application-
    level representation rules of course can still be useful to amplify
    the benefits of Preferred or Basic Serialization.
 
