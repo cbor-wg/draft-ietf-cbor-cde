@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                   3 February 2025
-Expires: 7 August 2025
+Intended status: Best Current Practice                   7 February 2025
+Expires: 11 August 2025
 
 
                 CBOR Common Deterministic Encoding (CDE)
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 1]
+Bormann                  Expires 11 August 2025                 [Page 1]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -63,7 +63,7 @@ Internet-Draft                  CBOR CDE                   February 2025
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2025.
+   This Internet-Draft will expire on 11 August 2025.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 2]
+Bormann                  Expires 11 August 2025                 [Page 2]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -165,7 +165,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 3]
+Bormann                  Expires 11 August 2025                 [Page 3]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -221,7 +221,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 4]
+Bormann                  Expires 11 August 2025                 [Page 4]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -277,12 +277,12 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 5]
+Bormann                  Expires 11 August 2025                 [Page 5]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
 
-   application defining rules for ALDR (see also {#aldr}).  Where
+   application defining rules for ALDR (see also Appendix A).  Where
    Deterministic Representation is not actually needed, Application-
    level representation rules of course can still be useful to amplify
    the benefits of Preferred or Basic Serialization.
@@ -333,7 +333,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 6]
+Bormann                  Expires 11 August 2025                 [Page 6]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -389,7 +389,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 7]
+Bormann                  Expires 11 August 2025                 [Page 7]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -445,7 +445,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 8]
+Bormann                  Expires 11 August 2025                 [Page 8]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -501,7 +501,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 9]
+Bormann                  Expires 11 August 2025                 [Page 9]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -557,7 +557,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                [Page 10]
+Bormann                  Expires 11 August 2025                [Page 10]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -613,7 +613,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                [Page 11]
+Bormann                  Expires 11 August 2025                [Page 11]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -669,7 +669,7 @@ Appendix A.  Application-level Deterministic Representation
 
 
 
-Bormann                   Expires 7 August 2025                [Page 12]
+Bormann                  Expires 11 August 2025                [Page 12]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -725,7 +725,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                [Page 13]
+Bormann                  Expires 11 August 2025                [Page 13]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -781,7 +781,7 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 
 
-Bormann                   Expires 7 August 2025                [Page 14]
+Bormann                  Expires 11 August 2025                [Page 14]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -837,7 +837,7 @@ Appendix B.  Implementers' Checklists
 
 
 
-Bormann                   Expires 7 August 2025                [Page 15]
+Bormann                  Expires 11 August 2025                [Page 15]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -893,7 +893,7 @@ B.1.1.  Preferred Serialization Encoders
 
 
 
-Bormann                   Expires 7 August 2025                [Page 16]
+Bormann                  Expires 11 August 2025                [Page 16]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -949,7 +949,7 @@ B.1.2.  Preferred Serialization Decoders
 
 
 
-Bormann                   Expires 7 August 2025                [Page 17]
+Bormann                  Expires 11 August 2025                [Page 17]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -1005,7 +1005,7 @@ B.3.  CDE
 
 
 
-Bormann                   Expires 7 August 2025                [Page 18]
+Bormann                  Expires 11 August 2025                [Page 18]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -1061,7 +1061,7 @@ Acknowledgments
 
 
 
-Bormann                   Expires 7 August 2025                [Page 19]
+Bormann                  Expires 11 August 2025                [Page 19]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -1117,4 +1117,4 @@ Author's Address
 
 
 
-Bormann                   Expires 7 August 2025                [Page 20]
+Bormann                  Expires 11 August 2025                [Page 20]
