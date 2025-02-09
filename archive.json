@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-06T01:16:12.696912+00:00",
+  "timestamp": "2025-02-09T01:19:43.311269+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -964,19 +964,154 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-02-03T21:11:31Z",
-      "updatedAt": "2025-02-03T21:11:31Z",
+      "updatedAt": "2025-02-07T17:49:21Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "9ca66321203435f571e7b6999e6eafe12d5d7149",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "encoding-choices",
-      "headRefOid": "37c0ea1831cbc3276cf43b3113841931368e0c1f",
+      "headRefOid": "ace1bb1944822bfdf207c0bd1e47bcc62f6f4103",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ8fYd86bFrQ4",
+          "commit": {
+            "abbreviatedOid": "37c0ea1"
+          },
+          "author": "mguetschow",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Thanks, I like what I read :) some comments inline.",
+          "createdAt": "2025-02-07T14:54:28Z",
+          "updatedAt": "2025-02-07T15:49:10Z",
+          "comments": [
+            {
+              "originalPosition": 70,
+              "body": "```suggestion\r\nIn many cases, CBOR provides more than one way to encode a data item,\r\ni.e., serialize it into a sequence of bytes.\r\n```",
+              "createdAt": "2025-02-07T14:54:28Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 74,
+              "body": "```suggestion\r\nIn general, there is no single perfect encoding choice that is optimal for all\r\n```",
+              "createdAt": "2025-02-07T15:17:21Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 78,
+              "body": "```suggestion\r\nHaving predefined sets of such choices is a useful way to reduce\r\n```",
+              "createdAt": "2025-02-07T15:17:52Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 101,
+              "body": "```suggestion\r\nThese constraints still allow some variation. In particular, there is\r\n```",
+              "createdAt": "2025-02-07T15:19:37Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 107,
+              "body": "```suggestion\r\ndefining a deterministic (namely, lexicographic) order for the keys in a map.\r\n```",
+              "createdAt": "2025-02-07T15:20:31Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 124,
+              "body": "I like!",
+              "createdAt": "2025-02-07T15:25:46Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 129,
+              "body": "I'm not sure I can parse this. How would an application \"generate (...) CBOR data items\"? Shouldn't applications be concerned with application data items and not CBOR data items?\r\n\r\nI guess you want to allude to problems such as integer/float equivalence on the application layer, but I can't match that to the sentence as is.\r\n\r\nIsn't it then more about the application handling different (received) CBOR data items as the same application data item?",
+              "createdAt": "2025-02-07T15:31:12Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 134,
+              "body": "```suggestion\r\napplication-level representation rules of course can still be useful\r\n```",
+              "createdAt": "2025-02-07T15:31:30Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 135,
+              "body": "```suggestion\r\nto amplify the benefits of Preferred or Basic Serialization,\r\nbut would not fall into the category of ALDR rules.\r\n```\r\n\r\nCouldn't we instead loosen the term ALDR (to ALR?) to encompass those, too? The differentiation between CBOR layer encoding rules and application-layer encoding rules would also be present for those cases, and would benefit from a term, too, I'd say.",
+              "createdAt": "2025-02-07T15:34:51Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "```suggestion\r\nthe application defining rules for ALDR (see also {{aldr}}).\r\n```\r\n(not sure about the right hyperlink syntax)",
+              "createdAt": "2025-02-07T15:47:49Z",
+              "updatedAt": "2025-02-07T15:49:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd86bHS1F",
+          "commit": {
+            "abbreviatedOid": "37c0ea1"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-07T17:28:27Z",
+          "updatedAt": "2025-02-07T17:28:28Z",
+          "comments": [
+            {
+              "originalPosition": 107,
+              "body": "Hmm, you don't order the keys, you order the entries (by their keys).\r\nAlso, I tried to point out that we need to agree on an order (so that in the end gives a deterministic result, of course, but the agreement was the point).",
+              "createdAt": "2025-02-07T17:28:28Z",
+              "updatedAt": "2025-02-07T17:28:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd86bHcAA",
+          "commit": {
+            "abbreviatedOid": "37c0ea1"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-07T17:45:09Z",
+          "updatedAt": "2025-02-07T17:45:09Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "Well, something needs to go from the application's information model to the CBOR generic data model.  Generally, this needs to be part of the application -- generally not the business end, but somewhere on the belly.  The onus on being deterministic is on the originating application.  To deal with bugs and attacks, the ingesting application should then check that this is done properly.",
+              "createdAt": "2025-02-07T17:45:09Z",
+              "updatedAt": "2025-02-07T17:45:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd86bHeVC",
+          "commit": {
+            "abbreviatedOid": "37c0ea1"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-07T17:49:21Z",
+          "updatedAt": "2025-02-07T17:49:21Z",
+          "comments": [
+            {
+              "originalPosition": 135,
+              "body": "The representation of application data in CBOR data items generally is governed by rules, which we could indeed term ALRs.  But this is so obvious that there is little point do have a term for that.\r\n\r\nThe need for ALDRs, in contrast, is specific to deterministic representation, and it can be surprising if you haven't done deterministic representation of application data before.\r\nSo it is a good thing to point this out and to also relieve the reader from the potental misunderstanding that ALDR needs to be put into CDE, because all deterministic encoding is put there.\r\n",
+              "createdAt": "2025-02-07T17:49:21Z",
+              "updatedAt": "2025-02-07T17:49:21Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
