@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                   3 February 2025
-Expires: 7 August 2025
+Intended status: Best Current Practice                  10 February 2025
+Expires: 14 August 2025
 
 
                 CBOR Common Deterministic Encoding (CDE)
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 1]
+Bormann                  Expires 14 August 2025                 [Page 1]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -63,7 +63,7 @@ Internet-Draft                  CBOR CDE                   February 2025
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2025.
+   This Internet-Draft will expire on 14 August 2025.
 
 Copyright Notice
 
@@ -84,32 +84,32 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Structure of This Document  . . . . . . . . . . . . . . .   3
      1.2.  Conventions and Definitions . . . . . . . . . . . . . . .   3
-   2.  CBOR Common Deterministic Encoding Profile (CDE)  . . . . . .   4
-   3.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .   6
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
-   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
-     6.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Appendix A.  Application-level Deterministic Representation
-           Rules . . . . . . . . . . . . . . . . . . . . . . . . . .  10
-   Appendix B.  Implementers' Checklists . . . . . . . . . . . . . .  12
-     B.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  13
-       B.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  13
-       B.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  14
-     B.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  15
-       B.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  15
-       B.2.2.  Basic Serialization Decoders  . . . . . . . . . . . .  16
-     B.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  16
-       B.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  16
-       B.3.2.  CDE Decoders  . . . . . . . . . . . . . . . . . . . .  16
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  17
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  17
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  17
+   2.  Encoding Choices in CBOR  . . . . . . . . . . . . . . . . . .   4
+   3.  CBOR Common Deterministic Encoding Profile (CDE)  . . . . . .   6
+   4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .   8
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  11
+   Appendix A.  Application-level Deterministic Representation . . .  12
+   Appendix B.  Implementers' Checklists . . . . . . . . . . . . . .  15
+     B.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  16
+       B.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  16
+       B.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  17
+     B.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  18
+       B.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  18
+       B.2.2.  Basic Serialization Decoders  . . . . . . . . . . . .  18
+     B.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  18
+       B.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  19
+       B.3.2.  CDE Decoders  . . . . . . . . . . . . . . . . . . . .  19
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  19
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  20
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  20
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 2]
+Bormann                  Expires 14 August 2025                 [Page 2]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -129,11 +129,12 @@ Internet-Draft                  CBOR CDE                   February 2025
 
 1.1.  Structure of This Document
 
-   After introductory material, Section 2 defines the CBOR Common
-   Deterministic Encoding Profile (CDE).  Section 3 defines Concise Data
-   Definition Language (CDDL) support for indicating the use of CDE.
-   This is followed by the conventional sections for Security
-   Considerations (4), IANA Considerations (5), and References (6).
+   After introductory material (this introduction and Section 2),
+   Section 3 defines the CBOR Common Deterministic Encoding Profile
+   (CDE).  Section 4 defines Concise Data Definition Language (CDDL)
+   support for indicating the use of CDE.  This is followed by the
+   conventional sections for Security Considerations (5), IANA
+   Considerations (6), and References (7).
 
    The informative Appendix B provides brief checklists that
    implementers can use to check their CDE implementations.
@@ -147,11 +148,12 @@ Internet-Draft                  CBOR CDE                   February 2025
    Instead of giving rise to the definition of application-specific,
    non-interoperable variants of CDE, this document identifies
    Application-level Deterministic Representation (ALDR) rules as a
-   concept that is separate from CDE itself (Appendix A).  ALDR rules
-   are layered on top of the CDE and address requirements on
-   deterministic representation of application data that are specific to
-   an application or a set of applications.  ALDR rules are often
-   provided with a specification for a CBOR-based protocol, or, if
+   concept that is separate from CDE itself (Appendix A) and therefore
+   out of scope for this document.  ALDR rules are situated at the
+   application-level, i.e., on top of the CDE, and address requirements
+   on deterministic representation of application data that are specific
+   to an application or a set of applications.  ALDR rules are often
+   provided as part of a specification for a CBOR-based protocol, or, if
    needed, can be provided by referencing a shared "ALDR ruleset" that
    is defined in a separate document.
 
@@ -159,22 +161,34 @@ Internet-Draft                  CBOR CDE                   February 2025
 
    The conventions and definitions of [STD94] apply.
 
-   The term "CBOR Application" ("application" for short) is not
-   explicitly defined in [STD94]; this document uses it in the same
-   sense as it is used there, specifically for applications that use
 
 
 
-Bormann                   Expires 7 August 2025                 [Page 3]
+
+Bormann                  Expires 14 August 2025                 [Page 3]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
 
-   CBOR as an interchange format and use (often generic) CBOR encoders/
-   decoders to serialize/ingest the CBOR form of their application data
-   to be exchanged.  Similarly, "CBOR Protocol" is used as in [STD94]
-   for the protocol that governs the interchange of data in CBOR format
-   for a specific application or set of applications.
+   *  The term "CBOR Application" ("application" for short) is not
+      explicitly defined in [STD94]; this document uses it in the same
+      sense as it is used there, specifically for applications that use
+      CBOR as an interchange format and use (often generic) CBOR
+      encoders/decoders to serialize/ingest the CBOR form of their
+      application data to be exchanged.
+
+   *  Similarly, "CBOR Protocol" is used as in [STD94] for the protocol
+      that governs the interchange of data in CBOR format for a specific
+      application or set of applications.
+
+   *  "Representation" stands for the process, and its result, of
+      building the representation format out of (information-model
+      level) application data.
+
+   *  "Serialization" is used for the subset of this process, and its
+      result, that represents ("serializes") data in CBOR generic data
+      model form into encoded data items.  "Encoding" is often used as a
+      synonym when the focus is on that.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -182,19 +196,102 @@ Internet-Draft                  CBOR CDE                   February 2025
    [BCP14] (RFC2119) (RFC8174) when, and only when, they appear in all
    capitals, as shown here.
 
-2.  CBOR Common Deterministic Encoding Profile (CDE)
+2.  Encoding Choices in CBOR
+
+   In many cases, CBOR provides more than one way to encode a data item,
+   i.e., to serialize it into a sequence of bytes.  This flexibility can
+   provide convenience for the generator of the encoded data item, but
+   handling the resulting variation can also put an onus on the decoder.
+   In general, there is no single perfect encoding choice that is
+   optimal for all applications.  Choosing the right constraints on
+   these encoding choices is one element of application protocol design.
+   Having predefined sets of such choices is a useful way to reduce
+   variation between applications, enabling generic implementations.
+
+   Section 4.1 of RFC 8949 [STD94] provides a recommendation for a
+   _Preferred Serialization_. This recommendation is useful for most
+   CBOR applications, and it is a good choice for most applications.
+   Its main constraint is to choose the shortest _head_ (Section 3 of
+   RFC 8949 [STD94]) that preserves the value of a data item.
+
+   Preferred Serialization allows indefinite length encoding
+   (Section 3.2 of RFC 8949 [STD94]), which does not express the length
+   of a string, an array, or a map in its head.  Supporting both
+   definite length and indefinite length encoding is an additional onus
+
+
+
+Bormann                  Expires 14 August 2025                 [Page 4]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
+   on the decoder; many applications therefore choose not to use
+   indefinite length encoding at all.  We call Preferred Serialization
+   with this additional constraint _Basic Serialization_. Basic
+   Serialization is a common choice for applications that need to
+   further reduce the variability that needs to be handled by decoders,
+   potentially maximizing interoperability with partial (e.g.,
+   constrained) CBOR decoder implementations.
+
+   These constraints still allow some variation.  In particular, there
+   is more than one serialization for data items that contain maps: The
+   order of serialization of map entries is ignored in CBOR (as it is in
+   JSON), so maps with more than one entry have all permutations of
+   these entries as valid Basic Serializations. _Deterministic
+   Serialization_ builds on Basic Serialization by defining a common
+   (namely, lexicographic) order for the entries in a map.  For many
+   applications, ensuring this common order is an additional onus on the
+   generator that is not actually needed, so they do not choose
+   Deterministic Serialization.  However, if the objective is minimal
+   effort for the consuming application, deterministic map ordering can
+   be useful even outside the main use cases for Deterministic
+   Serialization that are further discussed in Section 2 of
+   [I-D.bormann-cbor-det].
+
+   Table 1 summarizes the increasingly restrictive sets of encoding
+   choices that have been given names in this section.
+
+        +=========================+================+==============+
+        | Set of Encoding Choices | Most Important | Applications |
+        |                         | Constraint     |              |
+        +=========================+================+==============+
+        | preferred               | shortest       | most         |
+        |                         | "head" variant |              |
+        +-------------------------+----------------+--------------+
+        | basic                   | + definite     | many         |
+        |                         | lengths only   |              |
+        +-------------------------+----------------+--------------+
+        | _deterministic_ ("CDE") | + common map   | specific     |
+        |                         | order          |              |
+        +-------------------------+----------------+--------------+
+
+             Table 1: Constraints on the Serialization of CBOR
+
+   Note that the objective to have a deterministic serialization for a
+   specific application data item can only be fulfilled if the
+   application itself does not generate multiple different CBOR data
+   items that represent that same (equivalent) application data item.
+   We speak of the need for Application-level Deterministic
+   Representation (ALDR), and we may want to aid achieving this by the
+
+
+
+Bormann                  Expires 14 August 2025                 [Page 5]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
+   application defining rules for ALDR (see also Appendix A).  Where
+   Deterministic Representation is not actually needed, application-
+   level representation rules of course can still be useful to amplify
+   the benefits of Preferred or Basic Serialization.
+
+3.  CBOR Common Deterministic Encoding Profile (CDE)
 
    This specification defines the _CBOR Common Deterministic Encoding
    Profile_ (CDE) based on the _Core Deterministic Encoding
    Requirements_ defined for CBOR in Section 4.2.1 of RFC 8949 [STD94].
-
-   In many cases, CBOR provides more than one way to encode a data item,
-   but also provides a recommendation for a _Preferred Serialization_.
-   The _CoRE Deterministic Encoding Requirements_ generally pick the
-   preferred serializations as mandatory; they also pick additional
-   choices such as definite-length encoding.  Finally, they define a map
-   ordering based on lexicographic ordering of the (deterministically)
-   encoded map keys.
 
    Note that this specific set of requirements is elective — in
    principle, other variants of deterministic encoding can be defined
@@ -219,13 +316,6 @@ Internet-Draft                  CBOR CDE                   February 2025
    by mandating the preferred serialization for all integers
    (Section 3.4.3 of RFC 8949 [STD94]).
 
-
-
-Bormann                   Expires 7 August 2025                 [Page 4]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
    1.  CDE turns this recommendation into a mandate: Integers that can
        be represented by basic major type 0 and 1 are encoded using the
        deterministic encoding defined for them, and integers outside
@@ -240,6 +330,14 @@ Internet-Draft                  CBOR CDE                   February 2025
    platform application data types onto the tag contents may require
    additional attention to perform it in a deterministic way; see
    Section 3.2 of [I-D.bormann-cbor-det] for more explanation as well as
+
+
+
+Bormann                  Expires 14 August 2025                 [Page 6]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
    examples.  As the CDE would continually need to address additional
    issues raised by the registration of new tags, this specification
    recommends that new tag registrations address deterministic encoding
@@ -274,14 +372,6 @@ Internet-Draft                  CBOR CDE                   February 2025
        apply to NaNs (with zero or non-zero payloads), using the
        canonical encoding of NaNs as defined in Section 6.2.1 of
        [IEEE754].  Specifically, this means that shorter forms of
-
-
-
-Bormann                   Expires 7 August 2025                 [Page 5]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
        encodings for a NaN are used when that can be achieved by only
        removing trailing zeros in the NaN payload (example
        serializations are available in Appendix A.1.2 of
@@ -297,14 +387,23 @@ Internet-Draft                  CBOR CDE                   February 2025
        quiet NaN with payload 0, which therefore deterministically
        encodes as 0xf97e00.
 
+
+
+Bormann                  Expires 14 August 2025                 [Page 7]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
    5.  There is no special handling of subnormal values.
 
    6.  CDE does not presume equivalence of basic floating point values
        with floating point values using other representations (e.g., tag
        4/5).  Such equivalences and related deterministic representation
        rules can be added at the ALDR level if desired, e.g., by
-       stipulating additional equivalences and by restricting the set of
-       data item values actually used by an application.
+       stipulating additional equivalences and deterministically
+       choosing exactly one representation for each such equivalence,
+       and by restricting in general the set of data item values
+       actually used by an application.
 
    The main intent here is to preserve the basic generic data model, so
    applications (in their ALDR rules or by referencing a separate ALDR
@@ -319,7 +418,7 @@ Internet-Draft                  CBOR CDE                   February 2025
    description is documenting specific encoding decisions for byte
    strings that carry embedded CBOR.
 
-3.  CDDL support
+4.  CDDL support
 
    CDDL defines the structure of CBOR data items at the data model
    level; it enables being specific about the data items allowed in a
@@ -330,14 +429,6 @@ Internet-Draft                  CBOR CDE                   February 2025
    data that can be encoded as [IEEE754] binary16.  Note that specifying
    "float32" for a floating point data item enables all floating point
    values that can be represented as binary32; this includes values that
-
-
-
-Bormann                   Expires 7 August 2025                 [Page 6]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
    can also be represented as binary16 and that will be so represented
    in Basic Serialization.
 
@@ -349,6 +440,15 @@ Internet-Draft                  CBOR CDE                   February 2025
    encoded in Common CBOR Deterministic Encoding.  The present
    specification adds two CDDL control operators that can be used for
    this.
+
+
+
+
+
+Bormann                  Expires 14 August 2025                 [Page 8]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
 
    The control operators .cde and .cdeseq are exactly like .cbor and
    .cborseq except that they also require the encoded data item(s) to be
@@ -363,7 +463,7 @@ Internet-Draft                  CBOR CDE                   February 2025
    specific structure, this can be expressed by the right-hand side
    (instead of using the most general CDDL type any here).
 
-   (Note that the .cborseq control operator does not enable specifying
+   (Note that the .cdeseq control operator does not enable specifying
    different deterministic encoding requirements for the elements of the
    sequence.  If a use case for such a feature becomes known, it could
    be added.)
@@ -372,7 +472,7 @@ Internet-Draft                  CBOR CDE                   February 2025
    control operators that also embody the processing required by those
    ALDR rules, and are encouraged to do so.
 
-4.  Security Considerations
+5.  Security Considerations
 
    The security considerations in Section 10 of RFC 8949 [STD94] apply.
    The use of deterministic encoding can mitigate issues arising out of
@@ -382,27 +482,29 @@ Internet-Draft                  CBOR CDE                   February 2025
    generally, additional security properties of deterministic encoding
    can rely on this check being performed properly.
 
-
-
-
-
-
-
-
-Bormann                   Expires 7 August 2025                 [Page 7]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
-5.  IANA Considerations
+6.  IANA Considerations
 
 
    // RFC Editor: please replace RFCXXXX with the RFC number of this RFC
    // and remove this note.
 
-   This document requests IANA to register the contents of Table 1 into
+   This document requests IANA to register the contents of Table 2 into
    the registry "CDDL Control Operators" of the [IANA.cddl] registry
    group:
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 14 August 2025                 [Page 9]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
 
                           +=========+===========+
                           | Name    | Reference |
@@ -412,13 +514,13 @@ Internet-Draft                  CBOR CDE                   February 2025
                           | .cdeseq | [RFCXXXX] |
                           +---------+-----------+
 
-                            Table 1: New control
+                            Table 2: New control
                               operators to be
                                  registered
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [BCP14]    Best Current Practice 14,
               <https://www.rfc-editor.org/info/bcp14>.
@@ -441,15 +543,6 @@ Internet-Draft                  CBOR CDE                   February 2025
               Std 754-2019, DOI 10.1109/IEEESTD.2019.8766229,
               <https://ieeexplore.ieee.org/document/8766229>.
 
-
-
-
-
-Bormann                   Expires 7 August 2025                 [Page 8]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
               Express Concise Binary Object Representation (CBOR) and
@@ -460,12 +553,21 @@ Internet-Draft                  CBOR CDE                   February 2025
               <https://www.rfc-editor.org/info/std94>.
               At the time of writing, this STD comprises the following:
 
+
+
+
+
+Bormann                  Expires 14 August 2025                [Page 10]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
               Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", STD 94, RFC 8949,
               DOI 10.17487/RFC8949, December 2020,
               <https://www.rfc-editor.org/info/rfc8949>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [I-D.bormann-cbor-det]
               Bormann, C., "CBOR: On Deterministic Encoding and
@@ -491,30 +593,49 @@ Internet-Draft                  CBOR CDE                   February 2025
               McNally, W., Allen, C., Bormann, C., and L. Lundblade,
               "dCBOR: A Deterministic CBOR Application Profile", Work in
               Progress, Internet-Draft, draft-mcnally-deterministic-
-              cbor-11, 8 August 2024,
+              cbor-12, 7 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-mcnally-
-              deterministic-cbor-11>.
+              deterministic-cbor-12>.
 
    [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
-
-
-
-Bormann                   Expires 7 August 2025                 [Page 9]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
 
    [RFC9581]  Bormann, C., Gamari, B., and H. Birkholz, "Concise Binary
               Object Representation (CBOR) Tags for Time, Duration, and
               Period", RFC 9581, DOI 10.17487/RFC9581, August 2024,
               <https://www.rfc-editor.org/rfc/rfc9581>.
 
+   [RFC9679]  Isobe, K., Tschofenig, H., and O. Steele, "CBOR Object
+              Signing and Encryption (COSE) Key Thumbprint", RFC 9679,
+              DOI 10.17487/RFC9679, December 2024,
+              <https://www.rfc-editor.org/rfc/rfc9679>.
+
+
+
+Bormann                  Expires 14 August 2025                [Page 11]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
+   [STD96]    Internet Standard 96,
+              <https://www.rfc-editor.org/info/std96>.
+              At the time of writing, this STD comprises the following:
+
+              Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Structures and Process", STD 96, RFC 9052,
+              DOI 10.17487/RFC9052, August 2022,
+              <https://www.rfc-editor.org/info/rfc9052>.
+
+              Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Countersignatures", STD 96, RFC 9338,
+              DOI 10.17487/RFC9338, December 2022,
+              <https://www.rfc-editor.org/info/rfc9338>.
+
    [UAX-15]   "Unicode Normalization Forms", Unicode Standard Annex,
               <https://unicode.org/reports/tr15/>.
 
-Appendix A.  Application-level Deterministic Representation Rules
+Appendix A.  Application-level Deterministic Representation
 
    This appendix is informative.
 
@@ -524,40 +645,87 @@ Appendix A.  Application-level Deterministic Representation Rules
    ways in which some aspect of the information model could be
    represented in the CBOR data model for the application.  For
    instance, there are several CBOR tags that can be used to represent a
-   time stamp (such as 0, 1, 1001), each with some specific properties.
-   Application protocols that need to represent a timestamp typically
-   choose a specific tag and further constrain its use where necessary
-   (e.g., tag 1001 was designed to cover a wide variety of applications
-   [RFC9581]).  Where no tag is available, the application protocol can
-   design its own format for some application data.  Even where a tag is
-   available, the application data can choose to use its definitions
-   without actually encoding the tag (e.g., by using its content in
-   specific places in an "unwrapped" form).  For instance, CWT defines
-   an application data type "NumericDate" which is formed by
-   "unwrapping" tag 1 (see Sections 2 and 5 of [RFC8392]).
+   time stamp (such as tag 0, 1, 1001), each with some specific
+   properties.  Application protocols that need to represent a timestamp
+   typically choose a specific tag and further constrain its use where
+   necessary (e.g., tag 1001 was designed to cover a wide variety of
+   applications [RFC9581]).  Where no tag is available, the application
+   protocol can design its own format for some application data.  Even
+   where a tag is available, the application data can choose to use its
+   definitions without actually encoding the tag (e.g., by using its
+   content in specific places in an "unwrapped" form).
 
-   CWT does not use deterministic encoding.  Applications that do, and
-   that derive CBOR data items from application data without maintaining
-   a record of which choices are to be made when representing these
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 14 August 2025                [Page 12]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
+   For instance, CWT defines an application data type "NumericDate"
+   which (as an application-level rule) is formed by "unwrapping" tag 1
+   (see Sections 2 and 5 of [RFC8392]).  CWT does stop short of using
+   deterministic encoding.  A hypothetical deterministic variant of CWT
+   would need to make an additional ALDR rule for NumericDate, as the
+   definition of tag 1 allows both integer and floating point numbers
+   (Section 3.4.2 of RFC 8949 [STD94]), which allows multiple
+   application-level representations of integral numbers.  These
+   application rules may choose to only ever use integers, or to always
+   use integers when the numeric value can be represented as such
+   without loss of information, or to always use floating point numbers,
+   or some of these for some application data and different ones for
+   other application data.
+
+   Applications that require Deterministic Representation, and that
+   derive CBOR data items from application data without maintaining a
+   record of which choices are to be made when representing these
    application data, generally make rules for these choices as part of
    the application protocol.  In this document, we speak about these
-   choices as Application-Level Deterministic Representation Rules (ALDR
-   for short).  For example, a hypothetical variant of CWT that makes
-   use of deterministic encoding will need to make an ALDR for
-   NumericDate: the definition of tag 1 allows both integer and floating
-   point numbers (Section 3.4.2 of RFC 8949 [STD94]), and the
-   application rules may choose to only use integers, or to always use
-   integers when the numeric value can be represented as such without
-   loss of information, or to always use floating point numbers, or some
-   of these for some application data and different ones for other
-   application data.
+   choices as Application-level Deterministic Representation Rules (ALDR
+   rules for short).
+
+   As an example, [RFC9679] is intended to derive a (deterministic)
+   thumbprint from a COSE key [STD96].  Section 4 of [RFC9679] provides
+   the rules that are used to construct a deterministic application-
+   level representation (ALDR rules).  Only certain data from a COSE key
+   are selected to be included in that ALDR, and, where the COSE can
+   choose multiple representations of semantically equivalent
+   application data, the ALDR rules choose one of them, potentially
+   requiring a conversion (Section 4.2 of [RFC9679]):
+
+   |  Note: [RFC9052] supports both compressed and uncompressed point
+   |  representations.  For interoperability, implementations adhering
+   |  to this specification MUST use the uncompressed point
+   |  representation.  Therefore, the y-coordinate is expressed as a
+   |  bstr.  If an implementation uses the compressed point
+   |  representation, it MUST first convert it to the uncompressed form
+   |  for the purpose of thumbprint calculation.
 
 
 
 
 
 
-Bormann                   Expires 7 August 2025                [Page 10]
+
+
+
+
+
+
+
+Bormann                  Expires 14 August 2025                [Page 13]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
@@ -567,23 +735,25 @@ Internet-Draft                  CBOR CDE                   February 2025
    be useful for an application or a group of applications to document
    their choices aimed at deterministic representation of application
    data in a general way, constraining the set of data items handled
-   (_exclusions_) and defining further mappings (_reductions_) that help
-   the application(s) get by with the exclusions.  This can be done in
-   the application protocol specification (similar to the way CWT
-   defines NumericDate) or as a separate document.
+   (_exclusions_, e.g., no compressed point representations) and
+   defining further mappings (_reductions_, e.g., conversions to
+   uncompressed form) that help the application(s) get by with the
+   exclusions.  This can be done in the application protocol
+   specification (as in [RFC9679]) or as a separate document.
 
-   For example, the dCBOR specification [I-D.mcnally-deterministic-cbor]
-   specifies the use of CDE together with some application-level rules,
-   i.e., an ALDR ruleset, such as a requirement for all text strings to
-   be in Unicode Normalization Form C (NFC) [UAX-15] — this specific
-   requirement is an example for an _exclusion_ of non-NFC data at the
-   application level, and it invites implementing a _reduction_ by
-   routine normalization of text strings.
+   An early example of a separate document is the dCBOR specification
+   [I-D.mcnally-deterministic-cbor]. dCBOR specifies the use of CDE
+   together with some application-level rules, i.e., an ALDR ruleset,
+   such as a requirement for all text strings to be in Unicode
+   Normalization Form C (NFC) [UAX-15] — this specific requirement is an
+   example for an _exclusion_ of non-NFC data at the application level,
+   and it invites implementing a _reduction_ by routine normalization of
+   text strings.
 
    ALDR rules (including rules specified in a ALDR ruleset document)
    enable simply using implementations of the common CDE; they do not
    "fork" CBOR in the sense of requiring distinct generic encoder/
-   decoder implementations.
+   decoder implementations for each application.
 
    An implementation of specific ALDR rules combined with a CDE
    implementation produces well-formed, deterministically encoded CBOR
@@ -608,16 +778,16 @@ Internet-Draft                  CBOR CDE                   February 2025
    generic data model, which in turn influences which subset of the ALDR
    rules is used by the specific application (in particular if the
    application simply references a more general ALDR ruleset document).
-   As a result, ALDR rules themselves place no direct requirement on
-   what minimum subset of CBOR is implemented.  For instance, a set of
 
 
 
-Bormann                   Expires 7 August 2025                [Page 11]
+Bormann                  Expires 14 August 2025                [Page 14]
 
 Internet-Draft                  CBOR CDE                   February 2025
 
 
+   As a result, ALDR rules themselves place no direct requirement on
+   what minimum subset of CBOR is implemented.  For instance, a set of
    ALDR rules might include rules for the processing of floating point
    values, but there is no requirement that implementations of that set
    of ALDR rules support floating point numbers (or any other kind of
@@ -656,24 +826,6 @@ Appendix B.  Implementers' Checklists
       dCBOR are different as they can affect the data model by
       restricting some values and ranges.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann                   Expires 7 August 2025                [Page 12]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
    *  CBOR decoders in general (as opposed to "CDE decoders"
       specifically advertised as supporting CDE) are not required to
       check for preferred serialization or CDE and reject inputs that do
@@ -682,6 +834,14 @@ Internet-Draft                  CBOR CDE                   February 2025
       decoders negates many of its benefits.  Decoder implementations
       that advertise "support" for preferred serialization or CDE need
       to check the encoding and reject input that is not encoded to the
+
+
+
+Bormann                  Expires 14 August 2025                [Page 15]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
+
       encoding specification in use.  Again, ALDR rules such as those in
       dCBOR may pose additional requirements, such as requiring
       rejection of non-conforming inputs.
@@ -722,14 +882,6 @@ B.1.1.  Preferred Serialization Encoders
        *  The length of the argument indicates half (binary16, ai =
           0x19), single (binary32, ai = 0x1a) and double (binary64, ai =
           0x1b) precision encoding.  If multiple of these encodings
-
-
-
-Bormann                   Expires 7 August 2025                [Page 13]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
           preserve the precision of the value to be encoded, only the
           shortest form of these MUST be emitted.  That is, encoders
           MUST support half-precision and single-precision floating
@@ -737,6 +889,14 @@ Internet-Draft                  CBOR CDE                   February 2025
 
        *  [IEEE754] Infinites and NaNs, and thus NaN payloads, MUST be
           supported, to the extent possible on the platform.
+
+
+
+
+Bormann                  Expires 14 August 2025                [Page 16]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
 
           As with all floating point numbers, Infinites and NaNs MUST be
           encoded in the shortest of double, single or half precision
@@ -778,14 +938,6 @@ B.1.2.  Preferred Serialization Decoders
    implementations need to pay attention to at least the following
    requirements:
 
-
-
-
-Bormann                   Expires 7 August 2025                [Page 14]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
    1.  Decoders MUST accept shortest-form encoded arguments (see
        Section 3 of RFC 8949 [STD94]).
 
@@ -794,6 +946,13 @@ Internet-Draft                  CBOR CDE                   February 2025
 
    3.  If text or byte strings are supported, definite-length text or
        byte strings MUST be accepted.
+
+
+
+Bormann                  Expires 14 August 2025                [Page 17]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
 
    4.  If floating-point numbers are supported, the following apply:
 
@@ -833,15 +992,6 @@ B.2.1.  Basic Serialization Encoders
    1.  If maps or arrays are emitted, they MUST use definite-length
        encoding (never indefinite-length).
 
-
-
-
-
-Bormann                   Expires 7 August 2025                [Page 15]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
    2.  If text or byte strings are emitted, they MUST use definite-
        length encoding (never indefinite-length).
 
@@ -851,6 +1001,14 @@ B.2.2.  Basic Serialization Decoders
    Preferred Serialization Decoder requirements.
 
 B.3.  CDE
+
+
+
+
+Bormann                  Expires 14 August 2025                [Page 18]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
 
 B.3.1.  CDE Encoders
 
@@ -890,14 +1048,6 @@ B.3.2.  CDE Decoders
        (except maybe via special diagnostic channels with no potential
        for confusion with a correctly CDE-decoded data item).
 
-
-
-
-Bormann                   Expires 7 August 2025                [Page 16]
-
-Internet-Draft                  CBOR CDE                   February 2025
-
-
 Acknowledgments
 
    An earlier version of this document was based on the work of Wolf
@@ -906,6 +1056,15 @@ Acknowledgments
    ALDR ruleset document.  We would like to explicitly acknowledge that
    this work has contributed greatly to shaping the concept of a CBOR
    Common Deterministic Encoding and ALDR rules/rulesets on top of that.
+
+
+
+
+
+Bormann                  Expires 14 August 2025                [Page 19]
+
+Internet-Draft                  CBOR CDE                   February 2025
+
 
 Contributors
 
@@ -949,4 +1108,13 @@ Author's Address
 
 
 
-Bormann                   Expires 7 August 2025                [Page 17]
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 14 August 2025                [Page 20]
