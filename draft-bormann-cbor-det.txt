@@ -938,9 +938,9 @@ Internet-Draft  On Deterministic Encoding/Representation   February 2025
 
    [I-D.ietf-cbor-cde]
               Bormann, C., "CBOR Common Deterministic Encoding (CDE)",
-              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-07,
-              21 January 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-cbor-cde-07>.
+              Work in Progress, Internet-Draft, draft-ietf-cbor-cde-08,
+              10 February 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-cde-08>.
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
