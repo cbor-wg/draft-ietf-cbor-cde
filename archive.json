@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-09T01:19:43.311269+00:00",
+  "timestamp": "2025-02-11T01:15:45.932634+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -957,24 +957,26 @@
       "id": "PR_kwDOJ8fYd86J53_T",
       "title": "Add new section 2 about encoding choices; fix up ALDR explanations",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/24",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-02-03T21:11:31Z",
-      "updatedAt": "2025-02-07T17:49:21Z",
+      "updatedAt": "2025-02-10T10:23:44Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "9ca66321203435f571e7b6999e6eafe12d5d7149",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "encoding-choices",
       "headRefOid": "ace1bb1944822bfdf207c0bd1e47bcc62f6f4103",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-10T10:23:44Z",
+      "mergedAt": "2025-02-10T10:23:43Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "c84b2c32714be92d88f903f7b952db107fb2b38d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -983,7 +985,7 @@
             "abbreviatedOid": "37c0ea1"
           },
           "author": "mguetschow",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "Thanks, I like what I read :) some comments inline.",
           "createdAt": "2025-02-07T14:54:28Z",
@@ -1110,6 +1112,59 @@
               "updatedAt": "2025-02-07T17:49:21Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd86bSb_q",
+          "commit": {
+            "abbreviatedOid": "37c0ea1"
+          },
+          "author": "mguetschow",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T10:16:59Z",
+          "updatedAt": "2025-02-10T10:16:59Z",
+          "comments": [
+            {
+              "originalPosition": 135,
+              "body": "ACK :)",
+              "createdAt": "2025-02-10T10:16:59Z",
+              "updatedAt": "2025-02-10T10:16:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd86bSdxC",
+          "commit": {
+            "abbreviatedOid": "37c0ea1"
+          },
+          "author": "mguetschow",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T10:20:00Z",
+          "updatedAt": "2025-02-10T10:20:00Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "Okay, makes sense. Thanks for re-explaining!",
+              "createdAt": "2025-02-10T10:20:00Z",
+              "updatedAt": "2025-02-10T10:20:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJ8fYd86bSeI5",
+          "commit": {
+            "abbreviatedOid": "ace1bb1"
+          },
+          "author": "mguetschow",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-10T10:20:38Z",
+          "updatedAt": "2025-02-10T10:20:38Z",
+          "comments": []
         }
       ]
     }
