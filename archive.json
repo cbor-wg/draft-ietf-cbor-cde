@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-04T01:19:39.534077+00:00",
+  "timestamp": "2025-03-06T01:19:52.118258+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -339,9 +339,17 @@
       "labels": [],
       "body": "My understanding is that in moving away from Application Profiles to ALDR, the notion that there are many *classes* of application that will layer on top of CDE is no longer. I think this is good. There's no eCBOR and fCBOR follow-ons to dCBOR, each of which has dozens of applications in each class. \r\n\r\nSo ALDR is primarily about application-specific rules now.\r\n\r\nA question is why do applications that use CDE have any more need for rules than applications that use preferred serialization or any sort of serialization.\r\n\r\nPreferred Serialization of big numbers requires *reduction* of the range of big numbers from -(2^64) through (2^64)-1 to integers. This is an example of an ALDR-like rule outside of CDE.\r\n\r\nSince this is about application-specific rules, I'd say that every application protocol excludes something, usually a lot. For example most protocols exclude floating-point just by not using it.\r\n\r\nDescribing the notion of a reduction seems useful for some applications that want an expanded notion of determinism past serialization into the data model. My preference would be to describe it as an application design consideration in an appendix titled \"Reductions\" or such.\r\n\r\nA lot of the description about reduction would be why they are useful for determinism in some contexts.\r\n\r\nA lot of the text in Appendix A is still oriented such that there is going to be an eCBOR, fCBOR,... I'd like to see that reoriented. I think the dCBOR document shouldn't refer to itself as a profile anymore.\r\n\r\nI don't think we need the concept of ALDR. We didn't need a conceptual name to write RFC 8949 section 5, \"Creating CBOR-Based Protocols\".",
       "createdAt": "2024-11-11T20:49:00Z",
-      "updatedAt": "2024-11-11T20:49:00Z",
+      "updatedAt": "2025-03-05T15:16:56Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "Consider this text:  https://mailarchive.ietf.org/arch/msg/cbor/G6w0Rz0eW9GJNd1et8I899Ua9MQ/\n\nFor the appendix, per interim discussion today. cc @chrysn ",
+          "createdAt": "2025-03-05T15:16:55Z",
+          "updatedAt": "2025-03-05T15:16:55Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -652,7 +660,7 @@
       "labels": [],
       "body": "Simplify Abstract; Move motivation to Introduction",
       "createdAt": "2024-06-12T19:22:23Z",
-      "updatedAt": "2024-07-08T23:47:59Z",
+      "updatedAt": "2025-03-05T15:13:22Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
@@ -670,6 +678,13 @@
           "body": "Thank you!  I think I like what I'm seeing, but some assembly is still required.\r\nUnfortunately, I ran out of time integrating this change; I plan to have this as part of -04 on 2024-07-21.",
           "createdAt": "2024-07-08T23:47:58Z",
           "updatedAt": "2024-07-08T23:47:58Z"
+        },
+        {
+          "author": "chrysn",
+          "authorAssociation": "MEMBER",
+          "body": "Please revisit whether that is still current (a lot changed in this document, @cabo mentioned in today's interim that it is probably overtaken by events)",
+          "createdAt": "2025-03-05T15:13:21Z",
+          "updatedAt": "2025-03-05T15:13:21Z"
         }
       ],
       "reviews": []
