@@ -538,6 +538,43 @@ This document requests IANA to register the contents of
 
 --- back
 
+# Information Model, Data Model and Serialization
+
+To understand well what is discussed here, it is very useful to possess a clear understanding of the difference between an information model, a data model and serialization.
+
+|  | Information Model | Data Model | Serialization |
+| Abstraction Level | Top level; conceptual | Realization of information in data structures and data types | Actual bytes encoded for transmission |
+| Example | The temperature of something | A floating-point number representing the temperature | Encoded CBOR of a floating-point number |
+| Standards | (UML) | CDDL | CBOR |
+| Implementation Representation | API Input to CBOR encoder library, output from CBOR decoder library | Encoded CBOR in memory or for transmission |
+
+CBOR defines a pallet of basic types that are used to construct the data model of a CBOR protocol.
+The pallet includes the usual types: integers, floating-point numbers, strings, arrays and maps.
+The process of serializing these types is the primary focus of RFC 8949.
+
+CBOR is fully extendable, allowing additional types to be constructed out of the basic data model.
+These make up the extended CBOR data model.
+{{Section 3.4. of RFC8949@-cbor}} standardizes several of these such as big numbers and date/time encoding.
+There's a little more to CBOR's data types, particularly simple types, but it is unnecessary to discuss them here.
+
+The data model of a CBOR protocol can be described using the standardized notation defined in {{-cddl}}.
+
+CBOR allows variation in the way a particular data type is serialized.
+For example, the integer 1 can be serialized in several different ways.
+This flexibility is necessary to accommodate highly constrained environments.
+It also leads to the need for this document and to define preferred serialization and CDE.
+
+That is, CBOR has clear separation between its data model and serialization.
+JSON does not have this separation.
+Each type in JSON corresponds exactly to an exact serialization and vice versa.
+Note that JSON's data model types are not explicitly defined; they derive implicitly from JSON's serialization.
+
+Generally speaking, a serialization should be orthogonal to data models.
+It should be capable of representing every CBOR type and the complete range of values each type can hold.
+This ensures a given serialization method can be applied to any CBOR protocol
+Preferred serialization has this characteristic.
+
+
 # Implementers' Checklists {#impcheck}
 
 This appendix is informative.
