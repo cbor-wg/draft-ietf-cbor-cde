@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T01:20:10.521536+00:00",
+  "timestamp": "2025-03-23T01:26:32.212769+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -350,6 +350,38 @@
           "updatedAt": "2025-03-05T15:16:55Z"
         }
       ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOJ8fYd86vBCFy",
+      "title": "Remove threat-based justification of ALDR",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/25",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "There's text that justifies the need for ALDR to defend a threat from wayward serialization schemes (e.g., from badly conceived  eCBOR, fCBOR and gCBOR). That threat doesn't really exist, so this text is unnecessary and confusing.\n\nIt's in several places in the document. not just the appendix.\n\nI think the main frame up for ALDR should be orient around helping designers of deterministic protocols. I think that's what the readers need.\n\n\n",
+      "createdAt": "2025-03-20T18:09:56Z",
+      "updatedAt": "2025-03-20T18:09:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOJ8fYd86vBE-p",
+      "title": "Add concrete ALDR recommendations for all data model items in RFC 8949",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/26",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://mailarchive.ietf.org/arch/msg/cbor/n1uFlXyT27vYHcnI4MnyzDjVCz0/\n\nI think these can replace the COSE thumbprint example. (I'm hoping for less text as well as clarity).\n\nI think this is important in that we should actually do what we say we people should do.",
+      "createdAt": "2025-03-20T18:15:46Z",
+      "updatedAt": "2025-03-20T18:15:46Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
