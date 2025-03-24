@@ -551,21 +551,21 @@ For a good understanding of this document, it is helpful to understand the diffe
 CBOR doesn't provide facilities for information models.
 They are mentioned here for completeness and to provide some context.
 
-CBOR defines a palette of basic types with the usual integers, floating-point numbers, strings, arrays and maps.
-This is extendable by constructing further types from the basic types.
+CBOR defines a palette of basic types that are the usual integers, floating-point numbers, strings, arrays and maps.
+Extended types may be constructing from these basic types.
 These basic and extended types are used to construct the data model of a CBOR protocol.
+While not required, the data model of a protocol is often described using {{-cddl}}.
 The types in the data model are serialized per RFC 8949 to create encoded CBOR.
 
-The data model of a CBOR protocol can be described using the standardized notation defined in {{-cddl}}.
-
 In contrast to JSON, CBOR separates the data model from serialization.
-Each data type in JSON corresponds exactly to a single serialization and vice versa.
+In JSON, there is one specific serialization for each data type and vice versa.
 That is not true in CBOR.
 
 CBOR allows variation in the way some data types can be serialized.
 For example, the integer 1 can be serialized in several different ways.
 This flexibility is necessary to accommodate highly constrained environments.
-The implications of this variation are substantial, leading to the need for this document and to define basic/preferred serialization.
+The implications of allowing this variation are substantial.
+It leads to the need for basic/preferred serialization, to many sections in RFC 8949 and to this document.
 
 General purpose CBOR serialization schemes should be orthogonal to data models.
 They should be able to represent all possible data types and their full range of values.
