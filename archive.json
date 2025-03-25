@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-23T01:26:32.212769+00:00",
+  "timestamp": "2025-03-25T01:22:24.134514+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1214,6 +1214,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOJ8fYd86P6IHO",
+      "title": "Describe information model, data model and serialization",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/27",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "A big motivation for this is that it would have taken six months off some of the email list discussions for me.\r\n\r\nAlso, JSON doesn't have the separation between data mode and serialization, so it might not be widely understood.\r\n\r\nAlso, understanding this is an under pinning to understand why serialization is the way it is.",
+      "createdAt": "2025-03-24T17:27:06Z",
+      "updatedAt": "2025-03-24T17:27:07Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "2cacb744ca196fce05070b8e343747c7b3b5b994",
+      "headRepository": "laurencelundblade/draft-ietf-cbor-cde",
+      "headRefName": "models",
+      "headRefOid": "42ca309776b0419d9265b737372a828963792969",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
