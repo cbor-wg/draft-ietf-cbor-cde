@@ -33,7 +33,8 @@ contributor:
 - name: Laurence Lundblade
   org: Security Theory LLC
   email: lgl@securitytheory.com
-  contribution: Laurence provided most of the text that became {{impcheck}}.
+  contribution: Laurence provided most of the text that became
+    {{models}} and {{impcheck}}.
 
 normative:
   STD94: cbor
@@ -124,6 +125,8 @@ ruleset" that is defined in a separate document.
 ## Conventions and Definitions
 
 The conventions and definitions of {{-cbor}} apply.
+{{models}} provides additional discussion of the terms information
+model, data model, and serialization.
 
 * The term "CBOR Application" ("application" for short) is not
 explicitly defined in {{-cbor}}; this document uses it in the same sense
@@ -538,7 +541,7 @@ This document requests IANA to register the contents of
 
 --- back
 
-# Information Model, Data Model and Serialization
+# Information Model, Data Model and Serialization {#models}
 
 For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
 
