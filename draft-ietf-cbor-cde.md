@@ -335,7 +335,120 @@ Concise Data Definition Language (CDDL)
 {{-cddl}}, except where the data description is documenting specific
 encoding decisions for byte strings that carry embedded CBOR.
 
+# CDDL support
+
+CDDL defines the structure of CBOR data items at the data model level;
+it enables being specific about the data items allowed in a particular
+place.
+It does not specify encoding, but CBOR protocols can specify the use
+of CDE (or simply Basic Serialization).
+For instance, it allows the specification of a floating point data item
+as "float16"; this means the application data model only foresees data
+that can be encoded as {{IEEE754}} binary16.
+Note that specifying "float32" for a floating point data item enables
+all floating point values that can be represented as binary32; this
+includes values that can also be represented as binary16 and that will
+be so represented in Basic Serialization.
+
+{{-cddl}} defines control operators to indicate that the contents of a
+byte string carries a CBOR-encoded data item (`.cbor`) or a sequence of
+CBOR-encoded data items (`.cborseq`).
+
+CDDL specifications may want to specify that the data items should be
+encoded in Common CBOR Deterministic Encoding.
+The present specification adds two CDDL control operators that can be used
+for this.
+
+The control operators `.cde` and `.cdeseq` are exactly like `.cbor` and
+`.cborseq` except that they also require the encoded data item(s) to be
+encoded according to CDE.
+
+For example, a byte string of embedded CBOR that is to be encoded
+according to CDE can be formalized as:
+
+~~~
+leaf = #6.24(bytes .cde any)
+~~~
+
+More importantly, if the encoded data item also needs to have a
+specific structure, this can be expressed by the right-hand side
+(instead of using the most general CDDL type `any` here).
+
+(Note that the `.cdeseq` control operator does not enable specifying
+different deterministic encoding requirements for the elements of the
+sequence.  If a use case for such a feature becomes known, it could be
+added.)
+
+
+Obviously, specifications that document ALDR rules can define related control operators
+that also embody the processing required by those ALDR rules,
+and are encouraged to do so.
+
+
+# Security Considerations {#seccons}
+
+The security considerations in {{Section 10 of RFC8949@-cbor}} apply.
+The use of deterministic encoding can mitigate issues arising out of
+the use of non-preferred serializations specially crafted by an attacker.
+However, this effect only accrues if the decoder actually checks that
+deterministic encoding was applied correctly.
+More generally, additional security properties of deterministic
+encoding can rely on this check being performed properly.
+
+# IANA Considerations {#sec-iana}
+
+[^to-be-removed]
+
+[^to-be-removed]: RFC Editor: please replace RFCXXXX with the RFC
+    number of this RFC and remove this note.
+
+This document requests IANA to register the contents of
+{{tbl-iana-reqs}} into the registry
+"{{cddl-control-operators (CDDL Control Operators)<IANA.cddl}}" of the
+{{IANA.cddl}} registry group:
+
+| Name      | Reference |
+| .cde      | \[RFCXXXX] |
+| .cdeseq   | \[RFCXXXX] |
+{: #tbl-iana-reqs title="New control operators to be registered"}
+
+
 --- back
+
+# Information Model, Data Model and Serialization {#models}
+
+For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
+
+|  | Information Model | Data Model | Serialization |
+| Abstraction Level | Top level; conceptual | Realization of information in data structures and data types | Actual bytes encoded for transmission |
+| Example | The temperature of something | A floating-point number representing the temperature | Encoded CBOR of a floating-point number |
+| Standards |  | CDDL | CBOR |
+| Implementation Representation | | API Input to CBOR encoder library, output from CBOR decoder library | Encoded CBOR in memory or for transmission |
+
+CBOR doesn't provide facilities for information models.
+They are mentioned here for completeness and to provide some context.
+
+CBOR defines a palette of basic types that are the usual integers, floating-point numbers, strings, arrays and maps.
+Extended types may be constructing from these basic types.
+These basic and extended types are used to construct the data model of a CBOR protocol.
+While not required, the data model of a protocol is often described using {{-cddl}}.
+The types in the data model are serialized per RFC 8949 to create encoded CBOR.
+
+In contrast to JSON, CBOR separates the data model from serialization.
+In JSON, there is one specific serialization for each data type and vice versa.
+That is not true in CBOR.
+
+CBOR allows variation in the way some data types can be serialized.
+For example, the integer 1 can be serialized in several different ways.
+This flexibility is necessary to accommodate highly constrained environments.
+The implications of allowing this variation are substantial.
+It leads to the need for basic/preferred serialization, to many sections in RFC 8949 and to this document.
+
+General purpose CBOR serialization schemes should be orthogonal to data models.
+They should be able to represent all possible data types and their full range of values.
+This ensures that a general-purpose serialization scheme can be applied to any CBOR protocol.
+Basic/preferred serialization has this characteristic.
+
 
 # Application-level Deterministic Representation {#aldr}
 
@@ -458,123 +571,6 @@ implementations of that set of ALDR rules support floating point
 numbers (or any other kind of number, such as arbitrary precision
 integers or 64-bit negative integers) when they are used with
 applications that do not use them.
-
---- middle
-
-# CDDL support
-
-CDDL defines the structure of CBOR data items at the data model level;
-it enables being specific about the data items allowed in a particular
-place.
-It does not specify encoding, but CBOR protocols can specify the use
-of CDE (or simply Basic Serialization).
-For instance, it allows the specification of a floating point data item
-as "float16"; this means the application data model only foresees data
-that can be encoded as {{IEEE754}} binary16.
-Note that specifying "float32" for a floating point data item enables
-all floating point values that can be represented as binary32; this
-includes values that can also be represented as binary16 and that will
-be so represented in Basic Serialization.
-
-{{-cddl}} defines control operators to indicate that the contents of a
-byte string carries a CBOR-encoded data item (`.cbor`) or a sequence of
-CBOR-encoded data items (`.cborseq`).
-
-CDDL specifications may want to specify that the data items should be
-encoded in Common CBOR Deterministic Encoding.
-The present specification adds two CDDL control operators that can be used
-for this.
-
-The control operators `.cde` and `.cdeseq` are exactly like `.cbor` and
-`.cborseq` except that they also require the encoded data item(s) to be
-encoded according to CDE.
-
-For example, a byte string of embedded CBOR that is to be encoded
-according to CDE can be formalized as:
-
-~~~
-leaf = #6.24(bytes .cde any)
-~~~
-
-More importantly, if the encoded data item also needs to have a
-specific structure, this can be expressed by the right-hand side
-(instead of using the most general CDDL type `any` here).
-
-(Note that the `.cdeseq` control operator does not enable specifying
-different deterministic encoding requirements for the elements of the
-sequence.  If a use case for such a feature becomes known, it could be
-added.)
-
-
-Obviously, specifications that document ALDR rules can define related control operators
-that also embody the processing required by those ALDR rules,
-and are encouraged to do so.
-
-
-# Security Considerations {#seccons}
-
-The security considerations in {{Section 10 of RFC8949@-cbor}} apply.
-The use of deterministic encoding can mitigate issues arising out of
-the use of non-preferred serializations specially crafted by an attacker.
-However, this effect only accrues if the decoder actually checks that
-deterministic encoding was applied correctly.
-More generally, additional security properties of deterministic
-encoding can rely on this check being performed properly.
-
-# IANA Considerations {#sec-iana}
-
-[^to-be-removed]
-
-[^to-be-removed]: RFC Editor: please replace RFCXXXX with the RFC
-    number of this RFC and remove this note.
-
-This document requests IANA to register the contents of
-{{tbl-iana-reqs}} into the registry
-"{{cddl-control-operators (CDDL Control Operators)<IANA.cddl}}" of the
-{{IANA.cddl}} registry group:
-
-| Name      | Reference |
-| .cde      | \[RFCXXXX] |
-| .cdeseq   | \[RFCXXXX] |
-{: #tbl-iana-reqs title="New control operators to be registered"}
-
-
---- back
-
-# Information Model, Data Model and Serialization {#models}
-
-For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
-
-|  | Information Model | Data Model | Serialization |
-| Abstraction Level | Top level; conceptual | Realization of information in data structures and data types | Actual bytes encoded for transmission |
-| Example | The temperature of something | A floating-point number representing the temperature | Encoded CBOR of a floating-point number |
-| Standards |  | CDDL | CBOR |
-| Implementation Representation | | API Input to CBOR encoder library, output from CBOR decoder library | Encoded CBOR in memory or for transmission |
-
-CBOR doesn't provide facilities for information models.
-They are mentioned here for completeness and to provide some context.
-
-CBOR defines a palette of basic types that are the usual integers, floating-point numbers, strings, arrays and maps.
-Extended types may be constructing from these basic types.
-These basic and extended types are used to construct the data model of a CBOR protocol.
-While not required, the data model of a protocol is often described using {{-cddl}}.
-The types in the data model are serialized per RFC 8949 to create encoded CBOR.
-
-In contrast to JSON, CBOR separates the data model from serialization.
-In JSON, there is one specific serialization for each data type and vice versa.
-That is not true in CBOR.
-
-CBOR allows variation in the way some data types can be serialized.
-For example, the integer 1 can be serialized in several different ways.
-This flexibility is necessary to accommodate highly constrained environments.
-The implications of allowing this variation are substantial.
-It leads to the need for basic/preferred serialization, to many sections in RFC 8949 and to this document.
-
-General purpose CBOR serialization schemes should be orthogonal to data models.
-They should be able to represent all possible data types and their full range of values.
-This ensures that a general-purpose serialization scheme can be applied to any CBOR protocol.
-Basic/preferred serialization has this characteristic.
-
 
 # Implementers' Checklists {#impcheck}
 
