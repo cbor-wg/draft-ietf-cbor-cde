@@ -419,28 +419,36 @@ This document requests IANA to register the contents of
 
 For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
 
-|  | Information Model | Data Model | Serialization |
-| Abstraction Level | Top level; conceptual | Realization of information in data structures and data types | Actual bytes encoded for transmission |
-| Example | The temperature of something | A floating-point number representing the temperature | Encoded CBOR of a floating-point number |
-| Standards |  | CDDL | CBOR |
-| Implementation Representation | | API Input to CBOR encoder library, output from CBOR decoder library | Encoded CBOR in memory or for transmission |
+|                   | Abstraction Level                                            | Example                                              | Standards | Implementation Representation                                       |
+| Information Model | Top level; conceptual                                        | The temperature of something                         |           |                                                                     |
+| Data Model        | Realization of information in data structures and data types | A floating-point number representing the temperature | CDDL      | API input to CBOR encoder library, output from CBOR decoder library |
+| Serialization     | Actual bytes encoded for transmission                        | Encoded CBOR of a floating-point number              | CBOR      | Encoded CBOR in memory or for transmission                          |
+{: #layers title="A three-layer model of information representation"}
 
-CBOR doesn't provide facilities for information models.
+CBOR doesn't provide facilities for expressing information models.
 They are mentioned here for completeness and to provide some context.
 
-CBOR defines a palette of basic types that are the usual integers, floating-point numbers, strings, arrays and maps.
-Extended types may be constructing from these basic types.
+CBOR defines a palette of basic data items that can be grouped into
+data types such as the usual integer or floating-point numbers, text or
+byte strings, arrays and maps, and certain special "simple values"
+such as Booleans and `null`.
+Extended data types may be constructed from these basic types.
 These basic and extended types are used to construct the data model of a CBOR protocol.
-While not required, the data model of a protocol is often described using {{-cddl}}.
-The types in the data model are serialized per RFC 8949 to create encoded CBOR.
+One notation that is often used for describing the data model of a CBOR protocol is CDDL {{-cddl}}.
+The various types of data items in the data model are serialized per RFC 8949 {{-cbor}} to create encoded CBOR data items.
 
-In contrast to JSON, CBOR separates the data model from serialization.
-In JSON, there is one specific serialization for each data type and vice versa.
-That is not true in CBOR.
+In contrast to JSON, CBOR-related documents explicitly discuss the data model separately from its serialization.
+<!-- NOT TRUE: In JSON, there is one specific serialization for each data type and vice versa. -->
+Both JSON and CBOR allow variation in the way some data types can be serialized.
+In JSON, the number 1 can be serialized in several different ways
+(`1`, `0.1e1`, `1.0`, `100e-2`) -- while it may seem obvious to use
+`1` for this case, this is less clear for `1000000000000000000000000000000` vs. `1e+30` or `1e30`.
+(As its serialization also doubles as a human-readable interface, JSON also allows the introduction of blank space for readability.)
 
-CBOR allows variation in the way some data types can be serialized.
-For example, the integer 1 can be serialized in several different ways.
-This flexibility is necessary to accommodate highly constrained environments.
+<!-- Fix the rest of this section... -->
+
+In CBOR, the variation available for serialization has been designed
+to accommodate highly constrained environments.
 The implications of allowing this variation are substantial.
 It leads to the need for basic/preferred serialization, to many sections in RFC 8949 and to this document.
 
