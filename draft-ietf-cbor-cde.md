@@ -513,7 +513,7 @@ semantically equivalent application data, the ALDR rules choose one of
 them, potentially requiring a conversion ({{Section 4.2 of -thumb}}):
 
 {:quote}
->  Note: [{{RFC9052}}] supports both compressed and uncompressed point
+>  Note: \[{{RFC9052}}] supports both compressed and uncompressed point
    representations.  For interoperability, implementations adhering to
    this specification MUST use the uncompressed point representation.
    Therefore, the y-coordinate is expressed as a bstr.  If an
