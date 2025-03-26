@@ -33,7 +33,8 @@ contributor:
 - name: Laurence Lundblade
   org: Security Theory LLC
   email: lgl@securitytheory.com
-  contribution: Laurence provided most of the text that became {{impcheck}}.
+  contribution: Laurence provided most of the text that became
+    {{models}} and {{impcheck}}.
 
 normative:
   STD94: cbor
@@ -124,6 +125,8 @@ ruleset" that is defined in a separate document.
 ## Conventions and Definitions
 
 The conventions and definitions of {{-cbor}} apply.
+{{models}} provides additional discussion of the terms information
+model, data model, and serialization.
 
 * The term "CBOR Application" ("application" for short) is not
 explicitly defined in {{-cbor}}; this document uses it in the same sense
@@ -332,7 +335,128 @@ Concise Data Definition Language (CDDL)
 {{-cddl}}, except where the data description is documenting specific
 encoding decisions for byte strings that carry embedded CBOR.
 
+# CDDL support
+
+CDDL defines the structure of CBOR data items at the data model level;
+it enables being specific about the data items allowed in a particular
+place.
+It does not specify encoding, but CBOR protocols can specify the use
+of CDE (or simply Basic Serialization).
+For instance, it allows the specification of a floating point data item
+as "float16"; this means the application data model only foresees data
+that can be encoded as {{IEEE754}} binary16.
+Note that specifying "float32" for a floating point data item enables
+all floating point values that can be represented as binary32; this
+includes values that can also be represented as binary16 and that will
+be so represented in Basic Serialization.
+
+{{-cddl}} defines control operators to indicate that the contents of a
+byte string carries a CBOR-encoded data item (`.cbor`) or a sequence of
+CBOR-encoded data items (`.cborseq`).
+
+CDDL specifications may want to specify that the data items should be
+encoded in Common CBOR Deterministic Encoding.
+The present specification adds two CDDL control operators that can be used
+for this.
+
+The control operators `.cde` and `.cdeseq` are exactly like `.cbor` and
+`.cborseq` except that they also require the encoded data item(s) to be
+encoded according to CDE.
+
+For example, a byte string of embedded CBOR that is to be encoded
+according to CDE can be formalized as:
+
+~~~
+leaf = #6.24(bytes .cde any)
+~~~
+
+More importantly, if the encoded data item also needs to have a
+specific structure, this can be expressed by the right-hand side
+(instead of using the most general CDDL type `any` here).
+
+(Note that the `.cdeseq` control operator does not enable specifying
+different deterministic encoding requirements for the elements of the
+sequence.  If a use case for such a feature becomes known, it could be
+added.)
+
+
+Obviously, specifications that document ALDR rules can define related control operators
+that also embody the processing required by those ALDR rules,
+and are encouraged to do so.
+
+
+# Security Considerations {#seccons}
+
+The security considerations in {{Section 10 of RFC8949@-cbor}} apply.
+The use of deterministic encoding can mitigate issues arising out of
+the use of non-preferred serializations specially crafted by an attacker.
+However, this effect only accrues if the decoder actually checks that
+deterministic encoding was applied correctly.
+More generally, additional security properties of deterministic
+encoding can rely on this check being performed properly.
+
+# IANA Considerations {#sec-iana}
+
+[^to-be-removed]
+
+[^to-be-removed]: RFC Editor: please replace RFCXXXX with the RFC
+    number of this RFC and remove this note.
+
+This document requests IANA to register the contents of
+{{tbl-iana-reqs}} into the registry
+"{{cddl-control-operators (CDDL Control Operators)<IANA.cddl}}" of the
+{{IANA.cddl}} registry group:
+
+| Name      | Reference |
+| .cde      | \[RFCXXXX] |
+| .cdeseq   | \[RFCXXXX] |
+{: #tbl-iana-reqs title="New control operators to be registered"}
+
+
 --- back
+
+# Information Model, Data Model and Serialization {#models}
+
+For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
+
+|                   | Abstraction Level                                            | Example                                              | Standards | Implementation Representation                                       |
+| Information Model | Top level; conceptual                                        | The temperature of something                         |           |                                                                     |
+| Data Model        | Realization of information in data structures and data types | A floating-point number representing the temperature | CDDL      | API input to CBOR encoder library, output from CBOR decoder library |
+| Serialization     | Actual bytes encoded for transmission                        | Encoded CBOR of a floating-point number              | CBOR      | Encoded CBOR in memory or for transmission                          |
+{: #layers title="A three-layer model of information representation"}
+
+CBOR doesn't provide facilities for expressing information models.
+They are mentioned here for completeness and to provide some context.
+
+CBOR defines a palette of basic data items that can be grouped into
+data types such as the usual integer or floating-point numbers, text or
+byte strings, arrays and maps, and certain special "simple values"
+such as Booleans and `null`.
+Extended data types may be constructed from these basic types.
+These basic and extended types are used to construct the data model of a CBOR protocol.
+One notation that is often used for describing the data model of a CBOR protocol is CDDL {{-cddl}}.
+The various types of data items in the data model are serialized per RFC 8949 {{-cbor}} to create encoded CBOR data items.
+
+In contrast to JSON, CBOR-related documents explicitly discuss the data model separately from its serialization.
+<!-- NOT TRUE: In JSON, there is one specific serialization for each data type and vice versa. -->
+Both JSON and CBOR allow variation in the way some data types can be serialized.
+In JSON, the number 1 can be serialized in several different ways
+(`1`, `0.1e1`, `1.0`, `100e-2`) -- while it may seem obvious to use
+`1` for this case, this is less clear for `1000000000000000000000000000000` vs. `1e+30` or `1e30`.
+(As its serialization also doubles as a human-readable interface, JSON also allows the introduction of blank space for readability.)
+
+<!-- Fix the rest of this section... -->
+
+In CBOR, the variation available for serialization has been designed
+to accommodate highly constrained environments.
+The implications of allowing this variation are substantial.
+It leads to the need for basic/preferred serialization, to many sections in RFC 8949 and to this document.
+
+General purpose CBOR serialization schemes should be orthogonal to data models.
+They should be able to represent all possible data types and their full range of values.
+This ensures that a general-purpose serialization scheme can be applied to any CBOR protocol.
+Basic/preferred serialization has this characteristic.
+
 
 # Application-level Deterministic Representation {#aldr}
 
@@ -455,88 +579,6 @@ implementations of that set of ALDR rules support floating point
 numbers (or any other kind of number, such as arbitrary precision
 integers or 64-bit negative integers) when they are used with
 applications that do not use them.
-
---- middle
-
-# CDDL support
-
-CDDL defines the structure of CBOR data items at the data model level;
-it enables being specific about the data items allowed in a particular
-place.
-It does not specify encoding, but CBOR protocols can specify the use
-of CDE (or simply Basic Serialization).
-For instance, it allows the specification of a floating point data item
-as "float16"; this means the application data model only foresees data
-that can be encoded as {{IEEE754}} binary16.
-Note that specifying "float32" for a floating point data item enables
-all floating point values that can be represented as binary32; this
-includes values that can also be represented as binary16 and that will
-be so represented in Basic Serialization.
-
-{{-cddl}} defines control operators to indicate that the contents of a
-byte string carries a CBOR-encoded data item (`.cbor`) or a sequence of
-CBOR-encoded data items (`.cborseq`).
-
-CDDL specifications may want to specify that the data items should be
-encoded in Common CBOR Deterministic Encoding.
-The present specification adds two CDDL control operators that can be used
-for this.
-
-The control operators `.cde` and `.cdeseq` are exactly like `.cbor` and
-`.cborseq` except that they also require the encoded data item(s) to be
-encoded according to CDE.
-
-For example, a byte string of embedded CBOR that is to be encoded
-according to CDE can be formalized as:
-
-~~~
-leaf = #6.24(bytes .cde any)
-~~~
-
-More importantly, if the encoded data item also needs to have a
-specific structure, this can be expressed by the right-hand side
-(instead of using the most general CDDL type `any` here).
-
-(Note that the `.cdeseq` control operator does not enable specifying
-different deterministic encoding requirements for the elements of the
-sequence.  If a use case for such a feature becomes known, it could be
-added.)
-
-
-Obviously, specifications that document ALDR rules can define related control operators
-that also embody the processing required by those ALDR rules,
-and are encouraged to do so.
-
-
-# Security Considerations {#seccons}
-
-The security considerations in {{Section 10 of RFC8949@-cbor}} apply.
-The use of deterministic encoding can mitigate issues arising out of
-the use of non-preferred serializations specially crafted by an attacker.
-However, this effect only accrues if the decoder actually checks that
-deterministic encoding was applied correctly.
-More generally, additional security properties of deterministic
-encoding can rely on this check being performed properly.
-
-# IANA Considerations {#sec-iana}
-
-[^to-be-removed]
-
-[^to-be-removed]: RFC Editor: please replace RFCXXXX with the RFC
-    number of this RFC and remove this note.
-
-This document requests IANA to register the contents of
-{{tbl-iana-reqs}} into the registry
-"{{cddl-control-operators (CDDL Control Operators)<IANA.cddl}}" of the
-{{IANA.cddl}} registry group:
-
-| Name      | Reference |
-| .cde      | \[RFCXXXX] |
-| .cdeseq   | \[RFCXXXX] |
-{: #tbl-iana-reqs title="New control operators to be registered"}
-
-
---- back
 
 # Implementers' Checklists {#impcheck}
 
