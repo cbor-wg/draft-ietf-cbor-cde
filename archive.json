@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T01:22:24.134514+00:00",
+  "timestamp": "2025-03-27T01:21:29.851529+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1227,7 +1227,7 @@
       "labels": [],
       "body": "A big motivation for this is that it would have taken six months off some of the email list discussions for me.\r\n\r\nAlso, JSON doesn't have the separation between data mode and serialization, so it might not be widely understood.\r\n\r\nAlso, understanding this is an under pinning to understand why serialization is the way it is.",
       "createdAt": "2025-03-24T17:27:06Z",
-      "updatedAt": "2025-03-24T17:27:07Z",
+      "updatedAt": "2025-03-26T16:53:35Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "2cacb744ca196fce05070b8e343747c7b3b5b994",
@@ -1238,7 +1238,63 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Nice!\r\nI started editing this and didn't want to edit on your account, so I forked the branch (now #28).\r\nIt is less clear to me what you wanted to say in the last two paragraphs, so I left them unedited for now.\r\n(I mostly transposed the table so it better shows the layering, and aligned same of the statements with our current terminology and certain facts about JSON.)",
+          "createdAt": "2025-03-26T16:53:33Z",
+          "updatedAt": "2025-03-26T16:53:33Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOJ8fYd86QPk00",
+      "title": "Describe information model, data model and serialization (edit of #27)",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/28",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-26T16:50:39Z",
+      "updatedAt": "2025-03-26T20:18:31Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "a9670a7ed020dbba0d7272aa488a502668627986",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "models-edit",
+      "headRefOid": "5f0ddd9bf415845301e81b42e686b652c5a16e68",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Trying to get clear how we characterize data model in CBOR vs JSON. When I ask ChatGPT, it says JSON doesn't have a separate data model (I ask ChatGPT because I don't work with JSON much).\r\n\r\nDo you think this is true: the variation in JSON is for ease of use by humans; the variation in CBOR is for ease of implementation in constrained environments? \r\n\r\nThat's not wording for the document, just to understand.\r\n\r\n",
+          "createdAt": "2025-03-26T19:15:40Z",
+          "updatedAt": "2025-03-26T19:15:40Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't think there was any conscious design on this going into JSON.  \r\nWhat we have there is pretty much a subset of JavaScript; whatever variation JavaScript had at the time went into JSON. \r\nExcept comments.\r\n\r\nIn CBOR, the early approach was to be deterministic (at least to the level that is now called \"preferred\") from the outset. \r\nThen there were considerations about implementations that simply fill in a binary \"form\" to send some data; these can't send \"preferred\".  \r\nAnd indefinite length was added as another variation, creating the need to have another term on the way to fully deterministic, which we now call \"basic\".\r\n\r\nOn the separation between serialization and data model: JSON tried to be a \"format\" only, i.e., a syntax, a grammar, with semantics that were only implied.  This is not the right way to do it, but this is very visible in ECMA 404 and even in the JSON RFCs (only Section 1 even mentions that there might be data with certain types and not just JSON texts).  This is what eventually made RFC 7493 necessary, I-JSON, which of course only could restrict the generic data model to what was interoperable in practice, dominated by JavaScript implementation practices.\r\n\r\nCBOR was built on a much deeper understanding of the issue.\r\nHowever, we hadn't had a strong requirement for deterministic representation and therefore only added deterministic encoding as an afterthought.  \r\nWe also were still struggling with the int/float issue and probably had a more dCBOR-like view (actually informed by the programming language Scheme) on this when RFC 7049 was finalized.  \r\nIn the seven years between 7049 and 8949, we got very strong feedback that int/float equivalence was not for everyone, so we dialed that back in the STD; the two are now clearly separate but can be integrated again [at the ALDR level (as dCBOR does)].  \r\nThe wording in 4.2.2 wasn't great though, and it took the dCBOR discussions and CDE to actually find the terms we needed here.",
+          "createdAt": "2025-03-26T19:41:49Z",
+          "updatedAt": "2025-03-26T19:41:49Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Thx.\r\n\r\nMaybe this: JSON decoders must accept all encoding variants (e.g., 1, 1.000...); that is not true of CBOR so as to accommodate constrained environments. CBOR also allows more variance than JSON (e.g. indefinite-lengths) also for constrained environments.",
+          "createdAt": "2025-03-26T20:18:30Z",
+          "updatedAt": "2025-03-26T20:18:30Z"
+        }
+      ],
       "reviews": []
     }
   ]
