@@ -557,20 +557,18 @@ These basic and extended types are used to construct the data model of a CBOR pr
 While not required, the data model of a protocol is often described using {{-cddl}}.
 The types in the data model are serialized per RFC 8949 to create encoded CBOR.
 
-In contrast to JSON, CBOR separates the data model from serialization.
-In JSON, there is one specific serialization for each data type and vice versa.
-That is not true in CBOR.
+CBOR allows certain data types to be serialized in multiple ways to facilitate easier implementation in constrained environments.
+For example, indefinite-length encoding enables strings, arrays, and maps to be streamed without knowing their length upfront.
 
-CBOR allows variation in the way some data types can be serialized.
-For example, the integer 1 can be serialized in several different ways.
-This flexibility is necessary to accommodate highly constrained environments.
-The implications of allowing this variation are substantial.
-It leads to the need for basic/preferred serialization, to many sections in RFC 8949 and to this document.
+Crucially, CBOR allows — and even expects — that some implementations will not support all serialization variants.
+In contrast, JSON permits variations (e.g., representing 1 as 1, 1.0, or 0.1e1), but requires all parsers to handle them.
 
-General purpose CBOR serialization schemes should be orthogonal to data models.
-They should be able to represent all possible data types and their full range of values.
-This ensures that a general-purpose serialization scheme can be applied to any CBOR protocol.
-Basic/preferred serialization has this characteristic.
+Since CBOR does not require implementations to support every serialization variant, defining a common serialization format is beneficial for those that don’t need specialized encoding.
+This is the role of basic/preferred serialization.
+It mandates a specific variant for each data type when multiple options exist.
+
+Thus, in contrast to JSON, the distinction between the data model and serialization is important, and CBOR is explicit about it.
+CBOR defines CDDL to describe data models, basic/preferred serialization and so on, where JSON doesn’t.
 
 
 # Implementers' Checklists {#impcheck}
