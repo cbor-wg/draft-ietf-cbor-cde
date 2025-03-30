@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 27 September 2025</td>
+<td class="center">Expires 1 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-26" class="published">26 March 2025</time>
+<time datetime="2025-03-30" class="published">30 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-27">27 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-01">1 October 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1733,6 +1733,10 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
         <dd>
 <span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">L. Lundblade</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-12</span>, <time datetime="2025-02-07" class="refDate">7 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-12">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7493">[RFC7493]</dt>
+        <dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7493">https://www.rfc-editor.org/rfc/rfc7493</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8392">[RFC8392]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
@@ -1810,7 +1814,7 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
         </tbody>
       </table>
 </div>
-<p id="appendix-A-3">CBOR doesn't provide facilities for expressing information models.
+<p id="appendix-A-3">CBOR does not provide facilities for expressing information models.
 They are mentioned here for completeness and to provide some context.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <p id="appendix-A-4">CBOR defines a palette of basic data items that can be grouped into
 data types such as the usual integer or floating-point numbers, text or
@@ -1821,20 +1825,68 @@ These basic and extended types are used to construct the data model of a CBOR pr
 One notation that is often used for describing the data model of a CBOR protocol is CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
 The various types of data items in the data model are serialized per RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> to create encoded CBOR data items.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
 <p id="appendix-A-5">In contrast to JSON, CBOR-related documents explicitly discuss the data model separately from its serialization.
-
-Both JSON and CBOR allow variation in the way some data types can be serialized.
-In JSON, the number 1 can be serialized in several different ways
-(<code>1</code>, <code>0.1e1</code>, <code>1.0</code>, <code>100e-2</code>) -- while it may seem obvious to use
+Both JSON and CBOR allow variation in the way some data types can be serialized:<a href="#appendix-A-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-6.1">
+          <p id="appendix-A-6.1.1">In JSON, the number 1 can be serialized in several different ways
+(<code>1</code>, <code>0.1e1</code>, <code>1.0</code>, <code>100e-2</code>) — while it may seem obvious to use
 <code>1</code> for this case, this is less clear for <code>1000000000000000000000000000000</code> vs. <code>1e+30</code> or <code>1e30</code>.
-(As its serialization also doubles as a human-readable interface, JSON also allows the introduction of blank space for readability.)<a href="#appendix-A-5" class="pilcrow">¶</a></p>
-<p id="appendix-A-6">In CBOR, the variation available for serialization has been designed
-to accommodate highly constrained environments.
-The implications of allowing this variation are substantial.
-It leads to the need for basic/preferred serialization, to many sections in RFC 8949 and to this document.<a href="#appendix-A-6" class="pilcrow">¶</a></p>
-<p id="appendix-A-7">General purpose CBOR serialization schemes should be orthogonal to data models.
-They should be able to represent all possible data types and their full range of values.
-This ensures that a general-purpose serialization scheme can be applied to any CBOR protocol.
-Basic/preferred serialization has this characteristic.<a href="#appendix-A-7" class="pilcrow">¶</a></p>
+(As its serialization also doubles as a human-readable interface, JSON
+also allows the introduction of blank space for readability.)
+The lack of an agreed data model for JSON led to the need for a complementary
+specification documenting an interoperable subset <span>[<a href="#RFC7493" class="cite xref">RFC7493</a>]</span>.<a href="#appendix-A-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-6.2">
+          <p id="appendix-A-6.2.1">The CBOR standard addresses constrained environments, both by being
+concise and by limiting variation, but also by conversely allowing
+certain data items in the data model to be serialized in multiple
+ways, which may ease implementation on low-resource platforms.
+On the other hand, constrained environments may further save
+resources by only partially implementing the decoder functionality,
+e.g., by not implementing all those variations.<a href="#appendix-A-6.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-A-7">To deal with this encoding variation provided for certain data items,
+CBOR defines a <em>preferred serialization</em> (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+<em>Partial CBOR implementations</em> are more likely to interoperate if their
+encoder uses preferred serialization and the decoder implements
+decoding at least the preferred serialization as well.
+a specific protocol for a constrained application may specify
+restrictions that allow, e.g., some fields to be of fixed length,
+guaranteeing interoperability even with partial implementations
+optimized for this application.<a href="#appendix-A-7" class="pilcrow">¶</a></p>
+<p id="appendix-A-8">Another encoding variation is provided by indefinite-length encoding
+for strings, arrays, and maps, which enables these to be streamed
+without knowing their length upfront (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.2" class="relref">3.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+For applications that do not perform streaming of this kind, variation
+can be reduced (and often performance improved) by only allowing
+definite-length encoding.
+The present document coins the term <em>basic encoding</em> for combining
+definite-length-only with preferred encoding, further reducing the
+variation that a decoder needs to deal with.
+The Common Deterministic Encoding, CDE, finally combines basic
+encoding with a deterministic ordering of entries in a map
+(<a href="#tab-constraints" class="auto internal xref">Table 1</a>).<a href="#appendix-A-8" class="pilcrow">¶</a></p>
+<p id="appendix-A-9">Partial implementations of a representation format are quite common in
+embedded applications.
+Protocols for embedded applications often reduce the footprint of an
+embedded JSON implementation by explicitly restricting the breadth of
+the data model, e.g., by not using floating point numbers with 64 bits
+of precision or by not using floating point numbers at all.
+These data-model-level restrictions do not get in the way of using
+complete implementations ("generic encoders/decoders", Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.2" class="relref">5.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+(Note that applications may need to complement deterministic
+encoding with decisions on the deterministic representation of
+application data into CBOR data items, see <a href="#aldr" class="auto internal xref">Appendix B</a>.)<a href="#appendix-A-9" class="pilcrow">¶</a></p>
+<p id="appendix-A-10">The increasing constraints on encoding (unconstrained, preferred,
+basic, CDE) are orthogonal to data-model-level data definitions as
+provided by <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
+To be useful in all applications, these constraints have been defined
+for all possible data items, covering the full range of values offered
+by CBOR's data types.
+This ensures that these serialization constraints can be applied to
+any CBOR protocol, without requiring protocol-specific modifications
+to generic encoder/decoder implementations.<a href="#appendix-A-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="aldr">
@@ -1844,14 +1896,36 @@ Basic/preferred serialization has this characteristic.<a href="#appendix-A-7" cl
       </h2>
 <p id="appendix-B-1">This appendix is informative.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">CBOR application protocols are agreements about how to use CBOR for a
-specific application or set of applications.
-Application protocols make representation decisions in order to
+specific application or set of applications.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">For a CBOR protocol to provide deterministic representation, both the
+encoding and application layer must be deterministic.
+While CDE ensures determinism at the encoding layer, requirements at
+the application layer may also be necessary.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<p id="appendix-B-4">Application protocols make representation decisions in order to
 constrain the variety of ways in which some aspect of the information
 model could be represented in the CBOR data model for the application.
 For instance, there are several CBOR tags that can be used to
 represent a time stamp (such as tag 0, 1, 1001), each with some specific
-properties.
-Application protocols that need to represent a timestamp typically
+properties.<a href="#appendix-B-4" class="pilcrow">¶</a></p>
+<aside id="appendix-B-5">
+        <p id="appendix-B-5.1">For example, an application protocol that needs to represent birthdate/times could specify:<a href="#appendix-B-5.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-5.2.1">
+            <p id="appendix-B-5.2.1.1">At the sender’s convenience, the birthdate/time <span class="bcp14">MAY</span>
+  be sent either in epoch date format (as in tag 1) or string date
+  format (as in tag 0).<a href="#appendix-B-5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B-5.2.2">
+            <p id="appendix-B-5.2.2.1">The receiver <span class="bcp14">MUST</span> decode both formats.<a href="#appendix-B-5.2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="appendix-B-5.3">While this specification is interoperable, it lacks determinism.
+There is variability in the application layer akin to variability in the CBOR encoding layer when CDE is not required.<a href="#appendix-B-5.3" class="pilcrow">¶</a></p>
+<p id="appendix-B-5.4">To make this example application layer specification deterministic,
+allow only one date format (or at least be deterministic when there is
+a choice, e.g., to specify string format for leap seconds only).<a href="#appendix-B-5.4" class="pilcrow">¶</a></p>
+</aside>
+<p id="appendix-B-6">Application protocols that need to represent a timestamp typically
 choose a specific tag and further constrain its use where necessary
 (e.g., tag 1001 was designed to cover a wide variety of applications
 <span>[<a href="#RFC9581" class="cite xref">RFC9581</a>]</span>).
@@ -1859,8 +1933,16 @@ Where no tag is available, the application protocol can design its own
 format for some application data.
 Even where a tag is available, the application data can choose to use
 its definitions without actually encoding the tag (e.g., by using its
-content in specific places in an "unwrapped" form).<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<p id="appendix-B-3">For instance, CWT defines an application data type "NumericDate" which
+content in specific places in an "unwrapped" form).<a href="#appendix-B-6" class="pilcrow">¶</a></p>
+<p id="appendix-B-7">Another source of application layer variability comes from the variety
+of number types CBOR offers.
+For instance, the number 2 can be represented as an integer, float,
+big number, decimal fraction and other.
+Most protocols designs will just specify one number type to use, and
+that will give determinism, but here’s an example specification that
+doesn’t:<a href="#appendix-B-7" class="pilcrow">¶</a></p>
+<aside id="appendix-B-8">
+        <p id="appendix-B-8.1">For instance, CWT <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> defines an application data type "NumericDate" which
 (as an application-level rule) is formed by "unwrapping" tag 1 (see
 Sections <a href="https://rfc-editor.org/rfc/rfc8392#section-2" class="relref">2</a> and <a href="https://rfc-editor.org/rfc/rfc8392#section-5" class="relref">5</a> of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>).
 CWT does stop short of using deterministic encoding.
@@ -1873,32 +1955,35 @@ These application rules may choose to only ever use integers, or to always
 use integers when the numeric value can be represented as such without
 loss of information, or to always use floating point numbers, or some
 of these for some application data and different ones for other
-application data.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
-<p id="appendix-B-4">Applications that require Deterministic Representation, and that
+application data.<a href="#appendix-B-8.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="appendix-B-9">Applications that require Deterministic Representation, and that
 derive CBOR data items from application data without maintaining a
 record of which choices are to be made when representing these
 application data, generally make rules for these choices as part of
 the application protocol.
 In this document, we speak about these choices as Application-level
-Deterministic Representation Rules (ALDR rules for short).<a href="#appendix-B-4" class="pilcrow">¶</a></p>
-<p id="appendix-B-5">As an example, <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> is intended to derive a (deterministic)
+Deterministic Representation Rules (ALDR rules for short).<a href="#appendix-B-9" class="pilcrow">¶</a></p>
+<aside id="appendix-B-10">
+        <p id="appendix-B-10.1">As an example, <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> is intended to derive a (deterministic)
 thumbprint from a COSE key <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>.
 <span><a href="https://rfc-editor.org/rfc/rfc9679#section-4" class="relref">Section 4</a> of [<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> provides the rules that are used to construct a
 deterministic application-level representation (ALDR rules).
 Only certain data from a COSE key are selected to be included in that
 ALDR, and, where the COSE can choose multiple representations of
 semantically equivalent application data, the ALDR rules choose one of
-them, potentially requiring a conversion (<span><a href="https://rfc-editor.org/rfc/rfc9679#section-4.2" class="relref">Section 4.2</a> of [<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>):<a href="#appendix-B-5" class="pilcrow">¶</a></p>
-<blockquote id="appendix-B-6">
-        <p id="appendix-B-6.1">Note: [<a href="#RFC9052" class="auto internal xref">RFC9052</a>] supports both compressed and uncompressed point
+them, potentially requiring a conversion (<span><a href="https://rfc-editor.org/rfc/rfc9679#section-4.2" class="relref">Section 4.2</a> of [<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>):<a href="#appendix-B-10.1" class="pilcrow">¶</a></p>
+<blockquote id="appendix-B-10.2">
+          <p id="appendix-B-10.2.1">Note: [<a href="#RFC9052" class="auto internal xref">RFC9052</a>] supports both compressed and uncompressed point
    representations.  For interoperability, implementations adhering to
    this specification <span class="bcp14">MUST</span> use the uncompressed point representation.
    Therefore, the y-coordinate is expressed as a bstr.  If an
    implementation uses the compressed point representation, it <span class="bcp14">MUST</span>
    first convert it to the uncompressed form for the purpose of
-   thumbprint calculation.<a href="#appendix-B-6.1" class="pilcrow">¶</a></p>
+   thumbprint calculation.<a href="#appendix-B-10.2.1" class="pilcrow">¶</a></p>
 </blockquote>
-<p id="appendix-B-7">CDE provides for encoding commonality between different applications
+</aside>
+<p id="appendix-B-11">CDE provides for encoding commonality between different applications
 of CBOR once these application-level choices have been made.
 It can be useful for an application or a group of applications to
 document their choices aimed at deterministic representation of
@@ -1908,20 +1993,22 @@ defining further mappings (<em>reductions</em>, e.g., conversions to
 uncompressed form)
 that help the application(s) get by with the exclusions.
 This can be done in the application protocol specification (as in
-<span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>) or as a separate document.<a href="#appendix-B-7" class="pilcrow">¶</a></p>
-<p id="appendix-B-8">An early example of a separate document is the dCBOR specification
+<span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>) or as a separate document.<a href="#appendix-B-11" class="pilcrow">¶</a></p>
+<aside id="appendix-B-12">
+        <p id="appendix-B-12.1">An early example of a separate document is the dCBOR specification
 <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>.
 dCBOR specifies the use of CDE together with some application-level
 rules, i.e., an ALDR ruleset, such as a requirement for all text
 strings to be in Unicode Normalization Form C (NFC) <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span> — this
 specific requirement is an example for an <em>exclusion</em> of non-NFC data
 at the application level, and it invites implementing a <em>reduction</em> by
-routine normalization of text strings.<a href="#appendix-B-8" class="pilcrow">¶</a></p>
-<p id="appendix-B-9">ALDR rules (including rules specified in a ALDR ruleset document) enable
+routine normalization of text strings.<a href="#appendix-B-12.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="appendix-B-13">ALDR rules (including rules specified in a ALDR ruleset document) enable
 simply using implementations of the common CDE; they do not
 "fork" CBOR in the sense of requiring distinct generic encoder/decoder
-implementations for each application.<a href="#appendix-B-9" class="pilcrow">¶</a></p>
-<p id="appendix-B-10">An implementation of specific ALDR rules combined with a CDE
+implementations for each application.<a href="#appendix-B-13" class="pilcrow">¶</a></p>
+<p id="appendix-B-14">An implementation of specific ALDR rules combined with a CDE
 implementation produces well-formed,
 deterministically encoded CBOR according to <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, and existing
 generic CBOR decoders will therefore be able to decode it, including
@@ -1930,14 +2017,14 @@ those that check for Deterministic Encoding ("CDE decoders", see also
 Similarly, generic CBOR encoders will be able to produce valid CBOR
 that can be ingested by an implementation that enforces an application's
 ALDR rules if the encoder was handed data model level information
-from an application that simply conformed to those ALDR rules.<a href="#appendix-B-10" class="pilcrow">¶</a></p>
-<p id="appendix-B-11">Please note that the separation between standard CBOR processing and
+from an application that simply conformed to those ALDR rules.<a href="#appendix-B-14" class="pilcrow">¶</a></p>
+<p id="appendix-B-15">Please note that the separation between standard CBOR processing and
 the processing required by the ALDR rules is a conceptual one:
 Instead of employing generic encoders/decoders, both ALDR rule
 processing and standard CBOR processing can be combined into a specialized
 encoder/decoder specifically designed for a particular set of ALDR
-rules.<a href="#appendix-B-11" class="pilcrow">¶</a></p>
-<p id="appendix-B-12">ALDR rules are intended to be used in conjunction with an
+rules.<a href="#appendix-B-15" class="pilcrow">¶</a></p>
+<p id="appendix-B-16">ALDR rules are intended to be used in conjunction with an
 application, which typically will naturally use a subset of the CBOR generic
 data model, which in turn
 influences which subset of the ALDR rules is used by the specific application
@@ -1950,7 +2037,7 @@ processing of floating point values, but there is no requirement that
 implementations of that set of ALDR rules support floating point
 numbers (or any other kind of number, such as arbitrary precision
 integers or 64-bit negative integers) when they are used with
-applications that do not use them.<a href="#appendix-B-12" class="pilcrow">¶</a></p>
+applications that do not use them.<a href="#appendix-B-16" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="impcheck">
