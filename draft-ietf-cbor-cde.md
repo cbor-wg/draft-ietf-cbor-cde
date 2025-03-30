@@ -102,14 +102,8 @@ This is followed by the conventional sections for
 {{<<sec-iana}} ({{<sec-iana}}),
 and {{<<sec-combined-references}} ({{<sec-combined-references}}).
 
-The informative {{impcheck}} provides brief checklists that implementers
-can use to check their CDE implementations.
-{{ps}} provides a checklist for implementing Preferred Serialization.
-{{bs}} introduces "Basic Serialization", a slightly more restricted form
-of Preferred Serialization that may be used by encoders to hit a sweet
-spot for maximizing interoperability with partial (e.g., constrained)
-CBOR decoder implementations.
-{{cde}} further restricts Basic Serialization to arrive at CDE.
+For use as background material, {{models}} introduces terminology for
+the layering of models used to describe CBOR.
 
 Instead of giving rise to the definition of application-specific,
 non-interoperable variants of CDE, this document identifies
@@ -123,6 +117,18 @@ applications.
 ALDR rules are often provided as part of a specification for a CBOR-based
 protocol, or, if needed, can be provided by referencing a shared "ALDR
 ruleset" that is defined in a separate document.
+
+The informative {{impcheck}} provides brief checklists that implementers
+can use to check their CDE implementations.
+{{ps}} provides a checklist for implementing Preferred Serialization.
+{{bs}} introduces "Basic Serialization", a slightly more restricted form
+of Preferred Serialization that may be used by encoders to hit a sweet
+spot for maximizing interoperability with partial (e.g., constrained)
+CBOR decoder implementations.
+{{cde}} further restricts Basic Serialization to arrive at CDE.
+
+{{examples}} provides a few examples for CBOR data items in CDE
+encoding, as well as a few failing examples.
 
 ## Conventions and Definitions
 
@@ -890,6 +896,10 @@ advertises _supporting_ CDE (see the start of this appendix).
 The following three tables provide examples of CDE-encoded CBOR data
 items, each giving Diagnostic Notation (EDN {{-edn}}), the encoded data
 item in hexadecimal, and a comment.
+
+Implementers that want to use these examples as test input may be
+interested in the file `example-table-input.csv` in the github
+repository `cbor-wg/draft-ietf-cbor-cde`.
 
 {::include example-tables.md}
 
