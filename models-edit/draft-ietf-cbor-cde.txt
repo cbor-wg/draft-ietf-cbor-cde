@@ -84,7 +84,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Structure of This Document  . . . . . . . . . . . . . . .   3
      1.2.  Conventions and Definitions . . . . . . . . . . . . . . .   4
-   2.  Encoding Choices in CBOR  . . . . . . . . . . . . . . . . . .   5
+   2.  Encoding Choices in CBOR  . . . . . . . . . . . . . . . . . .   4
    3.  CBOR Common Deterministic Encoding Profile (CDE)  . . . . . .   6
    4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .   9
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
@@ -115,7 +115,7 @@ Internet-Draft                  CBOR CDE                      March 2025
 
 
      D.2.  Floating Point Value Examples . . . . . . . . . . . . . .  25
-     D.3.  Failing Examples  . . . . . . . . . . . . . . . . . . . .  28
+     D.3.  Failing Examples  . . . . . . . . . . . . . . . . . . . .  29
    List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  29
    Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  30
    Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  30
@@ -143,32 +143,8 @@ Internet-Draft                  CBOR CDE                      March 2025
    conventional sections for Security Considerations (5), IANA
    Considerations (6), and References (7).
 
-   The informative Appendix C provides brief checklists that
-   implementers can use to check their CDE implementations.
-   Appendix C.1 provides a checklist for implementing Preferred
-   Serialization.  Appendix C.2 introduces "Basic Serialization", a
-   slightly more restricted form of Preferred Serialization that may be
-   used by encoders to hit a sweet spot for maximizing interoperability
-   with partial (e.g., constrained) CBOR decoder implementations.
-   Appendix C.3 further restricts Basic Serialization to arrive at CDE.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann                  Expires 1 October 2025                 [Page 3]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
+   For use as background material, Appendix A introduces terminology for
+   the layering of models used to describe CBOR.
 
    Instead of giving rise to the definition of application-specific,
    non-interoperable variants of CDE, this document identifies
@@ -181,6 +157,26 @@ Internet-Draft                  CBOR CDE                      March 2025
    provided as part of a specification for a CBOR-based protocol, or, if
    needed, can be provided by referencing a shared "ALDR ruleset" that
    is defined in a separate document.
+
+   The informative Appendix C provides brief checklists that
+   implementers can use to check their CDE implementations.
+   Appendix C.1 provides a checklist for implementing Preferred
+   Serialization.  Appendix C.2 introduces "Basic Serialization", a
+
+
+
+Bormann                  Expires 1 October 2025                 [Page 3]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
+   slightly more restricted form of Preferred Serialization that may be
+   used by encoders to hit a sweet spot for maximizing interoperability
+   with partial (e.g., constrained) CBOR decoder implementations.
+   Appendix C.3 further restricts Basic Serialization to arrive at CDE.
+
+   Appendix D provides a few examples for CBOR data items in CDE
+   encoding, as well as a few failing examples.
 
 1.2.  Conventions and Definitions
 
@@ -214,18 +210,6 @@ Internet-Draft                  CBOR CDE                      March 2025
    [BCP14] (RFC2119) (RFC8174) when, and only when, they appear in all
    capitals, as shown here.
 
-
-
-
-
-
-
-
-Bormann                  Expires 1 October 2025                 [Page 4]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
-
 2.  Encoding Choices in CBOR
 
    In many cases, CBOR provides more than one way to encode a data item,
@@ -234,6 +218,14 @@ Internet-Draft                  CBOR CDE                      March 2025
    handling the resulting variation can also put an onus on the decoder.
    In general, there is no single perfect encoding choice that is
    optimal for all applications.  Choosing the right constraints on
+
+
+
+Bormann                  Expires 1 October 2025                 [Page 4]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
    these encoding choices is one element of application protocol design.
    Having predefined sets of such choices is a useful way to reduce
    variation between applications, enabling generic implementations.
@@ -273,6 +265,14 @@ Internet-Draft                  CBOR CDE                      March 2025
 
    Table 1 summarizes the increasingly restrictive sets of encoding
    choices that have been given names in this section.
+
+
+
+
+
+
+
+
 
 
 
@@ -1259,6 +1259,10 @@ Appendix D.  Encoding Examples
    [I-D.ietf-cbor-edn-literals]), the encoded data item in hexadecimal,
    and a comment.
 
+   Implementers that want to use these examples as test input may be
+   interested in the file example-table-input.csv in the github
+   repository cbor-wg/draft-ietf-cbor-cde.
+
 D.1.  Integer Value Examples
 
     +=======================+========================+================+
@@ -1278,10 +1282,6 @@ D.1.  Integer Value Examples
     +-----------------------+------------------------+----------------+
     | -24                   | 37                     | Smallest       |
     |                       |                        | negative       |
-    |                       |                        | immediate int  |
-    +-----------------------+------------------------+----------------+
-    | 24                    | 1818                   | Smallest       |
-    |                       |                        | unsigned one-  |
 
 
 
@@ -1290,6 +1290,10 @@ Bormann                  Expires 1 October 2025                [Page 23]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
+    |                       |                        | immediate int  |
+    +-----------------------+------------------------+----------------+
+    | 24                    | 1818                   | Smallest       |
+    |                       |                        | unsigned one-  |
     |                       |                        | byte int       |
     +-----------------------+------------------------+----------------+
     | -25                   | 3818                   | Largest        |
@@ -1334,10 +1338,6 @@ Internet-Draft                  CBOR CDE                      March 2025
     +-----------------------+------------------------+----------------+
     | -4294967296           | 3affffffff             | Smallest       |
     |                       |                        | negative four- |
-    |                       |                        | byte int       |
-    +-----------------------+------------------------+----------------+
-    | 4294967296            | 1b0000000100000000     | Smallest       |
-    |                       |                        | unsigned       |
 
 
 
@@ -1346,6 +1346,10 @@ Bormann                  Expires 1 October 2025                [Page 24]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | 4294967296            | 1b0000000100000000     | Smallest       |
+    |                       |                        | unsigned       |
     |                       |                        | eight-byte int |
     +-----------------------+------------------------+----------------+
     | -4294967297           | 3b0000000100000000     | Largest        |
@@ -1390,10 +1394,6 @@ D.2.  Floating Point Value Examples
    |                           |                    | zero payload     |
    +---------------------------+--------------------+------------------+
    | 5.960464477539063e-8      | f90001             | Smallest         |
-   |                           |                    | positive         |
-   |                           |                    | subnormal        |
-   |                           |                    | 16-bit float     |
-   +---------------------------+--------------------+------------------+
 
 
 
@@ -1402,54 +1402,54 @@ Bormann                  Expires 1 October 2025                [Page 25]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
+   |                           |                    | positive         |
+   |                           |                    | 16-bit float     |
+   |                           |                    | (subnormal)      |
+   +---------------------------+--------------------+------------------+
    | 0.00006097555160522461    | f903ff             | Largest          |
    |                           |                    | positive         |
    |                           |                    | subnormal        |
    |                           |                    | 16-bit float     |
    +---------------------------+--------------------+------------------+
-   | 0.00006103515625          | f90400             | Smallest         |
-   |                           |                    | positive 16-bit  |
-   |                           |                    | float            |
+   | 0.00006103515625          | f90400             | Smallest non-    |
+   |                           |                    | subnormal        |
+   |                           |                    | positive         |
+   |                           |                    | 16-bit float     |
    +---------------------------+--------------------+------------------+
    | 65504.0                   | f97bff             | Largest          |
-   |                           |                    | positive 16-bit  |
-   |                           |                    | float            |
+   |                           |                    | positive         |
+   |                           |                    | 16-bit float     |
    +---------------------------+--------------------+------------------+
    | 1.401298464324817e-45     | fa00000001         | Smallest         |
    |                           |                    | positive         |
-   |                           |                    | subnormal        |
    |                           |                    | 32-bit float     |
+   |                           |                    | (subnormal)      |
    +---------------------------+--------------------+------------------+
    | 1.1754942106924411e-38    | fa007fffff         | Largest          |
    |                           |                    | positive         |
    |                           |                    | subnormal        |
    |                           |                    | 32-bit float     |
    +---------------------------+--------------------+------------------+
-   | 1.1754943508222875e-38    | fa00800000         | Smallest         |
-   |                           |                    | positive 32-bit  |
-   |                           |                    | float            |
+   | 1.1754943508222875e-38    | fa00800000         | Smallest non-    |
+   |                           |                    | subnormal        |
+   |                           |                    | positive         |
+   |                           |                    | 32-bit float     |
    +---------------------------+--------------------+------------------+
    | 3.4028234663852886e+38    | fa7f7fffff         | Largest          |
-   |                           |                    | positive 32-bit  |
-   |                           |                    | float            |
+   |                           |                    | positive         |
+   |                           |                    | 32-bit float     |
    +---------------------------+--------------------+------------------+
    | 5.0e-324                  | fb0000000000000001 | Smallest         |
    |                           |                    | positive         |
-   |                           |                    | subnormal        |
    |                           |                    | 64-bit float     |
+   |                           |                    | (subnormal)      |
    +---------------------------+--------------------+------------------+
    | 2.225073858507201e-308    | fb000fffffffffffff | Largest          |
    |                           |                    | positive         |
    |                           |                    | subnormal        |
    |                           |                    | 64-bit float     |
    +---------------------------+--------------------+------------------+
-   | 2.2250738585072014e-308   | fb0010000000000000 | Smallest         |
-   |                           |                    | positive 64-bit  |
-   |                           |                    | float            |
-   +---------------------------+--------------------+------------------+
-   | 1.7976931348623157e+308   | fb7fefffffffffffff | Largest          |
-   |                           |                    | positive 64-bit  |
-   |                           |                    | float            |
+   | 2.2250738585072014e-308   | fb0010000000000000 | Smallest non-    |
 
 
 
@@ -1458,22 +1458,32 @@ Bormann                  Expires 1 October 2025                [Page 26]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
+   |                           |                    | subnormal        |
+   |                           |                    | positive         |
+   |                           |                    | 64-bit float     |
    +---------------------------+--------------------+------------------+
-   | -0.0000033333333333333333 | fbbecbf647612f3696 | Randomly         |
-   |                           |                    | selected number  |
+   | 1.7976931348623157e+308   | fb7fefffffffffffff | Largest          |
+   |                           |                    | positive         |
+   |                           |                    | 64-bit float     |
+   +---------------------------+--------------------+------------------+
+   | -0.0000033333333333333333 | fbbecbf647612f3696 | Arbitrarily      |
+   |                           |                    | selected         |
+   |                           |                    | number           |
    +---------------------------+--------------------+------------------+
    | 10.559998512268066        | fa4128f5c1         | -"-              |
    +---------------------------+--------------------+------------------+
    | 10.559998512268068        | fb40251eb820000001 | Next in          |
    |                           |                    | succession       |
    +---------------------------+--------------------+------------------+
-   | 295147905179352830000.0   | fa61800000         | 268 (diagnostic  |
+   | 295147905179352830000.0   | fa61800000         | 2^68             |
+   |                           |                    | (diagnostic      |
    |                           |                    | notation         |
    |                           |                    | truncates        |
    |                           |                    | precision)       |
    +---------------------------+--------------------+------------------+
-   | 2.0                       | f94000             | Number without   |
-   |                           |                    | a fractional     |
+   | 2.0                       | f94000             | Number           |
+   |                           |                    | without a        |
+   |                           |                    | fractional       |
    |                           |                    | part             |
    +---------------------------+--------------------+------------------+
    | -5.960464477539063e-8     | f98001             | Largest          |
@@ -1496,16 +1506,6 @@ Internet-Draft                  CBOR CDE                      March 2025
    |                           |                    | subnormal        |
    |                           |                    | 16-bit float     |
    +---------------------------+--------------------+------------------+
-   | 0.000060975551605224616   | fb3f0ff80000000001 | -"-              |
-   +---------------------------+--------------------+------------------+
-   | 0.000060975555243203416   | fa387fc001         | -"-              |
-   +---------------------------+--------------------+------------------+
-   | 0.00006103515624999999    | fb3f0fffffffffffff | Adjacent to      |
-   |                           |                    | smallest 16-bit  |
-   |                           |                    | float            |
-   +---------------------------+--------------------+------------------+
-   | 0.00006103515625000001    | fb3f10000000000001 | -"-              |
-   +---------------------------+--------------------+------------------+
 
 
 
@@ -1514,11 +1514,21 @@ Bormann                  Expires 1 October 2025                [Page 27]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
+   | 0.000060975551605224616   | fb3f0ff80000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 0.000060975555243203416   | fa387fc001         | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 0.00006103515624999999    | fb3f0fffffffffffff | Adjacent to      |
+   |                           |                    | smallest         |
+   |                           |                    | 16-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 0.00006103515625000001    | fb3f10000000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
    | 0.00006103516352595761    | fa38800001         | -"-              |
    +---------------------------+--------------------+------------------+
    | 65503.99999999999         | fb40effbffffffffff | Adjacent to      |
-   |                           |                    | largest 16-bit   |
-   |                           |                    | float            |
+   |                           |                    | largest          |
+   |                           |                    | 16-bit float     |
    +---------------------------+--------------------+------------------+
    | 65504.00000000001         | fb40effc0000000001 | -"-              |
    +---------------------------+--------------------+------------------+
@@ -1539,19 +1549,26 @@ Internet-Draft                  CBOR CDE                      March 2025
    | 1.1754942106924412e-38    | fb380fffffc0000001 | -"-              |
    +---------------------------+--------------------+------------------+
    | 1.1754943508222874e-38    | fb380fffffffffffff | Adjacent to      |
-   |                           |                    | smallest 32-bit  |
-   |                           |                    | float            |
+   |                           |                    | smallest         |
+   |                           |                    | 32-bit float     |
    +---------------------------+--------------------+------------------+
    | 1.1754943508222878e-38    | fb3810000000000001 | -"-              |
    +---------------------------+--------------------+------------------+
    | 3.4028234663852882e+38    | fb47efffffdfffffff | Adjacent to      |
-   |                           |                    | largest 32-bit   |
-   |                           |                    | float            |
+   |                           |                    | largest          |
+   |                           |                    | 32-bit float     |
    +---------------------------+--------------------+------------------+
    | 3.402823466385289e+38     | fb47efffffe0000001 | -"-              |
    +---------------------------+--------------------+------------------+
 
                    Table 5: Floating Point Value Examples
+
+
+
+Bormann                  Expires 1 October 2025                [Page 28]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
 
 D.3.  Failing Examples
 
@@ -1562,14 +1579,6 @@ D.3.  Failing Examples
    |                       |                          | key ordering  |
    +-----------------------+--------------------------+---------------+
    | 255                   | 1900ff                   | Integer not   |
-
-
-
-Bormann                  Expires 1 October 2025                [Page 28]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
-
    |                       |                          | in preferred  |
    |                       |                          | encoding      |
    +-----------------------+--------------------------+---------------+
@@ -1609,15 +1618,6 @@ List of Tables
    2.  New control operators to be registered (Table 2)
    3.  A three-layer model of information representation (Table 3)
    4.  Integer Value Examples (Table 4)
-   5.  Floating Point Value Examples (Table 5)
-   6.  Failing Examples (Table 6)
-
-
-
-
-
-
-
 
 
 
@@ -1625,6 +1625,9 @@ Bormann                  Expires 1 October 2025                [Page 29]
 
 Internet-Draft                  CBOR CDE                      March 2025
 
+
+   5.  Floating Point Value Examples (Table 5)
+   6.  Failing Examples (Table 6)
 
 Acknowledgments
 
@@ -1657,9 +1660,6 @@ Author's Address
    Germany
    Phone: +49-421-218-63921
    Email: cabo@tzi.org
-
-
-
 
 
 
