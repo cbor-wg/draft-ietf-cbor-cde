@@ -1247,16 +1247,30 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-list-of-tables" class="internal xref">List of Tables</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-encoding-examples" class="internal xref">Encoding Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-D.1" class="auto internal xref">D.1</a>.  <a href="#name-integer-value-examples" class="internal xref">Integer Value Examples</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#appendix-D.2" class="auto internal xref">D.2</a>.  <a href="#name-floating-point-value-exampl" class="internal xref">Floating Point Value Examples</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
+                <p id="section-toc.1-1.11.2.3.1"><a href="#appendix-D.3" class="auto internal xref">D.3</a>.  <a href="#name-failing-examples" class="internal xref">Failing Examples</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-list-of-tables" class="internal xref">List of Tables</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#appendix-H" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1728,6 +1742,10 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dt id="I-D.bormann-dispatch-modern-network-unicode">[I-D.bormann-dispatch-modern-network-unicode]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Modern Network Unicode"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-dispatch-modern-network-unicode-06</span>, <time datetime="2025-03-02" class="refDate">2 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-06">https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-16</span>, <time datetime="2025-01-08" class="refDate">8 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-16">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
         <dd>
@@ -2359,37 +2377,507 @@ correctly CDE-decoded data item).<a href="#appendix-C.3.2-2.2.2" class="pilcrow"
 </div>
 </section>
 </div>
-<div id="list-of-tables">
+<div id="examples">
 <section id="appendix-D">
+      <h2 id="name-encoding-examples">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-encoding-examples" class="section-name selfRef">Encoding Examples</a>
+      </h2>
+<p id="appendix-D-1">The following three tables provide examples of CDE-encoded CBOR data
+items, each giving Diagnostic Notation (EDN <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>), the encoded data
+item in hexadecimal, and a comment.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<div id="integer-value-examples">
+<section id="appendix-D.1">
+        <h3 id="name-integer-value-examples">
+<a href="#appendix-D.1" class="section-number selfRef">D.1. </a><a href="#name-integer-value-examples" class="section-name selfRef">Integer Value Examples</a>
+        </h3>
+<span id="name-integer-value-examples-2"></span><div id="tab-example-int">
+<table class="center" id="table-4">
+          <caption>
+<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#name-integer-value-examples-2" class="selfRef">Integer Value Examples</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">EDN</th>
+              <th class="text-left" rowspan="1" colspan="1">CBOR (hex)</th>
+              <th class="text-left" rowspan="1" colspan="1">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0</td>
+              <td class="text-left" rowspan="1" colspan="1">00</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-1</td>
+              <td class="text-left" rowspan="1" colspan="1">20</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">23</td>
+              <td class="text-left" rowspan="1" colspan="1">17</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-24</td>
+              <td class="text-left" rowspan="1" colspan="1">37</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">24</td>
+              <td class="text-left" rowspan="1" colspan="1">1818</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-25</td>
+              <td class="text-left" rowspan="1" colspan="1">3818</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">255</td>
+              <td class="text-left" rowspan="1" colspan="1">18ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-256</td>
+              <td class="text-left" rowspan="1" colspan="1">38ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">256</td>
+              <td class="text-left" rowspan="1" colspan="1">190100</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-257</td>
+              <td class="text-left" rowspan="1" colspan="1">390100</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65535</td>
+              <td class="text-left" rowspan="1" colspan="1">19ffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-65536</td>
+              <td class="text-left" rowspan="1" colspan="1">39ffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65536</td>
+              <td class="text-left" rowspan="1" colspan="1">1a00010000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-65537</td>
+              <td class="text-left" rowspan="1" colspan="1">3a00010000</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4294967295</td>
+              <td class="text-left" rowspan="1" colspan="1">1affffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-4294967296</td>
+              <td class="text-left" rowspan="1" colspan="1">3affffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4294967296</td>
+              <td class="text-left" rowspan="1" colspan="1">1b0000000100000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-4294967297</td>
+              <td class="text-left" rowspan="1" colspan="1">3b0000000100000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">18446744073709551615</td>
+              <td class="text-left" rowspan="1" colspan="1">1bffffffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-18446744073709551616</td>
+              <td class="text-left" rowspan="1" colspan="1">3bffffffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">18446744073709551616</td>
+              <td class="text-left" rowspan="1" colspan="1">c249010000000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned bigint</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-18446744073709551617</td>
+              <td class="text-left" rowspan="1" colspan="1">c349010000000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative bigint</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="floating-point-value-examples">
+<section id="appendix-D.2">
+        <h3 id="name-floating-point-value-exampl">
+<a href="#appendix-D.2" class="section-number selfRef">D.2. </a><a href="#name-floating-point-value-exampl" class="section-name selfRef">Floating Point Value Examples</a>
+        </h3>
+<span id="name-floating-point-value-example"></span><div id="tab-example-flt">
+<table class="center" id="table-5">
+          <caption>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-floating-point-value-example" class="selfRef">Floating Point Value Examples</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">EDN</th>
+              <th class="text-left" rowspan="1" colspan="1">CBOR (hex)</th>
+              <th class="text-left" rowspan="1" colspan="1">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f90000</td>
+              <td class="text-left" rowspan="1" colspan="1">Zero</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-0.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f98000</td>
+              <td class="text-left" rowspan="1" colspan="1">Negative zero</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Infinity</td>
+              <td class="text-left" rowspan="1" colspan="1">f97c00</td>
+              <td class="text-left" rowspan="1" colspan="1">Infinity</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-Infinity</td>
+              <td class="text-left" rowspan="1" colspan="1">f9fc00</td>
+              <td class="text-left" rowspan="1" colspan="1">-Infinity</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+              <td class="text-left" rowspan="1" colspan="1">f97e00</td>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+              <td class="text-left" rowspan="1" colspan="1">f97e01</td>
+              <td class="text-left" rowspan="1" colspan="1">NaN with non-zero payload</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">5.960464477539063e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">f90001</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006097555160522461</td>
+              <td class="text-left" rowspan="1" colspan="1">f903ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103515625</td>
+              <td class="text-left" rowspan="1" colspan="1">f90400</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65504.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f97bff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.401298464324817e-45</td>
+              <td class="text-left" rowspan="1" colspan="1">fa00000001</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive subnormal 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754942106924411e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fa007fffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754943508222875e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fa00800000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3.4028234663852886e+38</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7f7fffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">5.0e-324</td>
+              <td class="text-left" rowspan="1" colspan="1">fb0000000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive subnormal 64-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2.225073858507201e-308</td>
+              <td class="text-left" rowspan="1" colspan="1">fb000fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 64-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2.2250738585072014e-308</td>
+              <td class="text-left" rowspan="1" colspan="1">fb0010000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive 64-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.7976931348623157e+308</td>
+              <td class="text-left" rowspan="1" colspan="1">fb7fefffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive 64-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-0.0000033333333333333333</td>
+              <td class="text-left" rowspan="1" colspan="1">fbbecbf647612f3696</td>
+              <td class="text-left" rowspan="1" colspan="1">Randomly selected number</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">10.559998512268066</td>
+              <td class="text-left" rowspan="1" colspan="1">fa4128f5c1</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">10.559998512268068</td>
+              <td class="text-left" rowspan="1" colspan="1">fb40251eb820000001</td>
+              <td class="text-left" rowspan="1" colspan="1">Next in succession</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">295147905179352830000.0</td>
+              <td class="text-left" rowspan="1" colspan="1">fa61800000</td>
+              <td class="text-left" rowspan="1" colspan="1">268 (diagnostic notation truncates precision)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f94000</td>
+              <td class="text-left" rowspan="1" colspan="1">Number without a fractional part</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960464477539063e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">f98001</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960464477539062e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">fbbe6fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest negative subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960464477539064e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">fbbe70000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960465188081798e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">fab3800001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.0000609755516052246</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f0ff7ffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.000060975551605224616</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f0ff80000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.000060975555243203416</td>
+              <td class="text-left" rowspan="1" colspan="1">fa387fc001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103515624999999</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f0fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103515625000001</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f10000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103516352595761</td>
+              <td class="text-left" rowspan="1" colspan="1">fa38800001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65503.99999999999</td>
+              <td class="text-left" rowspan="1" colspan="1">fb40effbffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65504.00000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">fb40effc0000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65504.00390625</td>
+              <td class="text-left" rowspan="1" colspan="1">fa477fe001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.4012984643248169e-45</td>
+              <td class="text-left" rowspan="1" colspan="1">fb369fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest subnormal 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.4012984643248174e-45</td>
+              <td class="text-left" rowspan="1" colspan="1">fb36a0000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.175494210692441e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb380fffffbfffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754942106924412e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb380fffffc0000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754943508222874e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb380fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754943508222878e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3810000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3.4028234663852882e+38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb47efffffdfffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3.402823466385289e+38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb47efffffe0000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="failing-examples">
+<section id="appendix-D.3">
+        <h3 id="name-failing-examples">
+<a href="#appendix-D.3" class="section-number selfRef">D.3. </a><a href="#name-failing-examples" class="section-name selfRef">Failing Examples</a>
+        </h3>
+<span id="name-failing-examples-2"></span><div id="tab-example-bad">
+<table class="center" id="table-6">
+          <caption>
+<a href="#table-6" class="selfRef">Table 6</a>:
+<a href="#name-failing-examples-2" class="selfRef">Failing Examples</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">EDN</th>
+              <th class="text-left" rowspan="1" colspan="1">CBOR (hex)</th>
+              <th class="text-left" rowspan="1" colspan="1">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">{"b":0,"a":1}</td>
+              <td class="text-left" rowspan="1" colspan="1">a2616200616101</td>
+              <td class="text-left" rowspan="1" colspan="1">Incorrect map key ordering</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">255</td>
+              <td class="text-left" rowspan="1" colspan="1">1900ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Integer not in preferred encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-18446744073709551617</td>
+              <td class="text-left" rowspan="1" colspan="1">c34a00010000000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Bigint with leading zero bytes</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">10.5</td>
+              <td class="text-left" rowspan="1" colspan="1">fa41280000</td>
+              <td class="text-left" rowspan="1" colspan="1">Not in shortest encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7fc00000</td>
+              <td class="text-left" rowspan="1" colspan="1">Not in shortest encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65536</td>
+              <td class="text-left" rowspan="1" colspan="1">c243010000</td>
+              <td class="text-left" rowspan="1" colspan="1">Integer value too small for bigint</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">(_ h'01', h'0203')</td>
+              <td class="text-left" rowspan="1" colspan="1">5f4101420203ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Indefinite length encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">(Not CBOR)</td>
+              <td class="text-left" rowspan="1" colspan="1">f818</td>
+              <td class="text-left" rowspan="1" colspan="1">Simple values 24..31 not in use</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">(Not CBOR)</td>
+              <td class="text-left" rowspan="1" colspan="1">fc</td>
+              <td class="text-left" rowspan="1" colspan="1">Reserved (ai = 28..30)</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="list-of-tables">
+<section id="appendix-E">
       <h2 id="name-list-of-tables">
 <a href="#name-list-of-tables" class="section-name selfRef">List of Tables</a>
       </h2>
-<ol start="1" type="1" class="compact type-1" id="appendix-D-1">
-<li id="appendix-D-1.1">
-          <p id="appendix-D-1.1.1"><span><a href="#tab-constraints" class="internal xref">Constraints on the Serialization of CBOR</a> (<a href="#tab-constraints" class="auto internal xref">Table 1</a>)</span><a href="#appendix-D-1.1.1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="appendix-E-1">
+<li id="appendix-E-1.1">
+          <p id="appendix-E-1.1.1"><span><a href="#tab-constraints" class="internal xref">Constraints on the Serialization of CBOR</a> (<a href="#tab-constraints" class="auto internal xref">Table 1</a>)</span><a href="#appendix-E-1.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="appendix-D-1.2">
-          <p id="appendix-D-1.2.1"><span><a href="#tbl-iana-reqs" class="internal xref">New control operators to be registered</a> (<a href="#tbl-iana-reqs" class="auto internal xref">Table 2</a>)</span><a href="#appendix-D-1.2.1" class="pilcrow">¶</a></p>
+        <li id="appendix-E-1.2">
+          <p id="appendix-E-1.2.1"><span><a href="#tbl-iana-reqs" class="internal xref">New control operators to be registered</a> (<a href="#tbl-iana-reqs" class="auto internal xref">Table 2</a>)</span><a href="#appendix-E-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.3">
+          <p id="appendix-E-1.3.1"><span><a href="#layers" class="internal xref">A three-layer model of information representation</a> (<a href="#layers" class="auto internal xref">Table 3</a>)</span><a href="#appendix-E-1.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.4">
+          <p id="appendix-E-1.4.1"><span><a href="#tab-example-int" class="internal xref">Integer Value Examples</a> (<a href="#tab-example-int" class="auto internal xref">Table 4</a>)</span><a href="#appendix-E-1.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.5">
+          <p id="appendix-E-1.5.1"><span><a href="#tab-example-flt" class="internal xref">Floating Point Value Examples</a> (<a href="#tab-example-flt" class="auto internal xref">Table 5</a>)</span><a href="#appendix-E-1.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.6">
+          <p id="appendix-E-1.6.1"><span><a href="#tab-example-bad" class="internal xref">Failing Examples</a> (<a href="#tab-example-bad" class="auto internal xref">Table 6</a>)</span><a href="#appendix-E-1.6.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="appendix-E">
+<section id="appendix-F">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-E-1">An earlier version of this document was based on the work of Wolf
-McNally and Christopher Allen as documented in <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>, which
+<p id="appendix-F-1">An early version of this document was based on the work of <span class="contact-name">Wolf McNally</span> and <span class="contact-name">Christopher Allen</span> as documented in <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>, which
 serves as an example for an ALDR ruleset document.
 We would like to explicitly acknowledge that this work has
 contributed greatly to shaping the concept of a CBOR Common
-Deterministic Encoding and ALDR rules/rulesets on top of that.
-Mikolai Gütschow proposed adding <a href="#choi" class="auto internal xref">Section 2</a>.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
+Deterministic Encoding and the use of ALDR rules/rulesets on top of that.
+<span class="contact-name">Mikolai Gütschow</span> proposed adding <a href="#choi" class="auto internal xref">Section 2</a>.
+<span class="contact-name">Anders Rundgren</span> provided most of the initial text that turned into
+<a href="#examples" class="auto internal xref">Appendix D</a>.<a href="#appendix-F-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
-<section id="appendix-F">
+<section id="appendix-G">
       <h2 id="name-contributors">
 <a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
@@ -2401,11 +2889,11 @@ Mikolai Gütschow proposed adding <a href="#choi" class="auto internal xref">Sec
 <a href="mailto:lgl@securitytheory.com" class="email">lgl@securitytheory.com</a>
 </div>
 </address>
-<p id="appendix-F-1">Laurence provided most of the text that became <a href="#models" class="auto internal xref">Appendix A</a> and <a href="#impcheck" class="auto internal xref">Appendix C</a>.<a href="#appendix-F-1" class="pilcrow">¶</a></p>
+<p id="appendix-G-1">Laurence provided most of the text that became <a href="#models" class="auto internal xref">Appendix A</a> and <a href="#impcheck" class="auto internal xref">Appendix C</a>.<a href="#appendix-G-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-G">
+<section id="appendix-H">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>

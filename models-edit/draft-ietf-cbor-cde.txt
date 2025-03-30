@@ -84,7 +84,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Structure of This Document  . . . . . . . . . . . . . . .   3
      1.2.  Conventions and Definitions . . . . . . . . . . . . . . .   4
-   2.  Encoding Choices in CBOR  . . . . . . . . . . . . . . . . . .   4
+   2.  Encoding Choices in CBOR  . . . . . . . . . . . . . . . . . .   5
    3.  CBOR Common Deterministic Encoding Profile (CDE)  . . . . . .   6
    4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .   9
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
@@ -92,11 +92,11 @@ Table of Contents
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  11
-   Appendix A.  Information Model, Data Model and Serialization  . .  12
+   Appendix A.  Information Model, Data Model and Serialization  . .  13
    Appendix B.  Application-level Deterministic Representation . . .  15
    Appendix C.  Implementers' Checklists . . . . . . . . . . . . . .  18
      C.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  19
-       C.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  20
+       C.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  19
        C.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  21
      C.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  22
        C.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  22
@@ -104,8 +104,8 @@ Table of Contents
      C.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  22
        C.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  22
        C.3.2.  CDE Decoders  . . . . . . . . . . . . . . . . . . . .  23
-   List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  23
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  23
+   Appendix D.  Encoding Examples  . . . . . . . . . . . . . . . . .  23
+     D.1.  Integer Value Examples  . . . . . . . . . . . . . . . . .  23
 
 
 
@@ -114,8 +114,12 @@ Bormann                  Expires 1 October 2025                 [Page 2]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  23
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  24
+     D.2.  Floating Point Value Examples . . . . . . . . . . . . . .  25
+     D.3.  Failing Examples  . . . . . . . . . . . . . . . . . . . .  28
+   List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  29
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  30
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  30
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  30
 
 1.  Introduction
 
@@ -148,6 +152,24 @@ Internet-Draft                  CBOR CDE                      March 2025
    with partial (e.g., constrained) CBOR decoder implementations.
    Appendix C.3 further restricts Basic Serialization to arrive at CDE.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 1 October 2025                 [Page 3]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
    Instead of giving rise to the definition of application-specific,
    non-interoperable variants of CDE, this document identifies
    Application-level Deterministic Representation (ALDR) rules as a
@@ -159,16 +181,6 @@ Internet-Draft                  CBOR CDE                      March 2025
    provided as part of a specification for a CBOR-based protocol, or, if
    needed, can be provided by referencing a shared "ALDR ruleset" that
    is defined in a separate document.
-
-
-
-
-
-
-Bormann                  Expires 1 October 2025                 [Page 3]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
 
 1.2.  Conventions and Definitions
 
@@ -202,18 +214,6 @@ Internet-Draft                  CBOR CDE                      March 2025
    [BCP14] (RFC2119) (RFC8174) when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Encoding Choices in CBOR
-
-   In many cases, CBOR provides more than one way to encode a data item,
-   i.e., to serialize it into a sequence of bytes.  This flexibility can
-   provide convenience for the generator of the encoded data item, but
-   handling the resulting variation can also put an onus on the decoder.
-   In general, there is no single perfect encoding choice that is
-   optimal for all applications.  Choosing the right constraints on
-   these encoding choices is one element of application protocol design.
-   Having predefined sets of such choices is a useful way to reduce
-   variation between applications, enabling generic implementations.
-
 
 
 
@@ -225,6 +225,18 @@ Bormann                  Expires 1 October 2025                 [Page 4]
 
 Internet-Draft                  CBOR CDE                      March 2025
 
+
+2.  Encoding Choices in CBOR
+
+   In many cases, CBOR provides more than one way to encode a data item,
+   i.e., to serialize it into a sequence of bytes.  This flexibility can
+   provide convenience for the generator of the encoded data item, but
+   handling the resulting variation can also put an onus on the decoder.
+   In general, there is no single perfect encoding choice that is
+   optimal for all applications.  Choosing the right constraints on
+   these encoding choices is one element of application protocol design.
+   Having predefined sets of such choices is a useful way to reduce
+   variation between applications, enabling generic implementations.
 
    Section 4.1 of RFC 8949 [STD94] provides a recommendation for a
    _Preferred Serialization_. This recommendation is useful for most
@@ -261,18 +273,6 @@ Internet-Draft                  CBOR CDE                      March 2025
 
    Table 1 summarizes the increasingly restrictive sets of encoding
    choices that have been given names in this section.
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -618,6 +618,13 @@ Bormann                  Expires 1 October 2025                [Page 11]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
+   [I-D.ietf-cbor-edn-literals]
+              Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
+              Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
+              literals-16, 8 January 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
+              edn-literals-16>.
+
    [I-D.mcnally-deterministic-cbor]
               McNally, W., Allen, C., Bormann, C., and L. Lundblade,
               "dCBOR: A Deterministic CBOR Application Profile", Work in
@@ -658,6 +665,15 @@ Internet-Draft                  CBOR CDE                      March 2025
               DOI 10.17487/RFC9338, December 2022,
               <https://www.rfc-editor.org/info/rfc9338>.
 
+
+
+
+
+Bormann                  Expires 1 October 2025                [Page 12]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
    [UAX-15]   "Unicode Normalization Forms", Unicode Standard Annex,
               <https://unicode.org/reports/tr15/>.
 
@@ -666,13 +682,6 @@ Appendix A.  Information Model, Data Model and Serialization
    For a good understanding of this document, it is helpful to
    understand the difference between an information model, a data model
    and serialization.
-
-
-
-Bormann                  Expires 1 October 2025                [Page 12]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
 
    +=============+============+==============+=========+==============+
    |             |Abstraction |Example       |Standards|Implementation|
@@ -711,15 +720,6 @@ Internet-Draft                  CBOR CDE                      March 2025
    [RFC8610].  The various types of data items in the data model are
    serialized per RFC 8949 [STD94] to create encoded CBOR data items.
 
-   In contrast to JSON, CBOR-related documents explicitly discuss the
-   data model separately from its serialization.  Both JSON and CBOR
-   allow variation in the way some data types can be serialized:
-
-
-
-
-
-
 
 
 
@@ -729,6 +729,10 @@ Bormann                  Expires 1 October 2025                [Page 13]
 
 Internet-Draft                  CBOR CDE                      March 2025
 
+
+   In contrast to JSON, CBOR-related documents explicitly discuss the
+   data model separately from its serialization.  Both JSON and CBOR
+   allow variation in the way some data types can be serialized:
 
    *  In JSON, the number 1 can be serialized in several different ways
       (1, 0.1e1, 1.0, 100e-2) — while it may seem obvious to use 1 for
@@ -769,15 +773,11 @@ Internet-Draft                  CBOR CDE                      March 2025
    combines basic encoding with a deterministic ordering of entries in a
    map (Table 1).
 
-
-
-
-
-
-
-
-
-
+   Partial implementations of a representation format are quite common
+   in embedded applications.  Protocols for embedded applications often
+   reduce the footprint of an embedded JSON implementation by explicitly
+   restricting the breadth of the data model, e.g., by not using
+   floating point numbers with 64 bits of precision or by not using
 
 
 
@@ -786,11 +786,6 @@ Bormann                  Expires 1 October 2025                [Page 14]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
-   Partial implementations of a representation format are quite common
-   in embedded applications.  Protocols for embedded applications often
-   reduce the footprint of an embedded JSON implementation by explicitly
-   restricting the breadth of the data model, e.g., by not using
-   floating point numbers with 64 bits of precision or by not using
    floating point numbers at all.  These data-model-level restrictions
    do not get in the way of using complete implementations ("generic
    encoders/decoders", Section 5.2 of RFC 8949 [STD94]).  (Note that
@@ -834,6 +829,11 @@ Appendix B.  Application-level Deterministic Representation
       |        date format (as in tag 0).
       |  
       |     *  The receiver MUST decode both formats.
+      |  
+      |  While this specification is interoperable, it lacks
+      |  determinism.  There is variability in the application layer
+      |  akin to variability in the CBOR encoding layer when CDE is not
+      |  required.
 
 
 
@@ -842,11 +842,6 @@ Bormann                  Expires 1 October 2025                [Page 15]
 Internet-Draft                  CBOR CDE                      March 2025
 
 
-      |  
-      |  While this specification is interoperable, it lacks
-      |  determinism.  There is variability in the application layer
-      |  akin to variability in the CBOR encoding layer when CDE is not
-      |  required.
       |  
       |  To make this example application layer specification
       |  deterministic, allow only one date format (or at least be
@@ -884,20 +879,6 @@ Internet-Draft                  CBOR CDE                      March 2025
       |  some of these for some application data and different ones for
       |  other application data.
 
-
-
-
-
-
-
-
-
-
-Bormann                  Expires 1 October 2025                [Page 16]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
-
    Applications that require Deterministic Representation, and that
    derive CBOR data items from application data without maintaining a
    record of which choices are to be made when representing these
@@ -909,6 +890,14 @@ Internet-Draft                  CBOR CDE                      March 2025
       |  As an example, [RFC9679] is intended to derive a
       |  (deterministic) thumbprint from a COSE key [STD96].  Section 4
       |  of [RFC9679] provides the rules that are used to construct a
+
+
+
+Bormann                  Expires 1 October 2025                [Page 16]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
       |  deterministic application-level representation (ALDR rules).
       |  Only certain data from a COSE key are selected to be included
       |  in that ALDR, and, where the COSE can choose multiple
@@ -946,14 +935,6 @@ Internet-Draft                  CBOR CDE                      March 2025
       |  implementing a _reduction_ by routine normalization of text
       |  strings.
 
-
-
-
-Bormann                  Expires 1 October 2025                [Page 17]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
-
    ALDR rules (including rules specified in a ALDR ruleset document)
    enable simply using implementations of the common CDE; they do not
    "fork" CBOR in the sense of requiring distinct generic encoder/
@@ -965,6 +946,14 @@ Internet-Draft                  CBOR CDE                      March 2025
    therefore be able to decode it, including those that check for
    Deterministic Encoding ("CDE decoders", see also Appendix C).
    Similarly, generic CBOR encoders will be able to produce valid CBOR
+
+
+
+Bormann                  Expires 1 October 2025                [Page 17]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
    that can be ingested by an implementation that enforces an
    application's ALDR rules if the encoder was handed data model level
    information from an application that simply conformed to those ALDR
@@ -1000,6 +989,17 @@ Appendix C.  Implementers' Checklists
 
    Notes:
 
+   *  This is largely a restatement of parts of Section 4 of RFC 8949
+      [STD94].  The purpose of the restatement is to aid the work of
+      implementers, not to redefine anything.
+
+      Preferred Serialization Encoders and Decoders as well as CDE
+      Encoders and Decoders have certain properties that are expressed
+      using RFC2119 keywords in this appendix.
+
+
+
+
 
 
 
@@ -1009,14 +1009,6 @@ Bormann                  Expires 1 October 2025                [Page 18]
 
 Internet-Draft                  CBOR CDE                      March 2025
 
-
-   *  This is largely a restatement of parts of Section 4 of RFC 8949
-      [STD94].  The purpose of the restatement is to aid the work of
-      implementers, not to redefine anything.
-
-      Preferred Serialization Encoders and Decoders as well as CDE
-      Encoders and Decoders have certain properties that are expressed
-      using RFC2119 keywords in this appendix.
 
    *  Duplicate map keys are never valid in CBOR at all (see list item
       "Major type 5" in Section 3.1 of RFC 8949 [STD94]) no matter what
@@ -1055,17 +1047,6 @@ C.1.  Preferred Serialization
    additional information field in the first byte of an encoded CBOR
    data item, which follows the 3-bit field for the major type.
 
-
-
-
-
-
-
-Bormann                  Expires 1 October 2025                [Page 19]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
-
 C.1.1.  Preferred Serialization Encoders
 
    1.  Shortest-form encoding of the argument MUST be used for all major
@@ -1076,6 +1057,14 @@ C.1.1.  Preferred Serialization Encoders
 
        *  0 to 23 and -1 to -24 MUST be encoded in the same byte as the
           major type.
+
+
+
+
+Bormann                  Expires 1 October 2025                [Page 19]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
 
        *  24 to 255 and -25 to -256 MUST be encoded only with an
           additional byte (ai = 0x18).
@@ -1114,14 +1103,6 @@ C.1.1.  Preferred Serialization Encoders
              representation) between the original format and the
              shortest format.  This trimming is performed only
              (preserves the value only) if all the rightmost bits
-
-
-
-Bormann                  Expires 1 October 2025                [Page 20]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
-
              removed are zero.  (This will always represent a double or
              single quiet NaN with a zero NaN payload in a half-
              precision quiet NaN.)
@@ -1133,6 +1114,13 @@ Internet-Draft                  CBOR CDE                      March 2025
 
        *  Negative integers from -(2^64) to -1 MUST be encoded as a type
           1 integer.
+
+
+
+Bormann                  Expires 1 October 2025                [Page 20]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
 
        *  Leading zeros MUST NOT be present in the byte string content
           of tag 2 and 3.
@@ -1171,17 +1159,24 @@ C.1.2.  Preferred Serialization Decoders
           and presented to the application (not necessarily in the
           platform number format, if that doesn't support those values).
 
+   5.  If big numbers (tags 2 and 3) are supported, type 0 and type 1
+       integers MUST be accepted where a tag 2 or 3 would be accepted.
+       Leading zero bytes in the tag content of a tag 2 or 3 MUST be
+       ignored.
+
+
+
+
+
+
+
+
 
 
 Bormann                  Expires 1 October 2025                [Page 21]
 
 Internet-Draft                  CBOR CDE                      March 2025
 
-
-   5.  If big numbers (tags 2 and 3) are supported, type 0 and type 1
-       integers MUST be accepted where a tag 2 or 3 would be accepted.
-       Leading zero bytes in the tag content of a tag 2 or 3 MUST be
-       ignored.
 
 C.2.  Basic Serialization
 
@@ -1225,6 +1220,11 @@ C.3.1.  CDE Encoders
        emitting duplicate keys in a major type 5 map as well as emitting
        only valid UTF-8 in major type 3 text strings.
 
+       Note also that CDE does NOT include a requirement for Unicode
+       normalization [UAX-15]; Appendix C of
+       [I-D.bormann-dispatch-modern-network-unicode] contains some
+       rationale that went into not requiring routine use of Unicode
+       normalization processes.
 
 
 
@@ -1233,12 +1233,6 @@ Bormann                  Expires 1 October 2025                [Page 22]
 
 Internet-Draft                  CBOR CDE                      March 2025
 
-
-       Note also that CDE does NOT include a requirement for Unicode
-       normalization [UAX-15]; Appendix C of
-       [I-D.bormann-dispatch-modern-network-unicode] contains some
-       rationale that went into not requiring routine use of Unicode
-       normalization processes.
 
 C.3.2.  CDE Decoders
 
@@ -1258,20 +1252,391 @@ C.3.2.  CDE Decoders
        (except maybe via special diagnostic channels with no potential
        for confusion with a correctly CDE-decoded data item).
 
+Appendix D.  Encoding Examples
+
+   The following three tables provide examples of CDE-encoded CBOR data
+   items, each giving Diagnostic Notation (EDN
+   [I-D.ietf-cbor-edn-literals]), the encoded data item in hexadecimal,
+   and a comment.
+
+D.1.  Integer Value Examples
+
+    +=======================+========================+================+
+    | EDN                   | CBOR (hex)             | Comment        |
+    +=======================+========================+================+
+    | 0                     | 00                     | Smallest       |
+    |                       |                        | unsigned       |
+    |                       |                        | immediate int  |
+    +-----------------------+------------------------+----------------+
+    | -1                    | 20                     | Largest        |
+    |                       |                        | negative       |
+    |                       |                        | immediate int  |
+    +-----------------------+------------------------+----------------+
+    | 23                    | 17                     | Largest        |
+    |                       |                        | unsigned       |
+    |                       |                        | immediate int  |
+    +-----------------------+------------------------+----------------+
+    | -24                   | 37                     | Smallest       |
+    |                       |                        | negative       |
+    |                       |                        | immediate int  |
+    +-----------------------+------------------------+----------------+
+    | 24                    | 1818                   | Smallest       |
+    |                       |                        | unsigned one-  |
+
+
+
+Bormann                  Expires 1 October 2025                [Page 23]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | -25                   | 3818                   | Largest        |
+    |                       |                        | negative one-  |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | 255                   | 18ff                   | Largest        |
+    |                       |                        | unsigned one-  |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | -256                  | 38ff                   | Smallest       |
+    |                       |                        | negative one-  |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | 256                   | 190100                 | Smallest       |
+    |                       |                        | unsigned two-  |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | -257                  | 390100                 | Largest        |
+    |                       |                        | negative two-  |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | 65535                 | 19ffff                 | Largest        |
+    |                       |                        | unsigned two-  |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | -65536                | 39ffff                 | Smallest       |
+    |                       |                        | negative two-  |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | 65536                 | 1a00010000             | Smallest       |
+    |                       |                        | unsigned four- |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | -65537                | 3a00010000             | Largest        |
+    |                       |                        | negative four- |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | 4294967295            | 1affffffff             | Largest        |
+    |                       |                        | unsigned four- |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | -4294967296           | 3affffffff             | Smallest       |
+    |                       |                        | negative four- |
+    |                       |                        | byte int       |
+    +-----------------------+------------------------+----------------+
+    | 4294967296            | 1b0000000100000000     | Smallest       |
+    |                       |                        | unsigned       |
+
+
+
+Bormann                  Expires 1 October 2025                [Page 24]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
+    |                       |                        | eight-byte int |
+    +-----------------------+------------------------+----------------+
+    | -4294967297           | 3b0000000100000000     | Largest        |
+    |                       |                        | negative       |
+    |                       |                        | eight-byte int |
+    +-----------------------+------------------------+----------------+
+    | 18446744073709551615  | 1bffffffffffffffff     | Largest        |
+    |                       |                        | unsigned       |
+    |                       |                        | eight-byte int |
+    +-----------------------+------------------------+----------------+
+    | -18446744073709551616 | 3bffffffffffffffff     | Smallest       |
+    |                       |                        | negative       |
+    |                       |                        | eight-byte int |
+    +-----------------------+------------------------+----------------+
+    | 18446744073709551616  | c249010000000000000000 | Smallest       |
+    |                       |                        | unsigned       |
+    |                       |                        | bigint         |
+    +-----------------------+------------------------+----------------+
+    | -18446744073709551617 | c349010000000000000000 | Largest        |
+    |                       |                        | negative       |
+    |                       |                        | bigint         |
+    +-----------------------+------------------------+----------------+
+
+                      Table 4: Integer Value Examples
+
+D.2.  Floating Point Value Examples
+
+   +===========================+====================+==================+
+   | EDN                       | CBOR (hex)         | Comment          |
+   +===========================+====================+==================+
+   | 0.0                       | f90000             | Zero             |
+   +---------------------------+--------------------+------------------+
+   | -0.0                      | f98000             | Negative zero    |
+   +---------------------------+--------------------+------------------+
+   | Infinity                  | f97c00             | Infinity         |
+   +---------------------------+--------------------+------------------+
+   | -Infinity                 | f9fc00             | -Infinity        |
+   +---------------------------+--------------------+------------------+
+   | NaN                       | f97e00             | NaN              |
+   +---------------------------+--------------------+------------------+
+   | NaN                       | f97e01             | NaN with non-    |
+   |                           |                    | zero payload     |
+   +---------------------------+--------------------+------------------+
+   | 5.960464477539063e-8      | f90001             | Smallest         |
+   |                           |                    | positive         |
+   |                           |                    | subnormal        |
+   |                           |                    | 16-bit float     |
+   +---------------------------+--------------------+------------------+
+
+
+
+Bormann                  Expires 1 October 2025                [Page 25]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
+   | 0.00006097555160522461    | f903ff             | Largest          |
+   |                           |                    | positive         |
+   |                           |                    | subnormal        |
+   |                           |                    | 16-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 0.00006103515625          | f90400             | Smallest         |
+   |                           |                    | positive 16-bit  |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 65504.0                   | f97bff             | Largest          |
+   |                           |                    | positive 16-bit  |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 1.401298464324817e-45     | fa00000001         | Smallest         |
+   |                           |                    | positive         |
+   |                           |                    | subnormal        |
+   |                           |                    | 32-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 1.1754942106924411e-38    | fa007fffff         | Largest          |
+   |                           |                    | positive         |
+   |                           |                    | subnormal        |
+   |                           |                    | 32-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 1.1754943508222875e-38    | fa00800000         | Smallest         |
+   |                           |                    | positive 32-bit  |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 3.4028234663852886e+38    | fa7f7fffff         | Largest          |
+   |                           |                    | positive 32-bit  |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 5.0e-324                  | fb0000000000000001 | Smallest         |
+   |                           |                    | positive         |
+   |                           |                    | subnormal        |
+   |                           |                    | 64-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 2.225073858507201e-308    | fb000fffffffffffff | Largest          |
+   |                           |                    | positive         |
+   |                           |                    | subnormal        |
+   |                           |                    | 64-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 2.2250738585072014e-308   | fb0010000000000000 | Smallest         |
+   |                           |                    | positive 64-bit  |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 1.7976931348623157e+308   | fb7fefffffffffffff | Largest          |
+   |                           |                    | positive 64-bit  |
+   |                           |                    | float            |
+
+
+
+Bormann                  Expires 1 October 2025                [Page 26]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
+   +---------------------------+--------------------+------------------+
+   | -0.0000033333333333333333 | fbbecbf647612f3696 | Randomly         |
+   |                           |                    | selected number  |
+   +---------------------------+--------------------+------------------+
+   | 10.559998512268066        | fa4128f5c1         | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 10.559998512268068        | fb40251eb820000001 | Next in          |
+   |                           |                    | succession       |
+   +---------------------------+--------------------+------------------+
+   | 295147905179352830000.0   | fa61800000         | 268 (diagnostic  |
+   |                           |                    | notation         |
+   |                           |                    | truncates        |
+   |                           |                    | precision)       |
+   +---------------------------+--------------------+------------------+
+   | 2.0                       | f94000             | Number without   |
+   |                           |                    | a fractional     |
+   |                           |                    | part             |
+   +---------------------------+--------------------+------------------+
+   | -5.960464477539063e-8     | f98001             | Largest          |
+   |                           |                    | negative         |
+   |                           |                    | subnormal        |
+   |                           |                    | 16-bit float     |
+   +---------------------------+--------------------+------------------+
+   | -5.960464477539062e-8     | fbbe6fffffffffffff | Adjacent to      |
+   |                           |                    | largest          |
+   |                           |                    | negative         |
+   |                           |                    | subnormal        |
+   |                           |                    | 16-bit float     |
+   +---------------------------+--------------------+------------------+
+   | -5.960464477539064e-8     | fbbe70000000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+   | -5.960465188081798e-8     | fab3800001         | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 0.0000609755516052246     | fb3f0ff7ffffffffff | Adjacent to      |
+   |                           |                    | largest          |
+   |                           |                    | subnormal        |
+   |                           |                    | 16-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 0.000060975551605224616   | fb3f0ff80000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 0.000060975555243203416   | fa387fc001         | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 0.00006103515624999999    | fb3f0fffffffffffff | Adjacent to      |
+   |                           |                    | smallest 16-bit  |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 0.00006103515625000001    | fb3f10000000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+
+
+
+Bormann                  Expires 1 October 2025                [Page 27]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
+   | 0.00006103516352595761    | fa38800001         | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 65503.99999999999         | fb40effbffffffffff | Adjacent to      |
+   |                           |                    | largest 16-bit   |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 65504.00000000001         | fb40effc0000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 65504.00390625            | fa477fe001         | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 1.4012984643248169e-45    | fb369fffffffffffff | Adjacent to      |
+   |                           |                    | smallest         |
+   |                           |                    | subnormal        |
+   |                           |                    | 32-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 1.4012984643248174e-45    | fb36a0000000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 1.175494210692441e-38     | fb380fffffbfffffff | Adjacent to      |
+   |                           |                    | largest          |
+   |                           |                    | subnormal        |
+   |                           |                    | 32-bit float     |
+   +---------------------------+--------------------+------------------+
+   | 1.1754942106924412e-38    | fb380fffffc0000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 1.1754943508222874e-38    | fb380fffffffffffff | Adjacent to      |
+   |                           |                    | smallest 32-bit  |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 1.1754943508222878e-38    | fb3810000000000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+   | 3.4028234663852882e+38    | fb47efffffdfffffff | Adjacent to      |
+   |                           |                    | largest 32-bit   |
+   |                           |                    | float            |
+   +---------------------------+--------------------+------------------+
+   | 3.402823466385289e+38     | fb47efffffe0000001 | -"-              |
+   +---------------------------+--------------------+------------------+
+
+                   Table 5: Floating Point Value Examples
+
+D.3.  Failing Examples
+
+   +=======================+==========================+===============+
+   | EDN                   | CBOR (hex)               | Comment       |
+   +=======================+==========================+===============+
+   | {"b":0,"a":1}         | a2616200616101           | Incorrect map |
+   |                       |                          | key ordering  |
+   +-----------------------+--------------------------+---------------+
+   | 255                   | 1900ff                   | Integer not   |
+
+
+
+Bormann                  Expires 1 October 2025                [Page 28]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
+
+   |                       |                          | in preferred  |
+   |                       |                          | encoding      |
+   +-----------------------+--------------------------+---------------+
+   | -18446744073709551617 | c34a00010000000000000000 | Bigint with   |
+   |                       |                          | leading zero  |
+   |                       |                          | bytes         |
+   +-----------------------+--------------------------+---------------+
+   | 10.5                  | fa41280000               | Not in        |
+   |                       |                          | shortest      |
+   |                       |                          | encoding      |
+   +-----------------------+--------------------------+---------------+
+   | NaN                   | fa7fc00000               | Not in        |
+   |                       |                          | shortest      |
+   |                       |                          | encoding      |
+   +-----------------------+--------------------------+---------------+
+   | 65536                 | c243010000               | Integer value |
+   |                       |                          | too small for |
+   |                       |                          | bigint        |
+   +-----------------------+--------------------------+---------------+
+   | (_ h'01', h'0203')    | 5f4101420203ff           | Indefinite    |
+   |                       |                          | length        |
+   |                       |                          | encoding      |
+   +-----------------------+--------------------------+---------------+
+   | (Not CBOR)            | f818                     | Simple values |
+   |                       |                          | 24..31 not in |
+   |                       |                          | use           |
+   +-----------------------+--------------------------+---------------+
+   | (Not CBOR)            | fc                       | Reserved (ai  |
+   |                       |                          | = 28..30)     |
+   +-----------------------+--------------------------+---------------+
+
+                        Table 6: Failing Examples
+
 List of Tables
 
    1.  Constraints on the Serialization of CBOR (Table 1)
    2.  New control operators to be registered (Table 2)
+   3.  A three-layer model of information representation (Table 3)
+   4.  Integer Value Examples (Table 4)
+   5.  Floating Point Value Examples (Table 5)
+   6.  Failing Examples (Table 6)
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 1 October 2025                [Page 29]
+
+Internet-Draft                  CBOR CDE                      March 2025
+
 
 Acknowledgments
 
-   An earlier version of this document was based on the work of Wolf
+   An early version of this document was based on the work of Wolf
    McNally and Christopher Allen as documented in
    [I-D.mcnally-deterministic-cbor], which serves as an example for an
    ALDR ruleset document.  We would like to explicitly acknowledge that
    this work has contributed greatly to shaping the concept of a CBOR
-   Common Deterministic Encoding and ALDR rules/rulesets on top of that.
-   Mikolai Gütschow proposed adding Section 2.
+   Common Deterministic Encoding and the use of ALDR rules/rulesets on
+   top of that.  Mikolai Gütschow proposed adding Section 2.  Anders
+   Rundgren provided most of the initial text that turned into
+   Appendix D.
 
 Contributors
 
@@ -1282,13 +1647,6 @@ Contributors
 
    Laurence provided most of the text that became Appendix A and
    Appendix C.
-
-
-
-Bormann                  Expires 1 October 2025                [Page 23]
-
-Internet-Draft                  CBOR CDE                      March 2025
-
 
 Author's Address
 
@@ -1319,26 +1677,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann                  Expires 1 October 2025                [Page 24]
+Bormann                  Expires 1 October 2025                [Page 30]
