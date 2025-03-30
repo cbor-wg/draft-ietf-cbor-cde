@@ -26,22 +26,22 @@ flt,Infinity,f97c00,Infinity
 flt,-Infinity,f9fc00,-Infinity
 flt,NaN,f97e00,NaN
 flt,NaN,f97e01,NaN with non-zero payload
-flt,5.960464477539063e-8,f90001,Smallest positive subnormal 16-bit float
+flt,5.960464477539063e-8,f90001,Smallest positive 16-bit float (subnormal)
 flt,0.00006097555160522461,f903ff,Largest positive subnormal 16-bit float
-flt,0.00006103515625,f90400,Smallest positive 16-bit float
+flt,0.00006103515625,f90400,Smallest non-subnormal positive 16-bit float
 flt,65504.0,f97bff,Largest positive 16-bit float
-flt,1.401298464324817e-45,fa00000001,Smallest positive subnormal 32-bit float
+flt,1.401298464324817e-45,fa00000001,Smallest positive 32-bit float (subnormal)
 flt,1.1754942106924411e-38,fa007fffff,Largest positive subnormal 32-bit float
-flt,1.1754943508222875e-38,fa00800000,Smallest positive 32-bit float
+flt,1.1754943508222875e-38,fa00800000,Smallest non-subnormal positive 32-bit float
 flt,3.4028234663852886e+38,fa7f7fffff,Largest positive 32-bit float
-flt,5.0e-324,fb0000000000000001,Smallest positive subnormal 64-bit float
+flt,5.0e-324,fb0000000000000001,Smallest positive 64-bit float (subnormal)
 flt,2.225073858507201e-308,fb000fffffffffffff,Largest positive subnormal 64-bit float
-flt,2.2250738585072014e-308,fb0010000000000000,Smallest positive 64-bit float
+flt,2.2250738585072014e-308,fb0010000000000000,Smallest non-subnormal positive 64-bit float
 flt,1.7976931348623157e+308,fb7fefffffffffffff,Largest positive 64-bit float
-flt,-0.0000033333333333333333,fbbecbf647612f3696,Randomly selected number
+flt,-0.0000033333333333333333,fbbecbf647612f3696,Arbitrarily selected number
 flt,10.559998512268066,fa4128f5c1,"-""-"
 flt,10.559998512268068,fb40251eb820000001,Next in succession
-flt,295147905179352830000.0,fa61800000,268 (diagnostic notation truncates precision)
+flt,295147905179352830000.0,fa61800000,2<sup>68</sup> (diagnostic notation truncates precision)
 flt,2.0,f94000,Number without a fractional part
 flt,-5.960464477539063e-8,f98001,Largest negative subnormal 16-bit float
 flt,-5.960464477539062e-8,fbbe6fffffffffffff,Adjacent to largest negative subnormal 16-bit float
