@@ -53,6 +53,7 @@ normative:
 
 
 informative:
+  I-D.ietf-cbor-edn-literals: edn
   I-D.bormann-cbor-det: det
   I-D.mcnally-deterministic-cbor: dcbor
   I-D.bormann-cbor-numbers: numbers
@@ -884,17 +885,25 @@ advertises _supporting_ CDE (see the start of this appendix).
    special diagnostic channels with no potential for confusion with a
    correctly CDE-decoded data item).
 
+# Encoding Examples {#examples}
+
+The following three tables provide examples of CDE-encoded CBOR data
+items, each giving Diagnostic Notation (EDN {{-edn}}), the encoded data
+item in hexadecimal, and a comment.
+
+{::include example-tables.md}
 
 {::include-all cde-lists.md}
 
 # Acknowledgments
 {:numbered="false"}
 
-An earlier version of this document was based on the work of Wolf
-McNally and Christopher Allen as documented in {{-dcbor}}, which
+An early version of this document was based on the work of {{{Wolf
+McNally}}} and {{{Christopher Allen}}} as documented in {{-dcbor}}, which
 serves as an example for an ALDR ruleset document.
 We would like to explicitly acknowledge that this work has
 contributed greatly to shaping the concept of a CBOR Common
-Deterministic Encoding and ALDR rules/rulesets on top of that.
-Mikolai Gütschow proposed adding {{choi}}.
-
+Deterministic Encoding and the use of ALDR rules/rulesets on top of that.
+{{{Mikolai Gütschow}}} proposed adding {{choi}}.
+{{{Anders Rundgren}}} provided most of the initial text that turned into
+{{examples}}.
