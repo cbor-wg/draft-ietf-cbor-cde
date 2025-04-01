@@ -13,6 +13,9 @@ area: "Applications and Real-Time"
 workgroup: CBOR
 keyword:
 
+v3xml2rfc:
+  table_borders: light
+
 venue:
   group: "Concise Binary Object Representation Maintenance and Extensions (CBOR)"
   mail: "cbor@ietf.org"
@@ -67,6 +70,7 @@ informative:
   RFC9679: thumb
   STD96: cose
   RFC7493: ijson
+  RFC9741: more
 
 --- abstract
 
@@ -237,7 +241,7 @@ Requirements_ defined for CBOR in
 
 Note that this specific set of requirements is elective — in
 principle, other variants of deterministic encoding can be defined
-(and have been, now being phased out slowly, as detailed in {{Section 4.2.3
+(and have been, now being phased out, as detailed in {{Section 4.2.3
 of RFC8949@-cbor}}).
 In many applications of CBOR today, deterministic encoding is not used
 at all, as its restriction of choices can create some additional
@@ -385,8 +389,8 @@ specific structure, this can be expressed by the right-hand side
 (Note that the `.cdeseq` control operator does not enable specifying
 different deterministic encoding requirements for the elements of the
 sequence.  If a use case for such a feature becomes known, it could be
-added.)
-
+added, or the CBOR sequence could be constructed with `.join` ({{Section
+3.1 of -more}}).)
 
 Obviously, specifications that document ALDR rules can define related control operators
 that also embody the processing required by those ALDR rules,
@@ -425,6 +429,8 @@ This document requests IANA to register the contents of
 
 # Information Model, Data Model and Serialization {#models}
 
+This appendix is informative.
+
 For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
 
 |                   | Abstraction Level                                            | Example                                              | Standards | Implementation Representation                                       |
@@ -445,8 +451,10 @@ These basic and extended types are used to construct the data model of a CBOR pr
 One notation that is often used for describing the data model of a CBOR protocol is CDDL {{-cddl}}.
 The various types of data items in the data model are serialized per RFC 8949 {{-cbor}} to create encoded CBOR data items.
 
+## Data Model, Encoding Variants and Interoperability with Partial Implementations
+
 In contrast to JSON, CBOR-related documents explicitly discuss the data model separately from its serialization.
-Both JSON and CBOR allow variation in the way some data types can be serialized:
+Both JSON and CBOR allow variation in the way some data items can be serialized:
 
 * In JSON, the number 1 can be serialized in several different ways
 (`1`, `0.1e1`, `1.0`, `100e-2`) — while it may seem obvious to use
@@ -470,7 +478,7 @@ RFC8949@-cbor}}).
 _Partial CBOR implementations_ are more likely to interoperate if their
 encoder uses preferred serialization and the decoder implements
 decoding at least the preferred serialization as well.
-a specific protocol for a constrained application may specify
+A specific protocol for a constrained application may specify
 restrictions that allow, e.g., some fields to be of fixed length,
 guaranteeing interoperability even with partial implementations
 optimized for this application.
@@ -481,11 +489,11 @@ without knowing their length upfront ({{Section 3.2 of RFC8949@-cbor}}).
 For applications that do not perform streaming of this kind, variation
 can be reduced (and often performance improved) by only allowing
 definite-length encoding.
-The present document coins the term _basic encoding_ for combining
+The present document coins the term _basic serialization_ for combining
 definite-length-only with preferred encoding, further reducing the
 variation that a decoder needs to deal with.
 The Common Deterministic Encoding, CDE, finally combines basic
-encoding with a deterministic ordering of entries in a map
+serialization with a deterministic ordering of entries in a map
 ({{tab-constraints}}).
 
 Partial implementations of a representation format are quite common in
@@ -543,7 +551,7 @@ There is variability in the application layer akin to variability in the CBOR en
 
 To make this example application layer specification deterministic,
 allow only one date format (or at least be deterministic when there is
-a choice, e.g., to specify string format for leap seconds only).
+a choice, e.g., by specifying string format for leap seconds only).
 </aside>
 
 Application protocols that need to represent a timestamp typically
