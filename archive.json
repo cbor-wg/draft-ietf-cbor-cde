@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-30T01:35:31.385578+00:00",
+  "timestamp": "2025-04-01T01:39:56.281733+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1261,13 +1261,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-03-26T16:50:39Z",
-      "updatedAt": "2025-03-26T20:18:31Z",
+      "updatedAt": "2025-03-30T16:42:29Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "a9670a7ed020dbba0d7272aa488a502668627986",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "models-edit",
-      "headRefOid": "5f0ddd9bf415845301e81b42e686b652c5a16e68",
+      "headRefOid": "9b23dc3714cf37222f98c7b9811a88a0d95ae7ef",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
