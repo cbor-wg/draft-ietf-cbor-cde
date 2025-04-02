@@ -12,10 +12,10 @@ its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
 feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+CBOR Common Deterministic Encoding (CDE) that can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
-It also defines "Basic Serialization", which stops short of the
+It also defines the term "Basic Serialization", which stops short of the
 potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders. 
@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">March 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 26 September 2025</td>
+<td class="center">Expires 4 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-25" class="published">25 March 2025</time>
+<time datetime="2025-04-02" class="published">2 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-26">26 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-04">4 October 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1094,10 +1094,10 @@ its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
 feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+CBOR Common Deterministic Encoding (CDE) that can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
-It also defines "Basic Serialization", which stops short of the
+It also defines the term "Basic Serialization", which stops short of the
 potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1136,7 +1136,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1180,7 +1180,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-encoding-choices-in-cbor" class="internal xref">Encoding Choices in CBOR</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-cbor-common-deterministic-e" class="internal xref">CBOR Common Deterministic Encoding Profile (CDE)</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-cbor-common-deterministic-e" class="internal xref">CBOR Common Deterministic Encoding (CDE)</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-cddl-support" class="internal xref">CDDL support</a></p>
@@ -1203,57 +1203,79 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-application-level-determini" class="internal xref">Application-level Deterministic Representation</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-information-model-data-mode" class="internal xref">Information Model, Data Model and Serialization</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-data-model-encoding-variant" class="internal xref">Data Model, Encoding Variants and Interoperability with Partial Implementations</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-implementers-checklists" class="internal xref">Implementers' Checklists</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-preferred-serialization" class="internal xref">Preferred Serialization</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1.2.1">
-                    <p id="section-toc.1-1.9.2.1.2.1.1"><a href="#appendix-B.1.1" class="auto internal xref">B.1.1</a>.  <a href="#name-preferred-serialization-enc" class="internal xref">Preferred Serialization Encoders</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-application-level-determini" class="internal xref">Application-level Deterministic Representation</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1.2.2">
-                    <p id="section-toc.1-1.9.2.1.2.2.1"><a href="#appendix-B.1.2" class="auto internal xref">B.1.2</a>.  <a href="#name-preferred-serialization-dec" class="internal xref">Preferred Serialization Decoders</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-implementers-checklists" class="internal xref">Implementers' Checklists</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-preferred-serialization" class="internal xref">Preferred Serialization</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.1">
+                    <p id="section-toc.1-1.10.2.1.2.1.1"><a href="#appendix-C.1.1" class="auto internal xref">C.1.1</a>.  <a href="#name-preferred-serialization-enc" class="internal xref">Preferred Serialization Encoders</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.2">
+                    <p id="section-toc.1-1.10.2.1.2.2.1"><a href="#appendix-C.1.2" class="auto internal xref">C.1.2</a>.  <a href="#name-preferred-serialization-dec" class="internal xref">Preferred Serialization Decoders</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-basic-serialization" class="internal xref">Basic Serialization</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-basic-serialization" class="internal xref">Basic Serialization</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2.2.1">
-                    <p id="section-toc.1-1.9.2.2.2.1.1"><a href="#appendix-B.2.1" class="auto internal xref">B.2.1</a>.  <a href="#name-basic-serialization-encoder" class="internal xref">Basic Serialization Encoders</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.1">
+                    <p id="section-toc.1-1.10.2.2.2.1.1"><a href="#appendix-C.2.1" class="auto internal xref">C.2.1</a>.  <a href="#name-basic-serialization-encoder" class="internal xref">Basic Serialization Encoders</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2.2.2">
-                    <p id="section-toc.1-1.9.2.2.2.2.1"><a href="#appendix-B.2.2" class="auto internal xref">B.2.2</a>.  <a href="#name-basic-serialization-decoder" class="internal xref">Basic Serialization Decoders</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.2">
+                    <p id="section-toc.1-1.10.2.2.2.2.1"><a href="#appendix-C.2.2" class="auto internal xref">C.2.2</a>.  <a href="#name-basic-serialization-decoder" class="internal xref">Basic Serialization Decoders</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-cde" class="internal xref">CDE</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
+                <p id="section-toc.1-1.10.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-cde" class="internal xref">CDE</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3.2.1">
-                    <p id="section-toc.1-1.9.2.3.2.1.1"><a href="#appendix-B.3.1" class="auto internal xref">B.3.1</a>.  <a href="#name-cde-encoders" class="internal xref">CDE Encoders</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3.2.1">
+                    <p id="section-toc.1-1.10.2.3.2.1.1"><a href="#appendix-C.3.1" class="auto internal xref">C.3.1</a>.  <a href="#name-cde-encoders" class="internal xref">CDE Encoders</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3.2.2">
-                    <p id="section-toc.1-1.9.2.3.2.2.1"><a href="#appendix-B.3.2" class="auto internal xref">B.3.2</a>.  <a href="#name-cde-decoders" class="internal xref">CDE Decoders</a></p>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3.2.2">
+                    <p id="section-toc.1-1.10.2.3.2.2.1"><a href="#appendix-C.3.2" class="auto internal xref">C.3.2</a>.  <a href="#name-cde-decoders" class="internal xref">CDE Decoders</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-list-of-tables" class="internal xref">List of Tables</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-encoding-examples" class="internal xref">Encoding Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-D.1" class="auto internal xref">D.1</a>.  <a href="#name-integer-value-examples" class="internal xref">Integer Value Examples</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#appendix-D.2" class="auto internal xref">D.2</a>.  <a href="#name-floating-point-value-exampl" class="internal xref">Floating Point Value Examples</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
+                <p id="section-toc.1-1.11.2.3.1"><a href="#appendix-D.3" class="auto internal xref">D.3</a>.  <a href="#name-failing-examples" class="internal xref">Failing Examples</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-list-of-tables" class="internal xref">List of Tables</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#appendix-H" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1269,10 +1291,10 @@ its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
 feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+CBOR Common Deterministic Encoding (CDE) that can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
-It also defines "Basic Serialization", which stops short of the
+It also defines the term "Basic Serialization", which stops short of the
 potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders.<a href="#section-1-1" class="pilcrow">¶</a></p>
@@ -1282,24 +1304,18 @@ variability needing to be handled by decoders.<a href="#section-1-1" class="pilc
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-structure-of-this-document" class="section-name selfRef">Structure of This Document</a>
         </h3>
 <p id="section-1.1-1">After introductory material (this introduction and <a href="#choi" class="auto internal xref">Section 2</a>), <a href="#dep" class="auto internal xref">Section 3</a>
-defines the CBOR Common Deterministic Encoding Profile (CDE).
+defines the CBOR Common Deterministic Encoding (CDE).
 <a href="#cddl-support" class="auto internal xref">Section 4</a> defines Concise Data Definition Language (CDDL) support for indicating the use of CDE.
 This is followed by the conventional sections for
 <a href="#seccons" class="internal xref">Security Considerations</a> (<a href="#seccons" class="auto internal xref">5</a>),
 <a href="#sec-iana" class="internal xref">IANA Considerations</a> (<a href="#sec-iana" class="auto internal xref">6</a>),
 and <a href="#sec-combined-references" class="internal xref">References</a> (<a href="#sec-combined-references" class="auto internal xref">7</a>).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">The informative <a href="#impcheck" class="auto internal xref">Appendix B</a> provides brief checklists that implementers
-can use to check their CDE implementations.
-<a href="#ps" class="auto internal xref">Appendix B.1</a> provides a checklist for implementing Preferred Serialization.
-<a href="#bs" class="auto internal xref">Appendix B.2</a> introduces "Basic Serialization", a slightly more restricted form
-of Preferred Serialization that may be used by encoders to hit a sweet
-spot for maximizing interoperability with partial (e.g., constrained)
-CBOR decoder implementations.
-<a href="#cde" class="auto internal xref">Appendix B.3</a> further restricts Basic Serialization to arrive at CDE.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">For use as background material, <a href="#models" class="auto internal xref">Appendix A</a> introduces terminology for
+the layering of models used to describe CBOR.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">Instead of giving rise to the definition of application-specific,
 non-interoperable variants of CDE, this document identifies
 Application-level Deterministic Representation (ALDR) rules as a
-concept that is separate from CDE itself (<a href="#aldr" class="auto internal xref">Appendix A</a>) and therefore out of
+concept that is separate from CDE itself (<a href="#aldr" class="auto internal xref">Appendix B</a>) and therefore out of
 scope for this document.
 ALDR rules are situated at the application-level, i.e., on top of the
 CDE, and address requirements on deterministic representation of
@@ -1308,6 +1324,16 @@ applications.
 ALDR rules are often provided as part of a specification for a CBOR-based
 protocol, or, if needed, can be provided by referencing a shared "ALDR
 ruleset" that is defined in a separate document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">The informative <a href="#impcheck" class="auto internal xref">Appendix C</a> provides brief checklists that implementers
+can use to check their CDE implementations.
+<a href="#ps" class="auto internal xref">Appendix C.1</a> provides a checklist for implementing Preferred Serialization.
+<a href="#bs" class="auto internal xref">Appendix C.2</a> introduces "Basic Serialization", a slightly more restricted form
+of Preferred Serialization that may be used by encoders to hit a sweet
+spot for maximizing interoperability with partial (e.g., constrained)
+CBOR decoder implementations.
+<a href="#cde" class="auto internal xref">Appendix C.3</a> further restricts Basic Serialization to arrive at CDE.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5"><a href="#examples" class="auto internal xref">Appendix D</a> provides a few examples for CBOR data items in CDE
+encoding, as well as a few failing examples.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1315,7 +1341,9 @@ ruleset" that is defined in a separate document.<a href="#section-1.1-3" class="
         <h3 id="name-conventions-and-definitions">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
         </h3>
-<p id="section-1.2-1">The conventions and definitions of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> apply.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">The conventions and definitions of <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> apply.
+<a href="#models" class="auto internal xref">Appendix A</a> provides additional discussion of the terms information
+model, data model, and serialization.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.2-2.1">
             <p id="section-1.2-2.1.1">The term "CBOR Application" ("application" for short) is not
@@ -1437,7 +1465,7 @@ application itself does not generate multiple different CBOR data
 items that represent that same (equivalent) application data item.
 We speak of the need for Application-level Deterministic
 Representation (ALDR), and we may want to aid achieving this by
-the application defining rules for ALDR (see also <a href="#aldr" class="auto internal xref">Appendix A</a>).
+the application defining rules for ALDR (see also <a href="#aldr" class="auto internal xref">Appendix B</a>).
 Where Deterministic Representation is not actually needed,
 application-level representation rules of course can still be useful
 to amplify the benefits of Preferred or Basic Serialization.<a href="#section-2-7" class="pilcrow">¶</a></p>
@@ -1446,19 +1474,20 @@ to amplify the benefits of Preferred or Basic Serialization.<a href="#section-2-
 <div id="dep">
 <section id="section-3">
       <h2 id="name-cbor-common-deterministic-e">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-cbor-common-deterministic-e" class="section-name selfRef">CBOR Common Deterministic Encoding Profile (CDE)</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-cbor-common-deterministic-e" class="section-name selfRef">CBOR Common Deterministic Encoding (CDE)</a>
       </h2>
-<p id="section-3-1">This specification defines the <em>CBOR Common Deterministic Encoding
-Profile</em> (CDE) based on the <em>Core Deterministic Encoding
+<p id="section-3-1">This specification defines the <em>CBOR Common Deterministic Encoding</em>
+(CDE) based on the <em>Core Deterministic Encoding
 Requirements</em> defined for CBOR in
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Note that this specific set of requirements is elective — in
 principle, other variants of deterministic encoding can be defined
-(and have been, now being phased out slowly, as detailed in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">4.2.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+(and have been, now being phased out, as detailed in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.3" class="relref">4.2.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
 In many applications of CBOR today, deterministic encoding is not used
 at all, as its restriction of choices can create some additional
 performance cost and code complexity.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3"><span>[<a href="#STD94" class="cite xref">STD94</a>]</span>'s core requirements are designed to provide well-understood and
+<p id="section-3-3"><span>[<a href="#STD94" class="cite xref">STD94</a>]</span>'s "Core Deterministic Encoding Requirements" are designed to
+provide well-understood and
 easy-to-implement rules while maximizing coverage, i.e., the subset of
 CBOR data items that are fully specified by these rules, and also
 placing minimal burden on implementations.<a href="#section-3-3" class="pilcrow">¶</a></p>
@@ -1497,7 +1526,7 @@ floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices; these need to
-be made to obtain the CBOR Common Deterministic Encoding Profile (CDE).
+be made to obtain the CBOR Common Deterministic Encoding (CDE).
 Specifically, CDE specifies (in the order of the bullet list at the end of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>):<a href="#section-3-7" class="pilcrow">¶</a></p>
 <ol start="2" type="1" class="normal type-1" id="section-3-8">
 <li id="section-3-8.1">
@@ -1552,7 +1581,7 @@ application.<a href="#section-3-8.5.1" class="pilcrow">¶</a></p>
 <p id="section-3-9">The main intent here is to preserve the basic generic data model, so
 applications (in their ALDR rules or by referencing a separate ALDR
 ruleset document, see
-<a href="#aldr" class="auto internal xref">Appendix A</a>) can
+<a href="#aldr" class="auto internal xref">Appendix B</a>) can
 make their own decisions within that data model.
 E.g., an application's ALDR rules can decide that it only ever allows a
 single NaN value that would be encoded as 0xf97e00, so a CDE
@@ -1605,7 +1634,7 @@ specific structure, this can be expressed by the right-hand side
 <p id="section-4-8">(Note that the <code>.cdeseq</code> control operator does not enable specifying
 different deterministic encoding requirements for the elements of the
 sequence.  If a use case for such a feature becomes known, it could be
-added.)<a href="#section-4-8" class="pilcrow">¶</a></p>
+added, or the CBOR sequence could be constructed with <code>.join</code> (<span><a href="https://rfc-editor.org/rfc/rfc9741#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9741" class="cite xref">RFC9741</a>]</span>).)<a href="#section-4-8" class="pilcrow">¶</a></p>
 <p id="section-4-9">Obviously, specifications that document ALDR rules can define related control operators
 that also embody the processing required by those ALDR rules,
 and are encouraged to do so.<a href="#section-4-9" class="pilcrow">¶</a></p>
@@ -1724,9 +1753,17 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Modern Network Unicode"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-dispatch-modern-network-unicode-06</span>, <time datetime="2025-03-02" class="refDate">2 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-06">https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-16</span>, <time datetime="2025-01-08" class="refDate">8 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-16">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-16</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
         <dd>
 <span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">L. Lundblade</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-12</span>, <time datetime="2025-02-07" class="refDate">7 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-12">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-12</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7493">[RFC7493]</dt>
+        <dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7493">https://www.rfc-editor.org/rfc/rfc7493</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8392">[RFC8392]</dt>
         <dd>
@@ -1739,6 +1776,10 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dt id="RFC9679">[RFC9679]</dt>
         <dd>
 <span class="refAuthor">Isobe, K.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) Key Thumbprint"</span>, <span class="seriesInfo">RFC 9679</span>, <span class="seriesInfo">DOI 10.17487/RFC9679</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9679">https://www.rfc-editor.org/rfc/rfc9679</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9741">[RFC9741]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): Additional Control Operators for the Conversion and Processing of Text"</span>, <span class="seriesInfo">RFC 9741</span>, <span class="seriesInfo">DOI 10.17487/RFC9741</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9741">https://www.rfc-editor.org/rfc/rfc9741</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STD96">[STD96]</dt>
         <dd>
@@ -1759,21 +1800,172 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 </div>
 </section>
 </div>
-<div id="aldr">
+<div id="models">
 <section id="appendix-A">
-      <h2 id="name-application-level-determini">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-application-level-determini" class="section-name selfRef">Application-level Deterministic Representation</a>
+      <h2 id="name-information-model-data-mode">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-information-model-data-mode" class="section-name selfRef">Information Model, Data Model and Serialization</a>
       </h2>
 <p id="appendix-A-1">This appendix is informative.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">CBOR application protocols are agreements about how to use CBOR for a
-specific application or set of applications.
-Application protocols make representation decisions in order to
+<p id="appendix-A-2">For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<span id="name-a-three-layer-model-of-info"></span><div id="layers">
+<table class="center" id="table-3">
+        <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-a-three-layer-model-of-info" class="selfRef">A three-layer model of information representation</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1"> </th>
+            <th class="text-left" rowspan="1" colspan="1">Abstraction Level</th>
+            <th class="text-left" rowspan="1" colspan="1">Example</th>
+            <th class="text-left" rowspan="1" colspan="1">Standards</th>
+            <th class="text-left" rowspan="1" colspan="1">Implementation Representation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Information Model</td>
+            <td class="text-left" rowspan="1" colspan="1">Top level; conceptual</td>
+            <td class="text-left" rowspan="1" colspan="1">The temperature of something</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Data Model</td>
+            <td class="text-left" rowspan="1" colspan="1">Realization of information in data structures and data types</td>
+            <td class="text-left" rowspan="1" colspan="1">A floating-point number representing the temperature</td>
+            <td class="text-left" rowspan="1" colspan="1">CDDL</td>
+            <td class="text-left" rowspan="1" colspan="1">API input to CBOR encoder library, output from CBOR decoder library</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Serialization</td>
+            <td class="text-left" rowspan="1" colspan="1">Actual bytes encoded for transmission</td>
+            <td class="text-left" rowspan="1" colspan="1">Encoded CBOR of a floating-point number</td>
+            <td class="text-left" rowspan="1" colspan="1">CBOR</td>
+            <td class="text-left" rowspan="1" colspan="1">Encoded CBOR in memory or for transmission</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<p id="appendix-A-4">CBOR does not provide facilities for expressing information models.
+They are mentioned here for completeness and to provide some context.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+<p id="appendix-A-5">CBOR defines a palette of basic data items that can be grouped into
+data types such as the usual integer or floating-point numbers, text or
+byte strings, arrays and maps, and certain special "simple values"
+such as Booleans and <code>null</code>.
+Extended data types may be constructed from these basic types.
+These basic and extended types are used to construct the data model of a CBOR protocol.
+One notation that is often used for describing the data model of a CBOR protocol is CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
+The various types of data items in the data model are serialized per RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> to create encoded CBOR data items.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
+<div id="data-model-encoding-variants-and-interoperability-with-partial-implementations">
+<section id="appendix-A.1">
+        <h3 id="name-data-model-encoding-variant">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-data-model-encoding-variant" class="section-name selfRef">Data Model, Encoding Variants and Interoperability with Partial Implementations</a>
+        </h3>
+<p id="appendix-A.1-1">In contrast to JSON, CBOR-related documents explicitly discuss the data model separately from its serialization.
+Both JSON and CBOR allow variation in the way some data items can be serialized:<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.1-2.1">
+            <p id="appendix-A.1-2.1.1">In JSON, the number 1 can be serialized in several different ways
+(<code>1</code>, <code>0.1e1</code>, <code>1.0</code>, <code>100e-2</code>) — while it may seem obvious to use
+<code>1</code> for this case, this is less clear for <code>1000000000000000000000000000000</code> vs. <code>1e+30</code> or <code>1e30</code>.
+(As its serialization also doubles as a human-readable interface, JSON
+also allows the introduction of blank space for readability.)
+The lack of an agreed data model for JSON led to the need for a complementary
+specification documenting an interoperable subset <span>[<a href="#RFC7493" class="cite xref">RFC7493</a>]</span>.<a href="#appendix-A.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.1-2.2">
+            <p id="appendix-A.1-2.2.1">The CBOR standard addresses constrained environments, both by being
+concise and by limiting variation, but also by conversely allowing
+certain data items in the data model to be serialized in multiple
+ways, which may ease implementation on low-resource platforms.
+On the other hand, constrained environments may further save
+resources by only partially implementing the decoder functionality,
+e.g., by not implementing all those variations.<a href="#appendix-A.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="appendix-A.1-3">To deal with this encoding variation provided for certain data items,
+CBOR defines a <em>preferred serialization</em> (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+<em>Partial CBOR implementations</em> are more likely to interoperate if their
+encoder uses preferred serialization and the decoder implements
+decoding at least the preferred serialization as well.
+A specific protocol for a constrained application may specify
+restrictions that allow, e.g., some fields to be of fixed length,
+guaranteeing interoperability even with partial implementations
+optimized for this application.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-4">Another encoding variation is provided by indefinite-length encoding
+for strings, arrays, and maps, which enables these to be streamed
+without knowing their length upfront (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.2" class="relref">3.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+For applications that do not perform streaming of this kind, variation
+can be reduced (and often performance improved) by only allowing
+definite-length encoding.
+The present document coins the term <em>basic serialization</em> for combining
+definite-length-only with preferred encoding, further reducing the
+variation that a decoder needs to deal with.
+The Common Deterministic Encoding, CDE, finally combines basic
+serialization with a deterministic ordering of entries in a map
+(<a href="#tab-constraints" class="auto internal xref">Table 1</a>).<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-5">Partial implementations of a representation format are quite common in
+embedded applications.
+Protocols for embedded applications often reduce the footprint of an
+embedded JSON implementation by explicitly restricting the breadth of
+the data model, e.g., by not using floating point numbers with 64 bits
+of precision or by not using floating point numbers at all.
+These data-model-level restrictions do not get in the way of using
+complete implementations ("generic encoders/decoders", Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.2" class="relref">5.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+(Note that applications may need to complement deterministic
+encoding with decisions on the deterministic representation of
+application data into CBOR data items, see <a href="#aldr" class="auto internal xref">Appendix B</a>.)<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-6">The increasing constraints on encoding (unconstrained, preferred,
+basic, CDE) are orthogonal to data-model-level data definitions as
+provided by <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
+To be useful in all applications, these constraints have been defined
+for all possible data items, covering the full range of values offered
+by CBOR's data types.
+This ensures that these serialization constraints can be applied to
+any CBOR protocol, without requiring protocol-specific modifications
+to generic encoder/decoder implementations.<a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="aldr">
+<section id="appendix-B">
+      <h2 id="name-application-level-determini">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-application-level-determini" class="section-name selfRef">Application-level Deterministic Representation</a>
+      </h2>
+<p id="appendix-B-1">This appendix is informative.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">CBOR application protocols are agreements about how to use CBOR for a
+specific application or set of applications.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">For a CBOR protocol to provide deterministic representation, both the
+encoding and application layer must be deterministic.
+While CDE ensures determinism at the encoding layer, requirements at
+the application layer may also be necessary.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<p id="appendix-B-4">Application protocols make representation decisions in order to
 constrain the variety of ways in which some aspect of the information
 model could be represented in the CBOR data model for the application.
 For instance, there are several CBOR tags that can be used to
 represent a time stamp (such as tag 0, 1, 1001), each with some specific
-properties.
-Application protocols that need to represent a timestamp typically
+properties.<a href="#appendix-B-4" class="pilcrow">¶</a></p>
+<aside id="appendix-B-5">
+        <p id="appendix-B-5.1">For example, an application protocol that needs to represent birthdate/times could specify:<a href="#appendix-B-5.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-5.2.1">
+            <p id="appendix-B-5.2.1.1">At the sender’s convenience, the birthdate/time <span class="bcp14">MAY</span>
+  be sent either in epoch date format (as in tag 1) or string date
+  format (as in tag 0).<a href="#appendix-B-5.2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B-5.2.2">
+            <p id="appendix-B-5.2.2.1">The receiver <span class="bcp14">MUST</span> decode both formats.<a href="#appendix-B-5.2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="appendix-B-5.3">While this specification is interoperable, it lacks determinism.
+There is variability in the application layer akin to variability in the CBOR encoding layer when CDE is not required.<a href="#appendix-B-5.3" class="pilcrow">¶</a></p>
+<p id="appendix-B-5.4">To make this example application layer specification deterministic,
+allow only one date format (or at least be deterministic when there is
+a choice, e.g., by specifying string format for leap seconds only).<a href="#appendix-B-5.4" class="pilcrow">¶</a></p>
+</aside>
+<p id="appendix-B-6">Application protocols that need to represent a timestamp typically
 choose a specific tag and further constrain its use where necessary
 (e.g., tag 1001 was designed to cover a wide variety of applications
 <span>[<a href="#RFC9581" class="cite xref">RFC9581</a>]</span>).
@@ -1781,8 +1973,16 @@ Where no tag is available, the application protocol can design its own
 format for some application data.
 Even where a tag is available, the application data can choose to use
 its definitions without actually encoding the tag (e.g., by using its
-content in specific places in an "unwrapped" form).<a href="#appendix-A-2" class="pilcrow">¶</a></p>
-<p id="appendix-A-3">For instance, CWT defines an application data type "NumericDate" which
+content in specific places in an "unwrapped" form).<a href="#appendix-B-6" class="pilcrow">¶</a></p>
+<p id="appendix-B-7">Another source of application layer variability comes from the variety
+of number types CBOR offers.
+For instance, the number 2 can be represented as an integer, float,
+big number, decimal fraction and other.
+Most protocols designs will just specify one number type to use, and
+that will give determinism, but here’s an example specification that
+doesn’t:<a href="#appendix-B-7" class="pilcrow">¶</a></p>
+<aside id="appendix-B-8">
+        <p id="appendix-B-8.1">For instance, CWT <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> defines an application data type "NumericDate" which
 (as an application-level rule) is formed by "unwrapping" tag 1 (see
 Sections <a href="https://rfc-editor.org/rfc/rfc8392#section-2" class="relref">2</a> and <a href="https://rfc-editor.org/rfc/rfc8392#section-5" class="relref">5</a> of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>).
 CWT does stop short of using deterministic encoding.
@@ -1795,32 +1995,35 @@ These application rules may choose to only ever use integers, or to always
 use integers when the numeric value can be represented as such without
 loss of information, or to always use floating point numbers, or some
 of these for some application data and different ones for other
-application data.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
-<p id="appendix-A-4">Applications that require Deterministic Representation, and that
+application data.<a href="#appendix-B-8.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="appendix-B-9">Applications that require Deterministic Representation, and that
 derive CBOR data items from application data without maintaining a
 record of which choices are to be made when representing these
 application data, generally make rules for these choices as part of
 the application protocol.
 In this document, we speak about these choices as Application-level
-Deterministic Representation Rules (ALDR rules for short).<a href="#appendix-A-4" class="pilcrow">¶</a></p>
-<p id="appendix-A-5">As an example, <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> is intended to derive a (deterministic)
+Deterministic Representation Rules (ALDR rules for short).<a href="#appendix-B-9" class="pilcrow">¶</a></p>
+<aside id="appendix-B-10">
+        <p id="appendix-B-10.1">As an example, <span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> is intended to derive a (deterministic)
 thumbprint from a COSE key <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>.
 <span><a href="https://rfc-editor.org/rfc/rfc9679#section-4" class="relref">Section 4</a> of [<a href="#RFC9679" class="cite xref">RFC9679</a>]</span> provides the rules that are used to construct a
 deterministic application-level representation (ALDR rules).
 Only certain data from a COSE key are selected to be included in that
 ALDR, and, where the COSE can choose multiple representations of
 semantically equivalent application data, the ALDR rules choose one of
-them, potentially requiring a conversion (<span><a href="https://rfc-editor.org/rfc/rfc9679#section-4.2" class="relref">Section 4.2</a> of [<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>):<a href="#appendix-A-5" class="pilcrow">¶</a></p>
-<blockquote id="appendix-A-6">
-        <p id="appendix-A-6.1">Note: [<a href="#RFC9052" class="auto internal xref">RFC9052</a>] supports both compressed and uncompressed point
+them, potentially requiring a conversion (<span><a href="https://rfc-editor.org/rfc/rfc9679#section-4.2" class="relref">Section 4.2</a> of [<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>):<a href="#appendix-B-10.1" class="pilcrow">¶</a></p>
+<blockquote id="appendix-B-10.2">
+          <p id="appendix-B-10.2.1">Note: [<a href="#RFC9052" class="auto internal xref">RFC9052</a>] supports both compressed and uncompressed point
    representations.  For interoperability, implementations adhering to
    this specification <span class="bcp14">MUST</span> use the uncompressed point representation.
    Therefore, the y-coordinate is expressed as a bstr.  If an
    implementation uses the compressed point representation, it <span class="bcp14">MUST</span>
    first convert it to the uncompressed form for the purpose of
-   thumbprint calculation.<a href="#appendix-A-6.1" class="pilcrow">¶</a></p>
+   thumbprint calculation.<a href="#appendix-B-10.2.1" class="pilcrow">¶</a></p>
 </blockquote>
-<p id="appendix-A-7">CDE provides for encoding commonality between different applications
+</aside>
+<p id="appendix-B-11">CDE provides for encoding commonality between different applications
 of CBOR once these application-level choices have been made.
 It can be useful for an application or a group of applications to
 document their choices aimed at deterministic representation of
@@ -1830,36 +2033,38 @@ defining further mappings (<em>reductions</em>, e.g., conversions to
 uncompressed form)
 that help the application(s) get by with the exclusions.
 This can be done in the application protocol specification (as in
-<span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>) or as a separate document.<a href="#appendix-A-7" class="pilcrow">¶</a></p>
-<p id="appendix-A-8">An early example of a separate document is the dCBOR specification
+<span>[<a href="#RFC9679" class="cite xref">RFC9679</a>]</span>) or as a separate document.<a href="#appendix-B-11" class="pilcrow">¶</a></p>
+<aside id="appendix-B-12">
+        <p id="appendix-B-12.1">An early example of a separate document is the dCBOR specification
 <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>.
 dCBOR specifies the use of CDE together with some application-level
 rules, i.e., an ALDR ruleset, such as a requirement for all text
 strings to be in Unicode Normalization Form C (NFC) <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span> — this
 specific requirement is an example for an <em>exclusion</em> of non-NFC data
 at the application level, and it invites implementing a <em>reduction</em> by
-routine normalization of text strings.<a href="#appendix-A-8" class="pilcrow">¶</a></p>
-<p id="appendix-A-9">ALDR rules (including rules specified in a ALDR ruleset document) enable
+routine normalization of text strings.<a href="#appendix-B-12.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="appendix-B-13">ALDR rules (including rules specified in a ALDR ruleset document) enable
 simply using implementations of the common CDE; they do not
 "fork" CBOR in the sense of requiring distinct generic encoder/decoder
-implementations for each application.<a href="#appendix-A-9" class="pilcrow">¶</a></p>
-<p id="appendix-A-10">An implementation of specific ALDR rules combined with a CDE
+implementations for each application.<a href="#appendix-B-13" class="pilcrow">¶</a></p>
+<p id="appendix-B-14">An implementation of specific ALDR rules combined with a CDE
 implementation produces well-formed,
 deterministically encoded CBOR according to <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, and existing
 generic CBOR decoders will therefore be able to decode it, including
 those that check for Deterministic Encoding ("CDE decoders", see also
-<a href="#impcheck" class="auto internal xref">Appendix B</a>).
+<a href="#impcheck" class="auto internal xref">Appendix C</a>).
 Similarly, generic CBOR encoders will be able to produce valid CBOR
 that can be ingested by an implementation that enforces an application's
 ALDR rules if the encoder was handed data model level information
-from an application that simply conformed to those ALDR rules.<a href="#appendix-A-10" class="pilcrow">¶</a></p>
-<p id="appendix-A-11">Please note that the separation between standard CBOR processing and
+from an application that simply conformed to those ALDR rules.<a href="#appendix-B-14" class="pilcrow">¶</a></p>
+<p id="appendix-B-15">Please note that the separation between standard CBOR processing and
 the processing required by the ALDR rules is a conceptual one:
 Instead of employing generic encoders/decoders, both ALDR rule
 processing and standard CBOR processing can be combined into a specialized
 encoder/decoder specifically designed for a particular set of ALDR
-rules.<a href="#appendix-A-11" class="pilcrow">¶</a></p>
-<p id="appendix-A-12">ALDR rules are intended to be used in conjunction with an
+rules.<a href="#appendix-B-15" class="pilcrow">¶</a></p>
+<p id="appendix-B-16">ALDR rules are intended to be used in conjunction with an
 application, which typically will naturally use a subset of the CBOR generic
 data model, which in turn
 influences which subset of the ALDR rules is used by the specific application
@@ -1872,51 +2077,51 @@ processing of floating point values, but there is no requirement that
 implementations of that set of ALDR rules support floating point
 numbers (or any other kind of number, such as arbitrary precision
 integers or 64-bit negative integers) when they are used with
-applications that do not use them.<a href="#appendix-A-12" class="pilcrow">¶</a></p>
+applications that do not use them.<a href="#appendix-B-16" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="impcheck">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-implementers-checklists">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-implementers-checklists" class="section-name selfRef">Implementers' Checklists</a>
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-implementers-checklists" class="section-name selfRef">Implementers' Checklists</a>
       </h2>
-<p id="appendix-B-1">This appendix is informative.
+<p id="appendix-C-1">This appendix is informative.
 It provides brief checklists that implementers can use to check their
 implementations.
 It uses <a href="#RFC2119" class="auto internal xref">RFC2119</a> language, specifically the keyword <span class="bcp14">MUST</span>, to highlight
 the specific items that implementers may want to check.
 It does not contain any normative mandates.
-This appendix is informative.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">Notes:<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+This appendix is informative.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">Notes:<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B-3.1">
-          <p id="appendix-B-3.1.1">This is largely a restatement of parts of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4" class="relref">4</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
+<li class="normal" id="appendix-C-3.1">
+          <p id="appendix-C-3.1.1">This is largely a restatement of parts of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4" class="relref">4</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.
 The purpose of the restatement is to aid the work of implementers,
-not to redefine anything.<a href="#appendix-B-3.1.1" class="pilcrow">¶</a></p>
-<p id="appendix-B-3.1.2">
+not to redefine anything.<a href="#appendix-C-3.1.1" class="pilcrow">¶</a></p>
+<p id="appendix-C-3.1.2">
 Preferred Serialization Encoders and Decoders as well as CDE
 Encoders and Decoders have certain properties that are expressed
-using <a href="#RFC2119" class="auto internal xref">RFC2119</a> keywords in this appendix.<a href="#appendix-B-3.1.2" class="pilcrow">¶</a></p>
+using <a href="#RFC2119" class="auto internal xref">RFC2119</a> keywords in this appendix.<a href="#appendix-C-3.1.2" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-3.2">
-          <p id="appendix-B-3.2.1">Duplicate map keys are never valid in CBOR at all (see
+        <li class="normal" id="appendix-C-3.2">
+          <p id="appendix-C-3.2.1">Duplicate map keys are never valid in CBOR at all (see
 list item "Major type 5" in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.1" class="relref">3.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>)
 no matter what sort of serialization is used.
 Of the various strategies listed in Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.6" class="relref">5.6</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>,
 detecting duplicates and handling them as an error instead of
 passing invalid data to the application is the most robust one;
 achieving this level of robustness is a mark of quality of
-implementation.<a href="#appendix-B-3.2.1" class="pilcrow">¶</a></p>
+implementation.<a href="#appendix-C-3.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-3.3">
-          <p id="appendix-B-3.3.1">Preferred serialization and CDE only affect serialization.
+        <li class="normal" id="appendix-C-3.3">
+          <p id="appendix-C-3.3.1">Preferred serialization and CDE only affect serialization.
 They do not place any requirements, exclusions, mappings or such on
 the data model level.
 ALDR rules such as the ALDR ruleset defined by dCBOR are different as they can affect
-the data model by restricting some values and ranges.<a href="#appendix-B-3.3.1" class="pilcrow">¶</a></p>
+the data model by restricting some values and ranges.<a href="#appendix-C-3.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="appendix-B-3.4">
-          <p id="appendix-B-3.4.1">CBOR decoders in general (as opposed to "CDE decoders" specifically
+        <li class="normal" id="appendix-C-3.4">
+          <p id="appendix-C-3.4.1">CBOR decoders in general (as opposed to "CDE decoders" specifically
 advertised as supporting CDE)
 are not required to check for preferred
 serialization or CDE and reject inputs that do not fulfill
@@ -1927,82 +2132,82 @@ Decoder implementations that advertise "support" for preferred
 serialization or CDE need to check the encoding and reject
 input that is not encoded to the encoding specification in use.
 Again, ALDR rules such as those in dCBOR may pose additional
-requirements, such as requiring rejection of non-conforming inputs.<a href="#appendix-B-3.4.1" class="pilcrow">¶</a></p>
-<p id="appendix-B-3.4.2">
+requirements, such as requiring rejection of non-conforming inputs.<a href="#appendix-C-3.4.1" class="pilcrow">¶</a></p>
+<p id="appendix-C-3.4.2">
 If a generic decoder needs to be used that does not "support" CDE, a
 simple (but somewhat clumsy) way to check for proper CDE encoding is
 to re-encode the decoded data and check for bit-to-bit equality with
-the original input.<a href="#appendix-B-3.4.2" class="pilcrow">¶</a></p>
+the original input.<a href="#appendix-C-3.4.2" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="ps">
-<section id="appendix-B.1">
+<section id="appendix-C.1">
         <h3 id="name-preferred-serialization">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-preferred-serialization" class="section-name selfRef">Preferred Serialization</a>
+<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-preferred-serialization" class="section-name selfRef">Preferred Serialization</a>
         </h3>
-<p id="appendix-B.1-1">In the following, the abbreviation "ai" will be used for the 5-bit
+<p id="appendix-C.1-1">In the following, the abbreviation "ai" will be used for the 5-bit
 additional information field in the first byte of an encoded CBOR data
-item, which follows the 3-bit field for the major type.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
+item, which follows the 3-bit field for the major type.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <div id="pse">
-<section id="appendix-B.1.1">
+<section id="appendix-C.1.1">
           <h4 id="name-preferred-serialization-enc">
-<a href="#appendix-B.1.1" class="section-number selfRef">B.1.1. </a><a href="#name-preferred-serialization-enc" class="section-name selfRef">Preferred Serialization Encoders</a>
+<a href="#appendix-C.1.1" class="section-number selfRef">C.1.1. </a><a href="#name-preferred-serialization-enc" class="section-name selfRef">Preferred Serialization Encoders</a>
           </h4>
-<ol start="1" type="1" class="normal type-1" id="appendix-B.1.1-1">
-<li id="appendix-B.1.1-1.1">
-              <p id="appendix-B.1.1-1.1.1">Shortest-form encoding of the argument <span class="bcp14">MUST</span> be used for all major
+<ol start="1" type="1" class="normal type-1" id="appendix-C.1.1-1">
+<li id="appendix-C.1.1-1.1">
+              <p id="appendix-C.1.1-1.1.1">Shortest-form encoding of the argument <span class="bcp14">MUST</span> be used for all major
 types.
 Major type 7 is used for floating-point and simple values; floating
 point values have its specific rules for how the shortest form is
 derived for the argument.
 The shortest form encoding for any argument that is not a floating
-point value is:<a href="#appendix-B.1.1-1.1.1" class="pilcrow">¶</a></p>
+point value is:<a href="#appendix-C.1.1-1.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1.1-1.1.2.1">
-                  <p id="appendix-B.1.1-1.1.2.1.1">0 to 23 and -1 to -24 <span class="bcp14">MUST</span> be encoded in the same byte as the
-major type.<a href="#appendix-B.1.1-1.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C.1.1-1.1.2.1">
+                  <p id="appendix-C.1.1-1.1.2.1.1">0 to 23 and -1 to -24 <span class="bcp14">MUST</span> be encoded in the same byte as the
+major type.<a href="#appendix-C.1.1-1.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.1-1.1.2.2">
-                  <p id="appendix-B.1.1-1.1.2.2.1">24 to 255 and -25 to -256 <span class="bcp14">MUST</span> be encoded only with an additional
-byte (ai = 0x18).<a href="#appendix-B.1.1-1.1.2.2.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="appendix-C.1.1-1.1.2.2">
+                  <p id="appendix-C.1.1-1.1.2.2.1">24 to 255 and -25 to -256 <span class="bcp14">MUST</span> be encoded only with an additional
+byte (ai = 0x18).<a href="#appendix-C.1.1-1.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.1-1.1.2.3">
-                  <p id="appendix-B.1.1-1.1.2.3.1">256 to 65535 and -257 to -65536 <span class="bcp14">MUST</span> be encoded only with an
-additional two bytes (ai = 0x19).<a href="#appendix-B.1.1-1.1.2.3.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="appendix-C.1.1-1.1.2.3">
+                  <p id="appendix-C.1.1-1.1.2.3.1">256 to 65535 and -257 to -65536 <span class="bcp14">MUST</span> be encoded only with an
+additional two bytes (ai = 0x19).<a href="#appendix-C.1.1-1.1.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.1-1.1.2.4">
-                  <p id="appendix-B.1.1-1.1.2.4.1">65536 to 4294967295 and -65537 to -4294967296 <span class="bcp14">MUST</span> be encoded
-only with an additional four bytes (ai = 0x1a).<a href="#appendix-B.1.1-1.1.2.4.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="appendix-C.1.1-1.1.2.4">
+                  <p id="appendix-C.1.1-1.1.2.4.1">65536 to 4294967295 and -65537 to -4294967296 <span class="bcp14">MUST</span> be encoded
+only with an additional four bytes (ai = 0x1a).<a href="#appendix-C.1.1-1.1.2.4.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
-            <li id="appendix-B.1.1-1.2">
-              <p id="appendix-B.1.1-1.2.1">If floating-point numbers are emitted, the following apply:<a href="#appendix-B.1.1-1.2.1" class="pilcrow">¶</a></p>
+            <li id="appendix-C.1.1-1.2">
+              <p id="appendix-C.1.1-1.2.1">If floating-point numbers are emitted, the following apply:<a href="#appendix-C.1.1-1.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1.1-1.2.2.1">
-                  <p id="appendix-B.1.1-1.2.2.1.1">The length of the argument indicates half (binary16, ai = 0x19),
+<li class="normal" id="appendix-C.1.1-1.2.2.1">
+                  <p id="appendix-C.1.1-1.2.2.1.1">The length of the argument indicates half (binary16, ai = 0x19),
 single (binary32, ai = 0x1a) and double (binary64, ai = 0x1b)
 precision encoding.
 If multiple of these encodings preserve the precision of the
 value to be encoded, only the shortest form of these <span class="bcp14">MUST</span> be
 emitted.
 That is, encoders <span class="bcp14">MUST</span> support half-precision and
-single-precision floating point.<a href="#appendix-B.1.1-1.2.2.1.1" class="pilcrow">¶</a></p>
+single-precision floating point.<a href="#appendix-C.1.1-1.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.1-1.2.2.2">
-                  <p id="appendix-B.1.1-1.2.2.2.1"><span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> Infinites and NaNs, and thus NaN payloads, <span class="bcp14">MUST</span> be
-supported, to the extent possible on the platform.<a href="#appendix-B.1.1-1.2.2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-B.1.1-1.2.2.2.2">
+                <li class="normal" id="appendix-C.1.1-1.2.2.2">
+                  <p id="appendix-C.1.1-1.2.2.2.1"><span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> Infinites and NaNs, and thus NaN payloads, <span class="bcp14">MUST</span> be
+supported, to the extent possible on the platform.<a href="#appendix-C.1.1-1.2.2.2.1" class="pilcrow">¶</a></p>
+<p id="appendix-C.1.1-1.2.2.2.2">
 As with all floating point numbers, Infinites and NaNs <span class="bcp14">MUST</span> be
 encoded in the shortest of double, single or half precision that
-preserves the value:<a href="#appendix-B.1.1-1.2.2.2.2" class="pilcrow">¶</a></p>
+preserves the value:<a href="#appendix-C.1.1-1.2.2.2.2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1.1-1.2.2.2.3.1">
-                      <p id="appendix-B.1.1-1.2.2.2.3.1.1">Positive and negative infinity and zero <span class="bcp14">MUST</span> be represented in
-half-precision floating point.<a href="#appendix-B.1.1-1.2.2.2.3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C.1.1-1.2.2.2.3.1">
+                      <p id="appendix-C.1.1-1.2.2.2.3.1.1">Positive and negative infinity and zero <span class="bcp14">MUST</span> be represented in
+half-precision floating point.<a href="#appendix-C.1.1-1.2.2.2.3.1.1" class="pilcrow">¶</a></p>
 </li>
-                    <li class="normal" id="appendix-B.1.1-1.2.2.2.3.2">
-                      <p id="appendix-B.1.1-1.2.2.2.3.2.1">For NaNs, the value to be preserved includes the sign bit,
+                    <li class="normal" id="appendix-C.1.1-1.2.2.2.3.2">
+                      <p id="appendix-C.1.1-1.2.2.2.3.2.1">For NaNs, the value to be preserved includes the sign bit,
 the quiet bit, and the NaN payload (whether zero or non-zero).
 The shortest form is obtained by removing the rightmost N bits of the
 payload, where N is the difference in the number of bits in the
@@ -2011,78 +2216,78 @@ and the shortest format.
 This trimming is performed only (preserves the value only) if all the
 rightmost bits removed are zero.
 (This will always represent a double or single quiet NaN with a zero
-NaN payload in a half-precision quiet NaN.)<a href="#appendix-B.1.1-1.2.2.2.3.2.1" class="pilcrow">¶</a></p>
+NaN payload in a half-precision quiet NaN.)<a href="#appendix-C.1.1-1.2.2.2.3.2.1" class="pilcrow">¶</a></p>
 </li>
                   </ul>
 </li>
               </ul>
 </li>
-            <li id="appendix-B.1.1-1.3">
-              <p id="appendix-B.1.1-1.3.1">If tags 2 and 3 are supported, the following apply:<a href="#appendix-B.1.1-1.3.1" class="pilcrow">¶</a></p>
+            <li id="appendix-C.1.1-1.3">
+              <p id="appendix-C.1.1-1.3.1">If tags 2 and 3 are supported, the following apply:<a href="#appendix-C.1.1-1.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1.1-1.3.2.1">
-                  <p id="appendix-B.1.1-1.3.2.1.1">Positive integers from 0 to 2^64 - 1 <span class="bcp14">MUST</span> be encoded as a type 0 integer.<a href="#appendix-B.1.1-1.3.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C.1.1-1.3.2.1">
+                  <p id="appendix-C.1.1-1.3.2.1.1">Positive integers from 0 to 2^64 - 1 <span class="bcp14">MUST</span> be encoded as a type 0 integer.<a href="#appendix-C.1.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.1-1.3.2.2">
-                  <p id="appendix-B.1.1-1.3.2.2.1">Negative integers from -(2^64) to -1 <span class="bcp14">MUST</span> be encoded as a type 1 integer.<a href="#appendix-B.1.1-1.3.2.2.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="appendix-C.1.1-1.3.2.2">
+                  <p id="appendix-C.1.1-1.3.2.2.1">Negative integers from -(2^64) to -1 <span class="bcp14">MUST</span> be encoded as a type 1 integer.<a href="#appendix-C.1.1-1.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.1-1.3.2.3">
-                  <p id="appendix-B.1.1-1.3.2.3.1">Leading zeros <span class="bcp14">MUST NOT</span> be present in the byte string content of tag 2 and 3.<a href="#appendix-B.1.1-1.3.2.3.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="appendix-C.1.1-1.3.2.3">
+                  <p id="appendix-C.1.1-1.3.2.3.1">Leading zeros <span class="bcp14">MUST NOT</span> be present in the byte string content of tag 2 and 3.<a href="#appendix-C.1.1-1.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
-<p id="appendix-B.1.1-1.3.3">
+<p id="appendix-C.1.1-1.3.3">
 (This also applies to the use of tags 2 and 3 within other tags,
-such as 4 or 5.)<a href="#appendix-B.1.1-1.3.3" class="pilcrow">¶</a></p>
+such as 4 or 5.)<a href="#appendix-C.1.1-1.3.3" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
 </div>
 <div id="psd">
-<section id="appendix-B.1.2">
+<section id="appendix-C.1.2">
           <h4 id="name-preferred-serialization-dec">
-<a href="#appendix-B.1.2" class="section-number selfRef">B.1.2. </a><a href="#name-preferred-serialization-dec" class="section-name selfRef">Preferred Serialization Decoders</a>
+<a href="#appendix-C.1.2" class="section-number selfRef">C.1.2. </a><a href="#name-preferred-serialization-dec" class="section-name selfRef">Preferred Serialization Decoders</a>
           </h4>
-<p id="appendix-B.1.2-1">There are no special requirements that CBOR decoders need to meet to
+<p id="appendix-C.1.2-1">There are no special requirements that CBOR decoders need to meet to
 be a Preferred Serialization Decoder.
 Partial decoder implementations need to pay attention to at least the
-following requirements:<a href="#appendix-B.1.2-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="appendix-B.1.2-2">
-<li id="appendix-B.1.2-2.1">
-              <p id="appendix-B.1.2-2.1.1">Decoders <span class="bcp14">MUST</span> accept shortest-form encoded arguments (see Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3" class="relref">3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#appendix-B.1.2-2.1.1" class="pilcrow">¶</a></p>
+following requirements:<a href="#appendix-C.1.2-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.1.2-2">
+<li id="appendix-C.1.2-2.1">
+              <p id="appendix-C.1.2-2.1.1">Decoders <span class="bcp14">MUST</span> accept shortest-form encoded arguments (see Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3" class="relref">3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#appendix-C.1.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="appendix-B.1.2-2.2">
-              <p id="appendix-B.1.2-2.2.1">If arrays or maps are supported, definite-length arrays or maps <span class="bcp14">MUST</span> be accepted.<a href="#appendix-B.1.2-2.2.1" class="pilcrow">¶</a></p>
+            <li id="appendix-C.1.2-2.2">
+              <p id="appendix-C.1.2-2.2.1">If arrays or maps are supported, definite-length arrays or maps <span class="bcp14">MUST</span> be accepted.<a href="#appendix-C.1.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="appendix-B.1.2-2.3">
-              <p id="appendix-B.1.2-2.3.1">If text or byte strings are supported, definite-length text or byte
-strings <span class="bcp14">MUST</span> be accepted.<a href="#appendix-B.1.2-2.3.1" class="pilcrow">¶</a></p>
+            <li id="appendix-C.1.2-2.3">
+              <p id="appendix-C.1.2-2.3.1">If text or byte strings are supported, definite-length text or byte
+strings <span class="bcp14">MUST</span> be accepted.<a href="#appendix-C.1.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="appendix-B.1.2-2.4">
-              <p id="appendix-B.1.2-2.4.1">If floating-point numbers are supported, the following apply:<a href="#appendix-B.1.2-2.4.1" class="pilcrow">¶</a></p>
+            <li id="appendix-C.1.2-2.4">
+              <p id="appendix-C.1.2-2.4.1">If floating-point numbers are supported, the following apply:<a href="#appendix-C.1.2-2.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.1.2-2.4.2.1">
-                  <p id="appendix-B.1.2-2.4.2.1.1">Half-precision values <span class="bcp14">MUST</span> be accepted.<a href="#appendix-B.1.2-2.4.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-C.1.2-2.4.2.1">
+                  <p id="appendix-C.1.2-2.4.2.1.1">Half-precision values <span class="bcp14">MUST</span> be accepted.<a href="#appendix-C.1.2-2.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.2-2.4.2.2">
-                  <p id="appendix-B.1.2-2.4.2.2.1">Double- and single-precision values <span class="bcp14">SHOULD</span> be accepted; leaving these out
+                <li class="normal" id="appendix-C.1.2-2.4.2.2">
+                  <p id="appendix-C.1.2-2.4.2.2.1">Double- and single-precision values <span class="bcp14">SHOULD</span> be accepted; leaving these out
 is only foreseen for decoders that need to work in exceptionally
-constrained environments.<a href="#appendix-B.1.2-2.4.2.2.1" class="pilcrow">¶</a></p>
+constrained environments.<a href="#appendix-C.1.2-2.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.2-2.4.2.3">
-                  <p id="appendix-B.1.2-2.4.2.3.1">If double-precision values are accepted, single-precision values
-<span class="bcp14">MUST</span> be accepted.<a href="#appendix-B.1.2-2.4.2.3.1" class="pilcrow">¶</a></p>
+                <li class="normal" id="appendix-C.1.2-2.4.2.3">
+                  <p id="appendix-C.1.2-2.4.2.3.1">If double-precision values are accepted, single-precision values
+<span class="bcp14">MUST</span> be accepted.<a href="#appendix-C.1.2-2.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
-                <li class="normal" id="appendix-B.1.2-2.4.2.4">
-                  <p id="appendix-B.1.2-2.4.2.4.1">Infinites and NaNs, and thus NaN payloads, <span class="bcp14">MUST</span> be accepted and
+                <li class="normal" id="appendix-C.1.2-2.4.2.4">
+                  <p id="appendix-C.1.2-2.4.2.4.1">Infinites and NaNs, and thus NaN payloads, <span class="bcp14">MUST</span> be accepted and
 presented to the application (not necessarily in the platform
-number format, if that doesn't support those values).<a href="#appendix-B.1.2-2.4.2.4.1" class="pilcrow">¶</a></p>
+number format, if that doesn't support those values).<a href="#appendix-C.1.2-2.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
               </ul>
 </li>
-            <li id="appendix-B.1.2-2.5">
-              <p id="appendix-B.1.2-2.5.1">If big numbers (tags 2 and 3) are supported, type 0 and type 1 integers <span class="bcp14">MUST</span>
+            <li id="appendix-C.1.2-2.5">
+              <p id="appendix-C.1.2-2.5.1">If big numbers (tags 2 and 3) are supported, type 0 and type 1 integers <span class="bcp14">MUST</span>
 be accepted where a tag 2 or 3 would be accepted.  Leading zero bytes
-in the tag content of a tag 2 or 3 <span class="bcp14">MUST</span> be ignored.<a href="#appendix-B.1.2-2.5.1" class="pilcrow">¶</a></p>
+in the tag content of a tag 2 or 3 <span class="bcp14">MUST</span> be ignored.<a href="#appendix-C.1.2-2.5.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
@@ -2090,141 +2295,614 @@ in the tag content of a tag 2 or 3 <span class="bcp14">MUST</span> be ignored.<a
 </section>
 </div>
 <div id="bs">
-<section id="appendix-B.2">
+<section id="appendix-C.2">
         <h3 id="name-basic-serialization">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-basic-serialization" class="section-name selfRef">Basic Serialization</a>
+<a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-basic-serialization" class="section-name selfRef">Basic Serialization</a>
         </h3>
-<p id="appendix-B.2-1">Basic Serialization further restricts Preferred Serialization by not
+<p id="appendix-C.2-1">Basic Serialization further restricts Preferred Serialization by not
 using indefinite length encoding.
 A CBOR encoder can choose to employ Basic Serialization in order to
 reduce the variability that needs to be handled by decoders,
 potentially maximizing interoperability with partial (e.g.,
-constrained) CBOR decoder implementations.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
+constrained) CBOR decoder implementations.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 <div id="bse">
-<section id="appendix-B.2.1">
+<section id="appendix-C.2.1">
           <h4 id="name-basic-serialization-encoder">
-<a href="#appendix-B.2.1" class="section-number selfRef">B.2.1. </a><a href="#name-basic-serialization-encoder" class="section-name selfRef">Basic Serialization Encoders</a>
+<a href="#appendix-C.2.1" class="section-number selfRef">C.2.1. </a><a href="#name-basic-serialization-encoder" class="section-name selfRef">Basic Serialization Encoders</a>
           </h4>
-<p id="appendix-B.2.1-1">The Basic Serialization Encoder requirements are identical to the
-Preferred Serialization Encoder requirements, with the following additions:<a href="#appendix-B.2.1-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="appendix-B.2.1-2">
-<li id="appendix-B.2.1-2.1">
-              <p id="appendix-B.2.1-2.1.1">If maps or arrays are emitted, they <span class="bcp14">MUST</span> use definite-length
-encoding (never indefinite-length).<a href="#appendix-B.2.1-2.1.1" class="pilcrow">¶</a></p>
+<p id="appendix-C.2.1-1">The Basic Serialization Encoder requirements are identical to the
+Preferred Serialization Encoder requirements, with the following additions:<a href="#appendix-C.2.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.2.1-2">
+<li id="appendix-C.2.1-2.1">
+              <p id="appendix-C.2.1-2.1.1">If maps or arrays are emitted, they <span class="bcp14">MUST</span> use definite-length
+encoding (never indefinite-length).<a href="#appendix-C.2.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="appendix-B.2.1-2.2">
-              <p id="appendix-B.2.1-2.2.1">If text or byte strings are emitted, they <span class="bcp14">MUST</span> use definite-length
-encoding (never indefinite-length).<a href="#appendix-B.2.1-2.2.1" class="pilcrow">¶</a></p>
+            <li id="appendix-C.2.1-2.2">
+              <p id="appendix-C.2.1-2.2.1">If text or byte strings are emitted, they <span class="bcp14">MUST</span> use definite-length
+encoding (never indefinite-length).<a href="#appendix-C.2.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
 </div>
 <div id="bsd">
-<section id="appendix-B.2.2">
+<section id="appendix-C.2.2">
           <h4 id="name-basic-serialization-decoder">
-<a href="#appendix-B.2.2" class="section-number selfRef">B.2.2. </a><a href="#name-basic-serialization-decoder" class="section-name selfRef">Basic Serialization Decoders</a>
+<a href="#appendix-C.2.2" class="section-number selfRef">C.2.2. </a><a href="#name-basic-serialization-decoder" class="section-name selfRef">Basic Serialization Decoders</a>
           </h4>
-<p id="appendix-B.2.2-1">The Basic Serialization Decoder requirements are identical to the
-Preferred Serialization Decoder requirements.<a href="#appendix-B.2.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.2.2-1">The Basic Serialization Decoder requirements are identical to the
+Preferred Serialization Decoder requirements.<a href="#appendix-C.2.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="cde">
-<section id="appendix-B.3">
+<section id="appendix-C.3">
         <h3 id="name-cde">
-<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-cde" class="section-name selfRef">CDE</a>
+<a href="#appendix-C.3" class="section-number selfRef">C.3. </a><a href="#name-cde" class="section-name selfRef">CDE</a>
         </h3>
 <div id="cde-encoders">
-<section id="appendix-B.3.1">
+<section id="appendix-C.3.1">
           <h4 id="name-cde-encoders">
-<a href="#appendix-B.3.1" class="section-number selfRef">B.3.1. </a><a href="#name-cde-encoders" class="section-name selfRef">CDE Encoders</a>
+<a href="#appendix-C.3.1" class="section-number selfRef">C.3.1. </a><a href="#name-cde-encoders" class="section-name selfRef">CDE Encoders</a>
           </h4>
-<ol start="1" type="1" class="normal type-1" id="appendix-B.3.1-1">
-<li id="appendix-B.3.1-1.1">
-              <p id="appendix-B.3.1-1.1.1">CDE encoders <span class="bcp14">MUST</span> only emit CBOR fulfilling the basic
-serialization rules (<a href="#bse" class="auto internal xref">Appendix B.2.1</a>).<a href="#appendix-B.3.1-1.1.1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.3.1-1">
+<li id="appendix-C.3.1-1.1">
+              <p id="appendix-C.3.1-1.1.1">CDE encoders <span class="bcp14">MUST</span> only emit CBOR fulfilling the basic
+serialization rules (<a href="#bse" class="auto internal xref">Appendix C.2.1</a>).<a href="#appendix-C.3.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="appendix-B.3.1-1.2">
-              <p id="appendix-B.3.1-1.2.1">CDE encoders <span class="bcp14">MUST</span> sort maps by the CBOR representation of the map
+            <li id="appendix-C.3.1-1.2">
+              <p id="appendix-C.3.1-1.2.1">CDE encoders <span class="bcp14">MUST</span> sort maps by the CBOR representation of the map
 key.
 The sorting is byte-wise lexicographic order of the encoded map
-key data items.<a href="#appendix-B.3.1-1.2.1" class="pilcrow">¶</a></p>
+key data items.<a href="#appendix-C.3.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="appendix-B.3.1-1.3">
-              <p id="appendix-B.3.1-1.3.1">CDE encoders <span class="bcp14">MUST</span> generate CBOR that fulfills basic validity
+            <li id="appendix-C.3.1-1.3">
+              <p id="appendix-C.3.1-1.3.1">CDE encoders <span class="bcp14">MUST</span> generate CBOR that fulfills basic validity
 (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.3.1" class="relref">5.3.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).  Note that this includes not
 emitting duplicate keys in a major type 5 map as well as emitting
-only valid UTF-8 in major type 3 text strings.<a href="#appendix-B.3.1-1.3.1" class="pilcrow">¶</a></p>
-<p id="appendix-B.3.1-1.3.2">
+only valid UTF-8 in major type 3 text strings.<a href="#appendix-C.3.1-1.3.1" class="pilcrow">¶</a></p>
+<p id="appendix-C.3.1-1.3.2">
 Note also that CDE does NOT include a requirement for Unicode
 normalization <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span>; <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-06#appendix-C" class="relref">Appendix C</a> of [<a href="#I-D.bormann-dispatch-modern-network-unicode" class="cite xref">I-D.bormann-dispatch-modern-network-unicode</a>]</span> contains some
 rationale that went into not requiring routine use of Unicode normalization
-processes.<a href="#appendix-B.3.1-1.3.2" class="pilcrow">¶</a></p>
+processes.<a href="#appendix-C.3.1-1.3.2" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
 </div>
 <div id="cde-decoders">
-<section id="appendix-B.3.2">
+<section id="appendix-C.3.2">
           <h4 id="name-cde-decoders">
-<a href="#appendix-B.3.2" class="section-number selfRef">B.3.2. </a><a href="#name-cde-decoders" class="section-name selfRef">CDE Decoders</a>
+<a href="#appendix-C.3.2" class="section-number selfRef">C.3.2. </a><a href="#name-cde-decoders" class="section-name selfRef">CDE Decoders</a>
           </h4>
-<p id="appendix-B.3.2-1">The term "CDE Decoder" is a shorthand for a CBOR decoder that
-advertises <em>supporting</em> CDE (see the start of this appendix).<a href="#appendix-B.3.2-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="appendix-B.3.2-2">
-<li id="appendix-B.3.2-2.1">
-              <p id="appendix-B.3.2-2.1.1">CDE decoders <span class="bcp14">MUST</span> follow the rules for preferred (and thus basic)
-serialization decoders (<a href="#psd" class="auto internal xref">Appendix B.1.2</a>).<a href="#appendix-B.3.2-2.1.1" class="pilcrow">¶</a></p>
+<p id="appendix-C.3.2-1">The term "CDE Decoder" is a shorthand for a CBOR decoder that
+advertises <em>supporting</em> CDE (see the start of this appendix).<a href="#appendix-C.3.2-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.3.2-2">
+<li id="appendix-C.3.2-2.1">
+              <p id="appendix-C.3.2-2.1.1">CDE decoders <span class="bcp14">MUST</span> follow the rules for preferred (and thus basic)
+serialization decoders (<a href="#psd" class="auto internal xref">Appendix C.1.2</a>).<a href="#appendix-C.3.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li id="appendix-B.3.2-2.2">
-              <p id="appendix-B.3.2-2.2.1">CDE decoders <span class="bcp14">MUST</span> check for ordering map keys and for basic
+            <li id="appendix-C.3.2-2.2">
+              <p id="appendix-C.3.2-2.2.1">CDE decoders <span class="bcp14">MUST</span> check for ordering map keys and for basic
 validity of the CBOR encoding (see Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.3.1" class="relref">5.3.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, which includes a check against duplicate map keys
-and invalid UTF-8).<a href="#appendix-B.3.2-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-B.3.2-2.2.2">
+and invalid UTF-8).<a href="#appendix-C.3.2-2.2.1" class="pilcrow">¶</a></p>
+<p id="appendix-C.3.2-2.2.2">
 To be called a CDE decoder, it <span class="bcp14">MUST NOT</span> present to the application
 a decoded data item that fails one of these checks (except maybe via
 special diagnostic channels with no potential for confusion with a
-correctly CDE-decoded data item).<a href="#appendix-B.3.2-2.2.2" class="pilcrow">¶</a></p>
+correctly CDE-decoded data item).<a href="#appendix-C.3.2-2.2.2" class="pilcrow">¶</a></p>
 </li>
           </ol>
 </section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="examples">
+<section id="appendix-D">
+      <h2 id="name-encoding-examples">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-encoding-examples" class="section-name selfRef">Encoding Examples</a>
+      </h2>
+<p id="appendix-D-1">The following three tables provide examples of CDE-encoded CBOR data
+items, each giving Diagnostic Notation (EDN <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>), the encoded data
+item in hexadecimal, and a comment.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-2">Implementers that want to use these examples as test input may be
+interested in the file <code>example-table-input.csv</code> in the github
+repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<div id="integer-value-examples">
+<section id="appendix-D.1">
+        <h3 id="name-integer-value-examples">
+<a href="#appendix-D.1" class="section-number selfRef">D.1. </a><a href="#name-integer-value-examples" class="section-name selfRef">Integer Value Examples</a>
+        </h3>
+<span id="name-integer-value-examples-2"></span><div id="tab-example-int">
+<table class="center" id="table-4">
+          <caption>
+<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#name-integer-value-examples-2" class="selfRef">Integer Value Examples</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">EDN</th>
+              <th class="text-left" rowspan="1" colspan="1">CBOR (hex)</th>
+              <th class="text-left" rowspan="1" colspan="1">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0</td>
+              <td class="text-left" rowspan="1" colspan="1">00</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-1</td>
+              <td class="text-left" rowspan="1" colspan="1">20</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">23</td>
+              <td class="text-left" rowspan="1" colspan="1">17</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-24</td>
+              <td class="text-left" rowspan="1" colspan="1">37</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative immediate int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">24</td>
+              <td class="text-left" rowspan="1" colspan="1">1818</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-25</td>
+              <td class="text-left" rowspan="1" colspan="1">3818</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">255</td>
+              <td class="text-left" rowspan="1" colspan="1">18ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-256</td>
+              <td class="text-left" rowspan="1" colspan="1">38ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative one-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">256</td>
+              <td class="text-left" rowspan="1" colspan="1">190100</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-257</td>
+              <td class="text-left" rowspan="1" colspan="1">390100</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65535</td>
+              <td class="text-left" rowspan="1" colspan="1">19ffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-65536</td>
+              <td class="text-left" rowspan="1" colspan="1">39ffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative two-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65536</td>
+              <td class="text-left" rowspan="1" colspan="1">1a00010000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-65537</td>
+              <td class="text-left" rowspan="1" colspan="1">3a00010000</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4294967295</td>
+              <td class="text-left" rowspan="1" colspan="1">1affffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-4294967296</td>
+              <td class="text-left" rowspan="1" colspan="1">3affffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative four-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4294967296</td>
+              <td class="text-left" rowspan="1" colspan="1">1b0000000100000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-4294967297</td>
+              <td class="text-left" rowspan="1" colspan="1">3b0000000100000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">18446744073709551615</td>
+              <td class="text-left" rowspan="1" colspan="1">1bffffffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest unsigned eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-18446744073709551616</td>
+              <td class="text-left" rowspan="1" colspan="1">3bffffffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest negative eight-byte int</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">18446744073709551616</td>
+              <td class="text-left" rowspan="1" colspan="1">c249010000000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest unsigned bigint</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-18446744073709551617</td>
+              <td class="text-left" rowspan="1" colspan="1">c349010000000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative bigint</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="floating-point-value-examples">
+<section id="appendix-D.2">
+        <h3 id="name-floating-point-value-exampl">
+<a href="#appendix-D.2" class="section-number selfRef">D.2. </a><a href="#name-floating-point-value-exampl" class="section-name selfRef">Floating Point Value Examples</a>
+        </h3>
+<span id="name-floating-point-value-example"></span><div id="tab-example-flt">
+<table class="center" id="table-5">
+          <caption>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-floating-point-value-example" class="selfRef">Floating Point Value Examples</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">EDN</th>
+              <th class="text-left" rowspan="1" colspan="1">CBOR (hex)</th>
+              <th class="text-left" rowspan="1" colspan="1">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f90000</td>
+              <td class="text-left" rowspan="1" colspan="1">Zero</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-0.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f98000</td>
+              <td class="text-left" rowspan="1" colspan="1">Negative zero</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Infinity</td>
+              <td class="text-left" rowspan="1" colspan="1">f97c00</td>
+              <td class="text-left" rowspan="1" colspan="1">Infinity</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-Infinity</td>
+              <td class="text-left" rowspan="1" colspan="1">f9fc00</td>
+              <td class="text-left" rowspan="1" colspan="1">-Infinity</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+              <td class="text-left" rowspan="1" colspan="1">f97e00</td>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+              <td class="text-left" rowspan="1" colspan="1">f97e01</td>
+              <td class="text-left" rowspan="1" colspan="1">NaN with non-zero payload</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">5.960464477539063e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">f90001</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive 16-bit float (subnormal)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006097555160522461</td>
+              <td class="text-left" rowspan="1" colspan="1">f903ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103515625</td>
+              <td class="text-left" rowspan="1" colspan="1">f90400</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65504.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f97bff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.401298464324817e-45</td>
+              <td class="text-left" rowspan="1" colspan="1">fa00000001</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive 32-bit float (subnormal)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754942106924411e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fa007fffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754943508222875e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fa00800000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3.4028234663852886e+38</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7f7fffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">5.0e-324</td>
+              <td class="text-left" rowspan="1" colspan="1">fb0000000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive 64-bit float (subnormal)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2.225073858507201e-308</td>
+              <td class="text-left" rowspan="1" colspan="1">fb000fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 64-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2.2250738585072014e-308</td>
+              <td class="text-left" rowspan="1" colspan="1">fb0010000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive 64-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.7976931348623157e+308</td>
+              <td class="text-left" rowspan="1" colspan="1">fb7fefffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive 64-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-0.0000033333333333333333</td>
+              <td class="text-left" rowspan="1" colspan="1">fbbecbf647612f3696</td>
+              <td class="text-left" rowspan="1" colspan="1">Arbitrarily selected number</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">10.559998512268066</td>
+              <td class="text-left" rowspan="1" colspan="1">fa4128f5c1</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">10.559998512268068</td>
+              <td class="text-left" rowspan="1" colspan="1">fb40251eb820000001</td>
+              <td class="text-left" rowspan="1" colspan="1">Next in succession</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">295147905179352830000.0</td>
+              <td class="text-left" rowspan="1" colspan="1">fa61800000</td>
+              <td class="text-left" rowspan="1" colspan="1">2<sup>68</sup> (diagnostic notation truncates precision)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2.0</td>
+              <td class="text-left" rowspan="1" colspan="1">f94000</td>
+              <td class="text-left" rowspan="1" colspan="1">Number without a fractional part</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960464477539063e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">f98001</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960464477539062e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">fbbe6fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest negative subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960464477539064e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">fbbe70000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-5.960465188081798e-8</td>
+              <td class="text-left" rowspan="1" colspan="1">fab3800001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.0000609755516052246</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f0ff7ffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.000060975551605224616</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f0ff80000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.000060975555243203416</td>
+              <td class="text-left" rowspan="1" colspan="1">fa387fc001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103515624999999</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f0fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103515625000001</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3f10000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0.00006103516352595761</td>
+              <td class="text-left" rowspan="1" colspan="1">fa38800001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65503.99999999999</td>
+              <td class="text-left" rowspan="1" colspan="1">fb40effbffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest 16-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65504.00000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">fb40effc0000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65504.00390625</td>
+              <td class="text-left" rowspan="1" colspan="1">fa477fe001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.4012984643248169e-45</td>
+              <td class="text-left" rowspan="1" colspan="1">fb369fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest subnormal 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.4012984643248174e-45</td>
+              <td class="text-left" rowspan="1" colspan="1">fb36a0000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.175494210692441e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb380fffffbfffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754942106924412e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb380fffffc0000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754943508222874e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb380fffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1.1754943508222878e-38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb3810000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3.4028234663852882e+38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb47efffffdfffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest 32-bit float</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3.402823466385289e+38</td>
+              <td class="text-left" rowspan="1" colspan="1">fb47efffffe0000001</td>
+              <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="failing-examples">
+<section id="appendix-D.3">
+        <h3 id="name-failing-examples">
+<a href="#appendix-D.3" class="section-number selfRef">D.3. </a><a href="#name-failing-examples" class="section-name selfRef">Failing Examples</a>
+        </h3>
+<span id="name-failing-examples-2"></span><div id="tab-example-bad">
+<table class="center" id="table-6">
+          <caption>
+<a href="#table-6" class="selfRef">Table 6</a>:
+<a href="#name-failing-examples-2" class="selfRef">Failing Examples</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">EDN</th>
+              <th class="text-left" rowspan="1" colspan="1">CBOR (hex)</th>
+              <th class="text-left" rowspan="1" colspan="1">Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">{"b":0,"a":1}</td>
+              <td class="text-left" rowspan="1" colspan="1">a2616200616101</td>
+              <td class="text-left" rowspan="1" colspan="1">Incorrect map key ordering</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">255</td>
+              <td class="text-left" rowspan="1" colspan="1">1900ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Integer not in preferred encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">-18446744073709551617</td>
+              <td class="text-left" rowspan="1" colspan="1">c34a00010000000000000000</td>
+              <td class="text-left" rowspan="1" colspan="1">Bigint with leading zero bytes</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">10.5</td>
+              <td class="text-left" rowspan="1" colspan="1">fa41280000</td>
+              <td class="text-left" rowspan="1" colspan="1">Not in shortest encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7fc00000</td>
+              <td class="text-left" rowspan="1" colspan="1">Not in shortest encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">65536</td>
+              <td class="text-left" rowspan="1" colspan="1">c243010000</td>
+              <td class="text-left" rowspan="1" colspan="1">Integer value too small for bigint</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">(_ h'01', h'0203')</td>
+              <td class="text-left" rowspan="1" colspan="1">5f4101420203ff</td>
+              <td class="text-left" rowspan="1" colspan="1">Indefinite length encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">(Not CBOR)</td>
+              <td class="text-left" rowspan="1" colspan="1">f818</td>
+              <td class="text-left" rowspan="1" colspan="1">Simple values 24..31 not in use</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">(Not CBOR)</td>
+              <td class="text-left" rowspan="1" colspan="1">fc</td>
+              <td class="text-left" rowspan="1" colspan="1">Reserved (ai = 28..30)</td>
+            </tr>
+          </tbody>
+        </table>
 </div>
 </section>
 </div>
 </section>
 </div>
 <div id="list-of-tables">
-<section id="appendix-C">
+<section id="appendix-E">
       <h2 id="name-list-of-tables">
 <a href="#name-list-of-tables" class="section-name selfRef">List of Tables</a>
       </h2>
-<ol start="1" type="1" class="compact type-1" id="appendix-C-1">
-<li id="appendix-C-1.1">
-          <p id="appendix-C-1.1.1"><span><a href="#tab-constraints" class="internal xref">Constraints on the Serialization of CBOR</a> (<a href="#tab-constraints" class="auto internal xref">Table 1</a>)</span><a href="#appendix-C-1.1.1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="appendix-E-1">
+<li id="appendix-E-1.1">
+          <p id="appendix-E-1.1.1"><span><a href="#tab-constraints" class="internal xref">Constraints on the Serialization of CBOR</a> (<a href="#tab-constraints" class="auto internal xref">Table 1</a>)</span><a href="#appendix-E-1.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="appendix-C-1.2">
-          <p id="appendix-C-1.2.1"><span><a href="#tbl-iana-reqs" class="internal xref">New control operators to be registered</a> (<a href="#tbl-iana-reqs" class="auto internal xref">Table 2</a>)</span><a href="#appendix-C-1.2.1" class="pilcrow">¶</a></p>
+        <li id="appendix-E-1.2">
+          <p id="appendix-E-1.2.1"><span><a href="#tbl-iana-reqs" class="internal xref">New control operators to be registered</a> (<a href="#tbl-iana-reqs" class="auto internal xref">Table 2</a>)</span><a href="#appendix-E-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.3">
+          <p id="appendix-E-1.3.1"><span><a href="#layers" class="internal xref">A three-layer model of information representation</a> (<a href="#layers" class="auto internal xref">Table 3</a>)</span><a href="#appendix-E-1.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.4">
+          <p id="appendix-E-1.4.1"><span><a href="#tab-example-int" class="internal xref">Integer Value Examples</a> (<a href="#tab-example-int" class="auto internal xref">Table 4</a>)</span><a href="#appendix-E-1.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.5">
+          <p id="appendix-E-1.5.1"><span><a href="#tab-example-flt" class="internal xref">Floating Point Value Examples</a> (<a href="#tab-example-flt" class="auto internal xref">Table 5</a>)</span><a href="#appendix-E-1.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-E-1.6">
+          <p id="appendix-E-1.6.1"><span><a href="#tab-example-bad" class="internal xref">Failing Examples</a> (<a href="#tab-example-bad" class="auto internal xref">Table 6</a>)</span><a href="#appendix-E-1.6.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="appendix-D">
+<section id="appendix-F">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-D-1">An earlier version of this document was based on the work of Wolf
-McNally and Christopher Allen as documented in <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>, which
+<p id="appendix-F-1">An early version of this document was based on the work of <span class="contact-name">Wolf McNally</span> and <span class="contact-name">Christopher Allen</span> as documented in <span>[<a href="#I-D.mcnally-deterministic-cbor" class="cite xref">I-D.mcnally-deterministic-cbor</a>]</span>, which
 serves as an example for an ALDR ruleset document.
 We would like to explicitly acknowledge that this work has
 contributed greatly to shaping the concept of a CBOR Common
-Deterministic Encoding and ALDR rules/rulesets on top of that.
-Mikolai Gütschow proposed adding <a href="#choi" class="auto internal xref">Section 2</a>.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+Deterministic Encoding and the use of ALDR rules/rulesets on top of that.
+<span class="contact-name">Mikolai Gütschow</span> proposed adding <a href="#choi" class="auto internal xref">Section 2</a>.
+<span class="contact-name">Anders Rundgren</span> provided most of the initial text that turned into
+<a href="#examples" class="auto internal xref">Appendix D</a>.<a href="#appendix-F-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
-<section id="appendix-E">
+<section id="appendix-G">
       <h2 id="name-contributors">
 <a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
@@ -2236,11 +2914,11 @@ Mikolai Gütschow proposed adding <a href="#choi" class="auto internal xref">Sec
 <a href="mailto:lgl@securitytheory.com" class="email">lgl@securitytheory.com</a>
 </div>
 </address>
-<p id="appendix-E-1">Laurence provided most of the text that became <a href="#impcheck" class="auto internal xref">Appendix B</a>.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
+<p id="appendix-G-1">Laurence provided most of the text that became <a href="#models" class="auto internal xref">Appendix A</a> and <a href="#impcheck" class="auto internal xref">Appendix C</a>.<a href="#appendix-G-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-F">
+<section id="appendix-H">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
