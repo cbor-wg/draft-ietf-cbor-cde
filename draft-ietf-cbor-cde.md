@@ -82,10 +82,10 @@ informative:
     decisions.
     To facilitate Deterministic Encoding to be offered as a selectable
     feature of generic encoders, the present document defines a
-    CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+    CBOR Common Deterministic Encoding (CDE) that can be shared by a
     large set of applications with potentially diverging detailed
     requirements.
-    It also defines "Basic Serialization", which stops short of the
+    It also defines the term "Basic Serialization", which stops short of the
     potentially more onerous requirements that make CDE fully
     deterministic, while employing most of its reductions of the
     variability needing to be handled by decoders.
@@ -99,7 +99,7 @@ informative:
 ## Structure of This Document
 
 After introductory material (this introduction and {{choi}}), {{dep}}
-defines the CBOR Common Deterministic Encoding Profile (CDE).
+defines the CBOR Common Deterministic Encoding (CDE).
 {{cddl-support}} defines Concise Data Definition Language (CDDL) support for indicating the use of CDE.
 This is followed by the conventional sections for
 {{<<seccons}} ({{<seccons}}),
@@ -232,10 +232,10 @@ Where Deterministic Representation is not actually needed,
 application-level representation rules of course can still be useful
 to amplify the benefits of Preferred or Basic Serialization.
 
-# CBOR Common Deterministic Encoding Profile (CDE) {#dep}
+# CBOR Common Deterministic Encoding (CDE) {#dep}
 
-This specification defines the *CBOR Common Deterministic Encoding
-Profile* (CDE) based on the _Core Deterministic Encoding
+This specification defines the *CBOR Common Deterministic Encoding*
+(CDE) based on the _Core Deterministic Encoding
 Requirements_ defined for CBOR in
 {{Section 4.2.1 of RFC8949@-cbor}}.
 
@@ -247,7 +247,8 @@ In many applications of CBOR today, deterministic encoding is not used
 at all, as its restriction of choices can create some additional
 performance cost and code complexity.
 
-{{-cbor}}'s core requirements are designed to provide well-understood and
+{{-cbor}}'s "Core Deterministic Encoding Requirements" are designed to
+provide well-understood and
 easy-to-implement rules while maximizing coverage, i.e., the subset of
 CBOR data items that are fully specified by these rules, and also
 placing minimal burden on implementations.
@@ -288,7 +289,7 @@ floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See {{Section 3.2.2 of -det}} for more details.
 {{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices; these need to
-be made to obtain the CBOR Common Deterministic Encoding Profile (CDE).
+be made to obtain the CBOR Common Deterministic Encoding (CDE).
 Specifically, CDE specifies (in the order of the bullet list at the end of {{Section
 4.2.2 of RFC8949@-cbor}}):
 
