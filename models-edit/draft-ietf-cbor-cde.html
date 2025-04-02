@@ -12,10 +12,10 @@ its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
 feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+CBOR Common Deterministic Encoding (CDE) that can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
-It also defines "Basic Serialization", which stops short of the
+It also defines the term "Basic Serialization", which stops short of the
 potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders. 
@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 3 October 2025</td>
+<td class="center">Expires 4 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-04-01" class="published">1 April 2025</time>
+<time datetime="2025-04-02" class="published">2 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-10-03">3 October 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-04">4 October 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1094,10 +1094,10 @@ its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
 feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+CBOR Common Deterministic Encoding (CDE) that can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
-It also defines "Basic Serialization", which stops short of the
+It also defines the term "Basic Serialization", which stops short of the
 potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1136,7 +1136,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1180,7 +1180,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-encoding-choices-in-cbor" class="internal xref">Encoding Choices in CBOR</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-cbor-common-deterministic-e" class="internal xref">CBOR Common Deterministic Encoding Profile (CDE)</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-cbor-common-deterministic-e" class="internal xref">CBOR Common Deterministic Encoding (CDE)</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-cddl-support" class="internal xref">CDDL support</a></p>
@@ -1291,10 +1291,10 @@ its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
 feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+CBOR Common Deterministic Encoding (CDE) that can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
-It also defines "Basic Serialization", which stops short of the
+It also defines the term "Basic Serialization", which stops short of the
 potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders.<a href="#section-1-1" class="pilcrow">¶</a></p>
@@ -1304,7 +1304,7 @@ variability needing to be handled by decoders.<a href="#section-1-1" class="pilc
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-structure-of-this-document" class="section-name selfRef">Structure of This Document</a>
         </h3>
 <p id="section-1.1-1">After introductory material (this introduction and <a href="#choi" class="auto internal xref">Section 2</a>), <a href="#dep" class="auto internal xref">Section 3</a>
-defines the CBOR Common Deterministic Encoding Profile (CDE).
+defines the CBOR Common Deterministic Encoding (CDE).
 <a href="#cddl-support" class="auto internal xref">Section 4</a> defines Concise Data Definition Language (CDDL) support for indicating the use of CDE.
 This is followed by the conventional sections for
 <a href="#seccons" class="internal xref">Security Considerations</a> (<a href="#seccons" class="auto internal xref">5</a>),
@@ -1474,10 +1474,10 @@ to amplify the benefits of Preferred or Basic Serialization.<a href="#section-2-
 <div id="dep">
 <section id="section-3">
       <h2 id="name-cbor-common-deterministic-e">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-cbor-common-deterministic-e" class="section-name selfRef">CBOR Common Deterministic Encoding Profile (CDE)</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-cbor-common-deterministic-e" class="section-name selfRef">CBOR Common Deterministic Encoding (CDE)</a>
       </h2>
-<p id="section-3-1">This specification defines the <em>CBOR Common Deterministic Encoding
-Profile</em> (CDE) based on the <em>Core Deterministic Encoding
+<p id="section-3-1">This specification defines the <em>CBOR Common Deterministic Encoding</em>
+(CDE) based on the <em>Core Deterministic Encoding
 Requirements</em> defined for CBOR in
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Note that this specific set of requirements is elective — in
@@ -1486,7 +1486,8 @@ principle, other variants of deterministic encoding can be defined
 In many applications of CBOR today, deterministic encoding is not used
 at all, as its restriction of choices can create some additional
 performance cost and code complexity.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3"><span>[<a href="#STD94" class="cite xref">STD94</a>]</span>'s core requirements are designed to provide well-understood and
+<p id="section-3-3"><span>[<a href="#STD94" class="cite xref">STD94</a>]</span>'s "Core Deterministic Encoding Requirements" are designed to
+provide well-understood and
 easy-to-implement rules while maximizing coverage, i.e., the subset of
 CBOR data items that are fully specified by these rules, and also
 placing minimal burden on implementations.<a href="#section-3-3" class="pilcrow">¶</a></p>
@@ -1525,7 +1526,7 @@ floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices; these need to
-be made to obtain the CBOR Common Deterministic Encoding Profile (CDE).
+be made to obtain the CBOR Common Deterministic Encoding (CDE).
 Specifically, CDE specifies (in the order of the bullet list at the end of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>):<a href="#section-3-7" class="pilcrow">¶</a></p>
 <ol start="2" type="1" class="normal type-1" id="section-3-8">
 <li id="section-3-8.1">
