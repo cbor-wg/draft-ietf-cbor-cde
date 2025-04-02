@@ -13,6 +13,9 @@ area: "Applications and Real-Time"
 workgroup: CBOR
 keyword:
 
+v3xml2rfc:
+  table_borders: light
+
 venue:
   group: "Concise Binary Object Representation Maintenance and Extensions (CBOR)"
   mail: "cbor@ietf.org"
@@ -33,7 +36,8 @@ contributor:
 - name: Laurence Lundblade
   org: Security Theory LLC
   email: lgl@securitytheory.com
-  contribution: Laurence provided most of the text that became {{impcheck}}.
+  contribution: Laurence provided most of the text that became
+    {{models}} and {{impcheck}}.
 
 normative:
   STD94: cbor
@@ -52,6 +56,7 @@ normative:
 
 
 informative:
+  I-D.ietf-cbor-edn-literals: edn
   I-D.bormann-cbor-det: det
   I-D.mcnally-deterministic-cbor: dcbor
   I-D.bormann-cbor-numbers: numbers
@@ -64,6 +69,8 @@ informative:
   RFC9581: tag1001
   RFC9679: thumb
   STD96: cose
+  RFC7493: ijson
+  RFC9741: more
 
 --- abstract
 
@@ -75,10 +82,10 @@ informative:
     decisions.
     To facilitate Deterministic Encoding to be offered as a selectable
     feature of generic encoders, the present document defines a
-    CBOR Common Deterministic Encoding (CDE) Profile that can be shared by a
+    CBOR Common Deterministic Encoding (CDE) that can be shared by a
     large set of applications with potentially diverging detailed
     requirements.
-    It also defines "Basic Serialization", which stops short of the
+    It also defines the term "Basic Serialization", which stops short of the
     potentially more onerous requirements that make CDE fully
     deterministic, while employing most of its reductions of the
     variability needing to be handled by decoders.
@@ -92,21 +99,15 @@ informative:
 ## Structure of This Document
 
 After introductory material (this introduction and {{choi}}), {{dep}}
-defines the CBOR Common Deterministic Encoding Profile (CDE).
+defines the CBOR Common Deterministic Encoding (CDE).
 {{cddl-support}} defines Concise Data Definition Language (CDDL) support for indicating the use of CDE.
 This is followed by the conventional sections for
 {{<<seccons}} ({{<seccons}}),
 {{<<sec-iana}} ({{<sec-iana}}),
 and {{<<sec-combined-references}} ({{<sec-combined-references}}).
 
-The informative {{impcheck}} provides brief checklists that implementers
-can use to check their CDE implementations.
-{{ps}} provides a checklist for implementing Preferred Serialization.
-{{bs}} introduces "Basic Serialization", a slightly more restricted form
-of Preferred Serialization that may be used by encoders to hit a sweet
-spot for maximizing interoperability with partial (e.g., constrained)
-CBOR decoder implementations.
-{{cde}} further restricts Basic Serialization to arrive at CDE.
+For use as background material, {{models}} introduces terminology for
+the layering of models used to describe CBOR.
 
 Instead of giving rise to the definition of application-specific,
 non-interoperable variants of CDE, this document identifies
@@ -121,9 +122,23 @@ ALDR rules are often provided as part of a specification for a CBOR-based
 protocol, or, if needed, can be provided by referencing a shared "ALDR
 ruleset" that is defined in a separate document.
 
+The informative {{impcheck}} provides brief checklists that implementers
+can use to check their CDE implementations.
+{{ps}} provides a checklist for implementing Preferred Serialization.
+{{bs}} introduces "Basic Serialization", a slightly more restricted form
+of Preferred Serialization that may be used by encoders to hit a sweet
+spot for maximizing interoperability with partial (e.g., constrained)
+CBOR decoder implementations.
+{{cde}} further restricts Basic Serialization to arrive at CDE.
+
+{{examples}} provides a few examples for CBOR data items in CDE
+encoding, as well as a few failing examples.
+
 ## Conventions and Definitions
 
 The conventions and definitions of {{-cbor}} apply.
+{{models}} provides additional discussion of the terms information
+model, data model, and serialization.
 
 * The term "CBOR Application" ("application" for short) is not
 explicitly defined in {{-cbor}}; this document uses it in the same sense
@@ -217,22 +232,23 @@ Where Deterministic Representation is not actually needed,
 application-level representation rules of course can still be useful
 to amplify the benefits of Preferred or Basic Serialization.
 
-# CBOR Common Deterministic Encoding Profile (CDE) {#dep}
+# CBOR Common Deterministic Encoding (CDE) {#dep}
 
-This specification defines the *CBOR Common Deterministic Encoding
-Profile* (CDE) based on the _Core Deterministic Encoding
+This specification defines the *CBOR Common Deterministic Encoding*
+(CDE) based on the _Core Deterministic Encoding
 Requirements_ defined for CBOR in
 {{Section 4.2.1 of RFC8949@-cbor}}.
 
 Note that this specific set of requirements is elective — in
 principle, other variants of deterministic encoding can be defined
-(and have been, now being phased out slowly, as detailed in {{Section 4.2.3
+(and have been, now being phased out, as detailed in {{Section 4.2.3
 of RFC8949@-cbor}}).
 In many applications of CBOR today, deterministic encoding is not used
 at all, as its restriction of choices can create some additional
 performance cost and code complexity.
 
-{{-cbor}}'s core requirements are designed to provide well-understood and
+{{-cbor}}'s "Core Deterministic Encoding Requirements" are designed to
+provide well-understood and
 easy-to-implement rules while maximizing coverage, i.e., the subset of
 CBOR data items that are fully specified by these rules, and also
 placing minimal burden on implementations.
@@ -273,7 +289,7 @@ floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See {{Section 3.2.2 of -det}} for more details.
 {{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices; these need to
-be made to obtain the CBOR Common Deterministic Encoding Profile (CDE).
+be made to obtain the CBOR Common Deterministic Encoding (CDE).
 Specifically, CDE specifies (in the order of the bullet list at the end of {{Section
 4.2.2 of RFC8949@-cbor}}):
 
@@ -332,132 +348,6 @@ Concise Data Definition Language (CDDL)
 {{-cddl}}, except where the data description is documenting specific
 encoding decisions for byte strings that carry embedded CBOR.
 
---- back
-
-# Application-level Deterministic Representation {#aldr}
-
-This appendix is informative.
-
-CBOR application protocols are agreements about how to use CBOR for a
-specific application or set of applications.
-Application protocols make representation decisions in order to
-constrain the variety of ways in which some aspect of the information
-model could be represented in the CBOR data model for the application.
-For instance, there are several CBOR tags that can be used to
-represent a time stamp (such as tag 0, 1, 1001), each with some specific
-properties.
-Application protocols that need to represent a timestamp typically
-choose a specific tag and further constrain its use where necessary
-(e.g., tag 1001 was designed to cover a wide variety of applications
-{{-tag1001}}).
-Where no tag is available, the application protocol can design its own
-format for some application data.
-Even where a tag is available, the application data can choose to use
-its definitions without actually encoding the tag (e.g., by using its
-content in specific places in an "unwrapped" form).
-
-For instance, CWT defines an application data type "NumericDate" which
-(as an application-level rule) is formed by "unwrapping" tag 1 (see
-{{Sections 2 and 5 of -cwt}}).
-CWT does stop short of using deterministic encoding.
-A hypothetical deterministic variant of CWT would need to make an
-additional ALDR rule for NumericDate, as
-the definition of tag 1 allows both integer and floating point numbers
-({{Section 3.4.2 of RFC8949@-cbor}}), which allows multiple
-application-level representations of integral numbers.
-These application rules may choose to only ever use integers, or to always
-use integers when the numeric value can be represented as such without
-loss of information, or to always use floating point numbers, or some
-of these for some application data and different ones for other
-application data.
-
-Applications that require Deterministic Representation, and that
-derive CBOR data items from application data without maintaining a
-record of which choices are to be made when representing these
-application data, generally make rules for these choices as part of
-the application protocol.
-In this document, we speak about these choices as Application-level
-Deterministic Representation Rules (ALDR rules for short).
-
-As an example, {{-thumb}} is intended to derive a (deterministic)
-thumbprint from a COSE key {{-cose}}.
-{{Section 4 of -thumb}} provides the rules that are used to construct a
-deterministic application-level representation (ALDR rules).
-Only certain data from a COSE key are selected to be included in that
-ALDR, and, where the COSE can choose multiple representations of
-semantically equivalent application data, the ALDR rules choose one of
-them, potentially requiring a conversion ({{Section 4.2 of -thumb}}):
-
-{:quote}
->  Note: \[{{RFC9052}}] supports both compressed and uncompressed point
-   representations.  For interoperability, implementations adhering to
-   this specification MUST use the uncompressed point representation.
-   Therefore, the y-coordinate is expressed as a bstr.  If an
-   implementation uses the compressed point representation, it MUST
-   first convert it to the uncompressed form for the purpose of
-   thumbprint calculation.
-
-CDE provides for encoding commonality between different applications
-of CBOR once these application-level choices have been made.
-It can be useful for an application or a group of applications to
-document their choices aimed at deterministic representation of
-application data in a general way, constraining the set of data items
-handled (_exclusions_, e.g., no compressed point representations) and
-defining further mappings (_reductions_, e.g., conversions to
-uncompressed form)
-that help the application(s) get by with the exclusions.
-This can be done in the application protocol specification (as in
-{{-thumb}}) or as a separate document.
-
-An early example of a separate document is the dCBOR specification
-{{-dcbor}}.
-dCBOR specifies the use of CDE together with some application-level
-rules, i.e., an ALDR ruleset, such as a requirement for all text
-strings to be in Unicode Normalization Form C (NFC) {{UAX-15}} — this
-specific requirement is an example for an _exclusion_ of non-NFC data
-at the application level, and it invites implementing a _reduction_ by
-routine normalization of text strings.
-
-ALDR rules (including rules specified in a ALDR ruleset document) enable
-simply using implementations of the common CDE; they do not
-"fork" CBOR in the sense of requiring distinct generic encoder/decoder
-implementations for each application.
-
-An implementation of specific ALDR rules combined with a CDE
-implementation produces well-formed,
-deterministically encoded CBOR according to {{STD94}}, and existing
-generic CBOR decoders will therefore be able to decode it, including
-those that check for Deterministic Encoding ("CDE decoders", see also
-{{impcheck}}).
-Similarly, generic CBOR encoders will be able to produce valid CBOR
-that can be ingested by an implementation that enforces an application's
-ALDR rules if the encoder was handed data model level information
-from an application that simply conformed to those ALDR rules.
-
-Please note that the separation between standard CBOR processing and
-the processing required by the ALDR rules is a conceptual one:
-Instead of employing generic encoders/decoders, both ALDR rule
-processing and standard CBOR processing can be combined into a specialized
-encoder/decoder specifically designed for a particular set of ALDR
-rules.
-
-ALDR rules are intended to be used in conjunction with an
-application, which typically will naturally use a subset of the CBOR generic
-data model, which in turn
-influences which subset of the ALDR rules is used by the specific application
-(in particular if the application simply references a more general
-ALDR ruleset document).
-As a result, ALDR rules themselves place no direct
-requirement on what minimum subset of CBOR is implemented.
-For instance, a set of ALDR rules might include rules for the
-processing of floating point values, but there is no requirement that
-implementations of that set of ALDR rules support floating point
-numbers (or any other kind of number, such as arbitrary precision
-integers or 64-bit negative integers) when they are used with
-applications that do not use them.
-
---- middle
-
 # CDDL support
 
 CDDL defines the structure of CBOR data items at the data model level;
@@ -500,8 +390,8 @@ specific structure, this can be expressed by the right-hand side
 (Note that the `.cdeseq` control operator does not enable specifying
 different deterministic encoding requirements for the elements of the
 sequence.  If a use case for such a feature becomes known, it could be
-added.)
-
+added, or the CBOR sequence could be constructed with `.join` ({{Section
+3.1 of -more}}).)
 
 Obviously, specifications that document ALDR rules can define related control operators
 that also embody the processing required by those ALDR rules,
@@ -537,6 +427,258 @@ This document requests IANA to register the contents of
 
 
 --- back
+
+# Information Model, Data Model and Serialization {#models}
+
+This appendix is informative.
+
+For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
+
+|                   | Abstraction Level                                            | Example                                              | Standards | Implementation Representation                                       |
+| Information Model | Top level; conceptual                                        | The temperature of something                         |           |                                                                     |
+| Data Model        | Realization of information in data structures and data types | A floating-point number representing the temperature | CDDL      | API input to CBOR encoder library, output from CBOR decoder library |
+| Serialization     | Actual bytes encoded for transmission                        | Encoded CBOR of a floating-point number              | CBOR      | Encoded CBOR in memory or for transmission                          |
+{: #layers title="A three-layer model of information representation"}
+
+CBOR does not provide facilities for expressing information models.
+They are mentioned here for completeness and to provide some context.
+
+CBOR defines a palette of basic data items that can be grouped into
+data types such as the usual integer or floating-point numbers, text or
+byte strings, arrays and maps, and certain special "simple values"
+such as Booleans and `null`.
+Extended data types may be constructed from these basic types.
+These basic and extended types are used to construct the data model of a CBOR protocol.
+One notation that is often used for describing the data model of a CBOR protocol is CDDL {{-cddl}}.
+The various types of data items in the data model are serialized per RFC 8949 {{-cbor}} to create encoded CBOR data items.
+
+## Data Model, Encoding Variants and Interoperability with Partial Implementations
+
+In contrast to JSON, CBOR-related documents explicitly discuss the data model separately from its serialization.
+Both JSON and CBOR allow variation in the way some data items can be serialized:
+
+* In JSON, the number 1 can be serialized in several different ways
+(`1`, `0.1e1`, `1.0`, `100e-2`) — while it may seem obvious to use
+`1` for this case, this is less clear for `1000000000000000000000000000000` vs. `1e+30` or `1e30`.
+(As its serialization also doubles as a human-readable interface, JSON
+also allows the introduction of blank space for readability.)
+The lack of an agreed data model for JSON led to the need for a complementary
+specification documenting an interoperable subset {{-ijson}}.
+
+* The CBOR standard addresses constrained environments, both by being
+  concise and by limiting variation, but also by conversely allowing
+  certain data items in the data model to be serialized in multiple
+  ways, which may ease implementation on low-resource platforms.
+  On the other hand, constrained environments may further save
+  resources by only partially implementing the decoder functionality,
+  e.g., by not implementing all those variations.
+
+To deal with this encoding variation provided for certain data items,
+CBOR defines a _preferred serialization_ ({{Section 4.1 of
+RFC8949@-cbor}}).
+_Partial CBOR implementations_ are more likely to interoperate if their
+encoder uses preferred serialization and the decoder implements
+decoding at least the preferred serialization as well.
+A specific protocol for a constrained application may specify
+restrictions that allow, e.g., some fields to be of fixed length,
+guaranteeing interoperability even with partial implementations
+optimized for this application.
+
+Another encoding variation is provided by indefinite-length encoding
+for strings, arrays, and maps, which enables these to be streamed
+without knowing their length upfront ({{Section 3.2 of RFC8949@-cbor}}).
+For applications that do not perform streaming of this kind, variation
+can be reduced (and often performance improved) by only allowing
+definite-length encoding.
+The present document coins the term _basic serialization_ for combining
+definite-length-only with preferred encoding, further reducing the
+variation that a decoder needs to deal with.
+The Common Deterministic Encoding, CDE, finally combines basic
+serialization with a deterministic ordering of entries in a map
+({{tab-constraints}}).
+
+Partial implementations of a representation format are quite common in
+embedded applications.
+Protocols for embedded applications often reduce the footprint of an
+embedded JSON implementation by explicitly restricting the breadth of
+the data model, e.g., by not using floating point numbers with 64 bits
+of precision or by not using floating point numbers at all.
+These data-model-level restrictions do not get in the way of using
+complete implementations ("generic encoders/decoders", {{Section 5.2 of
+RFC8949@-cbor}}).
+(Note that applications may need to complement deterministic
+encoding with decisions on the deterministic representation of
+application data into CBOR data items, see {{aldr}}.)
+
+The increasing constraints on encoding (unconstrained, preferred,
+basic, CDE) are orthogonal to data-model-level data definitions as
+provided by {{-cddl}}.
+To be useful in all applications, these constraints have been defined
+for all possible data items, covering the full range of values offered
+by CBOR's data types.
+This ensures that these serialization constraints can be applied to
+any CBOR protocol, without requiring protocol-specific modifications
+to generic encoder/decoder implementations.
+
+# Application-level Deterministic Representation {#aldr}
+
+This appendix is informative.
+
+CBOR application protocols are agreements about how to use CBOR for a
+specific application or set of applications.
+
+For a CBOR protocol to provide deterministic representation, both the
+encoding and application layer must be deterministic.
+While CDE ensures determinism at the encoding layer, requirements at
+the application layer may also be necessary.
+
+Application protocols make representation decisions in order to
+constrain the variety of ways in which some aspect of the information
+model could be represented in the CBOR data model for the application.
+For instance, there are several CBOR tags that can be used to
+represent a time stamp (such as tag 0, 1, 1001), each with some specific
+properties.
+
+<aside markdown="1">
+For example, an application protocol that needs to represent birthdate/times could specify:
+
+* At the sender’s convenience, the birthdate/time MAY
+    be sent either in epoch date format (as in tag 1) or string date
+    format (as in tag 0).
+* The receiver MUST decode both formats.
+
+While this specification is interoperable, it lacks determinism.
+There is variability in the application layer akin to variability in the CBOR encoding layer when CDE is not required.
+
+To make this example application layer specification deterministic,
+allow only one date format (or at least be deterministic when there is
+a choice, e.g., by specifying string format for leap seconds only).
+</aside>
+
+Application protocols that need to represent a timestamp typically
+choose a specific tag and further constrain its use where necessary
+(e.g., tag 1001 was designed to cover a wide variety of applications
+{{-tag1001}}).
+Where no tag is available, the application protocol can design its own
+format for some application data.
+Even where a tag is available, the application data can choose to use
+its definitions without actually encoding the tag (e.g., by using its
+content in specific places in an "unwrapped" form).
+
+Another source of application layer variability comes from the variety
+of number types CBOR offers.
+For instance, the number 2 can be represented as an integer, float,
+big number, decimal fraction and other.
+Most protocols designs will just specify one number type to use, and
+that will give determinism, but here’s an example specification that
+doesn’t:
+
+
+<aside markdown="1">
+For instance, CWT {{-cwt}} defines an application data type "NumericDate" which
+(as an application-level rule) is formed by "unwrapping" tag 1 (see
+{{Sections 2 and 5 of -cwt}}).
+CWT does stop short of using deterministic encoding.
+A hypothetical deterministic variant of CWT would need to make an
+additional ALDR rule for NumericDate, as
+the definition of tag 1 allows both integer and floating point numbers
+({{Section 3.4.2 of RFC8949@-cbor}}), which allows multiple
+application-level representations of integral numbers.
+These application rules may choose to only ever use integers, or to always
+use integers when the numeric value can be represented as such without
+loss of information, or to always use floating point numbers, or some
+of these for some application data and different ones for other
+application data.
+</aside>
+
+Applications that require Deterministic Representation, and that
+derive CBOR data items from application data without maintaining a
+record of which choices are to be made when representing these
+application data, generally make rules for these choices as part of
+the application protocol.
+In this document, we speak about these choices as Application-level
+Deterministic Representation Rules (ALDR rules for short).
+
+<aside markdown="1">
+As an example, {{-thumb}} is intended to derive a (deterministic)
+thumbprint from a COSE key {{-cose}}.
+{{Section 4 of -thumb}} provides the rules that are used to construct a
+deterministic application-level representation (ALDR rules).
+Only certain data from a COSE key are selected to be included in that
+ALDR, and, where the COSE can choose multiple representations of
+semantically equivalent application data, the ALDR rules choose one of
+them, potentially requiring a conversion ({{Section 4.2 of -thumb}}):
+
+{:quote}
+>  Note: \[{{RFC9052}}] supports both compressed and uncompressed point
+   representations.  For interoperability, implementations adhering to
+   this specification MUST use the uncompressed point representation.
+   Therefore, the y-coordinate is expressed as a bstr.  If an
+   implementation uses the compressed point representation, it MUST
+   first convert it to the uncompressed form for the purpose of
+   thumbprint calculation.
+</aside>
+
+CDE provides for encoding commonality between different applications
+of CBOR once these application-level choices have been made.
+It can be useful for an application or a group of applications to
+document their choices aimed at deterministic representation of
+application data in a general way, constraining the set of data items
+handled (_exclusions_, e.g., no compressed point representations) and
+defining further mappings (_reductions_, e.g., conversions to
+uncompressed form)
+that help the application(s) get by with the exclusions.
+This can be done in the application protocol specification (as in
+{{-thumb}}) or as a separate document.
+
+<aside markdown="1">
+An early example of a separate document is the dCBOR specification
+{{-dcbor}}.
+dCBOR specifies the use of CDE together with some application-level
+rules, i.e., an ALDR ruleset, such as a requirement for all text
+strings to be in Unicode Normalization Form C (NFC) {{UAX-15}} — this
+specific requirement is an example for an _exclusion_ of non-NFC data
+at the application level, and it invites implementing a _reduction_ by
+routine normalization of text strings.
+</aside>
+
+ALDR rules (including rules specified in a ALDR ruleset document) enable
+simply using implementations of the common CDE; they do not
+"fork" CBOR in the sense of requiring distinct generic encoder/decoder
+implementations for each application.
+
+An implementation of specific ALDR rules combined with a CDE
+implementation produces well-formed,
+deterministically encoded CBOR according to {{STD94}}, and existing
+generic CBOR decoders will therefore be able to decode it, including
+those that check for Deterministic Encoding ("CDE decoders", see also
+{{impcheck}}).
+Similarly, generic CBOR encoders will be able to produce valid CBOR
+that can be ingested by an implementation that enforces an application's
+ALDR rules if the encoder was handed data model level information
+from an application that simply conformed to those ALDR rules.
+
+Please note that the separation between standard CBOR processing and
+the processing required by the ALDR rules is a conceptual one:
+Instead of employing generic encoders/decoders, both ALDR rule
+processing and standard CBOR processing can be combined into a specialized
+encoder/decoder specifically designed for a particular set of ALDR
+rules.
+
+ALDR rules are intended to be used in conjunction with an
+application, which typically will naturally use a subset of the CBOR generic
+data model, which in turn
+influences which subset of the ALDR rules is used by the specific application
+(in particular if the application simply references a more general
+ALDR ruleset document).
+As a result, ALDR rules themselves place no direct
+requirement on what minimum subset of CBOR is implemented.
+For instance, a set of ALDR rules might include rules for the
+processing of floating point values, but there is no requirement that
+implementations of that set of ALDR rules support floating point
+numbers (or any other kind of number, such as arbitrary precision
+integers or 64-bit negative integers) when they are used with
+applications that do not use them.
 
 # Implementers' Checklists {#impcheck}
 
@@ -758,17 +900,29 @@ advertises _supporting_ CDE (see the start of this appendix).
    special diagnostic channels with no potential for confusion with a
    correctly CDE-decoded data item).
 
+# Encoding Examples {#examples}
+
+The following three tables provide examples of CDE-encoded CBOR data
+items, each giving Diagnostic Notation (EDN {{-edn}}), the encoded data
+item in hexadecimal, and a comment.
+
+Implementers that want to use these examples as test input may be
+interested in the file `example-table-input.csv` in the github
+repository `cbor-wg/draft-ietf-cbor-cde`.
+
+{::include example-tables.md}
 
 {::include-all cde-lists.md}
 
 # Acknowledgments
 {:numbered="false"}
 
-An earlier version of this document was based on the work of Wolf
-McNally and Christopher Allen as documented in {{-dcbor}}, which
+An early version of this document was based on the work of {{{Wolf
+McNally}}} and {{{Christopher Allen}}} as documented in {{-dcbor}}, which
 serves as an example for an ALDR ruleset document.
 We would like to explicitly acknowledge that this work has
 contributed greatly to shaping the concept of a CBOR Common
-Deterministic Encoding and ALDR rules/rulesets on top of that.
-Mikolai Gütschow proposed adding {{choi}}.
-
+Deterministic Encoding and the use of ALDR rules/rulesets on top of that.
+{{{Mikolai Gütschow}}} proposed adding {{choi}}.
+{{{Anders Rundgren}}} provided most of the initial text that turned into
+{{examples}}.

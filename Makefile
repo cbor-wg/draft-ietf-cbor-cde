@@ -18,3 +18,7 @@ endif
 cde-lists.md: draft-ietf-cbor-cde.xml
 	kramdown-rfc-extract-figures-tables $< >$@.new
 	mv $@.new $@
+
+example-tables.md: example-table-input.csv generate-tables.rb
+	ruby generate-tables.rb > $@.new
+	if cmp $@.new $@; then rm -v $@.new; else mv -v $@.new $@; fi
