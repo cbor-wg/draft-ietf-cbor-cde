@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:39:56.281733+00:00",
+  "timestamp": "2025-04-03T01:22:09.645406+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -363,9 +363,17 @@
       "labels": [],
       "body": "There's text that justifies the need for ALDR to defend a threat from wayward serialization schemes (e.g., from badly conceived  eCBOR, fCBOR and gCBOR). That threat doesn't really exist, so this text is unnecessary and confusing.\n\nIt's in several places in the document. not just the appendix.\n\nI think the main frame up for ALDR should be orient around helping designers of deterministic protocols. I think that's what the readers need.\n\n\n",
       "createdAt": "2025-03-20T18:09:56Z",
-      "updatedAt": "2025-03-20T18:09:56Z",
+      "updatedAt": "2025-04-02T14:22:30Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "hildjj",
+          "authorAssociation": "NONE",
+          "body": "Can you point to sections in the current version that you are worried about, so I'm sure I'm looking at the right places, please? ",
+          "createdAt": "2025-04-02T14:22:29Z",
+          "updatedAt": "2025-04-02T14:22:29Z"
+        }
+      ]
     },
     {
       "number": 26,
@@ -382,6 +390,61 @@
       "updatedAt": "2025-03-20T18:15:46Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOJ8fYd86wu4p9",
+      "title": "CDE or CDE Profile?",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/29",
+      "state": "CLOSED",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In RFC 8949 it is always \"Core Deterministic Encoding Requirements\"\n\nIn discussions we say \"CDE\"; I guess didn't happen to use \"CDER\"\n\nIn draft-cbor-cde it is sort renamed/magnified into \"CBOR Common Deterministic Encoding Profile\".\n\nThis is the sort multi-naming that causes a reader to spend an hour or two to figure out if they are the same or different. It's a lot harder for them to sort through this than us because they are likely coming in pretty cold and uninformed.\n\nThe requirements in RFC 8949 4.2.1 for CDE are pretty solid in my opinion. There's no need to rename because of a few clarifications. \n\nSo may be always \"Core Deterministic Encoding Requirements\" in long form and \"CDE\" in short?\n\n\n\n",
+      "createdAt": "2025-04-02T03:29:30Z",
+      "updatedAt": "2025-04-02T15:52:54Z",
+      "closedAt": "2025-04-02T15:52:54Z",
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi Laurence,\r\n\r\n(Copying my response to the CBOR list.)\r\n\r\n> On 2. Apr 2025, at 05:29, Laurence Lundblade ***@***.***> wrote:\r\n> \r\n> In RFC 8949 it is always \"Core Deterministic Encoding Requirements\"\r\n\r\nYes.  This is how far we got with things up to 2020.\r\n\r\nThe idea in 7049 (2013) was that an application protocol would define its own \u201ccanonical encoding\u201d.\r\n\r\nSection 3.9 about application protocols that want to do that:\r\n\r\n   Those protocols are free to define\r\n   what they mean by a canonical format and what encoders and decoders\r\n   are expected to do.  This section lists some suggestions for such\r\n   protocols.\r\n\r\nSo 7049 essentially provided a toolkit that an application protocol would pick from to define its own canonical encoding; there was no normative intent to have a common one, but we did provide some suggestions for the application protocol \r\n\r\nIn 8949, we still had this approach, but started giving it some structure:\r\n\r\n   A CBOR encoding satisfies the \"core deterministic encoding\r\n   requirements\" if it satisfies the following restrictions:\r\n\r\nSo, still, the application protocol would essentially define a custom deterministic encoding; Section 4.2 still says:\r\n\r\n   Those\r\n   protocols are free to define what they mean by a \"deterministic\r\n   format\" and what encoders and decoders are expected to do.  This\r\n   section defines a set of restrictions that can serve as the base of\r\n   such a deterministic format.\r\n\r\nHence the term \"Core Deterministic Encoding Requirements\u201d \u2014 these were *requirements* an application protocol that wanted to be deterministic could adopt.  Or not adopt \u2014 everything was custom.\r\n\r\nWe have since made major progress:\r\nWe understand that the vast majority of the application protocols that want to be deterministic can use a \u201cCommon Deterministic Encoding\u201d (CDE), maybe with a topping of some ALDR rules.\r\nSo the CDE BCP picks all the details of the \u201cCommon Deterministic Encoding\u201d, no need for the application protocol to do anything except say \u201cusing CDE\u201d (plus possibly some ALDR rules).\r\nOf course, applications can still define their own deterministic encoding (4.2.3 of 8949 also is still around), but we have:\r\n\r\n    One\r\n\r\n\u201cCommon Deterministic Encoding\u201d.\r\n\r\nThe difference here is not so much in what details we picked, but in the normative intent of there being \r\n\r\n    One\r\n\r\n    \u201cCommon\r\n\r\nDeterministic encoding\".\r\n\r\n> In discussions we say \"CDE\"; I guess didn't happen to use \"CDER\"\r\n\r\nThe 2020 status was \"Core Deterministic Encoding Requirements\u201d (which could be abbreviated to CDER but better never is).\r\nThe 2023 status (on which we have been chewing for a couple years now) is that those requirements continue to be available for custom application protocols, but we have picked a best current practive, the\r\n\r\n     \u201cCommon\u201d\r\n\r\nDeterministic Encoding.\r\n\r\n> In draft-cbor-cde it is sort renamed/magnified into \"CBOR Common Deterministic Encoding Profile\".\r\n\r\nWe need to get rid of that last occurrence of \u201cprofile\u201d.\r\n\r\n> This is the sort multi-naming that causes a reader to spend an hour or two to figure out if they are the same or different.\r\n\r\nThe technicalities are the same, the *normative intent* is different, so it is really worthwhile to have a name for the new intent, even if there isn\u2019t that much technical innovation.\r\n\r\n> It's a lot harder for them to sort through this than us because they are likely coming in pretty cold and uninformed.\r\n> The requirements in RFC 8949 4.2.1 for CDE are pretty solid in my opinion. There's no need to rename because of a few clarifications.\r\n\r\nThere is a need to make clear we now have a \u201c*Common* Deterministic Encoding\u201d, not just a set of requirements that an application protocol needs to choose from (4.2.2).\r\n\r\n> So may be always \"Core Deterministic Encoding Requirements\" in long form and \"CDE\" in short?\r\n\r\nNo, that would be a major regression.\r\n\r\nGr\u00fc\u00dfe, Carsten\r\n\r\n",
+          "createdAt": "2025-04-02T04:11:41Z",
+          "updatedAt": "2025-04-02T04:11:41Z"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOJ8fYd86w1uyA",
+      "title": "Relation to 8949",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/30",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\nSTD94 -> [4.2.1. ](https://datatracker.ietf.org/doc/html/rfc8949#section-4.2.1)[Core Deterministic Encoding Requirements](https://datatracker.ietf.org/doc/html/rfc8949#name-core-deterministic-encoding)\n\nCDE BCP draft -> [CBOR Common Deterministic Encoding (CDE)](https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-10#name-cbor-common-deterministic-e)\n\n> This specification defines the CBOR Common Deterministic Encoding (CDE) based on the Core Deterministic Encoding Requirements defined for CBOR in Section [4.2.1](https://rfc-editor.org/rfc/rfc8949#section-4.2.1) of RFC 8949 [[STD94](https://www.rfc-editor.org/info/std94)].\n\n\nThis makes it clear that \"CBOR Common Deterministic Encoding \" builds on \"Core Deterministic Encoding Requirements\".\n\nLater:\n\n> CDE turns this recommendation into a mandate: Integers that can be represented by basic major type 0 and 1 are encoded using the deterministic encoding defined for them, and integers outside this range are encoded using the preferred serialization (Section [3.4.3](https://rfc-editor.org/rfc/rfc8949#section-3.4.3) of RFC 8949 [[STD94](https://www.rfc-editor.org/info/std94)]) of tag 2 and 3 (i.e., no leading zero bytes).\n\nLogically, this is turning a SHOULD, into a MUST.\n\nI think we agree on what is happening here, and the layering, and even ALDR.\n\nWhere we seem to not have agreement in discussing this, is on clarity of terminology, and to a certain degree, on what the problem is we are solving with the BCP.\n\nMy understanding of the problem is as follows:\n\nPeople and SDOs believe that CBOR has no interoperable deterministic encoding.\nPeople and SDOs do not feel that STD94 defines a deterministic encoding, (perhaps they do understand that it does define requirements for others to create deterministic encodings).\n\nOver time, this seems to have resulted in many different deterministic encoding proposals, which blur the lines between \"Core Deterministic Encoding Requirements\" and \"Application-level Deterministic Representation\".\n\nMy preferred solution:\n\n- Update 8949 to make basic, preferred and deterministic clearly part of CBOR.\n- Choose terminology that is not nearly indistinguishable (Common vs Core) Deterministic Encoding (Requirements)\n- Keep the text on ALDR is a BCP, and anchor it to what is required for interop with STD 94.\n\n\n",
+      "createdAt": "2025-04-02T15:53:31Z",
+      "updatedAt": "2025-04-02T16:13:48Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2025-04-02, at 17:53, Orie Steele ***@***.***> wrote:\r\n> \r\n> \t\u2022 Choose terminology that is not nearly indistinguishable (Common vs Core) Deterministic Encoding (Requirements)\r\n\r\nI believe this problem can be completely solved by explaining it once.\r\n\r\nIf we really have to avoid the C, I found two synonyms of \u201ccommon\u201d:\r\n\r\n* universal\r\n* standard\r\n\r\nGr\u00fc\u00dfe, Carsten\r\n\r\n",
+          "createdAt": "2025-04-02T16:05:21Z",
+          "updatedAt": "2025-04-02T16:05:21Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On 2025-04-02, at 17:53, Orie Steele ***@***.***> wrote:\r\n> \r\n> \t\u2022 Update 8949 to make basic, preferred and deterministic clearly part of CBOR.\r\n\r\n\u201cPreferred Serialization\" already is defined in 8949; there is no update.\r\n\r\nDeterministic is a mathematical property, CBOR doesn\u2019t define it.\r\nDeterministic encoding is, again, a property of serialization choices, not a specific set of such choices.\r\n8949 defines \u201ccore deterministic encoding requirements\u201d, which are OPTIONAL requirements to be picked by an application defining its deterministic encoding choices.\r\n\r\nPicking up all of them and selecting Rule 2 out of the bullet list in 4.2.2 yields a single, well-defined deterministic serialization or encoding, CDE.  This is what the BCP is about.\r\nIt does not change 8949.\r\n\r\n\u201cBasic Serialization\u201d just is a term for something that exists in 8949 (Second bullet of 4.2.1); one could argue that a new term updates the thing it is applied to, but that is a very weak argument.\r\n\r\nI\u2019m really having trouble following the argument here.\r\n\r\nHaving a single document that defines all of these, via reference or by new text, is exactly the point of the CDE draft; splitting it up over multiple documents is counterproductive.\r\n\r\nGr\u00fc\u00dfe, Carsten\r\n\r\n",
+          "createdAt": "2025-04-02T16:13:47Z",
+          "updatedAt": "2025-04-02T16:13:47Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1227,7 +1290,7 @@
       "labels": [],
       "body": "A big motivation for this is that it would have taken six months off some of the email list discussions for me.\r\n\r\nAlso, JSON doesn't have the separation between data mode and serialization, so it might not be widely understood.\r\n\r\nAlso, understanding this is an under pinning to understand why serialization is the way it is.",
       "createdAt": "2025-03-24T17:27:06Z",
-      "updatedAt": "2025-03-27T20:17:48Z",
+      "updatedAt": "2025-04-02T16:39:13Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "2cacb744ca196fce05070b8e343747c7b3b5b994",
@@ -1245,6 +1308,13 @@
           "body": "Nice!\r\nI started editing this and didn't want to edit on your account, so I forked the branch (now #28).\r\nIt is less clear to me what you wanted to say in the last two paragraphs, so I left them unedited for now.\r\n(I mostly transposed the table so it better shows the layering, and aligned same of the statements with our current terminology and certain facts about JSON.)",
           "createdAt": "2025-03-26T16:53:33Z",
           "updatedAt": "2025-03-26T16:53:33Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is there anything left that hasn't been covered by #28?",
+          "createdAt": "2025-04-02T16:39:12Z",
+          "updatedAt": "2025-04-02T16:39:12Z"
         }
       ],
       "reviews": []
@@ -1254,24 +1324,26 @@
       "id": "PR_kwDOJ8fYd86QPk00",
       "title": "Describe information model, data model and serialization (edit of #27)",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/28",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-03-26T16:50:39Z",
-      "updatedAt": "2025-03-30T16:42:29Z",
+      "updatedAt": "2025-04-02T15:52:53Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "a9670a7ed020dbba0d7272aa488a502668627986",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "models-edit",
-      "headRefOid": "9b23dc3714cf37222f98c7b9811a88a0d95ae7ef",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f93126b42cc8532b57438075c63af8569c580f02",
+      "closedAt": "2025-04-02T15:52:52Z",
+      "mergedAt": "2025-04-02T15:52:52Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "653a6effaa83665bd1accb4bcd25295729542531"
+      },
       "comments": [
         {
           "author": "laurencelundblade",
@@ -1295,7 +1367,21 @@
           "updatedAt": "2025-03-26T20:18:30Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ8fYd86jGyOy",
+          "commit": {
+            "abbreviatedOid": "f93126b"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-02T14:22:28Z",
+          "updatedAt": "2025-04-02T14:22:28Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
