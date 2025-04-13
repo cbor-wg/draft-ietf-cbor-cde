@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-03T01:22:09.645406+00:00",
+  "timestamp": "2025-04-13T02:50:40.843810+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -445,6 +445,22 @@
           "updatedAt": "2025-04-02T16:13:47Z"
         }
       ]
+    },
+    {
+      "number": 31,
+      "id": "I_kwDOJ8fYd86yK5ie",
+      "title": "Clarify section 3 (CDE)",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/31",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The only normative change from CDER to CDE is the addition of preferred serialization of big numbers. This is pretty hard to notice because that requirement is so encompassed by commentary, background and other text.\n\nA simple fix is to put the normative change in section 3.1 and the commentary in 3.2.\n\nI would much prefer this draft turn into a serialization draft with a lot of re writing, but I'm filing this issue because of the hard push for WGLC. I wouldn't want this draft to get published without some improvement to section 3.\n\n",
+      "createdAt": "2025-04-11T16:51:33Z",
+      "updatedAt": "2025-04-11T16:51:33Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
