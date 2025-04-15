@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-13T02:50:40.843810+00:00",
+  "timestamp": "2025-04-15T01:25:26.278972+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -458,9 +458,17 @@
       "labels": [],
       "body": "The only normative change from CDER to CDE is the addition of preferred serialization of big numbers. This is pretty hard to notice because that requirement is so encompassed by commentary, background and other text.\n\nA simple fix is to put the normative change in section 3.1 and the commentary in 3.2.\n\nI would much prefer this draft turn into a serialization draft with a lot of re writing, but I'm filing this issue because of the hard push for WGLC. I wouldn't want this draft to get published without some improvement to section 3.\n\n",
       "createdAt": "2025-04-11T16:51:33Z",
-      "updatedAt": "2025-04-11T16:51:33Z",
+      "updatedAt": "2025-04-13T09:50:52Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The (questionable) logic of RFC 8949 is to treat core requirements in Section (4.1 and) 4.2, and leave the tag-related requirements with the tags.  Since we use tags to represent bignums, the relevant specification text for tags 2 and 3 is in 3.4.3.\n\nThere is no normative change.\n\n(We can still mention the place where the text is in 8949 in CDE's section 3.1/3.2.)",
+          "createdAt": "2025-04-13T09:50:51Z",
+          "updatedAt": "2025-04-13T09:50:51Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1299,21 +1307,21 @@
       "id": "PR_kwDOJ8fYd86P6IHO",
       "title": "Describe information model, data model and serialization",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "A big motivation for this is that it would have taken six months off some of the email list discussions for me.\r\n\r\nAlso, JSON doesn't have the separation between data mode and serialization, so it might not be widely understood.\r\n\r\nAlso, understanding this is an under pinning to understand why serialization is the way it is.",
       "createdAt": "2025-03-24T17:27:06Z",
-      "updatedAt": "2025-04-02T16:39:13Z",
+      "updatedAt": "2025-04-13T09:51:41Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "2cacb744ca196fce05070b8e343747c7b3b5b994",
       "headRepository": "laurencelundblade/draft-ietf-cbor-cde",
       "headRefName": "models",
       "headRefOid": "f94f874a49f64c95c5ebb22c73fa5ea54fe0facc",
-      "closedAt": null,
+      "closedAt": "2025-04-13T09:51:41Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -1331,6 +1339,13 @@
           "body": "Is there anything left that hasn't been covered by #28?",
           "createdAt": "2025-04-02T16:39:12Z",
           "updatedAt": "2025-04-02T16:39:12Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this now as overtaken by events.",
+          "createdAt": "2025-04-13T09:51:41Z",
+          "updatedAt": "2025-04-13T09:51:41Z"
         }
       ],
       "reviews": []
