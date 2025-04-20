@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-15T01:25:26.278972+00:00",
+  "timestamp": "2025-04-20T01:37:04.213785+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -469,6 +469,22 @@
           "updatedAt": "2025-04-13T09:50:51Z"
         }
       ]
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOJ8fYd86zH9Ng",
+      "title": "Deterministic serialization for tags 0, 1, 4, 5, 36, 257",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/32",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Deterministic serialization is specified for tags 2, 3. It is inconsistent to not specify deterministic encoding for the above mentioned tags.\n\nI believe the tags not mentioned (e.g., 6, 7,... ) have no variability at the data model level so they are inherently deterministic.",
+      "createdAt": "2025-04-18T15:42:34Z",
+      "updatedAt": "2025-04-18T15:42:34Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
