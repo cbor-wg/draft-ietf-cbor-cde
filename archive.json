@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-20T01:37:04.213785+00:00",
+  "timestamp": "2025-05-01T01:41:16.492721+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -458,7 +458,7 @@
       "labels": [],
       "body": "The only normative change from CDER to CDE is the addition of preferred serialization of big numbers. This is pretty hard to notice because that requirement is so encompassed by commentary, background and other text.\n\nA simple fix is to put the normative change in section 3.1 and the commentary in 3.2.\n\nI would much prefer this draft turn into a serialization draft with a lot of re writing, but I'm filing this issue because of the hard push for WGLC. I wouldn't want this draft to get published without some improvement to section 3.\n\n",
       "createdAt": "2025-04-11T16:51:33Z",
-      "updatedAt": "2025-04-13T09:50:52Z",
+      "updatedAt": "2025-04-30T06:34:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -467,6 +467,27 @@
           "body": "The (questionable) logic of RFC 8949 is to treat core requirements in Section (4.1 and) 4.2, and leave the tag-related requirements with the tags.  Since we use tags to represent bignums, the relevant specification text for tags 2 and 3 is in 3.4.3.\n\nThere is no normative change.\n\n(We can still mention the place where the text is in 8949 in CDE's section 3.1/3.2.)",
           "createdAt": "2025-04-13T09:50:51Z",
           "updatedAt": "2025-04-13T09:50:51Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Assuming agreement that there's no normative change, that makes CDE and CDER pretty much the same. This rename (IMO) seems strange and confusing even given the email discussion about the helping a confused SDO with determinism.\n\nI know this is a bit radical, but can't we just drop the term \"CDE\" and go back to CDER so we don't have two names for the same thing. Seems like we can find another way to help the confused SDO.",
+          "createdAt": "2025-04-30T06:26:15Z",
+          "updatedAt": "2025-04-30T06:26:15Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The point of giving the encoding a name is to go beyond the pick-your-variant set of requirements language of RFC 8949.\nYou are essentially proposing to introduce the new name CDER (which is not used in 8949) instead of CDE (which points to the BCP and has all the details SDOs and other users need).\n\nWhat do you gain from trying to use the wrong name for the thing?\n(CDER also is confusing, as it sounds like ASN.1 DER and CER mixed.)",
+          "createdAt": "2025-04-30T06:33:39Z",
+          "updatedAt": "2025-04-30T06:33:39Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> There is no normative change.\n\nWell, there is normative text on NaN with non-zero payloads now.\nCDE simply is the whole solution, no longer the \"some assembly required\" common requirements kit.",
+          "createdAt": "2025-04-30T06:34:52Z",
+          "updatedAt": "2025-04-30T06:34:52Z"
         }
       ]
     },
