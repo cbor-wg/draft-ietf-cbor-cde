@@ -20,17 +20,17 @@ potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders. 
     ' name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="draft-ietf-cbor-cde-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
-    Python 3.12.9
+  xml2rfc 3.28.1
+    Python 3.12.10
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.6
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">April 2025</td>
+<td class="right">May 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 4 October 2025</td>
+<td class="center">Expires 4 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-04-02" class="published">2 April 2025</time>
+<time datetime="2025-05-03" class="published">3 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-10-04">4 October 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-04">4 November 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1181,6 +1181,17 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-cbor-common-deterministic-e" class="internal xref">CBOR Common Deterministic Encoding (CDE)</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-cde-constraints-from-prefer" class="internal xref">CDE Constraints from Preferred Serialization</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-additional-cde-constraint-f" class="internal xref">Additional CDE Constraint from Basic Serialization</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-additional-cde-constraint-fr" class="internal xref">Additional CDE Constraint from CDE Itself</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-cddl-support" class="internal xref">CDDL support</a></p>
@@ -1245,7 +1256,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
                     <p id="section-toc.1-1.10.2.3.2.1.1"><a href="#appendix-C.3.1" class="auto internal xref">C.3.1</a>.  <a href="#name-cde-encoders" class="internal xref">CDE Encoders</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3.2.2">
-                    <p id="section-toc.1-1.10.2.3.2.2.1"><a href="#appendix-C.3.2" class="auto internal xref">C.3.2</a>.  <a href="#name-cde-decoders" class="internal xref">CDE Decoders</a></p>
+                    <p id="section-toc.1-1.10.2.3.2.2.1"><a href="#appendix-C.3.2" class="auto internal xref">C.3.2</a>.  <a href="#name-cde-checking-decoders" class="internal xref">CDE-checking Decoders</a></p>
 </li>
                 </ul>
 </li>
@@ -1441,18 +1452,18 @@ encoding choices that have been given names in this section.<a href="#section-2-
         </thead>
         <tbody>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">preferred</td>
+            <td class="text-left" rowspan="1" colspan="1">Preferred</td>
             <td class="text-left" rowspan="1" colspan="1">shortest "head" variant</td>
             <td class="text-left" rowspan="1" colspan="1">most</td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">basic</td>
+            <td class="text-left" rowspan="1" colspan="1">Basic</td>
             <td class="text-left" rowspan="1" colspan="1">+ definite lengths only</td>
             <td class="text-left" rowspan="1" colspan="1">many</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
-              <em>deterministic</em> ("CDE")</td>
+              <em>Deterministic</em> ("CDE")</td>
             <td class="text-left" rowspan="1" colspan="1">+ common map order</td>
             <td class="text-left" rowspan="1" colspan="1">specific</td>
           </tr>
@@ -1491,7 +1502,27 @@ provide well-understood and
 easy-to-implement rules while maximizing coverage, i.e., the subset of
 CBOR data items that are fully specified by these rules, and also
 placing minimal burden on implementations.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> picks up on the interaction of extensibility
+<p id="section-3-4">As discussed in <a href="#choi" class="auto internal xref">Section 2</a>, CDE combines the constraints of Preferred
+Serialization with a constraint added by Basic Serialization and
+another constraint added by CDE itself.
+While many CBOR implementations do set out to provide Preferred
+Serialization, there is less of a practical requirement to fully
+conform, as generic CBOR decoders do not normally check for Preferred
+Serialization.
+However, an application that relies on deterministic representation,
+during ingestion of an encoded CBOR data item will often need to
+employ a "CDE-checking decoder", i.e., a CBOR decoder configured to
+also check that all CDE constraints are satisfied (see also
+<a href="#impcheck" class="auto internal xref">Appendix C</a>).
+Here, small deviations from CDE, including deviations from Preferred
+Serialization, turn into interoperability problems; hence the
+additional attention of the present document on these constraints.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<div id="psconstr">
+<section id="section-3.1">
+        <h3 id="name-cde-constraints-from-prefer">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-cde-constraints-from-prefer" class="section-name selfRef">CDE Constraints from Preferred Serialization</a>
+        </h3>
+<p id="section-3.1-1">Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> picks up on the interaction of extensibility
 (CBOR tags) and deterministic encoding.
 CBOR itself uses some tags to increase the range of its basic
 generic data types, e.g., tags 2/3 extend the range of basic major
@@ -1499,17 +1530,18 @@ types 0/1 in a seamless way.
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> recommends handling this transition the same
 way as with the transition between different integer representation
 lengths in the basic generic data model, i.e., by mandating the
-preferred serialization for all integers (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-3-4" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3-5">
-<li id="section-3-5.1">
-          <p id="section-3-5.1.1">CDE turns this
+Preferred Serialization for all integers (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.1-2">
+<li id="section-3.1-2.1">
+            <p id="section-3.1-2.1.1">By adopting the encoding constraints from Preferred Serialization,
+CDE turns this
 recommendation into a mandate: Integers that can be represented by
 basic major type 0 and 1 are encoded using the deterministic
 encoding defined for them, and integers outside this range are
-encoded using the preferred serialization (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>) of tag 2 and 3 (i.e., no leading zero bytes).<a href="#section-3-5.1.1" class="pilcrow">¶</a></p>
+encoded using the Preferred Serialization (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.3" class="relref">3.4.3</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>) of tag 2 and 3 (i.e., no leading zero bytes).<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-      </ol>
-<p id="section-3-6">Most tags capture more specific application semantics and therefore
+        </ol>
+<p id="section-3.1-3">Most tags capture more specific application semantics and therefore
 may be harder to define a deterministic encoding for.
 While the deterministic encoding of their tag internals is often
 covered by the <em>Core Deterministic Encoding Requirements</em>, the mapping
@@ -1520,33 +1552,40 @@ more explanation as well as examples.
 As the CDE would continually
 need to address additional issues raised by the registration of new
 tags, this specification recommends that new tag registrations address
-deterministic encoding in the context of CDE.<a href="#section-3-6" class="pilcrow">¶</a></p>
-<p id="section-3-7">A particularly difficult field to obtain deterministic encoding for is
+deterministic encoding in the context of CDE.
+Note that not in all cases the tag's deterministic encoding constraints
+will be confined to its definition of Preferred Serialization.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">A particularly difficult field to obtain deterministic encoding for is
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
-Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices; these need to
+Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices that needed to
 be made to obtain the CBOR Common Deterministic Encoding (CDE).
-Specifically, CDE specifies (in the order of the bullet list at the end of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>):<a href="#section-3-7" class="pilcrow">¶</a></p>
-<ol start="2" type="1" class="normal type-1" id="section-3-8">
-<li id="section-3-8.1">
-          <p id="section-3-8.1.1">Besides the mandated use of preferred serialization, there is no further
+Here, CDE entirely recurs to Preferred Serialization and
+does <em>not</em> itself define any additional constraints.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">However, this BCP responds to a perceived need to clarify some of the
+Preferred Serialization constraints.
+Specifically, CDE specifies (in the order of the bullet list at the end of Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>):<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<ol start="2" type="1" class="normal type-1" id="section-3.1-6">
+<li id="section-3.1-6.1">
+            <p id="section-3.1-6.1.1">Besides the mandated use of Preferred Serialization, there is no further
 specific action for the two different zero values, e.g., an encoder
 that is asked by an application to represent a negative floating
-point zero will generate 0xf98000.<a href="#section-3-8.1.1" class="pilcrow">¶</a></p>
+point zero will generate 0xf98000.<a href="#section-3.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-8.2">
-          <p id="section-3-8.2.1">There is no attempt to mix integers and floating point numbers,
+          <li id="section-3.1-6.2">
+            <p id="section-3.1-6.2.1">There is no attempt to mix integers and floating point numbers,
 i.e., all floating point values are encoded as the preferred
 floating-point representation that accurately represents the value,
 independent of whether the floating point value is, mathematically,
-an integral value (choice 2 of the second bullet).<a href="#section-3-8.2.1" class="pilcrow">¶</a></p>
+an integral value (choice 2 of the second bullet).<a href="#section-3.1-6.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-8.3">
-          <p id="section-3-8.3.1">Apart from finite and infinite numbers, <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> floating point
+          <li id="section-3.1-6.3">
+            <p id="section-3.1-6.3.1">Apart from finite and infinite numbers, <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span> floating point
 values include NaN (not a number) values <span>[<a href="#I-D.bormann-cbor-numbers" class="cite xref">I-D.bormann-cbor-numbers</a>]</span>.
-In CDE, there is no special handling of NaN values, except that the
-preferred serialization rules also apply to NaNs (with zero or
+In CDE, there is no special handling of NaN values, except a
+clarification that the
+Preferred Serialization rules also apply to NaNs (with zero or
 non-zero payloads), using the canonical encoding of NaNs as defined
 in Section 6.2.1 of <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>.
 Specifically, this means that shorter forms of encodings for a NaN
@@ -1557,17 +1596,18 @@ Further clarifying a "should"-level statement in Section 6.2.1 of
 <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, the CBOR encoding always uses a leading bit of 1 in the
 significand to encode a quiet NaN; the use of signaling NaNs by
 application protocols is <span class="bcp14">NOT RECOMMENDED</span> but when presented by an
-application these are encoded by using a leading bit of 0.<a href="#section-3-8.3.1" class="pilcrow">¶</a></p>
-<p id="section-3-8.3.2">
+application these are encoded by using a leading bit of 0.<a href="#section-3.1-6.3.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-6.3.2">
 Typically, most applications that employ NaNs in their storage and
-communication interfaces will only use a single NaN value, quiet NaN with payload 0,
-which therefore deterministically encodes as 0xf97e00.<a href="#section-3-8.3.2" class="pilcrow">¶</a></p>
+communication interfaces will only use a single NaN value, quiet,
+non-negative NaN with payload 0,
+which therefore deterministically encodes as 0xf97e00.<a href="#section-3.1-6.3.2" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-8.4">
-          <p id="section-3-8.4.1">There is no special handling of subnormal values.<a href="#section-3-8.4.1" class="pilcrow">¶</a></p>
+          <li id="section-3.1-6.4">
+            <p id="section-3.1-6.4.1">There is no special handling of subnormal values.<a href="#section-3.1-6.4.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-8.5">
-          <p id="section-3-8.5.1">CDE does not presume
+          <li id="section-3.1-6.5">
+            <p id="section-3.1-6.5.1">CDE does not presume
 equivalence of basic floating point values with floating point
 values using other representations (e.g., tag 4/5).
 Such equivalences and related deterministic representation rules
@@ -1575,23 +1615,68 @@ can be added at the ALDR level if desired, e.g., by stipulating
 additional equivalences and deterministically choosing exactly one
 representation for each such equivalence, and by restricting in
 general the set of data item values actually used by an
-application.<a href="#section-3-8.5.1" class="pilcrow">¶</a></p>
+application.<a href="#section-3.1-6.5.1" class="pilcrow">¶</a></p>
 </li>
-      </ol>
-<p id="section-3-9">The main intent here is to preserve the basic generic data model, so
+        </ol>
+<p id="section-3.1-7">The main intent here is to preserve the basic generic data model, so
 applications (in their ALDR rules or by referencing a separate ALDR
 ruleset document, see
 <a href="#aldr" class="auto internal xref">Appendix B</a>) can
 make their own decisions within that data model.
 E.g., an application's ALDR rules can decide that it only ever allows a
 single NaN value that would be encoded as 0xf97e00, so a CDE
-implementation focusing on this application would not need to
+implementation focusing on this application would not even need to
 provide processing for other NaN values.
 Basing the definition of both CDE and ALDR rules on the
 generic data model of CBOR also means that there is no effect on the
 Concise Data Definition Language (CDDL)
 <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>, except where the data description is documenting specific
-encoding decisions for byte strings that carry embedded CBOR.<a href="#section-3-9" class="pilcrow">¶</a></p>
+encoding decisions for byte strings that carry embedded CBOR <a href="#cddl-support" class="auto internal xref">Section 4</a>.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="additional-cde-constraint-from-basic-serialization">
+<section id="section-3.2">
+        <h3 id="name-additional-cde-constraint-f">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-additional-cde-constraint-f" class="section-name selfRef">Additional CDE Constraint from Basic Serialization</a>
+        </h3>
+<p id="section-3.2-1">In addition to the encoding constraints from Preferred Serialization,
+CDE adds the constraint of not using indefinite length encoding from
+Basic Serialization.
+In many encoders, the use of indefinite length encoding is controlled
+by its configuration and can simply be switched off.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Some encoders turn to indefinite length encoding for arrays and maps
+with 256 or more elements/entries, to use the slightly smaller
+serialization size indefinite length encoding offers for these cases.
+Since leaving out support for indefinite length encoding is a common
+form of partial implementation, this may reduce interoperability.
+(Indefinite length encoding may also be used conditionally to avoid
+having to compute the total size ahead of time if the platform uses
+some form of chunking.)
+As CDE uses definite length encoding exclusively, such behavior
+needs to be turned off for CDE.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="additional-cde-constraint-from-cde-itself">
+<section id="section-3.3">
+        <h3 id="name-additional-cde-constraint-fr">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-additional-cde-constraint-fr" class="section-name selfRef">Additional CDE Constraint from CDE Itself</a>
+        </h3>
+<p id="section-3.3-1">In line with Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, CDE adds the constraint
+of map ordering to those from Basic Serialization.
+In some implementations, where platform representations of maps
+preserve ordering, this can be achieved using a generic CBOR encoder by
+pre-ordering all maps to be encoded, as long as that generic encoder
+also preserves the ordering in maps.
+In implementations without these properties, a specialized CBOR
+encoder may need to be employed.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Map ordering is a deterministic encoding constraint specific to maps,
+major type 5, that goes beyond maps' constraints for preferred
+serialization.
+In the definition of a tag being employed, there may also be some
+deterministic encoding constraints that are not covered by the tag's
+constraints for Preferred Serialization (see <a href="#psconstr" class="auto internal xref">Section 3.1</a>).<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="cddl-support">
@@ -1885,10 +1970,10 @@ e.g., by not implementing all those variations.<a href="#appendix-A.1-2.2.1" cla
 </li>
         </ul>
 <p id="appendix-A.1-3">To deal with this encoding variation provided for certain data items,
-CBOR defines a <em>preferred serialization</em> (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
+CBOR defines a <em>Preferred Serialization</em> (Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.1" class="relref">4.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>).
 <em>Partial CBOR implementations</em> are more likely to interoperate if their
-encoder uses preferred serialization and the decoder implements
-decoding at least the preferred serialization as well.
+encoder uses Preferred Serialization and the decoder implements
+decoding at least the Preferred Serialization as well.
 A specific protocol for a constrained application may specify
 restrictions that allow, e.g., some fields to be of fixed length,
 guaranteeing interoperability even with partial implementations
@@ -1899,7 +1984,7 @@ without knowing their length upfront (Section <a href="https://rfc-editor.org/rf
 For applications that do not perform streaming of this kind, variation
 can be reduced (and often performance improved) by only allowing
 definite-length encoding.
-The present document coins the term <em>basic serialization</em> for combining
+The present document coins the term <em>Basic Serialization</em> for combining
 definite-length-only with preferred encoding, further reducing the
 variation that a decoder needs to deal with.
 The Common Deterministic Encoding, CDE, finally combines basic
@@ -2052,7 +2137,7 @@ implementations for each application.<a href="#appendix-B-13" class="pilcrow">¶
 implementation produces well-formed,
 deterministically encoded CBOR according to <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, and existing
 generic CBOR decoders will therefore be able to decode it, including
-those that check for Deterministic Encoding ("CDE decoders", see also
+those that check for Deterministic Encoding ("CDE-checking decoders", see also
 <a href="#impcheck" class="auto internal xref">Appendix C</a>).
 Similarly, generic CBOR encoders will be able to produce valid CBOR
 that can be ingested by an implementation that enforces an application's
@@ -2121,7 +2206,7 @@ ALDR rules such as the ALDR ruleset defined by dCBOR are different as they can a
 the data model by restricting some values and ranges.<a href="#appendix-C-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-3.4">
-          <p id="appendix-C-3.4.1">CBOR decoders in general (as opposed to "CDE decoders" specifically
+          <p id="appendix-C-3.4.1">CBOR decoders in general (as opposed to "CDE-checking decoders" specifically
 advertised as supporting CDE)
 are not required to check for preferred
 serialization or CDE and reject inputs that do not fulfill
@@ -2370,24 +2455,24 @@ processes.<a href="#appendix-C.3.1-1.3.2" class="pilcrow">¶</a></p>
           </ol>
 </section>
 </div>
-<div id="cde-decoders">
+<div id="cde-checking-decoders">
 <section id="appendix-C.3.2">
-          <h4 id="name-cde-decoders">
-<a href="#appendix-C.3.2" class="section-number selfRef">C.3.2. </a><a href="#name-cde-decoders" class="section-name selfRef">CDE Decoders</a>
+          <h4 id="name-cde-checking-decoders">
+<a href="#appendix-C.3.2" class="section-number selfRef">C.3.2. </a><a href="#name-cde-checking-decoders" class="section-name selfRef">CDE-checking Decoders</a>
           </h4>
-<p id="appendix-C.3.2-1">The term "CDE Decoder" is a shorthand for a CBOR decoder that
+<p id="appendix-C.3.2-1">The term "CDE-checking Decoder" is a shorthand for a CBOR decoder that
 advertises <em>supporting</em> CDE (see the start of this appendix).<a href="#appendix-C.3.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="appendix-C.3.2-2">
 <li id="appendix-C.3.2-2.1">
-              <p id="appendix-C.3.2-2.1.1">CDE decoders <span class="bcp14">MUST</span> follow the rules for preferred (and thus basic)
+              <p id="appendix-C.3.2-2.1.1">CDE-checking decoders <span class="bcp14">MUST</span> follow the rules for preferred (and thus basic)
 serialization decoders (<a href="#psd" class="auto internal xref">Appendix C.1.2</a>).<a href="#appendix-C.3.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="appendix-C.3.2-2.2">
-              <p id="appendix-C.3.2-2.2.1">CDE decoders <span class="bcp14">MUST</span> check for ordering map keys and for basic
+              <p id="appendix-C.3.2-2.2.1">CDE-checking decoders <span class="bcp14">MUST</span> check for ordering map keys and for basic
 validity of the CBOR encoding (see Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.3.1" class="relref">5.3.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, which includes a check against duplicate map keys
 and invalid UTF-8).<a href="#appendix-C.3.2-2.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-C.3.2-2.2.2">
-To be called a CDE decoder, it <span class="bcp14">MUST NOT</span> present to the application
+To be called a CDE-checking decoder, it <span class="bcp14">MUST NOT</span> present to the application
 a decoded data item that fails one of these checks (except maybe via
 special diagnostic channels with no potential for confusion with a
 correctly CDE-decoded data item).<a href="#appendix-C.3.2-2.2.2" class="pilcrow">¶</a></p>
@@ -2813,6 +2898,11 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
               <td class="text-left" rowspan="1" colspan="1">Incorrect map key ordering</td>
             </tr>
             <tr>
+              <td class="text-left" rowspan="1" colspan="1">[4, 5]</td>
+              <td class="text-left" rowspan="1" colspan="1">98020405</td>
+              <td class="text-left" rowspan="1" colspan="1">Array length not in preferred encoding</td>
+            </tr>
+            <tr>
               <td class="text-left" rowspan="1" colspan="1">255</td>
               <td class="text-left" rowspan="1" colspan="1">1900ff</td>
               <td class="text-left" rowspan="1" colspan="1">Integer not in preferred encoding</td>
@@ -2825,12 +2915,12 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">10.5</td>
               <td class="text-left" rowspan="1" colspan="1">fa41280000</td>
-              <td class="text-left" rowspan="1" colspan="1">Not in shortest encoding</td>
+              <td class="text-left" rowspan="1" colspan="1">Not in preferred encoding</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">NaN</td>
               <td class="text-left" rowspan="1" colspan="1">fa7fc00000</td>
-              <td class="text-left" rowspan="1" colspan="1">Not in shortest encoding</td>
+              <td class="text-left" rowspan="1" colspan="1">Not in preferred encoding</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">65536</td>
