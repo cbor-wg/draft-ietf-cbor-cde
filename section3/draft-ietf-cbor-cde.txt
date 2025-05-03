@@ -470,7 +470,7 @@ Internet-Draft                  CBOR CDE                        May 2025
    CBOR also means that there is no effect on the Concise Data
    Definition Language (CDDL) [RFC8610], except where the data
    description is documenting specific encoding decisions for byte
-   strings that carry embedded CBOR Section 4.
+   strings that carry embedded CBOR (see Section 4).
 
 3.2.  Additional CDE Constraint from Basic Serialization
 
