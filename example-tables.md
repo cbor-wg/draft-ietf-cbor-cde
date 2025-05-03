@@ -78,10 +78,11 @@
 
 | EDN | CBOR (hex) | Comment |
 | {"b":0,"a":1} | a2616200616101 | Incorrect map key ordering |
+| [4, 5] | 98020405 | Array length not in preferred encoding |
 | 255 | 1900ff | Integer not in preferred encoding |
 | -18446744073709551617 | c34a00010000000000000000 | Bigint with leading zero bytes |
-| 10.5 | fa41280000 | Not in shortest encoding |
-| NaN | fa7fc00000 | Not in shortest encoding |
+| 10.5 | fa41280000 | Not in preferred encoding |
+| NaN | fa7fc00000 | Not in preferred encoding |
 | 65536 | c243010000 | Integer value too small for bigint |
 | (_ h'01', h'0203') | 5f4101420203ff | Indefinite length encoding |
 | (Not CBOR) | f818 | Simple values 24..31 not in use |
