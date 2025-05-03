@@ -374,7 +374,8 @@ Basing the definition of both CDE and ALDR rules on the
 generic data model of CBOR also means that there is no effect on the
 Concise Data Definition Language (CDDL)
 {{-cddl}}, except where the data description is documenting specific
-encoding decisions for byte strings that carry embedded CBOR {{cddl-support}}.
+encoding decisions for byte strings that carry embedded CBOR (see
+{{cddl-support}}).
 
 ## Additional CDE Constraint from Basic Serialization
 
