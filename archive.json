@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-01T01:41:16.492721+00:00",
+  "timestamp": "2025-05-04T01:41:47.003323+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -47,6 +47,16 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "On Explainer Document",
+      "description": "",
+      "color": "f9d0c4"
+    },
+    {
+      "name": "to be closed",
+      "description": "",
+      "color": "333333"
     }
   ],
   "issues": [
@@ -59,10 +69,12 @@
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "On Explainer Document"
+      ],
       "body": "Use Wolf's list of use cases <https://mailarchive.ietf.org/arch/msg/cbor/RaZfA5XLMRQ65kKu_XstEPwMK2k>\r\nto generate a more complete list in det.",
       "createdAt": "2023-08-22T23:26:34Z",
-      "updatedAt": "2023-08-22T23:26:34Z",
+      "updatedAt": "2025-05-01T08:21:06Z",
       "closedAt": null,
       "comments": []
     },
@@ -75,10 +87,12 @@
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "On Explainer Document"
+      ],
       "body": "",
       "createdAt": "2023-08-24T08:28:54Z",
-      "updatedAt": "2024-01-25T12:57:14Z",
+      "updatedAt": "2025-05-01T08:22:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -94,6 +108,13 @@
           "body": "I do think that we want to have some such pseudocode.\r\nThe question is whether it belongs into the normative document for CDE or in the determinism explainer (\"det\").\r\nWe also haven't decided on any role that the explainer could play in the WG.",
           "createdAt": "2024-01-25T12:57:12Z",
           "updatedAt": "2024-01-25T12:57:12Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Given some aversion against adding more implementation help to the BCP, I would keep this as a TODO on the explainer document.",
+          "createdAt": "2025-05-01T08:22:44Z",
+          "updatedAt": "2025-05-01T08:22:44Z"
         }
       ]
     },
@@ -336,10 +357,12 @@
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "to be closed"
+      ],
       "body": "My understanding is that in moving away from Application Profiles to ALDR, the notion that there are many *classes* of application that will layer on top of CDE is no longer. I think this is good. There's no eCBOR and fCBOR follow-ons to dCBOR, each of which has dozens of applications in each class. \r\n\r\nSo ALDR is primarily about application-specific rules now.\r\n\r\nA question is why do applications that use CDE have any more need for rules than applications that use preferred serialization or any sort of serialization.\r\n\r\nPreferred Serialization of big numbers requires *reduction* of the range of big numbers from -(2^64) through (2^64)-1 to integers. This is an example of an ALDR-like rule outside of CDE.\r\n\r\nSince this is about application-specific rules, I'd say that every application protocol excludes something, usually a lot. For example most protocols exclude floating-point just by not using it.\r\n\r\nDescribing the notion of a reduction seems useful for some applications that want an expanded notion of determinism past serialization into the data model. My preference would be to describe it as an application design consideration in an appendix titled \"Reductions\" or such.\r\n\r\nA lot of the description about reduction would be why they are useful for determinism in some contexts.\r\n\r\nA lot of the text in Appendix A is still oriented such that there is going to be an eCBOR, fCBOR,... I'd like to see that reoriented. I think the dCBOR document shouldn't refer to itself as a profile anymore.\r\n\r\nI don't think we need the concept of ALDR. We didn't need a conceptual name to write RFC 8949 section 5, \"Creating CBOR-Based Protocols\".",
       "createdAt": "2024-11-11T20:49:00Z",
-      "updatedAt": "2025-03-05T15:16:56Z",
+      "updatedAt": "2025-05-01T08:27:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -348,6 +371,13 @@
           "body": "Consider this text:  https://mailarchive.ietf.org/arch/msg/cbor/G6w0Rz0eW9GJNd1et8I899Ua9MQ/\n\nFor the appendix, per interim discussion today. cc @chrysn ",
           "createdAt": "2025-03-05T15:16:55Z",
           "updatedAt": "2025-03-05T15:16:55Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> A question is why do applications that use CDE have any more need for rules than applications that use preferred serialization or any sort of serialization.\n\nWhere deterministic representation is an actual requirement (and not just a matter of taste as in Anders' documents), there always is a need for thinking about this at the application level.  Whether this leads to actual rules depends on the case, but having the explanation to point out this must be thought about, but is separate from the deterministic encoding, motivates a brief discussion.\n\nApart from this question, I think this issue is OBE based on the integration of text ideas Laurence supplied in the above-referenced.\n\nCan this be closed now?\n\n",
+          "createdAt": "2025-05-01T08:27:41Z",
+          "updatedAt": "2025-05-01T08:27:41Z"
         }
       ]
     },
@@ -360,10 +390,12 @@
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "to be closed"
+      ],
       "body": "There's text that justifies the need for ALDR to defend a threat from wayward serialization schemes (e.g., from badly conceived  eCBOR, fCBOR and gCBOR). That threat doesn't really exist, so this text is unnecessary and confusing.\n\nIt's in several places in the document. not just the appendix.\n\nI think the main frame up for ALDR should be orient around helping designers of deterministic protocols. I think that's what the readers need.\n\n\n",
       "createdAt": "2025-03-20T18:09:56Z",
-      "updatedAt": "2025-04-02T14:22:30Z",
+      "updatedAt": "2025-05-01T08:31:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -372,6 +404,13 @@
           "body": "Can you point to sections in the current version that you are worried about, so I'm sure I'm looking at the right places, please? ",
           "createdAt": "2025-04-02T14:22:29Z",
           "updatedAt": "2025-04-02T14:22:29Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I cannot find the word \"threat\" in the current document, and the above question is unanswered.\n\n(Apart from that, his threat definitely exists, motivated by the toybox approach used by RFC 8949 Core DE Requirements; it is just exacerbated when people don't know about the architecture.)\n\nCan this be closed?",
+          "createdAt": "2025-05-01T08:30:51Z",
+          "updatedAt": "2025-05-01T08:30:51Z"
         }
       ]
     },
@@ -387,9 +426,24 @@
       "labels": [],
       "body": "See https://mailarchive.ietf.org/arch/msg/cbor/n1uFlXyT27vYHcnI4MnyzDjVCz0/\n\nI think these can replace the COSE thumbprint example. (I'm hoping for less text as well as clarity).\n\nI think this is important in that we should actually do what we say we people should do.",
       "createdAt": "2025-03-20T18:15:46Z",
-      "updatedAt": "2025-03-20T18:15:46Z",
+      "updatedAt": "2025-05-03T12:08:49Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Most of this list is indeed useful, we could add this information to the examples in Appendix B.",
+          "createdAt": "2025-05-01T08:33:06Z",
+          "updatedAt": "2025-05-01T08:33:06Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See also: <https://mailarchive.ietf.org/arch/msg/cbor/Lm-GYgTDUCESkBzSo3Ws02WBNFU>\n",
+          "createdAt": "2025-05-03T12:08:47Z",
+          "updatedAt": "2025-05-03T12:08:47Z"
+        }
+      ]
     },
     {
       "number": 29,
@@ -424,10 +478,12 @@
       "author": "OR13",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "to be closed"
+      ],
       "body": "\nSTD94 -> [4.2.1. ](https://datatracker.ietf.org/doc/html/rfc8949#section-4.2.1)[Core Deterministic Encoding Requirements](https://datatracker.ietf.org/doc/html/rfc8949#name-core-deterministic-encoding)\n\nCDE BCP draft -> [CBOR Common Deterministic Encoding (CDE)](https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde-10#name-cbor-common-deterministic-e)\n\n> This specification defines the CBOR Common Deterministic Encoding (CDE) based on the Core Deterministic Encoding Requirements defined for CBOR in Section [4.2.1](https://rfc-editor.org/rfc/rfc8949#section-4.2.1) of RFC 8949 [[STD94](https://www.rfc-editor.org/info/std94)].\n\n\nThis makes it clear that \"CBOR Common Deterministic Encoding \" builds on \"Core Deterministic Encoding Requirements\".\n\nLater:\n\n> CDE turns this recommendation into a mandate: Integers that can be represented by basic major type 0 and 1 are encoded using the deterministic encoding defined for them, and integers outside this range are encoded using the preferred serialization (Section [3.4.3](https://rfc-editor.org/rfc/rfc8949#section-3.4.3) of RFC 8949 [[STD94](https://www.rfc-editor.org/info/std94)]) of tag 2 and 3 (i.e., no leading zero bytes).\n\nLogically, this is turning a SHOULD, into a MUST.\n\nI think we agree on what is happening here, and the layering, and even ALDR.\n\nWhere we seem to not have agreement in discussing this, is on clarity of terminology, and to a certain degree, on what the problem is we are solving with the BCP.\n\nMy understanding of the problem is as follows:\n\nPeople and SDOs believe that CBOR has no interoperable deterministic encoding.\nPeople and SDOs do not feel that STD94 defines a deterministic encoding, (perhaps they do understand that it does define requirements for others to create deterministic encodings).\n\nOver time, this seems to have resulted in many different deterministic encoding proposals, which blur the lines between \"Core Deterministic Encoding Requirements\" and \"Application-level Deterministic Representation\".\n\nMy preferred solution:\n\n- Update 8949 to make basic, preferred and deterministic clearly part of CBOR.\n- Choose terminology that is not nearly indistinguishable (Common vs Core) Deterministic Encoding (Requirements)\n- Keep the text on ALDR is a BCP, and anchor it to what is required for interop with STD 94.\n\n\n",
       "createdAt": "2025-04-02T15:53:31Z",
-      "updatedAt": "2025-04-02T16:13:48Z",
+      "updatedAt": "2025-05-01T08:34:49Z",
       "closedAt": null,
       "comments": [
         {
@@ -443,6 +499,13 @@
           "body": "On 2025-04-02, at 17:53, Orie Steele ***@***.***> wrote:\r\n> \r\n> \t\u2022 Update 8949 to make basic, preferred and deterministic clearly part of CBOR.\r\n\r\n\u201cPreferred Serialization\" already is defined in 8949; there is no update.\r\n\r\nDeterministic is a mathematical property, CBOR doesn\u2019t define it.\r\nDeterministic encoding is, again, a property of serialization choices, not a specific set of such choices.\r\n8949 defines \u201ccore deterministic encoding requirements\u201d, which are OPTIONAL requirements to be picked by an application defining its deterministic encoding choices.\r\n\r\nPicking up all of them and selecting Rule 2 out of the bullet list in 4.2.2 yields a single, well-defined deterministic serialization or encoding, CDE.  This is what the BCP is about.\r\nIt does not change 8949.\r\n\r\n\u201cBasic Serialization\u201d just is a term for something that exists in 8949 (Second bullet of 4.2.1); one could argue that a new term updates the thing it is applied to, but that is a very weak argument.\r\n\r\nI\u2019m really having trouble following the argument here.\r\n\r\nHaving a single document that defines all of these, via reference or by new text, is exactly the point of the CDE draft; splitting it up over multiple documents is counterproductive.\r\n\r\nGr\u00fc\u00dfe, Carsten\r\n\r\n",
           "createdAt": "2025-04-02T16:13:47Z",
           "updatedAt": "2025-04-02T16:13:47Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't think we have a better term than CDE.\n\nCan we close this?",
+          "createdAt": "2025-05-01T08:34:34Z",
+          "updatedAt": "2025-05-01T08:34:34Z"
         }
       ]
     },
@@ -455,10 +518,12 @@
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "to be closed"
+      ],
       "body": "The only normative change from CDER to CDE is the addition of preferred serialization of big numbers. This is pretty hard to notice because that requirement is so encompassed by commentary, background and other text.\n\nA simple fix is to put the normative change in section 3.1 and the commentary in 3.2.\n\nI would much prefer this draft turn into a serialization draft with a lot of re writing, but I'm filing this issue because of the hard push for WGLC. I wouldn't want this draft to get published without some improvement to section 3.\n\n",
       "createdAt": "2025-04-11T16:51:33Z",
-      "updatedAt": "2025-04-30T06:34:53Z",
+      "updatedAt": "2025-05-01T08:36:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -488,6 +553,13 @@
           "body": "> There is no normative change.\n\nWell, there is normative text on NaN with non-zero payloads now.\nCDE simply is the whole solution, no longer the \"some assembly required\" common requirements kit.",
           "createdAt": "2025-04-30T06:34:52Z",
           "updatedAt": "2025-04-30T06:34:52Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We should not \"just drop the term \"CDE\" and go back to \"Core Deterministic Encoding Requirements\" or even introduce a confusing abbreviation for the latter.\n\nCan we close this now?\n",
+          "createdAt": "2025-05-01T08:36:06Z",
+          "updatedAt": "2025-05-01T08:36:06Z"
         }
       ]
     },
@@ -500,12 +572,46 @@
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "to be closed"
+      ],
       "body": "Deterministic serialization is specified for tags 2, 3. It is inconsistent to not specify deterministic encoding for the above mentioned tags.\n\nI believe the tags not mentioned (e.g., 6, 7,... ) have no variability at the data model level so they are inherently deterministic.",
       "createdAt": "2025-04-18T15:42:34Z",
-      "updatedAt": "2025-04-18T15:42:34Z",
+      "updatedAt": "2025-05-01T08:39:46Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't know what tags 6 or 7 are (if cbor-packed gets 6, it is a nice example of not *wanting* to do deterministic representation, because packers are deliberately unspecified).\nThe tag numbers of the title seem to be a duplicate of #26.\n\nLet's continue any discussion needed there and close this duplicate.\n",
+          "createdAt": "2025-05-01T08:39:39Z",
+          "updatedAt": "2025-05-01T08:39:39Z"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOJ8fYd8602mTA",
+      "title": "Floating-point clarifications really apply to preferred/basic serialization",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/33",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I think we should preserve the layering of CDER/CDE over basic/preferred where the only difference between the two is map sorting.\n\nThat implies all the clarifications on floating-point should be for basic/preferred serialization, not for CDER/CDE. \n\nA possible solution is to move those clarifications out of section 3 and into section 2. \n\nSome of the other discussion on floating-point is general high-level commentary and maybe can stay in section 3; NaN handling is the most obvious thing to be applied to preferred/basic serialization.\n",
+      "createdAt": "2025-05-01T16:26:11Z",
+      "updatedAt": "2025-05-03T12:10:21Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See also: <https://mailarchive.ietf.org/arch/msg/cbor/Mm4iUMOLWc3F4aRWVgRyjdy98xc>\n",
+          "createdAt": "2025-05-03T12:10:20Z",
+          "updatedAt": "2025-05-03T12:10:20Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -813,10 +919,12 @@
       "author": "rohanmahy",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "to be closed"
+      ],
       "body": "Simplify Abstract; Move motivation to Introduction",
       "createdAt": "2024-06-12T19:22:23Z",
-      "updatedAt": "2025-03-05T15:13:22Z",
+      "updatedAt": "2025-05-01T08:40:20Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "2bbc1a1a6c706f5c33e5e779df65d5b811c2f322",
@@ -1450,6 +1558,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOJ8fYd86U0qmr",
+      "title": "Close #33",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/34",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 3: Don't try to hide the fact that most clarifications in Section 3 are about Preferred Serialization; explain why these are needed specifically for CDE.\r\n\r\nAttendant editorial fixes:\r\n\r\n* s/CDE decoder/CDE-checking decoder/\r\n* Always capitalize ___ed Serialization\r\n* reduce use of \"shortest\" in examples when we mean preferred",
+      "createdAt": "2025-05-03T12:14:34Z",
+      "updatedAt": "2025-05-03T12:21:11Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "653a6effaa83665bd1accb4bcd25295729542531",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "section3",
+      "headRefOid": "264641c0dff1a526671998b22b54ba68039e94cc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
