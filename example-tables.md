@@ -1,5 +1,7 @@
 ## Integer Value Examples
 
+<?v3xml2rfc table_borders="light" ?>
+
 | EDN | CBOR (hex) | Comment |
 | 0 | 00 | Smallest unsigned immediate int |
 | -1 | 20 | Largest negative immediate int |
@@ -26,6 +28,8 @@
 {: #tab-example-int title="Integer Value Examples"}
 
 ## Floating Point Value Examples
+
+<?v3xml2rfc table_borders="light" ?>
 
 | EDN | CBOR (hex) | Comment |
 | 0.0 | f90000 | Zero |
@@ -75,6 +79,8 @@
 {: #tab-example-flt title="Floating Point Value Examples"}
 
 ## Failing Examples
+
+<?v3xml2rfc table_borders="light" ?>
 
 | EDN | CBOR (hex) | Comment |
 | {"b":0,"a":1} | a2616200616101 | Incorrect map key ordering |

@@ -13,8 +13,8 @@ area: "Applications and Real-Time"
 workgroup: CBOR
 keyword:
 
-v3xml2rfc:
-  table_borders: light
+# v3xml2rfc:
+#  table_borders: light
 
 venue:
   group: "Concise Binary Object Representation Maintenance and Extensions (CBOR)"
@@ -213,6 +213,8 @@ discussed in {{Section 2 of -det}}.
 
 {{tab-constraints}} summarizes the increasingly restrictive sets of
 encoding choices that have been given names in this section.
+
+<?v3xml2rfc table_borders="full" ?>
 
 {: #tab-constraints title="Constraints on the Serialization of CBOR"}
 | Set of Encoding Choices | Most Important Constraint | Applications |
@@ -486,6 +488,8 @@ This document requests IANA to register the contents of
 "{{cddl-control-operators (CDDL Control Operators)<IANA.cddl}}" of the
 {{IANA.cddl}} registry group:
 
+<?v3xml2rfc table_borders="light" ?>
+
 | Name      | Reference |
 | .cde      | \[RFCXXXX] |
 | .cdeseq   | \[RFCXXXX] |
@@ -499,6 +503,8 @@ This document requests IANA to register the contents of
 This appendix is informative.
 
 For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
+
+<?v3xml2rfc table_borders="full" ?>
 
 |                   | Abstraction Level                                            | Example                                              | Standards | Implementation Representation                                       |
 | Information Model | Top level; conceptual                                        | The temperature of something                         |           |                                                                     |

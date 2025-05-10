@@ -70,6 +70,8 @@ end
 typs.keys.each do |typ|
   puts "## #{typs[typ]}"
   puts
+  puts '<?v3xml2rfc table_borders="light" ?>'
+  puts
   puts tables[typ]
   puts %{{: #tab-example-#{typ} title="#{typs[typ]}"}}
   puts
