@@ -281,7 +281,8 @@ types 0/1 in a seamless way.
 {{Section 4.2.2 of RFC8949@-cbor}} recommends handling this transition the same
 way as with the transition between different integer representation
 lengths in the basic generic data model, i.e., by mandating the
-Preferred Serialization for all integers ({{Section 3.4.3 of RFC8949@-cbor}}).
+Preferred Serialization for all integers ({{Section 3.4.3 of
+RFC8949@-cbor}}; see also {{exa-int}} and {{exa-pref}}).
 
 {: group="1"}
 1. By adopting the encoding constraints from Preferred Serialization,
@@ -983,6 +984,41 @@ interested in the file `example-table-input.csv` in the github
 repository `cbor-wg/draft-ietf-cbor-cde`.
 
 {::include example-tables.md}
+
+# Examples for Preferred Serialization of Integers {#exa-pref}
+
+This appendix looks at the set of encoded CBOR data items that
+represent the integer number `1`.
+Preferred Serialization chooses one of them (`0x01`), which is then
+always used to encode the number.
+The CDE encoding constraints include those of preferred serialization.
+A CDE-checking decoder checks that no other serialization is being
+used in the encoded data item being decoded.
+
+<?v3xml2rfc table_borders="full" ?>
+
+| Serialization of integer number 1                    | Preferred?                             |
+| 0x01                                                 | yes (shortest mt0)                     |
+| 0x1801, 0x190001, 0x1a00000001, 0x1b0000000000000001 | no (mt0, but not shortest argument)    |
+| 0xc24101                                             | no (could use mt0)                     |
+| 0xc2420001, 0xc243000001, etc.                       | no (could use mt0, uses leading zeros) |
+| 0xc25f41004101ff, and similar                        | no (could use mt0, uses leading zeros) |
+{: #tbl-ser-1 title="Serializations of integer number 1"}
+
+For the integer number 100000000000000000000 (1 with 20 decimal
+zeros), the only *basic* serialization is:
+
+~~~
+C2                       # tag(2)
+   49                    # bytes(9)
+      056BC75E2D63100000 #
+~~~
+
+(Note that, in addition to this serialization, there are multiple
+serializations that would also count as *preferred* serializations, as
+the preferred serialization constraint by itself does not exclude
+indefinite length encoding of the byte string that is the content of
+tag 2.)
 
 {::include-all cde-lists.md}
 

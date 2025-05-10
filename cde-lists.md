@@ -9,3 +9,4 @@
 4. [Integer Value Examples](#tab-example-int)
 5. [Floating Point Value Examples](#tab-example-flt)
 6. [Failing Examples](#tab-example-bad)
+7. [Serializations of integer number 1](#tbl-ser-1)

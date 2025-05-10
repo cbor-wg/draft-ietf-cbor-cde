@@ -1,4 +1,4 @@
-## Integer Value Examples
+## Integer Value Examples {#exa-int}
 
 <?v3xml2rfc table_borders="light" ?>
 
@@ -27,7 +27,7 @@
 | -18446744073709551617 | c349010000000000000000 | Largest negative bigint |
 {: #tab-example-int title="Integer Value Examples"}
 
-## Floating Point Value Examples
+## Floating Point Value Examples {#exa-flt}
 
 <?v3xml2rfc table_borders="light" ?>
 
@@ -78,7 +78,7 @@
 | 3.402823466385289e+38 | fb47efffffe0000001 | -"- |
 {: #tab-example-flt title="Floating Point Value Examples"}
 
-## Failing Examples
+## Failing Examples {#exa-bad}
 
 <?v3xml2rfc table_borders="light" ?>
 

@@ -68,7 +68,7 @@ csv.each do |row|
 end
 
 typs.keys.each do |typ|
-  puts "## #{typs[typ]}"
+  puts "## #{typs[typ]} {#exa-#{typ}}"
   puts
   puts '<?v3xml2rfc table_borders="light" ?>'
   puts
