@@ -770,8 +770,8 @@ Notes:
   The purpose of the restatement is to aid the work of implementers,
   not to redefine anything.
 
-  Preferred Serialization Encoders and Decoders as well as CDE
-  Encoders and Decoders have certain properties that are expressed
+  Preferred Serialization Encoders as well as CDE
+  Encoders and CDE-Checking Decoders have certain properties that are expressed
   using {{RFC2119}} keywords in this appendix.
 
 * Duplicate map keys are never valid in CBOR at all (see
@@ -803,8 +803,8 @@ Notes:
   requirements, such as requiring rejection of non-conforming inputs.
 
   If a generic decoder needs to be used that does not "support" CDE, a
-  simple (but somewhat clumsy) way to check for proper CDE encoding is
-  to re-encode the decoded data and check for bit-to-bit equality with
+  simple (but somewhat clumsy) way to check its input for proper CDE encoding is
+  to re-encode the decoded data with CDE and check for bit-to-bit equality with
   the original input.
 
 ## Preferred Serialization {#ps}
@@ -861,9 +861,8 @@ item, which follows the 3-bit field for the major type.
      and the shortest format.
      This trimming is performed only (preserves the value only) if all the
      rightmost bits removed are zero.
-     (This will always represent a double or single quiet NaN with a zero
-     NaN payload in a half-precision quiet NaN.)
-
+     (This means that a double or single quiet NaN that has a zero
+     NaN payload will always be represented in a half-precision quiet NaN.)
 
 1. If tags 2 and 3 are supported, the following apply:
 
@@ -876,19 +875,21 @@ item, which follows the 3-bit field for the major type.
    (This also applies to the use of tags 2 and 3 within other tags,
    such as 4 or 5.)
 
-### Preferred Serialization Decoders {#psd}
+### Decoders and Preferred Serialization {#psd}
 
 There are no special requirements that CBOR decoders need to meet to
-be a Preferred Serialization Decoder.
-Partial decoder implementations need to pay attention to at least the
+be what could be called a "Preferred Serialization Decoder".
+
+Partial decoder implementations that want to accept at least Preferred
+Serialization need to pay attention to at least the
 following requirements:
 
 1. Decoders MUST accept shortest-form encoded arguments (see {{Section
    3 of RFC8949@-cbor}}).
 
-1. If arrays or maps are supported, definite-length arrays or maps MUST be accepted.
+1. {:#arraymap-indef} If arrays or maps are supported, both definite-length and indefinite-length arrays or maps MUST be accepted.
 
-1. If text or byte strings are supported, definite-length text or byte
+1. {:#string-indef} If text or byte strings are supported, both definite-length and indefinite-length text or byte
    strings MUST be accepted.
 
 1. If floating-point numbers are supported, the following apply:
@@ -927,16 +928,26 @@ Preferred Serialization Encoder requirements, with the following additions:
 1. If text or byte strings are emitted, they MUST use definite-length
    encoding (never indefinite-length).
 
-### Basic Serialization Decoders {#bsd}
+### Decoders and Basic Serialization {#bsd}
 
-The Basic Serialization Decoder requirements are identical to the
-Preferred Serialization Decoder requirements.
+There are no special requirements that CBOR decoders need to meet to
+be what could be called a "Basic Serialization Decoder".
+
+Partial decoder implementations that want to accept at least Basic
+Serialization need to pay attention to the requirements for partial
+decoder implementations that accept Preferred Serialization, with the
+following relaxations from the items {{<arraymap-indef}} and {{<string-indef}} of {{psd}}:
+
+1. If arrays or maps are supported, definite-length arrays or maps MUST be accepted.
+
+1. If text or byte strings are supported, definite-length text or byte
+   strings MUST be accepted.
 
 ## CDE
 
 ### CDE Encoders
 
-1. CDE encoders MUST only emit CBOR fulfilling the basic
+1. CDE encoders MUST only emit CBOR that fulfills the basic
    serialization rules ({{bse}}).
 
 1. CDE encoders MUST sort maps by the CBOR representation of the map
@@ -960,18 +971,19 @@ Preferred Serialization Decoder requirements.
 The term "CDE-checking Decoder" is a shorthand for a CBOR decoder that
 advertises _supporting_ CDE (see the start of this appendix).
 
-1. CDE-checking decoders MUST follow the rules for preferred (and thus basic)
-   serialization decoders ({{psd}}).
+1. CDE-checking decoders MUST follow the rules for decoders that
+   accept Basic Serialization ({{bsd}}) and MUST check the input for
+   keeping the Basic Serialization constraints.
 
 1. CDE-checking decoders MUST check for ordering map keys and for basic
    validity of the CBOR encoding (see {{Section 5.3.1 of
    RFC8949@-cbor}}, which includes a check against duplicate map keys
    and invalid UTF-8).
 
-   To be called a CDE-checking decoder, it MUST NOT present to the application
-   a decoded data item that fails one of these checks (except maybe via
-   special diagnostic channels with no potential for confusion with a
-   correctly CDE-decoded data item).
+To be called a CDE-checking decoder, it MUST NOT present to the application
+a decoded data item that fails one of these checks (except maybe via
+special diagnostic channels with no potential for confusion with a
+correctly CDE-decoded data item).
 
 # Encoding Examples {#examples}
 
