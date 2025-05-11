@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-04T01:41:47.003323+00:00",
+  "timestamp": "2025-05-11T01:40:03.736634+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1571,13 +1571,13 @@
       "labels": [],
       "body": "Section 3: Don't try to hide the fact that most clarifications in Section 3 are about Preferred Serialization; explain why these are needed specifically for CDE.\r\n\r\nAttendant editorial fixes:\r\n\r\n* s/CDE decoder/CDE-checking decoder/\r\n* Always capitalize ___ed Serialization\r\n* reduce use of \"shortest\" in examples when we mean preferred",
       "createdAt": "2025-05-03T12:14:34Z",
-      "updatedAt": "2025-05-03T12:21:11Z",
+      "updatedAt": "2025-05-10T18:44:27Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "653a6effaa83665bd1accb4bcd25295729542531",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "section3",
-      "headRefOid": "264641c0dff1a526671998b22b54ba68039e94cc",
+      "headRefOid": "4db816fee93f71c2e51d3610629cc502dad3dace",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
