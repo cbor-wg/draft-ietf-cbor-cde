@@ -771,7 +771,7 @@ Notes:
   not to redefine anything.
 
   Preferred Serialization Encoders as well as CDE
-  Encoders and CDE-Checking Decoders have certain properties that are expressed
+  Encoders and CDE-checking Decoders have certain properties that are expressed
   using {{RFC2119}} keywords in this appendix.
 
 * Duplicate map keys are never valid in CBOR at all (see
