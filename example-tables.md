@@ -1,4 +1,6 @@
-## Integer Value Examples
+## Integer Value Examples {#exa-int}
+
+<?v3xml2rfc table_borders="light" ?>
 
 | EDN | CBOR (hex) | Comment |
 | 0 | 00 | Smallest unsigned immediate int |
@@ -25,7 +27,9 @@
 | -18446744073709551617 | c349010000000000000000 | Largest negative bigint |
 {: #tab-example-int title="Integer Value Examples"}
 
-## Floating Point Value Examples
+## Floating Point Value Examples {#exa-flt}
+
+<?v3xml2rfc table_borders="light" ?>
 
 | EDN | CBOR (hex) | Comment |
 | 0.0 | f90000 | Zero |
@@ -74,14 +78,17 @@
 | 3.402823466385289e+38 | fb47efffffe0000001 | -"- |
 {: #tab-example-flt title="Floating Point Value Examples"}
 
-## Failing Examples
+## Failing Examples {#exa-bad}
+
+<?v3xml2rfc table_borders="light" ?>
 
 | EDN | CBOR (hex) | Comment |
 | {"b":0,"a":1} | a2616200616101 | Incorrect map key ordering |
+| [4, 5] | 98020405 | Array length not in preferred encoding |
 | 255 | 1900ff | Integer not in preferred encoding |
 | -18446744073709551617 | c34a00010000000000000000 | Bigint with leading zero bytes |
-| 10.5 | fa41280000 | Not in shortest encoding |
-| NaN | fa7fc00000 | Not in shortest encoding |
+| 10.5 | fa41280000 | Not in preferred encoding |
+| NaN | fa7fc00000 | Not in preferred encoding |
 | 65536 | c243010000 | Integer value too small for bigint |
 | (_ h'01', h'0203') | 5f4101420203ff | Indefinite length encoding |
 | (Not CBOR) | f818 | Simple values 24..31 not in use |

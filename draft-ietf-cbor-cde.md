@@ -13,8 +13,8 @@ area: "Applications and Real-Time"
 workgroup: CBOR
 keyword:
 
-v3xml2rfc:
-  table_borders: light
+# v3xml2rfc:
+#  table_borders: light
 
 venue:
   group: "Concise Binary Object Representation Maintenance and Extensions (CBOR)"
@@ -214,12 +214,14 @@ discussed in {{Section 2 of -det}}.
 {{tab-constraints}} summarizes the increasingly restrictive sets of
 encoding choices that have been given names in this section.
 
+<?v3xml2rfc table_borders="full" ?>
+
 {: #tab-constraints title="Constraints on the Serialization of CBOR"}
 | Set of Encoding Choices | Most Important Constraint | Applications |
 |-------------------------|---------------------------|--------------|
-| preferred               | shortest "head" variant   | most         |
-| basic                   | + definite lengths only   | many         |
-| *deterministic* ("CDE") | + common map order        | specific     |
+| Preferred               | shortest "head" variant   | most         |
+| Basic                   | + definite lengths only   | many         |
+| *Deterministic* ("CDE") | + common map order        | specific     |
 
 Note that the objective to have a deterministic serialization for a
 specific application data item can only be fulfilled if the
@@ -253,6 +255,24 @@ easy-to-implement rules while maximizing coverage, i.e., the subset of
 CBOR data items that are fully specified by these rules, and also
 placing minimal burden on implementations.
 
+As discussed in {{choi}}, CDE combines the constraints of Preferred
+Serialization with a constraint added by Basic Serialization and
+another constraint added by CDE itself.
+While many CBOR implementations do set out to provide Preferred
+Serialization, there is less of a practical requirement to fully
+conform, as generic CBOR decoders do not normally check for Preferred
+Serialization.
+However, an application that relies on deterministic representation,
+during ingestion of an encoded CBOR data item will often need to
+employ a "CDE-checking decoder", i.e., a CBOR decoder configured to
+also check that all CDE constraints are satisfied (see also
+{{impcheck}}).
+Here, small deviations from CDE, including deviations from Preferred
+Serialization, turn into interoperability problems; hence the
+additional attention of the present document on these constraints.
+
+## CDE Constraints from Preferred Serialization {#psconstr}
+
 {{Section 4.2.2 of RFC8949@-cbor}} picks up on the interaction of extensibility
 (CBOR tags) and deterministic encoding.
 CBOR itself uses some tags to increase the range of its basic
@@ -261,14 +281,16 @@ types 0/1 in a seamless way.
 {{Section 4.2.2 of RFC8949@-cbor}} recommends handling this transition the same
 way as with the transition between different integer representation
 lengths in the basic generic data model, i.e., by mandating the
-preferred serialization for all integers ({{Section 3.4.3 of RFC8949@-cbor}}).
+Preferred Serialization for all integers ({{Section 3.4.3 of
+RFC8949@-cbor}}; see also {{exa-int}} and {{exa-pref}}).
 
 {: group="1"}
-1. CDE turns this
+1. By adopting the encoding constraints from Preferred Serialization,
+   CDE turns this
    recommendation into a mandate: Integers that can be represented by
    basic major type 0 and 1 are encoded using the deterministic
    encoding defined for them, and integers outside this range are
-   encoded using the preferred serialization ({{Section 3.4.3 of
+   encoded using the Preferred Serialization ({{Section 3.4.3 of
    RFC8949@-cbor}}) of tag 2 and 3 (i.e., no leading zero bytes).
 
 Most tags capture more specific application semantics and therefore
@@ -283,18 +305,25 @@ As the CDE would continually
 need to address additional issues raised by the registration of new
 tags, this specification recommends that new tag registrations address
 deterministic encoding in the context of CDE.
+Note that not in all cases the tag's deterministic encoding constraints
+will be confined to its definition of Preferred Serialization.
 
 A particularly difficult field to obtain deterministic encoding for is
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See {{Section 3.2.2 of -det}} for more details.
-{{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices; these need to
+{{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices that needed to
 be made to obtain the CBOR Common Deterministic Encoding (CDE).
+Here, CDE entirely recurs to Preferred Serialization and
+does *not* itself define any additional constraints.
+
+However, this BCP responds to a perceived need to clarify some of the
+Preferred Serialization constraints.
 Specifically, CDE specifies (in the order of the bullet list at the end of {{Section
 4.2.2 of RFC8949@-cbor}}):
 
 {: group="1"}
-2. Besides the mandated use of preferred serialization, there is no further
+2. Besides the mandated use of Preferred Serialization, there is no further
    specific action for the two different zero values, e.g., an encoder
    that is asked by an application to represent a negative floating
    point zero will generate 0xf98000.
@@ -305,8 +334,9 @@ Specifically, CDE specifies (in the order of the bullet list at the end of {{Sec
    an integral value (choice 2 of the second bullet).
 4. Apart from finite and infinite numbers, {{IEEE754}} floating point
    values include NaN (not a number) values {{-numbers}}.
-   In CDE, there is no special handling of NaN values, except that the
-   preferred serialization rules also apply to NaNs (with zero or
+   In CDE, there is no special handling of NaN values, except a
+   clarification that the
+   Preferred Serialization rules also apply to NaNs (with zero or
    non-zero payloads), using the canonical encoding of NaNs as defined
    in Section 6.2.1 of {{IEEE754}}.
    Specifically, this means that shorter forms of encodings for a NaN
@@ -320,7 +350,8 @@ Specifically, CDE specifies (in the order of the bullet list at the end of {{Sec
    application these are encoded by using a leading bit of 0.
 
    Typically, most applications that employ NaNs in their storage and
-   communication interfaces will only use a single NaN value, quiet NaN with payload 0,
+   communication interfaces will only use a single NaN value, quiet,
+   non-negative NaN with payload 0,
    which therefore deterministically encodes as 0xf97e00.
 5. There is no special handling of subnormal values.
 6. CDE does not presume
@@ -340,13 +371,51 @@ ruleset document, see
 make their own decisions within that data model.
 E.g., an application's ALDR rules can decide that it only ever allows a
 single NaN value that would be encoded as 0xf97e00, so a CDE
-implementation focusing on this application would not need to
+implementation focusing on this application would not even need to
 provide processing for other NaN values.
 Basing the definition of both CDE and ALDR rules on the
 generic data model of CBOR also means that there is no effect on the
 Concise Data Definition Language (CDDL)
 {{-cddl}}, except where the data description is documenting specific
-encoding decisions for byte strings that carry embedded CBOR.
+encoding decisions for byte strings that carry embedded CBOR (see
+{{cddl-support}}).
+
+## Additional CDE Constraint from Basic Serialization
+
+In addition to the encoding constraints from Preferred Serialization,
+CDE adds the constraint of not using indefinite length encoding from
+Basic Serialization.
+In many encoders, the use of indefinite length encoding is controlled
+by its configuration and can simply be switched off.
+
+Some encoders turn to indefinite length encoding for arrays and maps
+with 256 or more elements/entries, to use the slightly smaller
+serialization size indefinite length encoding offers for these cases.
+Since leaving out support for indefinite length encoding is a common
+form of partial implementation, this may reduce interoperability.
+(Indefinite length encoding may also be used conditionally to avoid
+having to compute the total size ahead of time if the platform uses
+some form of chunking.)
+As CDE uses definite length encoding exclusively, such behavior
+needs to be turned off for CDE.
+
+## Additional CDE Constraint from CDE Itself
+
+In line with {{Section 4.2.1 of RFC8949@-cbor}}, CDE adds the constraint
+of map ordering to those from Basic Serialization.
+In some implementations, where platform representations of maps
+preserve ordering, this can be achieved using a generic CBOR encoder by
+pre-ordering all maps to be encoded, as long as that generic encoder
+also preserves the ordering in maps.
+In implementations without these properties, a specialized CBOR
+encoder may need to be employed.
+
+Map ordering is a deterministic encoding constraint specific to maps,
+major type 5, that goes beyond maps' constraints for preferred
+serialization.
+In the definition of a tag being employed, there may also be some
+deterministic encoding constraints that are not covered by the tag's
+constraints for Preferred Serialization (see {{psconstr}}).
 
 # CDDL support
 
@@ -420,6 +489,8 @@ This document requests IANA to register the contents of
 "{{cddl-control-operators (CDDL Control Operators)<IANA.cddl}}" of the
 {{IANA.cddl}} registry group:
 
+<?v3xml2rfc table_borders="light" ?>
+
 | Name      | Reference |
 | .cde      | \[RFCXXXX] |
 | .cdeseq   | \[RFCXXXX] |
@@ -433,6 +504,8 @@ This document requests IANA to register the contents of
 This appendix is informative.
 
 For a good understanding of this document, it is helpful to understand the difference between an information model, a data model and serialization.
+
+<?v3xml2rfc table_borders="full" ?>
 
 |                   | Abstraction Level                                            | Example                                              | Standards | Implementation Representation                                       |
 | Information Model | Top level; conceptual                                        | The temperature of something                         |           |                                                                     |
@@ -474,11 +547,11 @@ specification documenting an interoperable subset {{-ijson}}.
   e.g., by not implementing all those variations.
 
 To deal with this encoding variation provided for certain data items,
-CBOR defines a _preferred serialization_ ({{Section 4.1 of
+CBOR defines a _Preferred Serialization_ ({{Section 4.1 of
 RFC8949@-cbor}}).
 _Partial CBOR implementations_ are more likely to interoperate if their
-encoder uses preferred serialization and the decoder implements
-decoding at least the preferred serialization as well.
+encoder uses Preferred Serialization and the decoder implements
+decoding at least the Preferred Serialization as well.
 A specific protocol for a constrained application may specify
 restrictions that allow, e.g., some fields to be of fixed length,
 guaranteeing interoperability even with partial implementations
@@ -490,7 +563,7 @@ without knowing their length upfront ({{Section 3.2 of RFC8949@-cbor}}).
 For applications that do not perform streaming of this kind, variation
 can be reduced (and often performance improved) by only allowing
 definite-length encoding.
-The present document coins the term _basic serialization_ for combining
+The present document coins the term _Basic Serialization_ for combining
 definite-length-only with preferred encoding, further reducing the
 variation that a decoder needs to deal with.
 The Common Deterministic Encoding, CDE, finally combines basic
@@ -651,7 +724,7 @@ An implementation of specific ALDR rules combined with a CDE
 implementation produces well-formed,
 deterministically encoded CBOR according to {{STD94}}, and existing
 generic CBOR decoders will therefore be able to decode it, including
-those that check for Deterministic Encoding ("CDE decoders", see also
+those that check for Deterministic Encoding ("CDE-checking decoders", see also
 {{impcheck}}).
 Similarly, generic CBOR encoders will be able to produce valid CBOR
 that can be ingested by an implementation that enforces an application's
@@ -697,8 +770,8 @@ Notes:
   The purpose of the restatement is to aid the work of implementers,
   not to redefine anything.
 
-  Preferred Serialization Encoders and Decoders as well as CDE
-  Encoders and Decoders have certain properties that are expressed
+  Preferred Serialization Encoders as well as CDE
+  Encoders and CDE-checking Decoders have certain properties that are expressed
   using {{RFC2119}} keywords in this appendix.
 
 * Duplicate map keys are never valid in CBOR at all (see
@@ -716,7 +789,7 @@ Notes:
   ALDR rules such as the ALDR ruleset defined by dCBOR are different as they can affect
   the data model by restricting some values and ranges.
 
-* CBOR decoders in general (as opposed to "CDE decoders" specifically
+* CBOR decoders in general (as opposed to "CDE-checking decoders" specifically
   advertised as supporting CDE)
   are not required to check for preferred
   serialization or CDE and reject inputs that do not fulfill
@@ -730,8 +803,8 @@ Notes:
   requirements, such as requiring rejection of non-conforming inputs.
 
   If a generic decoder needs to be used that does not "support" CDE, a
-  simple (but somewhat clumsy) way to check for proper CDE encoding is
-  to re-encode the decoded data and check for bit-to-bit equality with
+  simple (but somewhat clumsy) way to check its input for proper CDE encoding is
+  to re-encode the decoded data with CDE and check for bit-to-bit equality with
   the original input.
 
 ## Preferred Serialization {#ps}
@@ -788,9 +861,8 @@ item, which follows the 3-bit field for the major type.
      and the shortest format.
      This trimming is performed only (preserves the value only) if all the
      rightmost bits removed are zero.
-     (This will always represent a double or single quiet NaN with a zero
-     NaN payload in a half-precision quiet NaN.)
-
+     (This means that a double or single quiet NaN that has a zero
+     NaN payload will always be represented in a half-precision quiet NaN.)
 
 1. If tags 2 and 3 are supported, the following apply:
 
@@ -803,19 +875,21 @@ item, which follows the 3-bit field for the major type.
    (This also applies to the use of tags 2 and 3 within other tags,
    such as 4 or 5.)
 
-### Preferred Serialization Decoders {#psd}
+### Decoders and Preferred Serialization {#psd}
 
 There are no special requirements that CBOR decoders need to meet to
-be a Preferred Serialization Decoder.
-Partial decoder implementations need to pay attention to at least the
+be what could be called a "Preferred Serialization Decoder".
+
+Partial decoder implementations that want to accept at least Preferred
+Serialization need to pay attention to at least the
 following requirements:
 
 1. Decoders MUST accept shortest-form encoded arguments (see {{Section
    3 of RFC8949@-cbor}}).
 
-1. If arrays or maps are supported, definite-length arrays or maps MUST be accepted.
+1. {:#arraymap-indef} If arrays or maps are supported, both definite-length and indefinite-length arrays or maps MUST be accepted.
 
-1. If text or byte strings are supported, definite-length text or byte
+1. {:#string-indef} If text or byte strings are supported, both definite-length and indefinite-length text or byte
    strings MUST be accepted.
 
 1. If floating-point numbers are supported, the following apply:
@@ -854,16 +928,26 @@ Preferred Serialization Encoder requirements, with the following additions:
 1. If text or byte strings are emitted, they MUST use definite-length
    encoding (never indefinite-length).
 
-### Basic Serialization Decoders {#bsd}
+### Decoders and Basic Serialization {#bsd}
 
-The Basic Serialization Decoder requirements are identical to the
-Preferred Serialization Decoder requirements.
+There are no special requirements that CBOR decoders need to meet to
+be what could be called a "Basic Serialization Decoder".
+
+Partial decoder implementations that want to accept at least Basic
+Serialization need to pay attention to the requirements for partial
+decoder implementations that accept Preferred Serialization, with the
+following relaxations from the items {{<arraymap-indef}} and {{<string-indef}} of {{psd}}:
+
+1. If arrays or maps are supported, definite-length arrays or maps MUST be accepted.
+
+1. If text or byte strings are supported, definite-length text or byte
+   strings MUST be accepted.
 
 ## CDE
 
 ### CDE Encoders
 
-1. CDE encoders MUST only emit CBOR fulfilling the basic
+1. CDE encoders MUST only emit CBOR that fulfills the basic
    serialization rules ({{bse}}).
 
 1. CDE encoders MUST sort maps by the CBOR representation of the map
@@ -882,23 +966,24 @@ Preferred Serialization Decoder requirements.
    rationale that went into not requiring routine use of Unicode normalization
    processes.
 
-### CDE Decoders
+### CDE-checking Decoders
 
-The term "CDE Decoder" is a shorthand for a CBOR decoder that
+The term "CDE-checking Decoder" is a shorthand for a CBOR decoder that
 advertises _supporting_ CDE (see the start of this appendix).
 
-1. CDE decoders MUST follow the rules for preferred (and thus basic)
-   serialization decoders ({{psd}}).
+1. CDE-checking decoders MUST follow the rules for decoders that
+   accept Basic Serialization ({{bsd}}) and MUST check the input for
+   keeping the Basic Serialization constraints.
 
-1. CDE decoders MUST check for ordering map keys and for basic
+1. CDE-checking decoders MUST check for ordering map keys and for basic
    validity of the CBOR encoding (see {{Section 5.3.1 of
    RFC8949@-cbor}}, which includes a check against duplicate map keys
    and invalid UTF-8).
 
-   To be called a CDE decoder, it MUST NOT present to the application
-   a decoded data item that fails one of these checks (except maybe via
-   special diagnostic channels with no potential for confusion with a
-   correctly CDE-decoded data item).
+To be called a CDE-checking decoder, it MUST NOT present to the application
+a decoded data item that fails one of these checks (except maybe via
+special diagnostic channels with no potential for confusion with a
+correctly CDE-decoded data item).
 
 # Encoding Examples {#examples}
 
@@ -911,6 +996,41 @@ interested in the file `example-table-input.csv` in the github
 repository `cbor-wg/draft-ietf-cbor-cde`.
 
 {::include example-tables.md}
+
+# Examples for Preferred Serialization of Integers {#exa-pref}
+
+This appendix looks at the set of encoded CBOR data items that
+represent the integer number `1`.
+Preferred Serialization chooses one of them (`0x01`), which is then
+always used to encode the number.
+The CDE encoding constraints include those of preferred serialization.
+A CDE-checking decoder checks that no other serialization is being
+used in the encoded data item being decoded.
+
+<?v3xml2rfc table_borders="full" ?>
+
+| Serialization of integer number 1                    | Preferred?                             |
+| 0x01                                                 | yes (shortest mt0)                     |
+| 0x1801, 0x190001, 0x1a00000001, 0x1b0000000000000001 | no (mt0, but not shortest argument)    |
+| 0xc24101                                             | no (could use mt0)                     |
+| 0xc2420001, 0xc243000001, etc.                       | no (could use mt0, uses leading zeros) |
+| 0xc25f41004101ff, and similar                        | no (could use mt0, uses leading zeros) |
+{: #tbl-ser-1 title="Serializations of integer number 1"}
+
+For the integer number 100000000000000000000 (1 with 20 decimal
+zeros), the only *basic* serialization is:
+
+~~~
+C2                       # tag(2)
+   49                    # bytes(9)
+      056BC75E2D63100000 #
+~~~
+
+(Note that, in addition to this serialization, there are multiple
+serializations that would also count as *preferred* serializations, as
+the preferred serialization constraint by itself does not exclude
+indefinite length encoding of the byte string that is the content of
+tag 2.)
 
 {::include-all cde-lists.md}
 
