@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                      2 April 2025
-Expires: 4 October 2025
+Intended status: Best Current Practice                       12 May 2025
+Expires: 13 November 2025
 
 
                 CBOR Common Deterministic Encoding (CDE)
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Bormann                  Expires 4 October 2025                 [Page 1]
+Bormann                 Expires 13 November 2025                [Page 1]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft                  CBOR CDE                      April 2025
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 October 2025.
+   This Internet-Draft will expire on 13 November 2025.
 
 Copyright Notice
 
@@ -86,42 +86,46 @@ Table of Contents
      1.2.  Conventions and Definitions . . . . . . . . . . . . . . .   4
    2.  Encoding Choices in CBOR  . . . . . . . . . . . . . . . . . .   5
    3.  CBOR Common Deterministic Encoding (CDE)  . . . . . . . . . .   6
-   4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .   9
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  11
-   Appendix A.  Information Model, Data Model and Serialization  . .  13
+     3.1.  CDE Constraints from Preferred Serialization  . . . . . .   7
+     3.2.  Additional CDE Constraint from Basic Serialization  . . .   9
+     3.3.  Additional CDE Constraint from CDE Itself . . . . . . . .  10
+   4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .  10
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  12
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  13
+   Appendix A.  Information Model, Data Model and Serialization  . .  14
      A.1.  Data Model, Encoding Variants and Interoperability with
-           Partial Implementations . . . . . . . . . . . . . . . . .  14
-   Appendix B.  Application-level Deterministic Representation . . .  15
-   Appendix C.  Implementers' Checklists . . . . . . . . . . . . . .  18
-     C.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  19
-       C.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  20
-       C.1.2.  Preferred Serialization Decoders  . . . . . . . . . .  21
-     C.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  22
-       C.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  22
-       C.2.2.  Basic Serialization Decoders  . . . . . . . . . . . .  22
-     C.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  22
-       C.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  22
-       C.3.2.  CDE Decoders  . . . . . . . . . . . . . . . . . . . .  23
+           Partial Implementations . . . . . . . . . . . . . . . . .  15
+   Appendix B.  Application-level Deterministic Representation . . .  17
+   Appendix C.  Implementers' Checklists . . . . . . . . . . . . . .  20
+     C.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  21
+       C.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  21
+       C.1.2.  Decoders and Preferred Serialization  . . . . . . . .  23
+     C.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  23
+       C.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  24
+       C.2.2.  Decoders and Basic Serialization  . . . . . . . . . .  24
 
 
 
-Bormann                  Expires 4 October 2025                 [Page 2]
+Bormann                 Expires 13 November 2025                [Page 2]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
-   Appendix D.  Encoding Examples  . . . . . . . . . . . . . . . . .  23
-     D.1.  Integer Value Examples  . . . . . . . . . . . . . . . . .  23
-     D.2.  Floating Point Value Examples . . . . . . . . . . . . . .  25
-     D.3.  Failing Examples  . . . . . . . . . . . . . . . . . . . .  27
-   List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  28
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  28
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  28
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  29
+     C.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  24
+       C.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  24
+       C.3.2.  CDE-checking Decoders . . . . . . . . . . . . . . . .  25
+   Appendix D.  Encoding Examples  . . . . . . . . . . . . . . . . .  25
+     D.1.  Integer Value Examples  . . . . . . . . . . . . . . . . .  25
+     D.2.  Floating Point Value Examples . . . . . . . . . . . . . .  27
+     D.3.  Failing Examples  . . . . . . . . . . . . . . . . . . . .  29
+   Appendix E.  Examples for Preferred Serialization of Integers . .  30
+   List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  31
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  32
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  32
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  32
 
 1.  Introduction
 
@@ -148,6 +152,24 @@ Internet-Draft                  CBOR CDE                      April 2025
    For use as background material, Appendix A introduces terminology for
    the layering of models used to describe CBOR.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025                [Page 3]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
    Instead of giving rise to the definition of application-specific,
    non-interoperable variants of CDE, this document identifies
    Application-level Deterministic Representation (ALDR) rules as a
@@ -159,16 +181,6 @@ Internet-Draft                  CBOR CDE                      April 2025
    provided as part of a specification for a CBOR-based protocol, or, if
    needed, can be provided by referencing a shared "ALDR ruleset" that
    is defined in a separate document.
-
-
-
-
-
-
-Bormann                  Expires 4 October 2025                 [Page 3]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
 
    The informative Appendix C provides brief checklists that
    implementers can use to check their CDE implementations.
@@ -203,6 +215,17 @@ Internet-Draft                  CBOR CDE                      April 2025
       building the representation format out of (information-model
       level) application data.
 
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025                [Page 4]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
    *  "Serialization" is used for the subset of this process, and its
       result, that represents ("serializes") data in CBOR generic data
       model form into encoded data items.  "Encoding" is often used as a
@@ -213,18 +236,6 @@ Internet-Draft                  CBOR CDE                      April 2025
    "OPTIONAL" in this document are to be interpreted as described in
    [BCP14] (RFC2119) (RFC8174) when, and only when, they appear in all
    capitals, as shown here.
-
-
-
-
-
-
-
-
-Bormann                  Expires 4 October 2025                 [Page 4]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
 
 2.  Encoding Choices in CBOR
 
@@ -263,6 +274,14 @@ Internet-Draft                  CBOR CDE                      April 2025
    these entries as valid Basic Serializations. _Deterministic
    Serialization_ builds on Basic Serialization by defining a common
    (namely, lexicographic) order for the entries in a map.  For many
+
+
+
+Bormann                 Expires 13 November 2025                [Page 5]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
    applications, ensuring this common order is an additional onus on the
    generator that is not actually needed, so they do not choose
    Deterministic Serialization.  However, if the objective is minimal
@@ -274,23 +293,17 @@ Internet-Draft                  CBOR CDE                      April 2025
    Table 1 summarizes the increasingly restrictive sets of encoding
    choices that have been given names in this section.
 
-
-
-
-Bormann                  Expires 4 October 2025                 [Page 5]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
-        +-------------------------+----------------+--------------+
+        +=========================+================+==============+
         | Set of Encoding Choices | Most Important | Applications |
         |                         | Constraint     |              |
-        +-------------------------+----------------+--------------+
-        | preferred               | shortest       | most         |
+        +=========================+================+==============+
+        | Preferred               | shortest       | most         |
         |                         | "head" variant |              |
-        | basic                   | + definite     | many         |
+        +-------------------------+----------------+--------------+
+        | Basic                   | + definite     | many         |
         |                         | lengths only   |              |
-        | _deterministic_ ("CDE") | + common map   | specific     |
+        +-------------------------+----------------+--------------+
+        | _Deterministic_ ("CDE") | + common map   | specific     |
         |                         | order          |              |
         +-------------------------+----------------+--------------+
 
@@ -313,6 +326,18 @@ Internet-Draft                  CBOR CDE                      April 2025
    (CDE) based on the _Core Deterministic Encoding Requirements_ defined
    for CBOR in Section 4.2.1 of RFC 8949 [STD94].
 
+
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025                [Page 6]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
    Note that this specific set of requirements is elective — in
    principle, other variants of deterministic encoding can be defined
    (and have been, now being phased out, as detailed in Section 4.2.3 of
@@ -326,30 +351,48 @@ Internet-Draft                  CBOR CDE                      April 2025
    specified by these rules, and also placing minimal burden on
    implementations.
 
+   As discussed in Section 2, CDE combines the constraints of Preferred
+   Serialization with a constraint added by Basic Serialization and
+   another constraint added by CDE itself.  While many CBOR
+   implementations do set out to provide Preferred Serialization, there
+   is less of a practical requirement to fully conform, as generic CBOR
+   decoders do not normally check for Preferred Serialization.  However,
+   an application that relies on deterministic representation, during
+   ingestion of an encoded CBOR data item will often need to employ a
+   "CDE-checking decoder", i.e., a CBOR decoder configured to also check
+   that all CDE constraints are satisfied (see also Appendix C).  Here,
+   small deviations from CDE, including deviations from Preferred
+   Serialization, turn into interoperability problems; hence the
+   additional attention of the present document on these constraints.
+
+3.1.  CDE Constraints from Preferred Serialization
+
    Section 4.2.2 of RFC 8949 [STD94] picks up on the interaction of
    extensibility (CBOR tags) and deterministic encoding.  CBOR itself
    uses some tags to increase the range of its basic generic data types,
    e.g., tags 2/3 extend the range of basic major types 0/1 in a
-
-
-
-Bormann                  Expires 4 October 2025                 [Page 6]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    seamless way.  Section 4.2.2 of RFC 8949 [STD94] recommends handling
    this transition the same way as with the transition between different
    integer representation lengths in the basic generic data model, i.e.,
-   by mandating the preferred serialization for all integers
-   (Section 3.4.3 of RFC 8949 [STD94]).
+   by mandating the Preferred Serialization for all integers
+   (Section 3.4.3 of RFC 8949 [STD94]; see also Appendix D.1 and
+   Appendix E).
 
-   1.  CDE turns this recommendation into a mandate: Integers that can
-       be represented by basic major type 0 and 1 are encoded using the
-       deterministic encoding defined for them, and integers outside
-       this range are encoded using the preferred serialization
-       (Section 3.4.3 of RFC 8949 [STD94]) of tag 2 and 3 (i.e., no
-       leading zero bytes).
+   1.  By adopting the encoding constraints from Preferred
+       Serialization, CDE turns this recommendation into a mandate:
+       Integers that can be represented by basic major type 0 and 1 are
+       encoded using the deterministic encoding defined for them, and
+       integers outside this range are encoded using the Preferred
+       Serialization (Section 3.4.3 of RFC 8949 [STD94]) of tag 2 and 3
+       (i.e., no leading zero bytes).
+
+
+
+
+Bormann                 Expires 13 November 2025                [Page 7]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
    Most tags capture more specific application semantics and therefore
    may be harder to define a deterministic encoding for.  While the
@@ -361,19 +404,26 @@ Internet-Draft                  CBOR CDE                      April 2025
    examples.  As the CDE would continually need to address additional
    issues raised by the registration of new tags, this specification
    recommends that new tag registrations address deterministic encoding
-   in the context of CDE.
+   in the context of CDE.  Note that not in all cases the tag's
+   deterministic encoding constraints will be confined to its definition
+   of Preferred Serialization.
 
    A particularly difficult field to obtain deterministic encoding for
    is floating point numbers, partially because they themselves are
    often obtained from processes that are not entirely deterministic
    between platforms.  See Section 3.2.2 of [I-D.bormann-cbor-det] for
    more details.  Section 4.2.2 of RFC 8949 [STD94] presents a number of
-   choices; these need to be made to obtain the CBOR Common
-   Deterministic Encoding (CDE).  Specifically, CDE specifies (in the
-   order of the bullet list at the end of Section 4.2.2 of RFC 8949
+   choices that needed to be made to obtain the CBOR Common
+   Deterministic Encoding (CDE).  Here, CDE entirely recurs to Preferred
+   Serialization and does _not_ itself define any additional
+   constraints.
+
+   However, this BCP responds to a perceived need to clarify some of the
+   Preferred Serialization constraints.  Specifically, CDE specifies (in
+   the order of the bullet list at the end of Section 4.2.2 of RFC 8949
    [STD94]):
 
-   2.  Besides the mandated use of preferred serialization, there is no
+   2.  Besides the mandated use of Preferred Serialization, there is no
        further specific action for the two different zero values, e.g.,
        an encoder that is asked by an application to represent a
        negative floating point zero will generate 0xf98000.
@@ -385,25 +435,24 @@ Internet-Draft                  CBOR CDE                      April 2025
        mathematically, an integral value (choice 2 of the second
        bullet).
 
-
-
-
-
-Bormann                  Expires 4 October 2025                 [Page 7]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    4.  Apart from finite and infinite numbers, [IEEE754] floating point
        values include NaN (not a number) values
        [I-D.bormann-cbor-numbers].  In CDE, there is no special handling
-       of NaN values, except that the preferred serialization rules also
-       apply to NaNs (with zero or non-zero payloads), using the
-       canonical encoding of NaNs as defined in Section 6.2.1 of
-       [IEEE754].  Specifically, this means that shorter forms of
-       encodings for a NaN are used when that can be achieved by only
-       removing trailing zeros in the NaN payload (example
-       serializations are available in Appendix A.1.2 of
+       of NaN values, except a clarification that the Preferred
+       Serialization rules also apply to NaNs (with zero or non-zero
+       payloads), using the canonical encoding of NaNs as defined in
+       Section 6.2.1 of [IEEE754].  Specifically, this means that
+
+
+
+Bormann                 Expires 13 November 2025                [Page 8]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
+       shorter forms of encodings for a NaN are used when that can be
+       achieved by only removing trailing zeros in the NaN payload
+       (example serializations are available in Appendix A.1.2 of
        [I-D.bormann-cbor-numbers]).  Further clarifying a "should"-level
        statement in Section 6.2.1 of [IEEE754], the CBOR encoding always
        uses a leading bit of 1 in the significand to encode a quiet NaN;
@@ -413,8 +462,8 @@ Internet-Draft                  CBOR CDE                      April 2025
 
        Typically, most applications that employ NaNs in their storage
        and communication interfaces will only use a single NaN value,
-       quiet NaN with payload 0, which therefore deterministically
-       encodes as 0xf97e00.
+       quiet, non-negative NaN with payload 0, which therefore
+       deterministically encodes as 0xf97e00.
 
    5.  There is no special handling of subnormal values.
 
@@ -433,22 +482,56 @@ Internet-Draft                  CBOR CDE                      April 2025
    that data model.  E.g., an application's ALDR rules can decide that
    it only ever allows a single NaN value that would be encoded as
    0xf97e00, so a CDE implementation focusing on this application would
-   not need to provide processing for other NaN values.  Basing the
+   not even need to provide processing for other NaN values.  Basing the
    definition of both CDE and ALDR rules on the generic data model of
    CBOR also means that there is no effect on the Concise Data
    Definition Language (CDDL) [RFC8610], except where the data
    description is documenting specific encoding decisions for byte
-   strings that carry embedded CBOR.
+   strings that carry embedded CBOR (see Section 4).
+
+3.2.  Additional CDE Constraint from Basic Serialization
+
+   In addition to the encoding constraints from Preferred Serialization,
+   CDE adds the constraint of not using indefinite length encoding from
+   Basic Serialization.  In many encoders, the use of indefinite length
+   encoding is controlled by its configuration and can simply be
+   switched off.
 
 
 
 
 
-
-Bormann                  Expires 4 October 2025                 [Page 8]
+Bormann                 Expires 13 November 2025                [Page 9]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
+
+   Some encoders turn to indefinite length encoding for arrays and maps
+   with 256 or more elements/entries, to use the slightly smaller
+   serialization size indefinite length encoding offers for these cases.
+   Since leaving out support for indefinite length encoding is a common
+   form of partial implementation, this may reduce interoperability.
+   (Indefinite length encoding may also be used conditionally to avoid
+   having to compute the total size ahead of time if the platform uses
+   some form of chunking.)  As CDE uses definite length encoding
+   exclusively, such behavior needs to be turned off for CDE.
+
+3.3.  Additional CDE Constraint from CDE Itself
+
+   In line with Section 4.2.1 of RFC 8949 [STD94], CDE adds the
+   constraint of map ordering to those from Basic Serialization.  In
+   some implementations, where platform representations of maps preserve
+   ordering, this can be achieved using a generic CBOR encoder by pre-
+   ordering all maps to be encoded, as long as that generic encoder also
+   preserves the ordering in maps.  In implementations without these
+   properties, a specialized CBOR encoder may need to be employed.
+
+   Map ordering is a deterministic encoding constraint specific to maps,
+   major type 5, that goes beyond maps' constraints for preferred
+   serialization.  In the definition of a tag being employed, there may
+   also be some deterministic encoding constraints that are not covered
+   by the tag's constraints for Preferred Serialization (see
+   Section 3.1).
 
 4.  CDDL support
 
@@ -467,6 +550,17 @@ Internet-Draft                  CBOR CDE                      April 2025
    [RFC8610] defines control operators to indicate that the contents of
    a byte string carries a CBOR-encoded data item (.cbor) or a sequence
    of CBOR-encoded data items (.cborseq).
+
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 10]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
    CDDL specifications may want to specify that the data items should be
    encoded in Common CBOR Deterministic Encoding.  The present
@@ -496,16 +590,6 @@ Internet-Draft                  CBOR CDE                      April 2025
    control operators that also embody the processing required by those
    ALDR rules, and are encouraged to do so.
 
-
-
-
-
-
-Bormann                  Expires 4 October 2025                 [Page 9]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
 5.  Security Considerations
 
    The security considerations in Section 10 of RFC 8949 [STD94] apply.
@@ -525,6 +609,14 @@ Internet-Draft                  CBOR CDE                      April 2025
    This document requests IANA to register the contents of Table 2 into
    the registry "CDDL Control Operators" of the [IANA.cddl] registry
    group:
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 11]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
                           +---------+-----------+
                           | Name    | Reference |
@@ -554,14 +646,6 @@ Internet-Draft                  CBOR CDE                      April 2025
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-
-
-
-Bormann                  Expires 4 October 2025                [Page 10]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    [IANA.cddl]
               IANA, "Concise Data Definition Language (CDDL)",
               <https://www.iana.org/assignments/cddl>.
@@ -579,6 +663,16 @@ Internet-Draft                  CBOR CDE                      April 2025
    [STD94]    Internet Standard 94,
               <https://www.rfc-editor.org/info/std94>.
               At the time of writing, this STD comprises the following:
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 12]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
               Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", STD 94, RFC 8949,
@@ -610,14 +704,6 @@ Internet-Draft                  CBOR CDE                      April 2025
    [I-D.ietf-cbor-edn-literals]
               Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
               Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 11]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
               literals-16, 8 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
               edn-literals-16>.
@@ -633,6 +719,16 @@ Internet-Draft                  CBOR CDE                      April 2025
    [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
               DOI 10.17487/RFC7493, March 2015,
               <https://www.rfc-editor.org/rfc/rfc7493>.
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 13]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
    [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
@@ -667,13 +763,6 @@ Internet-Draft                  CBOR CDE                      April 2025
               DOI 10.17487/RFC9338, December 2022,
               <https://www.rfc-editor.org/info/rfc9338>.
 
-
-
-Bormann                  Expires 4 October 2025                [Page 12]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    [UAX-15]   "Unicode Normalization Forms", Unicode Standard Annex,
               <https://unicode.org/reports/tr15/>.
 
@@ -685,13 +774,26 @@ Appendix A.  Information Model, Data Model and Serialization
    understand the difference between an information model, a data model
    and serialization.
 
-   +-------------+------------+--------------+---------+--------------+
+
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 14]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
+   +=============+============+==============+=========+==============+
    |             |Abstraction |Example       |Standards|Implementation|
    |             |Level       |              |         |Representation|
-   +-------------+------------+--------------+---------+--------------+
+   +=============+============+==============+=========+==============+
    |Information  |Top level;  |The           |         |              |
    |Model        |conceptual  |temperature of|         |              |
    |             |            |something     |         |              |
+   +-------------+------------+--------------+---------+--------------+
    |Data Model   |Realization |A floating-   |CDDL     |API input to  |
    |             |of          |point number  |         |CBOR encoder  |
    |             |information |representing  |         |library,      |
@@ -699,6 +801,7 @@ Appendix A.  Information Model, Data Model and Serialization
    |             |structures  |temperature   |         |CBOR decoder  |
    |             |and data    |              |         |library       |
    |             |types       |              |         |              |
+   +-------------+------------+--------------+---------+--------------+
    |Serialization|Actual bytes|Encoded CBOR  |CBOR     |Encoded CBOR  |
    |             |encoded for |of a floating-|         |in memory or  |
    |             |transmission|point number  |         |for           |
@@ -720,16 +823,6 @@ Appendix A.  Information Model, Data Model and Serialization
    [RFC8610].  The various types of data items in the data model are
    serialized per RFC 8949 [STD94] to create encoded CBOR data items.
 
-
-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 13]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
 A.1.  Data Model, Encoding Variants and Interoperability with Partial
       Implementations
 
@@ -741,6 +834,14 @@ A.1.  Data Model, Encoding Variants and Interoperability with Partial
       (1, 0.1e1, 1.0, 100e-2) — while it may seem obvious to use 1 for
       this case, this is less clear for 1000000000000000000000000000000
       vs. 1e+30 or 1e30.  (As its serialization also doubles as a human-
+
+
+
+Bormann                 Expires 13 November 2025               [Page 15]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
       readable interface, JSON also allows the introduction of blank
       space for readability.)  The lack of an agreed data model for JSON
       led to the need for a complementary specification documenting an
@@ -755,10 +856,10 @@ A.1.  Data Model, Encoding Variants and Interoperability with Partial
       functionality, e.g., by not implementing all those variations.
 
    To deal with this encoding variation provided for certain data items,
-   CBOR defines a _preferred serialization_ (Section 4.1 of RFC 8949
+   CBOR defines a _Preferred Serialization_ (Section 4.1 of RFC 8949
    [STD94]). _Partial CBOR implementations_ are more likely to
-   interoperate if their encoder uses preferred serialization and the
-   decoder implements decoding at least the preferred serialization as
+   interoperate if their encoder uses Preferred Serialization and the
+   decoder implements decoding at least the Preferred Serialization as
    well.  A specific protocol for a constrained application may specify
    restrictions that allow, e.g., some fields to be of fixed length,
    guaranteeing interoperability even with partial implementations
@@ -770,21 +871,11 @@ A.1.  Data Model, Encoding Variants and Interoperability with Partial
    [STD94]).  For applications that do not perform streaming of this
    kind, variation can be reduced (and often performance improved) by
    only allowing definite-length encoding.  The present document coins
-   the term _basic serialization_ for combining definite-length-only
+   the term _Basic Serialization_ for combining definite-length-only
    with preferred encoding, further reducing the variation that a
    decoder needs to deal with.  The Common Deterministic Encoding, CDE,
    finally combines basic serialization with a deterministic ordering of
    entries in a map (Table 1).
-
-
-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 14]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
 
    Partial implementations of a representation format are quite common
    in embedded applications.  Protocols for embedded applications often
@@ -797,6 +888,15 @@ Internet-Draft                  CBOR CDE                      April 2025
    applications may need to complement deterministic encoding with
    decisions on the deterministic representation of application data
    into CBOR data items, see Appendix B.)
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 16]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
    The increasing constraints on encoding (unconstrained, preferred,
    basic, CDE) are orthogonal to data-model-level data definitions as
@@ -834,14 +934,6 @@ Appendix B.  Application-level Deterministic Representation
       |        date format (as in tag 0).
       |  
       |     *  The receiver MUST decode both formats.
-
-
-
-Bormann                  Expires 4 October 2025                [Page 15]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
       |  
       |  While this specification is interoperable, it lacks
       |  determinism.  There is variability in the application layer
@@ -852,6 +944,15 @@ Internet-Draft                  CBOR CDE                      April 2025
       |  deterministic, allow only one date format (or at least be
       |  deterministic when there is a choice, e.g., by specifying
       |  string format for leap seconds only).
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 17]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
    Application protocols that need to represent a timestamp typically
    choose a specific tag and further constrain its use where necessary
@@ -884,20 +985,6 @@ Internet-Draft                  CBOR CDE                      April 2025
       |  some of these for some application data and different ones for
       |  other application data.
 
-
-
-
-
-
-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 16]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    Applications that require Deterministic Representation, and that
    derive CBOR data items from application data without maintaining a
    record of which choices are to be made when representing these
@@ -915,6 +1002,14 @@ Internet-Draft                  CBOR CDE                      April 2025
       |  representations of semantically equivalent application data,
       |  the ALDR rules choose one of them, potentially requiring a
       |  conversion (Section 4.2 of [RFC9679]):
+
+
+
+Bormann                 Expires 13 November 2025               [Page 18]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
       |  
       |     |  Note: [RFC9052] supports both compressed and uncompressed
       |     |  point representations.  For interoperability,
@@ -946,14 +1041,6 @@ Internet-Draft                  CBOR CDE                      April 2025
       |  implementing a _reduction_ by routine normalization of text
       |  strings.
 
-
-
-
-Bormann                  Expires 4 October 2025                [Page 17]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    ALDR rules (including rules specified in a ALDR ruleset document)
    enable simply using implementations of the common CDE; they do not
    "fork" CBOR in the sense of requiring distinct generic encoder/
@@ -963,12 +1050,21 @@ Internet-Draft                  CBOR CDE                      April 2025
    implementation produces well-formed, deterministically encoded CBOR
    according to [STD94], and existing generic CBOR decoders will
    therefore be able to decode it, including those that check for
-   Deterministic Encoding ("CDE decoders", see also Appendix C).
-   Similarly, generic CBOR encoders will be able to produce valid CBOR
-   that can be ingested by an implementation that enforces an
-   application's ALDR rules if the encoder was handed data model level
-   information from an application that simply conformed to those ALDR
-   rules.
+   Deterministic Encoding ("CDE-checking decoders", see also
+   Appendix C).  Similarly, generic CBOR encoders will be able to
+   produce valid CBOR that can be ingested by an implementation that
+   enforces an application's ALDR rules if the encoder was handed data
+   model level information from an application that simply conformed to
+   those ALDR rules.
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 19]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
    Please note that the separation between standard CBOR processing and
    the processing required by the ALDR rules is a conceptual one:
@@ -1000,23 +1096,13 @@ Appendix C.  Implementers' Checklists
 
    Notes:
 
-
-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 18]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    *  This is largely a restatement of parts of Section 4 of RFC 8949
       [STD94].  The purpose of the restatement is to aid the work of
       implementers, not to redefine anything.
 
-      Preferred Serialization Encoders and Decoders as well as CDE
-      Encoders and Decoders have certain properties that are expressed
-      using RFC2119 keywords in this appendix.
+      Preferred Serialization Encoders as well as CDE Encoders and CDE-
+      checking Decoders have certain properties that are expressed using
+      RFC2119 keywords in this appendix.
 
    *  Duplicate map keys are never valid in CBOR at all (see list item
       "Major type 5" in Section 3.1 of RFC 8949 [STD94]) no matter what
@@ -1026,13 +1112,23 @@ Internet-Draft                  CBOR CDE                      April 2025
       application is the most robust one; achieving this level of
       robustness is a mark of quality of implementation.
 
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 20]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
    *  Preferred serialization and CDE only affect serialization.  They
       do not place any requirements, exclusions, mappings or such on the
       data model level.  ALDR rules such as the ALDR ruleset defined by
       dCBOR are different as they can affect the data model by
       restricting some values and ranges.
 
-   *  CBOR decoders in general (as opposed to "CDE decoders"
+   *  CBOR decoders in general (as opposed to "CDE-checking decoders"
       specifically advertised as supporting CDE) are not required to
       check for preferred serialization or CDE and reject inputs that do
       not fulfill their requirements.  However, in an environment that
@@ -1045,26 +1141,15 @@ Internet-Draft                  CBOR CDE                      April 2025
       rejection of non-conforming inputs.
 
       If a generic decoder needs to be used that does not "support" CDE,
-      a simple (but somewhat clumsy) way to check for proper CDE
-      encoding is to re-encode the decoded data and check for bit-to-bit
-      equality with the original input.
+      a simple (but somewhat clumsy) way to check its input for proper
+      CDE encoding is to re-encode the decoded data with CDE and check
+      for bit-to-bit equality with the original input.
 
 C.1.  Preferred Serialization
 
    In the following, the abbreviation "ai" will be used for the 5-bit
    additional information field in the first byte of an encoded CBOR
    data item, which follows the 3-bit field for the major type.
-
-
-
-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 19]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
 
 C.1.1.  Preferred Serialization Encoders
 
@@ -1085,6 +1170,13 @@ C.1.1.  Preferred Serialization Encoders
 
        *  65536 to 4294967295 and -65537 to -4294967296 MUST be encoded
           only with an additional four bytes (ai = 0x1a).
+
+
+
+Bormann                 Expires 13 November 2025               [Page 21]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
    2.  If floating-point numbers are emitted, the following apply:
 
@@ -1114,17 +1206,9 @@ C.1.1.  Preferred Serialization Encoders
              representation) between the original format and the
              shortest format.  This trimming is performed only
              (preserves the value only) if all the rightmost bits
-
-
-
-Bormann                  Expires 4 October 2025                [Page 20]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
-             removed are zero.  (This will always represent a double or
-             single quiet NaN with a zero NaN payload in a half-
-             precision quiet NaN.)
+             removed are zero.  (This means that a double or single
+             quiet NaN that has a zero NaN payload will always be
+             represented in a half-precision quiet NaN.)
 
    3.  If tags 2 and 3 are supported, the following apply:
 
@@ -1140,21 +1224,33 @@ Internet-Draft                  CBOR CDE                      April 2025
        (This also applies to the use of tags 2 and 3 within other tags,
        such as 4 or 5.)
 
-C.1.2.  Preferred Serialization Decoders
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 22]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
+C.1.2.  Decoders and Preferred Serialization
 
    There are no special requirements that CBOR decoders need to meet to
-   be a Preferred Serialization Decoder.  Partial decoder
-   implementations need to pay attention to at least the following
-   requirements:
+   be what could be called a "Preferred Serialization Decoder".
+
+   Partial decoder implementations that want to accept at least
+   Preferred Serialization need to pay attention to at least the
+   following requirements:
 
    1.  Decoders MUST accept shortest-form encoded arguments (see
        Section 3 of RFC 8949 [STD94]).
 
-   2.  If arrays or maps are supported, definite-length arrays or maps
-       MUST be accepted.
+   2.  If arrays or maps are supported, both definite-length and
+       indefinite-length arrays or maps MUST be accepted.
 
-   3.  If text or byte strings are supported, definite-length text or
-       byte strings MUST be accepted.
+   3.  If text or byte strings are supported, both definite-length and
+       indefinite-length text or byte strings MUST be accepted.
 
    4.  If floating-point numbers are supported, the following apply:
 
@@ -1171,13 +1267,6 @@ C.1.2.  Preferred Serialization Decoders
           and presented to the application (not necessarily in the
           platform number format, if that doesn't support those values).
 
-
-
-Bormann                  Expires 4 October 2025                [Page 21]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
-
    5.  If big numbers (tags 2 and 3) are supported, type 0 and type 1
        integers MUST be accepted where a tag 2 or 3 would be accepted.
        Leading zero bytes in the tag content of a tag 2 or 3 MUST be
@@ -1192,6 +1281,15 @@ C.2.  Basic Serialization
    interoperability with partial (e.g., constrained) CBOR decoder
    implementations.
 
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 23]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
 C.2.1.  Basic Serialization Encoders
 
    The Basic Serialization Encoder requirements are identical to the
@@ -1204,16 +1302,27 @@ C.2.1.  Basic Serialization Encoders
    2.  If text or byte strings are emitted, they MUST use definite-
        length encoding (never indefinite-length).
 
-C.2.2.  Basic Serialization Decoders
+C.2.2.  Decoders and Basic Serialization
 
-   The Basic Serialization Decoder requirements are identical to the
-   Preferred Serialization Decoder requirements.
+   There are no special requirements that CBOR decoders need to meet to
+   be what could be called a "Basic Serialization Decoder".
+
+   Partial decoder implementations that want to accept at least Basic
+   Serialization need to pay attention to the requirements for partial
+   decoder implementations that accept Preferred Serialization, with the
+   following relaxations from the items 2 and 3 of Appendix C.1.2:
+
+   1.  If arrays or maps are supported, definite-length arrays or maps
+       MUST be accepted.
+
+   2.  If text or byte strings are supported, definite-length text or
+       byte strings MUST be accepted.
 
 C.3.  CDE
 
 C.3.1.  CDE Encoders
 
-   1.  CDE encoders MUST only emit CBOR fulfilling the basic
+   1.  CDE encoders MUST only emit CBOR that fulfills the basic
        serialization rules (Appendix C.2.1).
 
    2.  CDE encoders MUST sort maps by the CBOR representation of the map
@@ -1229,9 +1338,12 @@ C.3.1.  CDE Encoders
 
 
 
-Bormann                  Expires 4 October 2025                [Page 22]
+
+
+
+Bormann                 Expires 13 November 2025               [Page 24]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
        Note also that CDE does NOT include a requirement for Unicode
@@ -1240,23 +1352,24 @@ Internet-Draft                  CBOR CDE                      April 2025
        rationale that went into not requiring routine use of Unicode
        normalization processes.
 
-C.3.2.  CDE Decoders
+C.3.2.  CDE-checking Decoders
 
-   The term "CDE Decoder" is a shorthand for a CBOR decoder that
-   advertises _supporting_ CDE (see the start of this appendix).
+   The term "CDE-checking Decoder" is a shorthand for a CBOR decoder
+   that advertises _supporting_ CDE (see the start of this appendix).
 
-   1.  CDE decoders MUST follow the rules for preferred (and thus basic)
-       serialization decoders (Appendix C.1.2).
+   1.  CDE-checking decoders MUST follow the rules for decoders that
+       accept Basic Serialization (Appendix C.2.2) and MUST check the
+       input for keeping the Basic Serialization constraints.
 
-   2.  CDE decoders MUST check for ordering map keys and for basic
-       validity of the CBOR encoding (see Section 5.3.1 of RFC 8949
-       [STD94], which includes a check against duplicate map keys and
-       invalid UTF-8).
+   2.  CDE-checking decoders MUST check for ordering map keys and for
+       basic validity of the CBOR encoding (see Section 5.3.1 of RFC
+       8949 [STD94], which includes a check against duplicate map keys
+       and invalid UTF-8).
 
-       To be called a CDE decoder, it MUST NOT present to the
-       application a decoded data item that fails one of these checks
-       (except maybe via special diagnostic channels with no potential
-       for confusion with a correctly CDE-decoded data item).
+   To be called a CDE-checking decoder, it MUST NOT present to the
+   application a decoded data item that fails one of these checks
+   (except maybe via special diagnostic channels with no potential for
+   confusion with a correctly CDE-decoded data item).
 
 Appendix D.  Encoding Examples
 
@@ -1281,15 +1394,15 @@ D.1.  Integer Value Examples
     |                       |                        | negative       |
     |                       |                        | immediate int  |
     | 23                    | 17                     | Largest        |
-    |                       |                        | unsigned       |
 
 
 
-Bormann                  Expires 4 October 2025                [Page 23]
+Bormann                 Expires 13 November 2025               [Page 25]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
+    |                       |                        | unsigned       |
     |                       |                        | immediate int  |
     | -24                   | 37                     | Smallest       |
     |                       |                        | negative       |
@@ -1337,15 +1450,15 @@ Internet-Draft                  CBOR CDE                      April 2025
     |                       |                        | negative       |
     |                       |                        | eight-byte int |
     | 18446744073709551615  | 1bffffffffffffffff     | Largest        |
-    |                       |                        | unsigned       |
 
 
 
-Bormann                  Expires 4 October 2025                [Page 24]
+Bormann                 Expires 13 November 2025               [Page 26]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
+    |                       |                        | unsigned       |
     |                       |                        | eight-byte int |
     | -18446744073709551616 | 3bffffffffffffffff     | Smallest       |
     |                       |                        | negative       |
@@ -1393,15 +1506,15 @@ D.2.  Floating Point Value Examples
    |                           |                    | (subnormal)      |
    | 1.1754942106924411e-38    | fa007fffff         | Largest          |
    |                           |                    | positive         |
-   |                           |                    | subnormal        |
 
 
 
-Bormann                  Expires 4 October 2025                [Page 25]
+Bormann                 Expires 13 November 2025               [Page 27]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
+   |                           |                    | subnormal        |
    |                           |                    | 32-bit float     |
    | 1.1754943508222875e-38    | fa00800000         | Smallest non-    |
    |                           |                    | subnormal        |
@@ -1449,15 +1562,15 @@ Internet-Draft                  CBOR CDE                      April 2025
    |                           |                    | negative         |
    |                           |                    | subnormal        |
    |                           |                    | 16-bit float     |
-   | -5.960464477539064e-8     | fbbe70000000000001 | -"-              |
 
 
 
-Bormann                  Expires 4 October 2025                [Page 26]
+Bormann                 Expires 13 November 2025               [Page 28]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
+   | -5.960464477539064e-8     | fbbe70000000000001 | -"-              |
    | -5.960465188081798e-8     | fab3800001         | -"-              |
    | 0.0000609755516052246     | fb3f0ff7ffffffffff | Adjacent to      |
    |                           |                    | largest          |
@@ -1499,45 +1612,107 @@ Internet-Draft                  CBOR CDE                      April 2025
 
 D.3.  Failing Examples
 
-   +-----------------------+--------------------------+---------------+
-   | EDN                   | CBOR (hex)               | Comment       |
-   +-----------------------+--------------------------+---------------+
-   | {"b":0,"a":1}         | a2616200616101           | Incorrect map |
-   |                       |                          | key ordering  |
-   | 255                   | 1900ff                   | Integer not   |
-   |                       |                          | in preferred  |
+    +-----------------------+--------------------------+--------------+
+    | EDN                   | CBOR (hex)               | Comment      |
+    +-----------------------+--------------------------+--------------+
+    | {"b":0,"a":1}         | a2616200616101           | Incorrect    |
+    |                       |                          | map key      |
+    |                       |                          | ordering     |
 
 
 
-Bormann                  Expires 4 October 2025                [Page 27]
+Bormann                 Expires 13 November 2025               [Page 29]
 
-Internet-Draft                  CBOR CDE                      April 2025
+Internet-Draft                  CBOR CDE                        May 2025
 
 
-   |                       |                          | encoding      |
-   | -18446744073709551617 | c34a00010000000000000000 | Bigint with   |
-   |                       |                          | leading zero  |
-   |                       |                          | bytes         |
-   | 10.5                  | fa41280000               | Not in        |
-   |                       |                          | shortest      |
-   |                       |                          | encoding      |
-   | NaN                   | fa7fc00000               | Not in        |
-   |                       |                          | shortest      |
-   |                       |                          | encoding      |
-   | 65536                 | c243010000               | Integer value |
-   |                       |                          | too small for |
-   |                       |                          | bigint        |
-   | (_ h'01', h'0203')    | 5f4101420203ff           | Indefinite    |
-   |                       |                          | length        |
-   |                       |                          | encoding      |
-   | (Not CBOR)            | f818                     | Simple values |
-   |                       |                          | 24..31 not in |
-   |                       |                          | use           |
-   | (Not CBOR)            | fc                       | Reserved (ai  |
-   |                       |                          | = 28..30)     |
-   +-----------------------+--------------------------+---------------+
+    | [4, 5]                | 98020405                 | Array length |
+    |                       |                          | not in       |
+    |                       |                          | preferred    |
+    |                       |                          | encoding     |
+    | 255                   | 1900ff                   | Integer not  |
+    |                       |                          | in preferred |
+    |                       |                          | encoding     |
+    | -18446744073709551617 | c34a00010000000000000000 | Bigint with  |
+    |                       |                          | leading zero |
+    |                       |                          | bytes        |
+    | 10.5                  | fa41280000               | Not in       |
+    |                       |                          | preferred    |
+    |                       |                          | encoding     |
+    | NaN                   | fa7fc00000               | Not in       |
+    |                       |                          | preferred    |
+    |                       |                          | encoding     |
+    | 65536                 | c243010000               | Integer      |
+    |                       |                          | value too    |
+    |                       |                          | small for    |
+    |                       |                          | bigint       |
+    | (_ h'01', h'0203')    | 5f4101420203ff           | Indefinite   |
+    |                       |                          | length       |
+    |                       |                          | encoding     |
+    | (Not CBOR)            | f818                     | Simple       |
+    |                       |                          | values       |
+    |                       |                          | 24..31 not   |
+    |                       |                          | in use       |
+    | (Not CBOR)            | fc                       | Reserved (ai |
+    |                       |                          | = 28..30)    |
+    +-----------------------+--------------------------+--------------+
 
-                        Table 6: Failing Examples
+                         Table 6: Failing Examples
+
+Appendix E.  Examples for Preferred Serialization of Integers
+
+   This appendix looks at the set of encoded CBOR data items that
+   represent the integer number 1.  Preferred Serialization chooses one
+   of them (0x01), which is then always used to encode the number.  The
+   CDE encoding constraints include those of preferred serialization.  A
+   CDE-checking decoder checks that no other serialization is being used
+   in the encoded data item being decoded.
+
+
+
+
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 30]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
+
+        +===================================+=====================+
+        | Serialization of integer number 1 | Preferred?          |
+        +===================================+=====================+
+        | 0x01                              | yes (shortest mt0)  |
+        +-----------------------------------+---------------------+
+        | 0x1801, 0x190001, 0x1a00000001,   | no (mt0, but not    |
+        | 0x1b0000000000000001              | shortest argument)  |
+        +-----------------------------------+---------------------+
+        | 0xc24101                          | no (could use mt0)  |
+        +-----------------------------------+---------------------+
+        | 0xc2420001, 0xc243000001, etc.    | no (could use mt0,  |
+        |                                   | uses leading zeros) |
+        +-----------------------------------+---------------------+
+        | 0xc25f41004101ff, and similar     | no (could use mt0,  |
+        |                                   | uses leading zeros) |
+        +-----------------------------------+---------------------+
+
+                Table 7: Serializations of integer number 1
+
+   For the integer number 100000000000000000000 (1 with 20 decimal
+   zeros), the only _basic_ serialization is:
+
+   C2                       # tag(2)
+      49                    # bytes(9)
+         056BC75E2D63100000 #
+
+   (Note that, in addition to this serialization, there are multiple
+   serializations that would also count as _preferred_ serializations,
+   as the preferred serialization constraint by itself does not exclude
+   indefinite length encoding of the byte string that is the content of
+   tag 2.)
 
 List of Tables
 
@@ -1547,6 +1722,21 @@ List of Tables
    4.  Integer Value Examples (Table 4)
    5.  Floating Point Value Examples (Table 5)
    6.  Failing Examples (Table 6)
+   7.  Serializations of integer number 1 (Table 7)
+
+
+
+
+
+
+
+
+
+
+Bormann                 Expires 13 November 2025               [Page 31]
+
+Internet-Draft                  CBOR CDE                        May 2025
+
 
 Acknowledgments
 
@@ -1561,14 +1751,6 @@ Acknowledgments
    Appendix D.
 
 Contributors
-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 28]
-
-Internet-Draft                  CBOR CDE                      April 2025
-
 
    Laurence Lundblade
    Security Theory LLC
@@ -1607,18 +1789,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Bormann                  Expires 4 October 2025                [Page 29]
+Bormann                 Expires 13 November 2025               [Page 32]
