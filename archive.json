@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-11T01:40:03.736634+00:00",
+  "timestamp": "2025-05-13T01:36:32.346749+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -594,15 +594,15 @@
       "id": "I_kwDOJ8fYd8602mTA",
       "title": "Floating-point clarifications really apply to preferred/basic serialization",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/33",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I think we should preserve the layering of CDER/CDE over basic/preferred where the only difference between the two is map sorting.\n\nThat implies all the clarifications on floating-point should be for basic/preferred serialization, not for CDER/CDE. \n\nA possible solution is to move those clarifications out of section 3 and into section 2. \n\nSome of the other discussion on floating-point is general high-level commentary and maybe can stay in section 3; NaN handling is the most obvious thing to be applied to preferred/basic serialization.\n",
       "createdAt": "2025-05-01T16:26:11Z",
-      "updatedAt": "2025-05-03T12:10:21Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-12T17:42:37Z",
+      "closedAt": "2025-05-12T17:42:37Z",
       "comments": [
         {
           "author": "cabo",
@@ -1564,24 +1564,26 @@
       "id": "PR_kwDOJ8fYd86U0qmr",
       "title": "Close #33",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/34",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Section 3: Don't try to hide the fact that most clarifications in Section 3 are about Preferred Serialization; explain why these are needed specifically for CDE.\r\n\r\nAttendant editorial fixes:\r\n\r\n* s/CDE decoder/CDE-checking decoder/\r\n* Always capitalize ___ed Serialization\r\n* reduce use of \"shortest\" in examples when we mean preferred",
       "createdAt": "2025-05-03T12:14:34Z",
-      "updatedAt": "2025-05-10T18:44:27Z",
+      "updatedAt": "2025-05-12T17:42:36Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "653a6effaa83665bd1accb4bcd25295729542531",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "section3",
-      "headRefOid": "4db816fee93f71c2e51d3610629cc502dad3dace",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5e4a569deac5d65f03b691a0280adac617a9c31f",
+      "closedAt": "2025-05-12T17:42:36Z",
+      "mergedAt": "2025-05-12T17:42:36Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "c7f0006ea9a17c779195dc2b18c3835020cbc696"
+      },
       "comments": [],
       "reviews": []
     }
