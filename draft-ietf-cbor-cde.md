@@ -1032,6 +1032,31 @@ the preferred serialization constraint by itself does not exclude
 indefinite length encoding of the byte string that is the content of
 tag 2.)
 
+# Example Code for Encoding into 16-bit Floating Point
+
+{{Appendix D (Half-Precision) of RFC8949@-cbor}} provides example C and
+Python code for decoding 16-bit ("Half Precision", binary16) floating point
+numbers.
+Providing this code was considered important at the time to aid in
+the creation of generic decoders.
+
+Given that CDE implementations that support floating point Numbers not
+only need to decode, but also to encode their 16-bit format, this
+appendix provides example C code to convert a floating point number
+that is in 64-bit form ("Double Precision", binary64) into binary16.
+
+If such a conversion is not possible (i.e., there is no 16-bit
+representation for the 64-bit value given), the function
+`try_float16_encode` returns `-1`.
+Otherwise it returns a two-byte integer (range `0x0000` to `0xFFFF`)
+that, prefixed with `0xF9`, is suitable to encode the value.
+
+~~~ c
+{::include half-encode.c}
+~~~
+{: #half-encode title="Example C Code for a Half-Precision Encoder"}
+
+
 {::include-all cde-lists.md}
 
 # Acknowledgments
