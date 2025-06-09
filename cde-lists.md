@@ -1,4 +1,10 @@
 
+# List of Figures
+{:unnumbered}
+
+{:compact}
+1. [Example C Code for a Half-Precision Encoder](#half-encode)
+
 # List of Tables
 {:unnumbered}
 
