@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-13T01:36:32.346749+00:00",
+  "timestamp": "2025-06-10T01:39:47.050640+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1584,6 +1584,32 @@
       "mergeCommit": {
         "oid": "c7f0006ea9a17c779195dc2b18c3835020cbc696"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOJ8fYd86Zvzih",
+      "title": "Add float16 encoder example code",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/35",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-09T20:46:16Z",
+      "updatedAt": "2025-06-09T20:46:16Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "91a45666cac32e0fd20bbf8283bb046e7cef0c02",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "encode-f16",
+      "headRefOid": "18cc965aab108f87b97f60c202739562b328ed4e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
