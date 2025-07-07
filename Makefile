@@ -16,7 +16,7 @@ endif
 endif
 
 cde-lists.md: draft-ietf-cbor-cde.xml
-	kramdown-rfc-extract-figures-tables $< >$@.new
+	kramdown-rfc-extract-figures-tables -trfc $< >$@.new
 	mv $@.new $@
 
 example-tables.md: example-table-input.csv generate-tables.rb
