@@ -12,24 +12,24 @@ reading material (such as use cases) for Deterministic Encoding.
 
 ## CBOR Common Deterministic Encoding (CDE)
 
-* [Editor's Copy](https://cbor-wg.github.io/det/#go.draft-ietf-cbor-cde.html)
+* [Editor's Copy](https://cbor-wg.github.io/draft-ietf-cbor-cde/#go.draft-ietf-cbor-cde.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-cbor-cde)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde)
-* [Compare Editor's Copy to Individual Draft](https://cbor-wg.github.io/det/#go.draft-ietf-cbor-cde.diff)
+* [WG Draft](https://datatracker.ietf.org/doc/html/draft-ietf-cbor-cde)
+* [Compare Editor's Copy to WG Draft](https://cbor-wg.github.io/draft-ietf-cbor-cde/#go.draft-ietf-cbor-cde.diff)
 
 
 ## CBOR: On Deterministic Encoding and Representation
 
-* [Editor's Copy](https://cbor-wg.github.io/det/#go.draft-bormann-cbor-det.html)
+* [Editor's Copy](https://cbor-wg.github.io/draft-ietf-cbor-cde/#go.draft-bormann-cbor-det.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-bormann-cbor-det)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det)
-* [Compare Editor's Copy to Individual Draft](https://cbor-wg.github.io/det/#go.draft-bormann-cbor-det.diff)
+* [Compare Editor's Copy to Individual Draft](https://cbor-wg.github.io/draft-ietf-cbor-cde/#go.draft-bormann-cbor-det.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/cbor-wg/det/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/cbor-wg/draft-ietf-cbor-cde/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
