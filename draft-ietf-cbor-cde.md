@@ -81,8 +81,9 @@ informative:
     its Section 4.2, providing some flexibility for application specific
     decisions.
     To facilitate Deterministic Encoding to be offered as a selectable
-    feature of generic encoders, the present document defines a
-    CBOR Common Deterministic Encoding (CDE) that can be shared by a
+    feature of generic encoders, the present document documents the
+    Best Current Practice for
+    CBOR Common Deterministic Encoding (CDE), which can be shared by a
     large set of applications with potentially diverging detailed
     requirements.
     It also defines the term "Basic Serialization", which stops short of the
@@ -118,7 +119,7 @@ ALDR rules are situated at the application-level, i.e., on top of the
 CDE, and address requirements on deterministic representation of
 application data that are specific to an application or a set of
 applications.
-ALDR rules are often provided as part of a specification for a CBOR-based
+ALDR rules are routinely provided as part of a specification for a CBOR-based
 protocol, or, if needed, can be provided by referencing a shared "ALDR
 ruleset" that is defined in a separate document.
 
@@ -129,10 +130,13 @@ can use to check their CDE implementations.
 of Preferred Serialization that may be used by encoders to hit a sweet
 spot for maximizing interoperability with partial (e.g., constrained)
 CBOR decoder implementations.
-{{cde}} further restricts Basic Serialization to arrive at CDE.
+{{cde}} further adds constraints to Basic Serialization to arrive at CDE.
 
 {{examples}} provides a few examples for CBOR data items in CDE
-encoding, as well as a few failing examples.
+encoding, as well as a few failing examples; {{exa-pref}} examines
+preferred serialization of the number `1` in more detail.
+For reference by implementers, {{encode-f16}} shows an implementation
+that encodes a floating point number as "half precision" binary16.
 
 ## Conventions and Definitions
 
@@ -236,8 +240,9 @@ to amplify the benefits of Preferred or Basic Serialization.
 
 # CBOR Common Deterministic Encoding (CDE) {#dep}
 
-This specification defines the *CBOR Common Deterministic Encoding*
-(CDE) based on the _Core Deterministic Encoding
+This specification documents the *CBOR Common Deterministic Encoding*
+(CDE) Best Current Practice that is
+based on the _Core Deterministic Encoding
 Requirements_ defined for CBOR in
 {{Section 4.2.1 of RFC8949@-cbor}}.
 
@@ -312,7 +317,7 @@ A particularly difficult field to obtain deterministic encoding for is
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See {{Section 3.2.2 of -det}} for more details.
-{{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices that needed to
+{{Section 4.2.2 of RFC8949@-cbor}} presents a number of choices that need to
 be made to obtain the CBOR Common Deterministic Encoding (CDE).
 Here, CDE entirely recurs to Preferred Serialization and
 does *not* itself define any additional constraints.
@@ -337,7 +342,7 @@ Specifically, CDE specifies (in the order of the bullet list at the end of {{Sec
    In CDE, there is no special handling of NaN values, except a
    clarification that the
    Preferred Serialization rules also apply to NaNs (with zero or
-   non-zero payloads), using the canonical encoding of NaNs as defined
+   non-zero payloads), using the encoding of NaNs as defined
    in Section 6.2.1 of {{IEEE754}}.
    Specifically, this means that shorter forms of encodings for a NaN
    are used when that can be achieved by only removing trailing zeros
@@ -793,7 +798,7 @@ Notes:
   advertised as supporting CDE)
   are not required to check for preferred
   serialization or CDE and reject inputs that do not fulfill
-  their requirements.
+  these requirements.
   However, in an environment that employs deterministic encoding,
   employing non-checking CBOR decoders negates many of its benefits.
   Decoder implementations that advertise "support" for preferred
@@ -1032,7 +1037,7 @@ the preferred serialization constraint by itself does not exclude
 indefinite length encoding of the byte string that is the content of
 tag 2.)
 
-# Example Code for Encoding into 16-bit Floating Point
+# Example Code for Encoding into 16-bit Floating Point {#encode-f16}
 
 {{Appendix D (Half-Precision) of RFC8949@-cbor}} provides example C and
 Python code for decoding 16-bit ("Half Precision", binary16) floating point
