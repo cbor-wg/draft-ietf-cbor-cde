@@ -4,8 +4,8 @@
 
 CBOR                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Best Current Practice                       9 June 2025
-Expires: 11 December 2025
+Intended status: Best Current Practice                       7 July 2025
+Expires: 8 January 2026
 
 
                 CBOR Common Deterministic Encoding (CDE)
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Bormann                 Expires 11 December 2025                [Page 1]
+Bormann                  Expires 8 January 2026                 [Page 1]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    Internet-Drafts are draft documents valid for a maximum of six months
@@ -63,7 +63,7 @@ Internet-Draft                  CBOR CDE                       June 2025
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 December 2025.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Bormann                 Expires 11 December 2025                [Page 2]
+Bormann                  Expires 8 January 2026                 [Page 2]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
      C.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  24
@@ -165,9 +165,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025                [Page 3]
+Bormann                  Expires 8 January 2026                 [Page 3]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    to an application or a set of applications.  ALDR rules are often
@@ -221,9 +221,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025                [Page 4]
+Bormann                  Expires 8 January 2026                 [Page 4]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
 2.  Encoding Choices in CBOR
@@ -277,9 +277,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025                [Page 5]
+Bormann                  Expires 8 January 2026                 [Page 5]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
         +=========================+================+==============+
@@ -333,9 +333,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025                [Page 6]
+Bormann                  Expires 8 January 2026                 [Page 6]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    As discussed in Section 2, CDE combines the constraints of Preferred
@@ -389,9 +389,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025                [Page 7]
+Bormann                  Expires 8 January 2026                 [Page 7]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    A particularly difficult field to obtain deterministic encoding for
@@ -445,9 +445,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025                [Page 8]
+Bormann                  Expires 8 January 2026                 [Page 8]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    5.  There is no special handling of subnormal values.
@@ -501,9 +501,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025                [Page 9]
+Bormann                  Expires 8 January 2026                 [Page 9]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
 3.3.  Additional CDE Constraint from CDE Itself
@@ -557,9 +557,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 10]
+Bormann                  Expires 8 January 2026                [Page 10]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    More importantly, if the encoded data item also needs to have a
@@ -613,9 +613,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 11]
+Bormann                  Expires 8 January 2026                [Page 11]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    [BCP14]    Best Current Practice 14,
@@ -669,16 +669,16 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 12]
+Bormann                  Expires 8 January 2026                [Page 12]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    [I-D.bormann-cbor-numbers]
               Bormann, C., "On Numbers in CBOR", Work in Progress,
-              Internet-Draft, draft-bormann-cbor-numbers-01, 8 January
+              Internet-Draft, draft-bormann-cbor-numbers-02, 7 July
               2025, <https://datatracker.ietf.org/doc/html/draft-
-              bormann-cbor-numbers-01>.
+              bormann-cbor-numbers-02>.
 
    [I-D.bormann-dispatch-modern-network-unicode]
               Bormann, C., "Modern Network Unicode", Work in Progress,
@@ -725,9 +725,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 13]
+Bormann                  Expires 8 January 2026                [Page 13]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    [RFC9741]  Bormann, C., "Concise Data Definition Language (CDDL):
@@ -781,9 +781,9 @@ Appendix A.  Information Model, Data Model and Serialization
 
 
 
-Bormann                 Expires 11 December 2025               [Page 14]
+Bormann                  Expires 8 January 2026                [Page 14]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    +=============+============+==============+=========+==============+
@@ -837,9 +837,9 @@ A.1.  Data Model, Encoding Variants and Interoperability with Partial
 
 
 
-Bormann                 Expires 11 December 2025               [Page 15]
+Bormann                  Expires 8 January 2026                [Page 15]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
       readable interface, JSON also allows the introduction of blank
@@ -893,9 +893,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 16]
+Bormann                  Expires 8 January 2026                [Page 16]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    The increasing constraints on encoding (unconstrained, preferred,
@@ -949,9 +949,9 @@ Appendix B.  Application-level Deterministic Representation
 
 
 
-Bormann                 Expires 11 December 2025               [Page 17]
+Bormann                  Expires 8 January 2026                [Page 17]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    Application protocols that need to represent a timestamp typically
@@ -1005,9 +1005,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 18]
+Bormann                  Expires 8 January 2026                [Page 18]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
       |  
@@ -1061,9 +1061,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 19]
+Bormann                  Expires 8 January 2026                [Page 19]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    Please note that the separation between standard CBOR processing and
@@ -1117,9 +1117,9 @@ Appendix C.  Implementers' Checklists
 
 
 
-Bormann                 Expires 11 December 2025               [Page 20]
+Bormann                  Expires 8 January 2026                [Page 20]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    *  Preferred serialization and CDE only affect serialization.  They
@@ -1173,9 +1173,9 @@ C.1.1.  Preferred Serialization Encoders
 
 
 
-Bormann                 Expires 11 December 2025               [Page 21]
+Bormann                  Expires 8 January 2026                [Page 21]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    2.  If floating-point numbers are emitted, the following apply:
@@ -1229,9 +1229,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 22]
+Bormann                  Expires 8 January 2026                [Page 22]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
 C.1.2.  Decoders and Preferred Serialization
@@ -1285,9 +1285,9 @@ C.2.  Basic Serialization
 
 
 
-Bormann                 Expires 11 December 2025               [Page 23]
+Bormann                  Expires 8 January 2026                [Page 23]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
 C.2.1.  Basic Serialization Encoders
@@ -1341,9 +1341,9 @@ C.3.1.  CDE Encoders
 
 
 
-Bormann                 Expires 11 December 2025               [Page 24]
+Bormann                  Expires 8 January 2026                [Page 24]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
        Note also that CDE does NOT include a requirement for Unicode
@@ -1397,9 +1397,9 @@ D.1.  Integer Value Examples
 
 
 
-Bormann                 Expires 11 December 2025               [Page 25]
+Bormann                  Expires 8 January 2026                [Page 25]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
     |                       |                        | unsigned       |
@@ -1453,9 +1453,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 26]
+Bormann                  Expires 8 January 2026                [Page 26]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
     |                       |                        | unsigned       |
@@ -1509,9 +1509,9 @@ D.2.  Floating Point Value Examples
 
 
 
-Bormann                 Expires 11 December 2025               [Page 27]
+Bormann                  Expires 8 January 2026                [Page 27]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    |                           |                    | subnormal        |
@@ -1565,9 +1565,9 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 
 
-Bormann                 Expires 11 December 2025               [Page 28]
+Bormann                  Expires 8 January 2026                [Page 28]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    | -5.960464477539064e-8     | fbbe70000000000001 | -"-              |
@@ -1621,9 +1621,9 @@ D.3.  Failing Examples
 
 
 
-Bormann                 Expires 11 December 2025               [Page 29]
+Bormann                  Expires 8 January 2026                [Page 29]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
     | [4, 5]                | 98020405                 | Array length |
@@ -1677,9 +1677,9 @@ Appendix E.  Examples for Preferred Serialization of Integers
 
 
 
-Bormann                 Expires 11 December 2025               [Page 30]
+Bormann                  Expires 8 January 2026                [Page 30]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
         +===================================+=====================+
@@ -1733,9 +1733,9 @@ Appendix F.  Example Code for Encoding into 16-bit Floating Point
 
 
 
-Bormann                 Expires 11 December 2025               [Page 31]
+Bormann                  Expires 8 January 2026                [Page 31]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
    If such a conversion is not possible (i.e., there is no 16-bit
@@ -1770,17 +1770,17 @@ Internet-Draft                  CBOR CDE                       June 2025
 
 List of Figures
 
-   1.  Example C Code for a Half-Precision Encoder (Figure 1)
+   Figure 1:  Example C Code for a Half-Precision Encoder
 
 List of Tables
 
-   1.  Constraints on the Serialization of CBOR (Table 1)
-   2.  New control operators to be registered (Table 2)
-   3.  A three-layer model of information representation (Table 3)
-   4.  Integer Value Examples (Table 4)
-   5.  Floating Point Value Examples (Table 5)
-   6.  Failing Examples (Table 6)
-   7.  Serializations of integer number 1 (Table 7)
+   Table 1:   Constraints on the Serialization of CBOR
+   Table 2:   New control operators to be registered
+   Table 3:   A three-layer model of information representation
+   Table 4:   Integer Value Examples
+   Table 5:   Floating Point Value Examples
+   Table 6:   Failing Examples
+   Table 7:   Serializations of integer number 1
 
 
 
@@ -1789,9 +1789,9 @@ List of Tables
 
 
 
-Bormann                 Expires 11 December 2025               [Page 32]
+Bormann                  Expires 8 January 2026                [Page 32]
 
-Internet-Draft                  CBOR CDE                       June 2025
+Internet-Draft                  CBOR CDE                       July 2025
 
 
 Acknowledgments
@@ -1845,4 +1845,4 @@ Author's Address
 
 
 
-Bormann                 Expires 11 December 2025               [Page 33]
+Bormann                  Expires 8 January 2026                [Page 33]

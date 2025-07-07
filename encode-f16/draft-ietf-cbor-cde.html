@@ -20,11 +20,11 @@ potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders. 
     ' name="description">
-<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="xml2rfc 3.29.0" name="generator">
 <meta content="draft-ietf-cbor-cde-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.1
-    Python 3.12.10
+  xml2rfc 3.29.0
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -33,7 +33,7 @@ variability needing to be handled by decoders.
     platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
+    requests 2.32.4
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1054,11 +1054,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">June 2025</td>
+<td class="right">July 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 11 December 2025</td>
+<td class="center">Expires 8 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-09" class="published">9 June 2025</time>
+<time datetime="2025-07-07" class="published">7 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-11">11 December 2025</time></dd>
+<dd class="expires"><time datetime="2026-01-08">8 January 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1600,7 +1600,7 @@ in Section 6.2.1 of <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</sp
 Specifically, this means that shorter forms of encodings for a NaN
 are used when that can be achieved by only removing trailing zeros
 in the NaN payload (example serializations are available in
-<span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-01#appendix-A.1.2" class="relref">Appendix A.1.2</a> of [<a href="#I-D.bormann-cbor-numbers" class="cite xref">I-D.bormann-cbor-numbers</a>]</span>).
+<span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-02#appendix-A.1.2" class="relref">Appendix A.1.2</a> of [<a href="#I-D.bormann-cbor-numbers" class="cite xref">I-D.bormann-cbor-numbers</a>]</span>).
 Further clarifying a "should"-level statement in Section 6.2.1 of
 <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>, the CBOR encoding always uses a leading bit of 1 in the
 significand to encode a quiet NaN; the use of signaling NaNs by
@@ -1842,7 +1842,7 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dd class="break"></dd>
 <dt id="I-D.bormann-cbor-numbers">[I-D.bormann-cbor-numbers]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"On Numbers in CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-numbers-01</span>, <time datetime="2025-01-08" class="refDate">8 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-01">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"On Numbers in CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-numbers-02</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-02">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-numbers-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.bormann-dispatch-modern-network-unicode">[I-D.bormann-dispatch-modern-network-unicode]</dt>
         <dd>
@@ -3098,11 +3098,14 @@ int try_float16_encode(unsigned long b64) {
       <h2 id="name-list-of-figures">
 <a href="#name-list-of-figures" class="section-name selfRef">List of Figures</a>
       </h2>
-<ol start="1" type="1" class="compact type-1" id="appendix-G-1">
-<li id="appendix-G-1.1">
-          <p id="appendix-G-1.1.1"><span><a href="#half-encode" class="internal xref">Example C Code for a Half-Precision Encoder</a> (<a href="#half-encode" class="auto internal xref">Figure 1</a>)</span><a href="#appendix-G-1.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ol>
+<span class="break"></span><dl class="dlCompact dlParallel" id="appendix-G-1">
+        <dt id="appendix-G-1.1">
+<a href="#half-encode" class="auto internal xref">Figure 1</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-G-1.2">
+          <p id="appendix-G-1.2.1"><a href="#half-encode" class="internal xref">Example C Code for a Half-Precision Encoder</a><a href="#appendix-G-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="list-of-tables">
@@ -3110,29 +3113,50 @@ int try_float16_encode(unsigned long b64) {
       <h2 id="name-list-of-tables">
 <a href="#name-list-of-tables" class="section-name selfRef">List of Tables</a>
       </h2>
-<ol start="1" type="1" class="compact type-1" id="appendix-H-1">
-<li id="appendix-H-1.1">
-          <p id="appendix-H-1.1.1"><span><a href="#tab-constraints" class="internal xref">Constraints on the Serialization of CBOR</a> (<a href="#tab-constraints" class="auto internal xref">Table 1</a>)</span><a href="#appendix-H-1.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="appendix-H-1.2">
-          <p id="appendix-H-1.2.1"><span><a href="#tbl-iana-reqs" class="internal xref">New control operators to be registered</a> (<a href="#tbl-iana-reqs" class="auto internal xref">Table 2</a>)</span><a href="#appendix-H-1.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="appendix-H-1.3">
-          <p id="appendix-H-1.3.1"><span><a href="#layers" class="internal xref">A three-layer model of information representation</a> (<a href="#layers" class="auto internal xref">Table 3</a>)</span><a href="#appendix-H-1.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="appendix-H-1.4">
-          <p id="appendix-H-1.4.1"><span><a href="#tab-example-int" class="internal xref">Integer Value Examples</a> (<a href="#tab-example-int" class="auto internal xref">Table 4</a>)</span><a href="#appendix-H-1.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="appendix-H-1.5">
-          <p id="appendix-H-1.5.1"><span><a href="#tab-example-flt" class="internal xref">Floating Point Value Examples</a> (<a href="#tab-example-flt" class="auto internal xref">Table 5</a>)</span><a href="#appendix-H-1.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="appendix-H-1.6">
-          <p id="appendix-H-1.6.1"><span><a href="#tab-example-bad" class="internal xref">Failing Examples</a> (<a href="#tab-example-bad" class="auto internal xref">Table 6</a>)</span><a href="#appendix-H-1.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="appendix-H-1.7">
-          <p id="appendix-H-1.7.1"><span><a href="#tbl-ser-1" class="internal xref">Serializations of integer number 1</a> (<a href="#tbl-ser-1" class="auto internal xref">Table 7</a>)</span><a href="#appendix-H-1.7.1" class="pilcrow">¶</a></p>
-</li>
-      </ol>
+<span class="break"></span><dl class="dlCompact dlParallel" id="appendix-H-1">
+        <dt id="appendix-H-1.1">
+<a href="#tab-constraints" class="auto internal xref">Table 1</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-H-1.2">
+          <p id="appendix-H-1.2.1"><a href="#tab-constraints" class="internal xref">Constraints on the Serialization of CBOR</a><a href="#appendix-H-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-H-1.3">
+<a href="#tbl-iana-reqs" class="auto internal xref">Table 2</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-H-1.4">
+          <p id="appendix-H-1.4.1"><a href="#tbl-iana-reqs" class="internal xref">New control operators to be registered</a><a href="#appendix-H-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-H-1.5">
+<a href="#layers" class="auto internal xref">Table 3</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-H-1.6">
+          <p id="appendix-H-1.6.1"><a href="#layers" class="internal xref">A three-layer model of information representation</a><a href="#appendix-H-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-H-1.7">
+<a href="#tab-example-int" class="auto internal xref">Table 4</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-H-1.8">
+          <p id="appendix-H-1.8.1"><a href="#tab-example-int" class="internal xref">Integer Value Examples</a><a href="#appendix-H-1.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-H-1.9">
+<a href="#tab-example-flt" class="auto internal xref">Table 5</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-H-1.10">
+          <p id="appendix-H-1.10.1"><a href="#tab-example-flt" class="internal xref">Floating Point Value Examples</a><a href="#appendix-H-1.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-H-1.11">
+<a href="#tab-example-bad" class="auto internal xref">Table 6</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-H-1.12">
+          <p id="appendix-H-1.12.1"><a href="#tab-example-bad" class="internal xref">Failing Examples</a><a href="#appendix-H-1.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-H-1.13">
+<a href="#tbl-ser-1" class="auto internal xref">Table 7</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-H-1.14">
+          <p id="appendix-H-1.14.1"><a href="#tbl-ser-1" class="internal xref">Serializations of integer number 1</a><a href="#appendix-H-1.14.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="acknowledgments">
