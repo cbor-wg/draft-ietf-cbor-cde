@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-08T01:40:36.134794+00:00",
+  "timestamp": "2025-07-10T01:41:45.344500+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -612,6 +612,22 @@
           "updatedAt": "2025-05-03T12:10:20Z"
         }
       ]
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOJ8fYd86_icbx",
+      "title": "Narrowing and widening of NaNs",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/36",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "<https://mailarchive.ietf.org/arch/msg/cbor/JupMiR9B3UIbkbcWWZ1vadUhA1c>\n\nPR #35 (which I merged prematurely and is now part of \u201312) offers one view of the CBOR way to widen and narrow NaNs.\nBut the situation for non-zero payloads is complex, as the above mail identifies.\n\nWe probably need to spend more time to understand the requirements that will shape the right answer.\n",
+      "createdAt": "2025-07-08T18:50:58Z",
+      "updatedAt": "2025-07-08T18:50:58Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
