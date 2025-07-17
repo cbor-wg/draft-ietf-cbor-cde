@@ -347,7 +347,7 @@ Specifically, CDE specifies (in the order of the bullet list at the end of {{Sec
    Specifically, this means that shorter forms of encodings for a NaN
    are used when that can be achieved by only removing trailing zeros
    in the NaN payload (example serializations are available in
-   {{Section A.1.2 of -numbers}}).
+   {{Section A.1.2 of -numbers}}; see also the aside below).
    Further clarifying a "should"-level statement in Section 6.2.1 of
    {{IEEE754}}, the CBOR encoding always uses a leading bit of 1 in the
    significand to encode a quiet NaN; the use of signaling NaNs by
@@ -384,6 +384,23 @@ Concise Data Definition Language (CDDL)
 {{-cddl}}, except where the data description is documenting specific
 encoding decisions for byte strings that carry embedded CBOR (see
 {{cddl-support}}).
+
+{:aside}
+>
+Section 9.7 of {{IEEE754}} specifies an implementation-defined
+programming interface for accessing non-zero NaN payloads, the
+getpayload/setpayload functions.
+(A version of these is also slated for inclusion in the next revision
+of the C language.)
+When using these functions, it is important that their effects are
+specific to the representation size of the floating point values they
+are applied to (e.g., half, single, or double precision).
+The representation size for interchange will be chosen by Preferred
+Serialization for each value, which may not always be the size that
+was intended for the use of getpayload/setpayload.
+A good way to handle this diversity is, upon decoding, to widen the
+representation size of all NaNs to a common size, often double
+precision ({{IEEE754}} binary64), before applying getpayload/setpayload.
 
 ## Additional CDE Constraint from Basic Serialization
 
