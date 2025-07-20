@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-10T01:41:45.344500+00:00",
+  "timestamp": "2025-07-20T01:53:18.803300+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1628,6 +1628,32 @@
       "mergeCommit": {
         "oid": "596465b9a6bd165006084e9454cc14fed0d542e8"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOJ8fYd86fXu_X",
+      "title": "Explain that get/setpayload depend on representation size...",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/37",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "... and explain how to best handle this (widen to common size).\r\n\r\nBased on <https://mailarchive.ietf.org/arch/msg/cbor/qUBDCK9SanAzhM4bt6C90Y_3-7g>\r\n\r\nThis is intended to close #36",
+      "createdAt": "2025-07-17T12:24:16Z",
+      "updatedAt": "2025-07-17T12:24:16Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "e3be1fb1a2f19f37dd9e67c3b46033744c478b7d",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "getpayload",
+      "headRefOid": "b4c0553509914012182b858fa86a0ee72d17f52f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
