@@ -71,6 +71,20 @@ informative:
   STD96: cose
   RFC7493: ijson
   RFC9741: more
+  C23:
+    author:
+    - org: International Organization for Standardization
+    title: >
+      Information technology — Programming languages — C
+    date: October 2024
+    target: https://www.iso.org/standard/82075.html
+    seriesinfo:
+      ISO/IEC: 9899:2024
+    ann: >
+       
+      This revision of the standard is widely known as C23.
+      Technically equivalent specification text is available at
+      <https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf>.
 
 --- abstract
 
@@ -390,8 +404,9 @@ encoding decisions for byte strings that carry embedded CBOR (see
 Section 9.7 of {{IEEE754}} specifies an implementation-defined
 programming interface for accessing non-zero NaN payloads, the
 getpayload/setpayload functions.
-(A version of these is also slated for inclusion in the next revision
-of the C language.)
+(A version of these, with separate sets of functions for each
+representation size, is also included in the revision of the C
+language that is most recent at the time of writing {{C23}}.)
 When using these functions, it is important that their effects are
 specific to the representation size of the floating point values they
 are applied to (e.g., half, single, or double precision).
@@ -401,6 +416,10 @@ was intended for the use of getpayload/setpayload.
 A good way to handle this diversity is, upon decoding, to widen the
 representation size of all NaNs to a common size, often double
 precision ({{IEEE754}} binary64), before applying getpayload/setpayload.
+The inverse to the narrowing performed by preferred serialization,
+this widening operation successively adds the necessary one bits to
+the exponent and trailing zero bits to the payload to build the next
+longer form until the desired size for the NaN has been reached.
 
 ## Additional CDE Constraint from Basic Serialization
 
