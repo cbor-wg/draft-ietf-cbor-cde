@@ -36,7 +36,7 @@
 | -0.0 | f98000 | Negative zero |
 | Infinity | f97c00 | Infinity |
 | -Infinity | f9fc00 | -Infinity |
-| NaN | f97e00 | NaN |
+| NaN | f97e00 | NaN with zero payload (see further down for more NaN examples) |
 | 5.960464477539063e-8 | f90001 | Smallest positive f16 (subnormal) |
 | 0.00006097555160522461 | f903ff | Largest positive subnormal f16 |
 | 0.00006103515625 | f90400 | Smallest non-subnormal positive f16 |
@@ -91,8 +91,9 @@
 | float'7ffffc0000000000' | f97fff |  f64 qNaN with 9 leftmost payload bits set -- shortens to f16 |
 | float'7fffffffe0000000' | fa7fffffff |  f64 qNaN with 22 leftmost payload bits set -- shortens to f32 |
 | float'7fffffffffffffff' | fb7fffffffffffffff |  f64 qNaN with all bits set -- no shorter encoding |
+| float'fe00' | f9fe00 | negative NaN with zero payload |
 | float'fff0000000000001' | fbfff0000000000001 |  f64 negative sNaN with payload of rightmost bit set -- no shorter encoding |
-| float'fff8000000000000' | f9fe00 |  f64 negative qNaN -- shortens to f16 |
+| float'fff8000000000000' | f9fe00 |  f64 negative qNaN with zero payload -- shortens to f16 |
 | float'ffffffffe0000000' | faffffffff |  f64 negative qNaN with 22 leftmost payload bits set -- shortens to f32 |
 {: #tab-example-flt title="Floating Point Value Examples"}
 
