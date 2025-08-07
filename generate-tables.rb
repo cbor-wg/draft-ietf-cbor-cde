@@ -3,6 +3,7 @@ require 'cbor-pure'
 require 'treetop'
 require 'cbor-diag-parser'
 require 'cbor-diagnostic'
+require "cbor-diagnostic-app/float"
 require 'cbor-pretty'
 require 'cbor-deterministic'
 
@@ -57,14 +58,19 @@ csv.each do |row|
     warn ["*** DET, #{det}, #{bin}"].inspect
   end
   # p data
+if dn != ""
   ednout = edn_decode(dn)
   # p ednout
   if ednout != data
-    unless :undefined == data || isnan(ednout) && isnan(data)
-      warn ["*** EDNOUT", ednout, data].inspect
+    if ednout.to_cbor != data.to_cbor
+      warn ["*** EDNOUT", ednout, data, row].inspect
+    else
+      warn ["*** info:", ednout, ednout.to_cbor.hexs, data, data.to_cbor.hexs, row].inspect
     end
   end
   tables[typ] << "| #{dn == "" ? "(Not CBOR)" : dn} | #{hex} | #{comment} |\n"
+end
+
 end
 
 typs.keys.each do |typ|
