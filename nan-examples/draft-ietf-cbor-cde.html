@@ -11,8 +11,9 @@
 its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
-feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) that can be shared by a
+feature of generic encoders, the present document documents the
+Best Current Practice for
+CBOR Common Deterministic Encoding (CDE), which can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
 It also defines the term "Basic Serialization", which stops short of the
@@ -20,10 +21,10 @@ potentially more onerous requirements that make CDE fully
 deterministic, while employing most of its reductions of the
 variability needing to be handled by decoders. 
     ' name="description">
-<meta content="xml2rfc 3.29.0" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="draft-ietf-cbor-cde-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.29.0
+  xml2rfc 3.30.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1054,11 +1055,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">July 2025</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 8 January 2026</td>
+<td class="center">Expires 8 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cbor-cde-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-07" class="published">7 July 2025</time>
+<time datetime="2025-08-07" class="published">7 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-08">8 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-02-08">8 February 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1093,8 +1094,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
-feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) that can be shared by a
+feature of generic encoders, the present document documents the
+Best Current Practice for
+CBOR Common Deterministic Encoding (CDE), which can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
 It also defines the term "Basic Serialization", which stops short of the
@@ -1136,7 +1138,7 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1310,8 +1312,9 @@ variability needing to be handled by decoders.<a href="#section-abstract-1" clas
 its Section 4.2, providing some flexibility for application specific
 decisions.
 To facilitate Deterministic Encoding to be offered as a selectable
-feature of generic encoders, the present document defines a
-CBOR Common Deterministic Encoding (CDE) that can be shared by a
+feature of generic encoders, the present document documents the
+Best Current Practice for
+CBOR Common Deterministic Encoding (CDE), which can be shared by a
 large set of applications with potentially diverging detailed
 requirements.
 It also defines the term "Basic Serialization", which stops short of the
@@ -1341,7 +1344,7 @@ ALDR rules are situated at the application-level, i.e., on top of the
 CDE, and address requirements on deterministic representation of
 application data that are specific to an application or a set of
 applications.
-ALDR rules are often provided as part of a specification for a CBOR-based
+ALDR rules are routinely provided as part of a specification for a CBOR-based
 protocol, or, if needed, can be provided by referencing a shared "ALDR
 ruleset" that is defined in a separate document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <p id="section-1.1-4">The informative <a href="#impcheck" class="auto internal xref">Appendix C</a> provides brief checklists that implementers
@@ -1351,9 +1354,12 @@ can use to check their CDE implementations.
 of Preferred Serialization that may be used by encoders to hit a sweet
 spot for maximizing interoperability with partial (e.g., constrained)
 CBOR decoder implementations.
-<a href="#cde" class="auto internal xref">Appendix C.3</a> further restricts Basic Serialization to arrive at CDE.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<a href="#cde" class="auto internal xref">Appendix C.3</a> further adds constraints to Basic Serialization to arrive at CDE.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 <p id="section-1.1-5"><a href="#examples" class="auto internal xref">Appendix D</a> provides a few examples for CBOR data items in CDE
-encoding, as well as a few failing examples.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+encoding, as well as a few failing examples; <a href="#exa-pref" class="auto internal xref">Appendix E</a> examines
+preferred serialization of the number <code>1</code> in more detail.
+For reference by implementers, <a href="#encode-f16" class="auto internal xref">Appendix F</a> shows an implementation
+that encodes a floating point number as "half precision" binary16.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1496,8 +1502,9 @@ to amplify the benefits of Preferred or Basic Serialization.<a href="#section-2-
       <h2 id="name-cbor-common-deterministic-e">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-cbor-common-deterministic-e" class="section-name selfRef">CBOR Common Deterministic Encoding (CDE)</a>
       </h2>
-<p id="section-3-1">This specification defines the <em>CBOR Common Deterministic Encoding</em>
-(CDE) based on the <em>Core Deterministic Encoding
+<p id="section-3-1">This specification documents the <em>CBOR Common Deterministic Encoding</em>
+(CDE) Best Current Practice that is
+based on the <em>Core Deterministic Encoding
 Requirements</em> defined for CBOR in
 Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.1" class="relref">4.2.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Note that this specific set of requirements is elective — in
@@ -1568,7 +1575,7 @@ will be confined to its definition of Preferred Serialization.<a href="#section-
 floating point numbers, partially because they themselves are often
 obtained from processes that are not entirely deterministic between platforms.
 See <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-det-04#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#I-D.bormann-cbor-det" class="cite xref">I-D.bormann-cbor-det</a>]</span> for more details.
-Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices that needed to
+Section <a href="https://rfc-editor.org/rfc/rfc8949#section-4.2.2" class="relref">4.2.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> presents a number of choices that need to
 be made to obtain the CBOR Common Deterministic Encoding (CDE).
 Here, CDE entirely recurs to Preferred Serialization and
 does <em>not</em> itself define any additional constraints.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
@@ -1595,7 +1602,7 @@ values include NaN (not a number) values <span>[<a href="#I-D.bormann-cbor-numbe
 In CDE, there is no special handling of NaN values, except a
 clarification that the
 Preferred Serialization rules also apply to NaNs (with zero or
-non-zero payloads), using the canonical encoding of NaNs as defined
+non-zero payloads), using the encoding of NaNs as defined
 in Section 6.2.1 of <span>[<a href="#IEEE754" class="cite xref">IEEE754</a>]</span>.
 Specifically, this means that shorter forms of encodings for a NaN
 are used when that can be achieved by only removing trailing zeros
@@ -1850,7 +1857,7 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dd class="break"></dd>
 <dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-17</span>, <time datetime="2025-05-12" class="refDate">12 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-17">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-17</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-18</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-18">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-18</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
         <dd>
@@ -2220,7 +2227,7 @@ the data model by restricting some values and ranges.<a href="#appendix-C-3.3.1"
 advertised as supporting CDE)
 are not required to check for preferred
 serialization or CDE and reject inputs that do not fulfill
-their requirements.
+these requirements.
 However, in an environment that employs deterministic encoding,
 employing non-checking CBOR decoders negates many of its benefits.
 Decoder implementations that advertise "support" for preferred
@@ -2519,10 +2526,26 @@ correctly CDE-decoded data item).<a href="#appendix-C.3.2-3" class="pilcrow">¶<
       </h2>
 <p id="appendix-D-1">The following three tables provide examples of CDE-encoded CBOR data
 items, each giving Diagnostic Notation (EDN <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>), the encoded data
-item in hexadecimal, and a comment.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">Implementers that want to use these examples as test input may be
+item in hexadecimal, and a comment:<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-D-2.1">
+          <p id="appendix-D-2.1.1">The comments use f16, f32, and f64 as abbreviations for 16-bit float
+(half precision, C language <code>_Float16</code>), 32-bit float (single
+precision, C language <code>_Float32</code>, fits in <code>float</code>), and 64-bit float
+(double precision, C language <code>_Float64</code>, fits in <code>double</code>),
+respectively, as well as qNaN for quiet NaN and sNaN for signaling
+NaN.<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-2.2">
+          <p id="appendix-D-2.2.1">As there is no established EDN for notating NaNs with non-zero
+payloads at the time of writing, this table uses <code>float'hex'</code>, where
+hex is a hexadecimal representation of the IEEE 754 interchange format
+for the NaN value.<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-D-3">Implementers that want to use these examples as test input may be
 interested in the file <code>example-table-input.csv</code> in the github
-repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
 <div id="exa-int">
 <section id="appendix-D.1">
         <h3 id="name-integer-value-examples">
@@ -2702,69 +2725,64 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
               <td class="text-left" rowspan="1" colspan="1">NaN</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">NaN</td>
-              <td class="text-left" rowspan="1" colspan="1">f97e01</td>
-              <td class="text-left" rowspan="1" colspan="1">NaN with non-zero payload</td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">5.960464477539063e-8</td>
               <td class="text-left" rowspan="1" colspan="1">f90001</td>
-              <td class="text-left" rowspan="1" colspan="1">Smallest positive 16-bit float (subnormal)</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive f16 (subnormal)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">0.00006097555160522461</td>
               <td class="text-left" rowspan="1" colspan="1">f903ff</td>
-              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">0.00006103515625</td>
               <td class="text-left" rowspan="1" colspan="1">f90400</td>
-              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">65504.0</td>
               <td class="text-left" rowspan="1" colspan="1">f97bff</td>
-              <td class="text-left" rowspan="1" colspan="1">Largest positive 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.401298464324817e-45</td>
               <td class="text-left" rowspan="1" colspan="1">fa00000001</td>
-              <td class="text-left" rowspan="1" colspan="1">Smallest positive 32-bit float (subnormal)</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive f32 (subnormal)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.1754942106924411e-38</td>
               <td class="text-left" rowspan="1" colspan="1">fa007fffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 32-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal f32</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.1754943508222875e-38</td>
               <td class="text-left" rowspan="1" colspan="1">fa00800000</td>
-              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive 32-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive f32</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">3.4028234663852886e+38</td>
               <td class="text-left" rowspan="1" colspan="1">fa7f7fffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Largest positive 32-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive f32</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">5.0e-324</td>
               <td class="text-left" rowspan="1" colspan="1">fb0000000000000001</td>
-              <td class="text-left" rowspan="1" colspan="1">Smallest positive 64-bit float (subnormal)</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest positive f64 (subnormal)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">2.225073858507201e-308</td>
               <td class="text-left" rowspan="1" colspan="1">fb000fffffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal 64-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive subnormal f64</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">2.2250738585072014e-308</td>
               <td class="text-left" rowspan="1" colspan="1">fb0010000000000000</td>
-              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive 64-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Smallest non-subnormal positive f64</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.7976931348623157e+308</td>
               <td class="text-left" rowspan="1" colspan="1">fb7fefffffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Largest positive 64-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest positive f64</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">-0.0000033333333333333333</td>
@@ -2794,12 +2812,12 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">-5.960464477539063e-8</td>
               <td class="text-left" rowspan="1" colspan="1">f98001</td>
-              <td class="text-left" rowspan="1" colspan="1">Largest negative subnormal 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Largest negative subnormal f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">-5.960464477539062e-8</td>
               <td class="text-left" rowspan="1" colspan="1">fbbe6fffffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest negative subnormal 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest negative subnormal f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">-5.960464477539064e-8</td>
@@ -2814,7 +2832,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">0.0000609755516052246</td>
               <td class="text-left" rowspan="1" colspan="1">fb3f0ff7ffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">0.000060975551605224616</td>
@@ -2829,7 +2847,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">0.00006103515624999999</td>
               <td class="text-left" rowspan="1" colspan="1">fb3f0fffffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">0.00006103515625000001</td>
@@ -2844,7 +2862,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">65503.99999999999</td>
               <td class="text-left" rowspan="1" colspan="1">fb40effbffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest 16-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">65504.00000000001</td>
@@ -2859,7 +2877,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.4012984643248169e-45</td>
               <td class="text-left" rowspan="1" colspan="1">fb369fffffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest subnormal 32-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest subnormal f32</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.4012984643248174e-45</td>
@@ -2869,7 +2887,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.175494210692441e-38</td>
               <td class="text-left" rowspan="1" colspan="1">fb380fffffbfffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal 32-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest subnormal f32</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.1754942106924412e-38</td>
@@ -2879,7 +2897,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.1754943508222874e-38</td>
               <td class="text-left" rowspan="1" colspan="1">fb380fffffffffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest 32-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to smallest f32</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">1.1754943508222878e-38</td>
@@ -2889,12 +2907,107 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">3.4028234663852882e+38</td>
               <td class="text-left" rowspan="1" colspan="1">fb47efffffdfffffff</td>
-              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest 32-bit float</td>
+              <td class="text-left" rowspan="1" colspan="1">Adjacent to largest f32</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">3.402823466385289e+38</td>
               <td class="text-left" rowspan="1" colspan="1">fb47efffffe0000001</td>
               <td class="text-left" rowspan="1" colspan="1">-"-</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7e01'</td>
+              <td class="text-left" rowspan="1" colspan="1">f97e01</td>
+              <td class="text-left" rowspan="1" colspan="1">f16 qNaN with non-zero payload</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7f800001'</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7f800001</td>
+              <td class="text-left" rowspan="1" colspan="1">f32 sNan with payload of rightmost bit set -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7fbfe000'</td>
+              <td class="text-left" rowspan="1" colspan="1">f97dff</td>
+              <td class="text-left" rowspan="1" colspan="1">f32 sNaN with 9 bit payload -- shortens to f16</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7fbff000'</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7fbff000</td>
+              <td class="text-left" rowspan="1" colspan="1">f32 sNaN with 10 bit payload -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7fc00000'</td>
+              <td class="text-left" rowspan="1" colspan="1">f97e00</td>
+              <td class="text-left" rowspan="1" colspan="1">f32 qNaN with zero payload -- shortens to f16</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ff0000000000001'</td>
+              <td class="text-left" rowspan="1" colspan="1">fb7ff0000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 sNaN with payload of rightmost bit set -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ff00000000003ff'</td>
+              <td class="text-left" rowspan="1" colspan="1">fb7ff00000000003ff</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 sNaN with 10 rightmost payload bits set -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ff0000020000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7f800001</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 sNaN with 23rd leftmost payload bit set -- shortens to f32</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ff43d7c40000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7fa1ebe2</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 sNaN with randomly chosen bit pattern -- shortens to f32</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ff7fffff0000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">fb7ff7fffff0000000</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 sNaN with 23 leftmost payload bits set -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ff8000000000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">f97e00</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 qNaN -- shortens to f16</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7fffe000'</td>
+              <td class="text-left" rowspan="1" colspan="1">f97fff</td>
+              <td class="text-left" rowspan="1" colspan="1">f32 qNaN with 9 bit payload -- shortens to f16</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ffff000'</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7ffff000</td>
+              <td class="text-left" rowspan="1" colspan="1">f32 qNaN with 10 bit payload -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7ffffc0000000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">f97fff</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 qNaN with 9 leftmost payload bits set -- shortens to f16</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7fffffffe0000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">fa7fffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 qNaN with 22 leftmost payload bits set -- shortens to f32</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'7fffffffffffffff'</td>
+              <td class="text-left" rowspan="1" colspan="1">fb7fffffffffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 qNaN with all bits set -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'fff0000000000001'</td>
+              <td class="text-left" rowspan="1" colspan="1">fbfff0000000000001</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 negative sNaN with payload of rightmost bit set -- no shorter encoding</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'fff8000000000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">f9fe00</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 negative qNaN -- shortens to f16</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'ffffffffe0000000'</td>
+              <td class="text-left" rowspan="1" colspan="1">faffffffff</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 negative qNaN with 22 leftmost payload bits set -- shortens to f32</td>
             </tr>
           </tbody>
         </table>
@@ -2959,16 +3072,6 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-2" clas
               <td class="text-left" rowspan="1" colspan="1">(_ h'01', h'0203')</td>
               <td class="text-left" rowspan="1" colspan="1">5f4101420203ff</td>
               <td class="text-left" rowspan="1" colspan="1">Indefinite length encoding</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">(Not CBOR)</td>
-              <td class="text-left" rowspan="1" colspan="1">f818</td>
-              <td class="text-left" rowspan="1" colspan="1">Simple values 24..31 not in use</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">(Not CBOR)</td>
-              <td class="text-left" rowspan="1" colspan="1">fc</td>
-              <td class="text-left" rowspan="1" colspan="1">Reserved (ai = 28..30)</td>
             </tr>
           </tbody>
         </table>
@@ -3041,7 +3144,7 @@ indefinite length encoding of the byte string that is the content of
 tag 2.)<a href="#appendix-E-5" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="example-code-for-encoding-into-16-bit-floating-point">
+<div id="encode-f16">
 <section id="appendix-F">
       <h2 id="name-example-code-for-encoding-i">
 <a href="#appendix-F" class="section-number selfRef">Appendix F. </a><a href="#name-example-code-for-encoding-i" class="section-name selfRef">Example Code for Encoding into 16-bit Floating Point</a>
@@ -3171,7 +3274,8 @@ contributed greatly to shaping the concept of a CBOR Common
 Deterministic Encoding and the use of ALDR rules/rulesets on top of that.
 <span class="contact-name">Mikolai Gütschow</span> proposed adding <a href="#choi" class="auto internal xref">Section 2</a>.
 <span class="contact-name">Anders Rundgren</span> provided most of the initial text that turned into
-<a href="#examples" class="auto internal xref">Appendix D</a>.<a href="#appendix-I-1" class="pilcrow">¶</a></p>
+<a href="#examples" class="auto internal xref">Appendix D</a>, <span class="contact-name">Laurence Lundblade</span> provided examples for "NaN" (not a
+number) floating point values.<a href="#appendix-I-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
