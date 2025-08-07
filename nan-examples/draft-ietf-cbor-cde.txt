@@ -126,7 +126,7 @@ Internet-Draft                  CBOR CDE                     August 2025
            Point . . . . . . . . . . . . . . . . . . . . . . . . . .  33
    List of Figures . . . . . . . . . . . . . . . . . . . . . . . . .  34
    List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  34
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  34
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  35
    Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  35
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  35
 
@@ -1494,7 +1494,11 @@ D.2.  Floating Point Value Examples
    | -0.0                      | f98000             | Negative zero    |
    | Infinity                  | f97c00             | Infinity         |
    | -Infinity                 | f9fc00             | -Infinity        |
-   | NaN                       | f97e00             | NaN              |
+   | NaN                       | f97e00             | NaN with zero    |
+   |                           |                    | payload (see     |
+   |                           |                    | further down     |
+   |                           |                    | for more NaN     |
+   |                           |                    | examples)        |
    | 5.960464477539063e-8      | f90001             | Smallest         |
    |                           |                    | positive f16     |
    |                           |                    | (subnormal)      |
@@ -1502,10 +1506,6 @@ D.2.  Floating Point Value Examples
    |                           |                    | positive         |
    |                           |                    | subnormal f16    |
    | 0.00006103515625          | f90400             | Smallest non-    |
-   |                           |                    | subnormal        |
-   |                           |                    | positive f16     |
-   | 65504.0                   | f97bff             | Largest          |
-   |                           |                    | positive f16     |
 
 
 
@@ -1514,6 +1514,10 @@ Bormann                  Expires 8 February 2026               [Page 27]
 Internet-Draft                  CBOR CDE                     August 2025
 
 
+   |                           |                    | subnormal        |
+   |                           |                    | positive f16     |
+   | 65504.0                   | f97bff             | Largest          |
+   |                           |                    | positive f16     |
    | 1.401298464324817e-45     | fa00000001         | Smallest         |
    |                           |                    | positive f32     |
    |                           |                    | (subnormal)      |
@@ -1558,10 +1562,6 @@ Internet-Draft                  CBOR CDE                     August 2025
    |                           |                    | largest          |
    |                           |                    | negative         |
    |                           |                    | subnormal f16    |
-   | -5.960464477539064e-8     | fbbe70000000000001 | -"-              |
-   | -5.960465188081798e-8     | fab3800001         | -"-              |
-   | 0.0000609755516052246     | fb3f0ff7ffffffffff | Adjacent to      |
-   |                           |                    | largest          |
 
 
 
@@ -1570,6 +1570,10 @@ Bormann                  Expires 8 February 2026               [Page 28]
 Internet-Draft                  CBOR CDE                     August 2025
 
 
+   | -5.960464477539064e-8     | fbbe70000000000001 | -"-              |
+   | -5.960465188081798e-8     | fab3800001         | -"-              |
+   | 0.0000609755516052246     | fb3f0ff7ffffffffff | Adjacent to      |
+   |                           |                    | largest          |
    |                           |                    | subnormal f16    |
    | 0.000060975551605224616   | fb3f0ff80000000001 | -"-              |
    | 0.000060975555243203416   | fa387fc001         | -"-              |
@@ -1614,10 +1618,6 @@ Internet-Draft                  CBOR CDE                     August 2025
    |                           |                    | shorter          |
    |                           |                    | encoding         |
    | float'7fc00000'           | f97e00             | f32 qNaN with    |
-   |                           |                    | zero payload     |
-   |                           |                    | -- shortens      |
-   |                           |                    | to f16           |
-   | float'7ff0000000000001'   | fb7ff0000000000001 | f64 sNaN with    |
 
 
 
@@ -1626,6 +1626,10 @@ Bormann                  Expires 8 February 2026               [Page 29]
 Internet-Draft                  CBOR CDE                     August 2025
 
 
+   |                           |                    | zero payload     |
+   |                           |                    | -- shortens      |
+   |                           |                    | to f16           |
+   | float'7ff0000000000001'   | fb7ff0000000000001 | f64 sNaN with    |
    |                           |                    | payload of       |
    |                           |                    | rightmost bit    |
    |                           |                    | set -- no        |
@@ -1670,10 +1674,6 @@ Internet-Draft                  CBOR CDE                     August 2025
    | float'7ffffc0000000000'   | f97fff             | f64 qNaN with    |
    |                           |                    | 9 leftmost       |
    |                           |                    | payload bits     |
-   |                           |                    | set --           |
-   |                           |                    | shortens to      |
-   |                           |                    | f16              |
-   | float'7fffffffe0000000'   | fa7fffffff         | f64 qNaN with    |
 
 
 
@@ -1682,6 +1682,10 @@ Bormann                  Expires 8 February 2026               [Page 30]
 Internet-Draft                  CBOR CDE                     August 2025
 
 
+   |                           |                    | set --           |
+   |                           |                    | shortens to      |
+   |                           |                    | f16              |
+   | float'7fffffffe0000000'   | fa7fffffff         | f64 qNaN with    |
    |                           |                    | 22 leftmost      |
    |                           |                    | payload bits     |
    |                           |                    | set --           |
@@ -1691,6 +1695,9 @@ Internet-Draft                  CBOR CDE                     August 2025
    |                           |                    | all bits set     |
    |                           |                    | -- no shorter    |
    |                           |                    | encoding         |
+   | float'fe00'               | f9fe00             | negative NaN     |
+   |                           |                    | with zero        |
+   |                           |                    | payload          |
    | float'fff0000000000001'   | fbfff0000000000001 | f64 negative     |
    |                           |                    | sNaN with        |
    |                           |                    | payload of       |
@@ -1699,9 +1706,10 @@ Internet-Draft                  CBOR CDE                     August 2025
    |                           |                    | shorter          |
    |                           |                    | encoding         |
    | float'fff8000000000000'   | f9fe00             | f64 negative     |
-   |                           |                    | qNaN --          |
-   |                           |                    | shortens to      |
-   |                           |                    | f16              |
+   |                           |                    | qNaN with        |
+   |                           |                    | zero payload     |
+   |                           |                    | -- shortens      |
+   |                           |                    | to f16           |
    | float'ffffffffe0000000'   | faffffffff         | f64 negative     |
    |                           |                    | qNaN with 22     |
    |                           |                    | leftmost         |
@@ -1722,14 +1730,6 @@ D.3.  Failing Examples
     |                       |                          | map key      |
     |                       |                          | ordering     |
     | [4, 5]                | 98020405                 | Array length |
-    |                       |                          | not in       |
-    |                       |                          | preferred    |
-    |                       |                          | encoding     |
-    | 255                   | 1900ff                   | Integer not  |
-    |                       |                          | in preferred |
-    |                       |                          | encoding     |
-    | -18446744073709551617 | c34a00010000000000000000 | Bigint with  |
-    |                       |                          | leading zero |
 
 
 
@@ -1738,6 +1738,14 @@ Bormann                  Expires 8 February 2026               [Page 31]
 Internet-Draft                  CBOR CDE                     August 2025
 
 
+    |                       |                          | not in       |
+    |                       |                          | preferred    |
+    |                       |                          | encoding     |
+    | 255                   | 1900ff                   | Integer not  |
+    |                       |                          | in preferred |
+    |                       |                          | encoding     |
+    | -18446744073709551617 | c34a00010000000000000000 | Bigint with  |
+    |                       |                          | leading zero |
     |                       |                          | bytes        |
     | 10.5                  | fa41280000               | Not in       |
     |                       |                          | preferred    |
@@ -1765,6 +1773,27 @@ Appendix E.  Examples for Preferred Serialization of Integers
    CDE-checking decoder checks that no other serialization is being used
    in the encoded data item being decoded.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                  Expires 8 February 2026               [Page 32]
+
+Internet-Draft                  CBOR CDE                     August 2025
+
+
         +===================================+=====================+
         | Serialization of integer number 1 | Preferred?          |
         +===================================+=====================+
@@ -1786,13 +1815,6 @@ Appendix E.  Examples for Preferred Serialization of Integers
 
    For the integer number 100000000000000000000 (1 with 20 decimal
    zeros), the only _basic_ serialization is:
-
-
-
-Bormann                  Expires 8 February 2026               [Page 32]
-
-Internet-Draft                  CBOR CDE                     August 2025
-
 
    C2                       # tag(2)
       49                    # bytes(9)
@@ -1816,28 +1838,6 @@ Appendix F.  Example Code for Encoding into 16-bit Floating Point
    appendix provides example C code to convert a floating point number
    that is in 64-bit form ("Double Precision", binary64) into binary16.
 
-   If such a conversion is not possible (i.e., there is no 16-bit
-   representation for the 64-bit value given), the function
-   try_float16_encode returns -1.  Otherwise it returns a two-byte
-   integer (range 0x0000 to 0xFFFF) that, prefixed with 0xF9, is
-   suitable to encode the value.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1849,6 +1849,12 @@ Bormann                  Expires 8 February 2026               [Page 33]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
+
+   If such a conversion is not possible (i.e., there is no 16-bit
+   representation for the 64-bit value given), the function
+   try_float16_encode returns -1.  Otherwise it returns a two-byte
+   integer (range 0x0000 to 0xFFFF) that, prefixed with 0xF9, is
+   suitable to encode the value.
 
    /* returns 0..0xFFFF if float16 encoding possible, -1 otherwise.
       b64 is a binary64 floating point as an unsigned long. */
@@ -1888,6 +1894,18 @@ List of Tables
    Table 6:   Failing Examples
    Table 7:   Serializations of integer number 1
 
+
+
+
+
+
+
+
+Bormann                  Expires 8 February 2026               [Page 34]
+
+Internet-Draft                  CBOR CDE                     August 2025
+
+
 Acknowledgments
 
    An early version of this document was based on the work of Wolf
@@ -1898,14 +1916,6 @@ Acknowledgments
    Common Deterministic Encoding and the use of ALDR rules/rulesets on
    top of that.  Mikolai Gütschow proposed adding Section 2.  Anders
    Rundgren provided most of the initial text that turned into
-
-
-
-Bormann                  Expires 8 February 2026               [Page 34]
-
-Internet-Draft                  CBOR CDE                     August 2025
-
-
    Appendix D, Laurence Lundblade provided examples for "NaN" (not a
    number) floating point values.
 
@@ -1928,16 +1938,6 @@ Author's Address
    Germany
    Phone: +49-421-218-63921
    Email: cabo@tzi.org
-
-
-
-
-
-
-
-
-
-
 
 
 

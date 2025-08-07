@@ -2722,7 +2722,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-3" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">NaN</td>
               <td class="text-left" rowspan="1" colspan="1">f97e00</td>
-              <td class="text-left" rowspan="1" colspan="1">NaN</td>
+              <td class="text-left" rowspan="1" colspan="1">NaN with zero payload (see further down for more NaN examples)</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">5.960464477539063e-8</td>
@@ -2995,6 +2995,11 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-3" clas
               <td class="text-left" rowspan="1" colspan="1">f64 qNaN with all bits set -- no shorter encoding</td>
             </tr>
             <tr>
+              <td class="text-left" rowspan="1" colspan="1">float'fe00'</td>
+              <td class="text-left" rowspan="1" colspan="1">f9fe00</td>
+              <td class="text-left" rowspan="1" colspan="1">negative NaN with zero payload</td>
+            </tr>
+            <tr>
               <td class="text-left" rowspan="1" colspan="1">float'fff0000000000001'</td>
               <td class="text-left" rowspan="1" colspan="1">fbfff0000000000001</td>
               <td class="text-left" rowspan="1" colspan="1">f64 negative sNaN with payload of rightmost bit set -- no shorter encoding</td>
@@ -3002,7 +3007,7 @@ repository <code>cbor-wg/draft-ietf-cbor-cde</code>.<a href="#appendix-D-3" clas
             <tr>
               <td class="text-left" rowspan="1" colspan="1">float'fff8000000000000'</td>
               <td class="text-left" rowspan="1" colspan="1">f9fe00</td>
-              <td class="text-left" rowspan="1" colspan="1">f64 negative qNaN -- shortens to f16</td>
+              <td class="text-left" rowspan="1" colspan="1">f64 negative qNaN with zero payload -- shortens to f16</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">float'ffffffffe0000000'</td>
