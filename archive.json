@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-07T01:49:25.415777+00:00",
+  "timestamp": "2025-08-10T01:52:12.050309+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1643,7 +1643,7 @@
       "labels": [],
       "body": "... and explain how to best handle this (widen to common size).\r\n\r\nBased on <https://mailarchive.ietf.org/arch/msg/cbor/qUBDCK9SanAzhM4bt6C90Y_3-7g>\r\n\r\nThis is intended to close #36",
       "createdAt": "2025-07-17T12:24:16Z",
-      "updatedAt": "2025-08-05T17:34:07Z",
+      "updatedAt": "2025-08-07T10:46:44Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "e3be1fb1a2f19f37dd9e67c3b46033744c478b7d",
@@ -1661,8 +1661,41 @@
           "body": "I still think this has nothing to do with determinism and should not be in this document, but rather as a note on 8949.",
           "createdAt": "2025-08-05T17:34:07Z",
           "updatedAt": "2025-08-05T17:34:07Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I still think this has nothing to do with determinism and should not be in this document, but rather as a note on 8949.\r\n\r\nAs I mentioned in other email, I don't know what \"a note on 8949\" means.\r\n\r\nBut I do agree that this is not normative content for this document.\r\nThat's why it is in an \"aside\", a way that RFCXML provides to put off-topic (but good-to-know) content in its own little box.",
+          "createdAt": "2025-08-07T10:31:31Z",
+          "updatedAt": "2025-08-07T10:46:44Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOJ8fYd86ijX14",
+      "title": "Add NaN examples to Appendix D",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/38",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-08-07T09:57:16Z",
+      "updatedAt": "2025-08-07T10:02:39Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "e3be1fb1a2f19f37dd9e67c3b46033744c478b7d",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "nan-examples",
+      "headRefOid": "2884dd744b75119f924eed13df8854a3d3ab524b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
