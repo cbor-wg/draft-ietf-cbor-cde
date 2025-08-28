@@ -71,6 +71,20 @@ informative:
   STD96: cose
   RFC7493: ijson
   RFC9741: more
+  C23:
+    author:
+    - org: International Organization for Standardization
+    title: >
+      Information technology — Programming languages — C
+    date: October 2024
+    target: https://www.iso.org/standard/82075.html
+    seriesinfo:
+      ISO/IEC: 9899:2024
+    ann: >
+       
+      This revision of the standard is widely known as C23.
+      Technically equivalent specification text is available at
+      <https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf>.
 
 --- abstract
 
@@ -347,7 +361,7 @@ Specifically, CDE specifies (in the order of the bullet list at the end of {{Sec
    Specifically, this means that shorter forms of encodings for a NaN
    are used when that can be achieved by only removing trailing zeros
    in the NaN payload (example serializations are available in
-   {{Section A.1.2 of -numbers}}).
+   {{Section A.1.2 of -numbers}}; see also the aside below).
    Further clarifying a "should"-level statement in Section 6.2.1 of
    {{IEEE754}}, the CBOR encoding always uses a leading bit of 1 in the
    significand to encode a quiet NaN; the use of signaling NaNs by
@@ -384,6 +398,28 @@ Concise Data Definition Language (CDDL)
 {{-cddl}}, except where the data description is documenting specific
 encoding decisions for byte strings that carry embedded CBOR (see
 {{cddl-support}}).
+
+{:aside}
+>
+Section 9.7 of {{IEEE754}} specifies an implementation-defined
+programming interface for accessing non-zero NaN payloads, the
+getpayload/setpayload functions.
+(A version of these, with separate sets of functions for each
+representation size, is also included in the revision of the C
+language that is most recent at the time of writing {{C23}}.)
+When using these functions, it is important that their effects are
+specific to the representation size of the floating point values they
+are applied to (e.g., half, single, or double precision).
+The representation size for interchange will be chosen by Preferred
+Serialization for each value, which may not always be the size that
+was intended for the use of getpayload/setpayload.
+A good way to handle this diversity is, upon decoding, to widen the
+representation size of all NaNs to a common size, often double
+precision ({{IEEE754}} binary64), before applying getpayload/setpayload.
+The inverse to the narrowing performed by preferred serialization,
+this widening operation successively adds the necessary one bits to
+the exponent and trailing zero bits to the payload to build the next
+longer form until the desired size for the NaN has been reached.
 
 ## Additional CDE Constraint from Basic Serialization
 
