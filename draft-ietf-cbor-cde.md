@@ -994,7 +994,19 @@ correctly CDE-decoded data item).
 
 The following three tables provide examples of CDE-encoded CBOR data
 items, each giving Diagnostic Notation (EDN {{-edn}}), the encoded data
-item in hexadecimal, and a comment.
+item in hexadecimal, and a comment:
+
+* The comments use f16, f32, and f64 as abbreviations for 16-bit float
+(half precision, C language `_Float16`), 32-bit float (single
+precision, C language `_Float32`, fits in `float`), and 64-bit float
+(double precision, C language `_Float64`, fits in `double`),
+respectively, as well as qNaN for quiet NaN and sNaN for signaling
+NaN.
+
+* As there is no established EDN for notating NaNs with non-zero
+payloads at the time of writing, this table uses `float'hex'`, where
+hex is a hexadecimal representation of the IEEE 754 interchange format
+for the NaN value.
 
 Implementers that want to use these examples as test input may be
 interested in the file `example-table-input.csv` in the github
@@ -1075,4 +1087,5 @@ contributed greatly to shaping the concept of a CBOR Common
 Deterministic Encoding and the use of ALDR rules/rulesets on top of that.
 {{{Mikolai Gütschow}}} proposed adding {{choi}}.
 {{{Anders Rundgren}}} provided most of the initial text that turned into
-{{examples}}.
+{{examples}}, {{{Laurence Lundblade}}} provided examples for "NaN" (not a
+number) floating point values.

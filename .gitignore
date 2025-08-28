@@ -16,10 +16,12 @@
 /lib
 /node_modules/
 /versioned/
+*-cruby.rb
 Gemfile.lock
 archive.json
 draft-bormann-cbor-det.xml
 draft-ietf-cbor-cde.xml
+draft-ietf-cbor-cde.v2v3.xml
 package-lock.json
 report.xml
 !requirements.txt
