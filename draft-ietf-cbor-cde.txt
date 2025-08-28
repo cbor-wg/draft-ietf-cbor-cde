@@ -89,23 +89,23 @@ Table of Contents
      3.1.  CDE Constraints from Preferred Serialization  . . . . . .   7
      3.2.  Additional CDE Constraint from Basic Serialization  . . .  10
      3.3.  Additional CDE Constraint from CDE Itself . . . . . . . .  10
-   4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .  10
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+   4.  CDDL support  . . . . . . . . . . . . . . . . . . . . . . . .  11
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  12
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  12
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  13
-   Appendix A.  Information Model, Data Model and Serialization  . .  14
+   Appendix A.  Information Model, Data Model and Serialization  . .  15
      A.1.  Data Model, Encoding Variants and Interoperability with
-           Partial Implementations . . . . . . . . . . . . . . . . .  15
-   Appendix B.  Application-level Deterministic Representation . . .  17
-   Appendix C.  Implementers' Checklists . . . . . . . . . . . . . .  20
-     C.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  21
-       C.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  21
-       C.1.2.  Decoders and Preferred Serialization  . . . . . . . .  23
-     C.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  23
-       C.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  24
-       C.2.2.  Decoders and Basic Serialization  . . . . . . . . . .  24
+           Partial Implementations . . . . . . . . . . . . . . . . .  16
+   Appendix B.  Application-level Deterministic Representation . . .  18
+   Appendix C.  Implementers' Checklists . . . . . . . . . . . . . .  21
+     C.1.  Preferred Serialization . . . . . . . . . . . . . . . . .  22
+       C.1.1.  Preferred Serialization Encoders  . . . . . . . . . .  22
+       C.1.2.  Decoders and Preferred Serialization  . . . . . . . .  24
+     C.2.  Basic Serialization . . . . . . . . . . . . . . . . . . .  24
+       C.2.1.  Basic Serialization Encoders  . . . . . . . . . . . .  25
+       C.2.2.  Decoders and Basic Serialization  . . . . . . . . . .  25
 
 
 
@@ -114,21 +114,21 @@ Bormann                   Expires 1 March 2026                  [Page 2]
 Internet-Draft                  CBOR CDE                     August 2025
 
 
-     C.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  24
-       C.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  24
-       C.3.2.  CDE-checking Decoders . . . . . . . . . . . . . . . .  25
-   Appendix D.  Encoding Examples  . . . . . . . . . . . . . . . . .  25
-     D.1.  Integer Value Examples  . . . . . . . . . . . . . . . . .  26
-     D.2.  Floating Point Value Examples . . . . . . . . . . . . . .  27
-     D.3.  Failing Examples  . . . . . . . . . . . . . . . . . . . .  31
-   Appendix E.  Examples for Preferred Serialization of Integers . .  32
+     C.3.  CDE . . . . . . . . . . . . . . . . . . . . . . . . . . .  25
+       C.3.1.  CDE Encoders  . . . . . . . . . . . . . . . . . . . .  25
+       C.3.2.  CDE-checking Decoders . . . . . . . . . . . . . . . .  26
+   Appendix D.  Encoding Examples  . . . . . . . . . . . . . . . . .  26
+     D.1.  Integer Value Examples  . . . . . . . . . . . . . . . . .  27
+     D.2.  Floating Point Value Examples . . . . . . . . . . . . . .  28
+     D.3.  Failing Examples  . . . . . . . . . . . . . . . . . . . .  32
+   Appendix E.  Examples for Preferred Serialization of Integers . .  33
    Appendix F.  Example Code for Encoding into 16-bit Floating
-           Point . . . . . . . . . . . . . . . . . . . . . . . . . .  33
-   List of Figures . . . . . . . . . . . . . . . . . . . . . . . . .  34
-   List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  34
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  35
-   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  35
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  35
+           Point . . . . . . . . . . . . . . . . . . . . . . . . . .  34
+   List of Figures . . . . . . . . . . . . . . . . . . . . . . . . .  35
+   List of Tables  . . . . . . . . . . . . . . . . . . . . . . . . .  35
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  36
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  36
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  36
 
 1.  Introduction
 
@@ -460,12 +460,12 @@ Internet-Draft                  CBOR CDE                     August 2025
        encodings for a NaN are used when that can be achieved by only
        removing trailing zeros in the NaN payload (example
        serializations are available in Appendix A.1.2 of
-       [I-D.bormann-cbor-numbers]).  Further clarifying a "should"-level
-       statement in Section 6.2.1 of [IEEE754], the CBOR encoding always
-       uses a leading bit of 1 in the significand to encode a quiet NaN;
-       the use of signaling NaNs by application protocols is NOT
-       RECOMMENDED but when presented by an application these are
-       encoded by using a leading bit of 0.
+       [I-D.bormann-cbor-numbers]; see also the aside below).  Further
+       clarifying a "should"-level statement in Section 6.2.1 of
+       [IEEE754], the CBOR encoding always uses a leading bit of 1 in
+       the significand to encode a quiet NaN; the use of signaling NaNs
+       by application protocols is NOT RECOMMENDED but when presented by
+       an application these are encoded by using a leading bit of 0.
 
        Typically, most applications that employ NaNs in their storage
        and communication interfaces will only use a single NaN value,
@@ -506,6 +506,27 @@ Bormann                   Expires 1 March 2026                  [Page 9]
 Internet-Draft                  CBOR CDE                     August 2025
 
 
+      |  Section 9.7 of [IEEE754] specifies an implementation-defined
+      |  programming interface for accessing non-zero NaN payloads, the
+      |  getpayload/setpayload functions.  (A version of these, with
+      |  separate sets of functions for each representation size, is
+      |  also included in the revision of the C language that is most
+      |  recent at the time of writing [C23].)  When using these
+      |  functions, it is important that their effects are specific to
+      |  the representation size of the floating point values they are
+      |  applied to (e.g., half, single, or double precision).  The
+      |  representation size for interchange will be chosen by Preferred
+      |  Serialization for each value, which may not always be the size
+      |  that was intended for the use of getpayload/setpayload.  A good
+      |  way to handle this diversity is, upon decoding, to widen the
+      |  representation size of all NaNs to a common size, often double
+      |  precision ([IEEE754] binary64), before applying getpayload/
+      |  setpayload.  The inverse to the narrowing performed by
+      |  preferred serialization, this widening operation successively
+      |  adds the necessary one bits to the exponent and trailing zero
+      |  bits to the payload to build the next longer form until the
+      |  desired size for the NaN has been reached.
+
 3.2.  Additional CDE Constraint from Basic Serialization
 
    In addition to the encoding constraints from Preferred Serialization,
@@ -534,6 +555,13 @@ Internet-Draft                  CBOR CDE                     August 2025
    preserves the ordering in maps.  In implementations without these
    properties, a specialized CBOR encoder may need to be employed.
 
+
+
+Bormann                   Expires 1 March 2026                 [Page 10]
+
+Internet-Draft                  CBOR CDE                     August 2025
+
+
    Map ordering is a deterministic encoding constraint specific to maps,
    major type 5, that goes beyond maps' constraints for preferred
    serialization.  In the definition of a tag being employed, there may
@@ -554,13 +582,6 @@ Internet-Draft                  CBOR CDE                     August 2025
    values that can be represented as binary32; this includes values that
    can also be represented as binary16 and that will be so represented
    in Basic Serialization.
-
-
-
-Bormann                   Expires 1 March 2026                 [Page 10]
-
-Internet-Draft                  CBOR CDE                     August 2025
-
 
    [RFC8610] defines control operators to indicate that the contents of
    a byte string carries a CBOR-encoded data item (.cbor) or a sequence
@@ -590,6 +611,13 @@ Internet-Draft                  CBOR CDE                     August 2025
    be added, or the CBOR sequence could be constructed with .join
    (Section 3.1 of [RFC9741]).)
 
+
+
+Bormann                   Expires 1 March 2026                 [Page 11]
+
+Internet-Draft                  CBOR CDE                     August 2025
+
+
    Obviously, specifications that document ALDR rules can define related
    control operators that also embody the processing required by those
    ALDR rules, and are encouraged to do so.
@@ -609,14 +637,6 @@ Internet-Draft                  CBOR CDE                     August 2025
 
    // RFC Editor: please replace RFCXXXX with the RFC number of this RFC
    // and remove this note.
-
-
-
-
-Bormann                   Expires 1 March 2026                 [Page 11]
-
-Internet-Draft                  CBOR CDE                     August 2025
-
 
    This document requests IANA to register the contents of Table 2 into
    the registry "CDDL Control Operators" of the [IANA.cddl] registry
@@ -646,6 +666,14 @@ Internet-Draft                  CBOR CDE                     August 2025
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+Bormann                   Expires 1 March 2026                 [Page 12]
+
+Internet-Draft                  CBOR CDE                     August 2025
+
+
               Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -666,14 +694,6 @@ Internet-Draft                  CBOR CDE                     August 2025
 
    [STD94]    Internet Standard 94,
               <https://www.rfc-editor.org/info/std94>.
-
-
-
-Bormann                   Expires 1 March 2026                 [Page 12]
-
-Internet-Draft                  CBOR CDE                     August 2025
-
-
               At the time of writing, this STD comprises the following:
 
               Bormann, C. and P. Hoffman, "Concise Binary Object
@@ -683,12 +703,32 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 7.2.  Informative References
 
+   [C23]      International Organization for Standardization,
+              "Information technology — Programming languages — C", ISO/
+              IEC 9899:2024, October 2024,
+              <https://www.iso.org/standard/82075.html>.  This revision
+              of the standard is widely known as C23.  Technically
+              equivalent specification text is available at
+              https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf
+              (https://www.open-std.org/jtc1/sc22/wg14/www/docs/
+              n3220.pdf).
+
    [I-D.bormann-cbor-det]
               Bormann, C., "CBOR: On Deterministic Encoding and
               Representation", Work in Progress, Internet-Draft, draft-
               bormann-cbor-det-04, 21 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
               det-04>.
+
+
+
+
+
+
+Bormann                   Expires 1 March 2026                 [Page 13]
+
+Internet-Draft                  CBOR CDE                     August 2025
+
 
    [I-D.bormann-cbor-numbers]
               Bormann, C., "On Numbers in CBOR", Work in Progress,
@@ -722,14 +762,6 @@ Internet-Draft                  CBOR CDE                     August 2025
               DOI 10.17487/RFC7493, March 2015,
               <https://www.rfc-editor.org/rfc/rfc7493>.
 
-
-
-
-Bormann                   Expires 1 March 2026                 [Page 13]
-
-Internet-Draft                  CBOR CDE                     August 2025
-
-
    [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
@@ -743,6 +775,16 @@ Internet-Draft                  CBOR CDE                     August 2025
               Signing and Encryption (COSE) Key Thumbprint", RFC 9679,
               DOI 10.17487/RFC9679, December 2024,
               <https://www.rfc-editor.org/rfc/rfc9679>.
+
+
+
+
+
+
+Bormann                   Expires 1 March 2026                 [Page 14]
+
+Internet-Draft                  CBOR CDE                     August 2025
+
 
    [RFC9741]  Bormann, C., "Concise Data Definition Language (CDDL):
               Additional Control Operators for the Conversion and
@@ -781,7 +823,21 @@ Appendix A.  Information Model, Data Model and Serialization
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 14]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bormann                   Expires 1 March 2026                 [Page 15]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -837,7 +893,7 @@ A.1.  Data Model, Encoding Variants and Interoperability with Partial
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 15]
+Bormann                   Expires 1 March 2026                 [Page 16]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -893,7 +949,7 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 16]
+Bormann                   Expires 1 March 2026                 [Page 17]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -949,7 +1005,7 @@ Appendix B.  Application-level Deterministic Representation
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 17]
+Bormann                   Expires 1 March 2026                 [Page 18]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1005,7 +1061,7 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 18]
+Bormann                   Expires 1 March 2026                 [Page 19]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1061,7 +1117,7 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 19]
+Bormann                   Expires 1 March 2026                 [Page 20]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1117,7 +1173,7 @@ Appendix C.  Implementers' Checklists
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 20]
+Bormann                   Expires 1 March 2026                 [Page 21]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1173,7 +1229,7 @@ C.1.1.  Preferred Serialization Encoders
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 21]
+Bormann                   Expires 1 March 2026                 [Page 22]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1229,7 +1285,7 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 22]
+Bormann                   Expires 1 March 2026                 [Page 23]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1285,7 +1341,7 @@ C.2.  Basic Serialization
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 23]
+Bormann                   Expires 1 March 2026                 [Page 24]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1341,7 +1397,7 @@ C.3.1.  CDE Encoders
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 24]
+Bormann                   Expires 1 March 2026                 [Page 25]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1397,7 +1453,7 @@ Appendix D.  Encoding Examples
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 25]
+Bormann                   Expires 1 March 2026                 [Page 26]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1453,7 +1509,7 @@ D.1.  Integer Value Examples
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 26]
+Bormann                   Expires 1 March 2026                 [Page 27]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1509,7 +1565,7 @@ D.2.  Floating Point Value Examples
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 27]
+Bormann                   Expires 1 March 2026                 [Page 28]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1565,7 +1621,7 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 28]
+Bormann                   Expires 1 March 2026                 [Page 29]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1621,7 +1677,7 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 29]
+Bormann                   Expires 1 March 2026                 [Page 30]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1677,7 +1733,7 @@ Internet-Draft                  CBOR CDE                     August 2025
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 30]
+Bormann                   Expires 1 March 2026                 [Page 31]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1733,7 +1789,7 @@ D.3.  Failing Examples
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 31]
+Bormann                   Expires 1 March 2026                 [Page 32]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1789,7 +1845,7 @@ Appendix E.  Examples for Preferred Serialization of Integers
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 32]
+Bormann                   Expires 1 March 2026                 [Page 33]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1845,7 +1901,7 @@ Appendix F.  Example Code for Encoding into 16-bit Floating Point
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 33]
+Bormann                   Expires 1 March 2026                 [Page 34]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1901,7 +1957,7 @@ List of Tables
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 34]
+Bormann                   Expires 1 March 2026                 [Page 35]
 
 Internet-Draft                  CBOR CDE                     August 2025
 
@@ -1957,4 +2013,4 @@ Author's Address
 
 
 
-Bormann                   Expires 1 March 2026                 [Page 35]
+Bormann                   Expires 1 March 2026                 [Page 36]
