@@ -37,9 +37,9 @@ end
 
 csv = CSV.read("example-table-input.csv")
 
-typs = {"int" => "Integer Value Examples",
- "flt" => "Floating Point Value Examples",
- "bad" => "Failing Examples"}
+typs = {"int" => "CDE: Integer Value Examples",
+ "flt" => "CDE: Floating Point Value Examples",
+ "bad" => "Failing Examples: Not CDE"}
 
 tables = Hash[typs.keys.map {
                 [_1, "| EDN | CBOR (hex) | Comment |\n"]

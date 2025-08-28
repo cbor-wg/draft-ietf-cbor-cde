@@ -1,4 +1,4 @@
-## Integer Value Examples {#exa-int}
+## CDE: Integer Value Examples {#exa-int}
 
 <?v3xml2rfc table_borders="light" ?>
 
@@ -23,11 +23,11 @@
 | -4294967297 | 3b0000000100000000 | Largest negative eight-byte int |
 | 18446744073709551615 | 1bffffffffffffffff | Largest unsigned eight-byte int |
 | -18446744073709551616 | 3bffffffffffffffff | Smallest negative eight-byte int |
-| 18446744073709551616 | c249010000000000000000 | Smallest unsigned bigint |
-| -18446744073709551617 | c349010000000000000000 | Largest negative bigint |
-{: #tab-example-int title="Integer Value Examples"}
+| 18446744073709551616 | c249010000000000000000 | Smallest unsigned bignum |
+| -18446744073709551617 | c349010000000000000000 | Largest negative bignum |
+{: #tab-example-int title="CDE: Integer Value Examples"}
 
-## Floating Point Value Examples {#exa-flt}
+## CDE: Floating Point Value Examples {#exa-flt}
 
 <?v3xml2rfc table_borders="light" ?>
 
@@ -95,20 +95,20 @@
 | float'fff0000000000001' | fbfff0000000000001 |  f64 negative sNaN with payload of rightmost bit set -- no shorter encoding |
 | float'fff8000000000000' | f9fe00 |  f64 negative qNaN with zero payload -- shortens to f16 |
 | float'ffffffffe0000000' | faffffffff |  f64 negative qNaN with 22 leftmost payload bits set -- shortens to f32 |
-{: #tab-example-flt title="Floating Point Value Examples"}
+{: #tab-example-flt title="CDE: Floating Point Value Examples"}
 
-## Failing Examples {#exa-bad}
+## Failing Examples: Not CDE {#exa-bad}
 
 <?v3xml2rfc table_borders="light" ?>
 
 | EDN | CBOR (hex) | Comment |
 | {"b":0,"a":1} | a2616200616101 | Incorrect map key ordering |
-| [4, 5] | 98020405 | Array length not in preferred encoding |
-| 255 | 1900ff | Integer not in preferred encoding |
-| -18446744073709551617 | c34a00010000000000000000 | Bigint with leading zero bytes |
-| 10.5 | fa41280000 | Not in preferred encoding |
-| NaN | fa7fc00000 | Not in preferred encoding |
-| 65536 | c243010000 | Integer value too small for bigint |
+| [4, 5] | 98020405 | Array length not in preferred serialization |
+| 255 | 1900ff | Integer not in preferred serialization |
+| -18446744073709551617 | c34a00010000000000000000 | Bignum with leading zero bytes |
+| 10.5 | fa41280000 | Not in preferred serialization |
+| NaN | fa7fc00000 | Not in preferred serialization |
+| 65536 | c243010000 | Integer value too small for bignum |
 | (_ h'01', h'0203') | 5f4101420203ff | Indefinite length encoding |
-{: #tab-example-bad title="Failing Examples"}
+{: #tab-example-bad title="Failing Examples: Not CDE"}
 

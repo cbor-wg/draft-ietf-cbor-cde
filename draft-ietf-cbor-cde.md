@@ -158,25 +158,108 @@ The conventions and definitions of {{-cbor}} apply.
 {{models}} provides additional discussion of the terms information
 model, data model, and serialization.
 
-* The term "CBOR Application" ("application" for short) is not
-explicitly defined in {{-cbor}}; this document uses it in the same sense
-as it is used there, specifically for applications that use CBOR as an
-interchange format and use (often generic) CBOR encoders/decoders to
+The terms specifically called out for this document fall into three categories:
+
+1. terms defined (or consistently used) in the text of {{RFC8949}}, but
+   possibly supplied with a concise definition here ("{{RFC8949}}
+   terms"), such as Preferred Serialization;
+2. terms we use in their English/CS sense ("generic terms"), for which
+   we may still want to supply a sharpened definition here, such as
+   Deterministic Encoding;
+3. terms that we specifically define in the document ("CDE terms"),
+   such as CDE or Basic Serialization.
+
+{:vspace="1"}
+"CBOR Application" ("application" for short, {{RFC8949}}):
+: application that uses CBOR as an
+interchange format and uses (often generic) CBOR encoders/decoders to
 serialize/ingest the CBOR form of their application data to be
 exchanged.
 
-* Similarly, "CBOR Protocol" is used as in {{-cbor}} for the protocol that
+"CBOR Protocol" ({{RFC8949}}):
+: the protocol that
 governs the interchange of data in CBOR format for a specific
 application or set of applications.
 
-* "Representation" stands for the process, and its result, of building
+"Representation" ({{RFC8949}}):
+: the process, and its result, of building
 the representation format out of (information-model level) application
 data.
 
-* "Serialization" is used for the subset of this process, and its
-result, that represents ("serializes") data in CBOR generic data model
-form into encoded data items.  "Encoding" is often used as a synonym
-when the focus is on that.
+"Serialization" ({{RFC8949}}):
+: the subset of the representation process, and its
+result, that represents ("serializes") a data item at the CBOR generic data model
+form into encoded data items.
+"Encoding" is often used as a synonym when the focus is on that.
+Often involves choosing one of several equivalent encodings (serializations), i.e., providing "variation".
+
+"Encoding constraint" (CDE):
+: A rule that governs the choice of one of several otherwise equivalent CBOR encodings for a CBOR data item.
+
+"Preferred serialization" ({{RFC8949}}):
+: Defined in {{Section 4.1 of RFC8949@-cbor}}, Preferred Serialization
+  is one specific set of encoding constraints.
+  Tag specifications can also define the Preferred Serialization of
+  the specific tag that are defining (e.g., in Section 3.4.3 of RFC 8949).
+
+"Deterministic encoding" (generic):
+: An encoding process (or, more specifically, encoding constraint) that deterministically always chooses the same encoding for each data item with several encoding choices.
+(The term refers both to such a process and a result of a specific such process.)
+Note that there can be many rule sets that each can yield
+ deterministic encodings; for instance, {{-cbor}} defines elements of a
+ legacy deterministic encoding in {{Section 4.2.3 of RFC8949@-cbor}} that is distinct from the one for which requirements are defined in {{Section 4.2.1 of RFC8949@-cbor}}.
+
+"Generic encoder"/"Generic decoder" ({{RFC8949}}):
+: Defined in {{Section 5.2 of RFC8949@-cbor}}, a generic CBOR decoder
+   can decode all well-formed ({{Section 1.2 of RFC8949@-cbor}}) encoded CBOR data
+   items and present the data items to an application.
+   Similarly, generic CBOR encoders provide an application interface that allows
+   the application to specify any well-formed value to be encoded as a
+   CBOR data item, including simple values and tags that are unknown to the
+   encoder.
+
+"Partial Implementation" (CDE):
+: A decoder or encoder that is not generic, but usually limited to the
+  needs of specific (a specific set of) applications.
+
+"Common Deterministic Encoding" (CDE):
+: The common deterministic encoding process defined in the present
+  BCP, based on Preferred Serialization and {{Section 4.2.1 of RFC8949@-cbor}}.
+  Out of many potential and actual deterministic encodings, CDE is
+  RECOMMENDED for implementation and specification where deterministic
+  encoding is required or desired.
+
+"Basic Serialization" (CDE):
+: The encoding constraints of Preferred Serialization combined with an
+  additional encoding constraint: no indefinite length encoding is
+  used.
+
+"CDE-checking decoder" (CDE):
+: A decoder that checks that the encoding constraints of CDE have been met.
+  (Note that a decoder can also provide other types of checks, such
+  validity-checking and duplicate-checking ({{RFC8949}}); just speaking
+  of "checking decoders" without further qualification can therefore
+  be imprecise.)
+  Note that an encoder can meet a set of encoding constraints without
+  the CBOR decoder then checking them (or even being aware of the
+  constraints or that they have been used).
+  Certain benefits of specific encoding constraints may only be
+  available in conjunction with decoders checking those constraints.
+
+Bignum ({{RFC8949}}):
+: An integer that is represented using CBOR tag 2 or tag 3.
+  (Not called Bigint as that term may be in use for a platform representation.)
+
+NaN payload ({{IEEE754}}):
+: All but the first bit (Q-bit) of the trailing significand component
+  of the {{IEEE754}} value for a NaN.
+  Separate from sign bit and Q-bit.
+
+Trivial NaN (CDE):
+: A NaN with a zero sign bit, and a payload composed of zero bits only.
+  Note that in {{IEEE754}}, all-zero payload implies that the Q-bit is
+  set to one.
+  Represented in CDE as the three bytes 0xf97e00.
 
 {::boilerplate bcp14-tagged-bcp14}
 
@@ -264,7 +347,7 @@ Note that this specific set of requirements is elective — in
 principle, other variants of deterministic encoding can be defined
 (and have been, now being phased out, as detailed in {{Section 4.2.3
 of RFC8949@-cbor}}).
-In many applications of CBOR today, deterministic encoding is not used
+In many applications of CBOR, deterministic encoding is not used
 at all, as its restriction of choices can create some additional
 performance cost and code complexity.
 
@@ -605,7 +688,7 @@ For applications that do not perform streaming of this kind, variation
 can be reduced (and often performance improved) by only allowing
 definite-length encoding.
 The present document coins the term _Basic Serialization_ for combining
-definite-length-only with preferred encoding, further reducing the
+definite-length-only with preferred serialization, further reducing the
 variation that a decoder needs to deal with.
 The Common Deterministic Encoding, CDE, finally combines basic
 serialization with a deterministic ordering of entries in a map
