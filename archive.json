@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-31T01:35:41.716502+00:00",
+  "timestamp": "2025-09-21T01:35:53.962262+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -627,6 +627,22 @@
       "createdAt": "2025-07-08T18:50:58Z",
       "updatedAt": "2025-08-28T13:26:48Z",
       "closedAt": "2025-08-28T13:26:48Z",
+      "comments": []
+    },
+    {
+      "number": 40,
+      "id": "I_kwDOJ8fYd87MeFGH",
+      "title": "Validity considerations",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/40",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From 2025-09-17 interim:\nPlease see: <https://mailarchive.ietf.org/arch/msg/cbor/tTMFfyKiZyYM0Yy7j-o9NUKAlp4>\n\nValidity is not a CDE subject by itself at all, but if we refine terms such as generic encoder/decoder (e.g., to discuss the \"checking\" feature of a decoder some more), validity might be addressed as well.\n\nOr we could decide to note the subject and handle it in a different document.\n",
+      "createdAt": "2025-09-18T13:38:39Z",
+      "updatedAt": "2025-09-18T13:38:39Z",
+      "closedAt": null,
       "comments": []
     }
   ],
