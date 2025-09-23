@@ -18,8 +18,8 @@ int,4294967296,1b0000000100000000,Smallest unsigned eight-byte int
 int,-4294967297,3b0000000100000000,Largest negative eight-byte int
 int,18446744073709551615,1bffffffffffffffff,Largest unsigned eight-byte int
 int,-18446744073709551616,3bffffffffffffffff,Smallest negative eight-byte int
-int,18446744073709551616,c249010000000000000000,Smallest unsigned bigint
-int,-18446744073709551617,c349010000000000000000,Largest negative bigint
+int,18446744073709551616,c249010000000000000000,Smallest unsigned bignum
+int,-18446744073709551617,c349010000000000000000,Largest negative bignum
 flt,0.0,f90000,Zero
 flt,-0.0,f98000,Negative zero
 flt,Infinity,f97c00,Infinity
@@ -84,12 +84,12 @@ flt,float'fff0000000000001',fbfff0000000000001, f64 negative sNaN with payload o
 flt,float'fff8000000000000',f9fe00, f64 negative qNaN with zero payload -- shortens to f16
 flt,float'ffffffffe0000000',faffffffff, f64 negative qNaN with 22 leftmost payload bits set -- shortens to f32
 bad,"{""b"":0,""a"":1}",a2616200616101,Incorrect map key ordering
-bad,"[4, 5]",98020405,Array length not in preferred encoding
-bad,255,1900ff,Integer not in preferred encoding
-bad,-18446744073709551617,c34a00010000000000000000,Bigint with leading zero bytes
-bad,10.5,fa41280000,Not in preferred encoding
-bad,NaN,fa7fc00000,Not in preferred encoding
-bad,65536,c243010000,Integer value too small for bigint
+bad,"[4, 5]",98020405,Array length not in preferred serialization
+bad,255,1900ff,Integer not in preferred serialization
+bad,-18446744073709551617,c34a00010000000000000000,Bignum with leading zero bytes
+bad,10.5,fa41280000,Not in preferred serialization
+bad,NaN,fa7fc00000,Not in preferred serialization
+bad,65536,c243010000,Integer value too small for bignum
 bad,"(_ h'01', h'0203')",5f4101420203ff,Indefinite length encoding
 bad,"",f818,Simple values 24..31 not in use
 bad,"",fc,Reserved (ai = 28..30)
