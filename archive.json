@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-21T01:35:53.962262+00:00",
+  "timestamp": "2025-09-25T01:22:02.393202+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1723,24 +1723,26 @@
       "id": "PR_kwDOJ8fYd86l09-9",
       "title": "Editorial work, such as Upgraded definitions.",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/39",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Based on <https://mailarchive.ietf.org/arch/msg/cbor/TGHVMNBe5LMhKoj4qMjHWiaLehI>\r\n\r\nAlso, start using the definitions consistently (more work is needed).",
       "createdAt": "2025-08-28T15:10:37Z",
-      "updatedAt": "2025-08-28T15:10:37Z",
+      "updatedAt": "2025-09-23T15:24:51Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "71168b3abc76c1f9304428934d665dd514c3bb14",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "editorial-august",
       "headRefOid": "62901d085dfe22dbfa2ab2fe4850df5de0c46036",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-23T15:24:51Z",
+      "mergedAt": "2025-09-23T15:24:51Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "5dbfef85b174944d7916fcf74db3a08304d5f75d"
+      },
       "comments": [],
       "reviews": []
     }
