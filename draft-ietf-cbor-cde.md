@@ -6,6 +6,7 @@ abbrev: CBOR CDE
 docname: draft-ietf-cbor-cde-latest
 category: bcp
 stream: IETF
+updates: 8949
 
 date:
 consensus: true
@@ -105,11 +106,21 @@ informative:
     deterministic, while employing most of its reductions of the
     variability needing to be handled by decoders.
 
+[^upd-]:
+    This specification updates RFC 8949 in that it provides
+    clarifications and definitions of additional terms as well as more
+    examples and explanatory text; it does not make technical changes
+    to RFC 8949.
+
+[^upd-]
+
 --- middle
 
 # Introduction
 
 [^abs1-]
+
+[^upd-]
 
 ## Structure of This Document
 
