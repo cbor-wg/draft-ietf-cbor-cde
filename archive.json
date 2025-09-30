@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-28T01:36:47.695859+00:00",
+  "timestamp": "2025-09-30T01:22:18.054715+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -1751,24 +1751,26 @@
       "id": "PR_kwDOJ8fYd86qidjY",
       "title": "Explain how this \"updates\" RFC 8949 (i.e., not in a technical way)",
       "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/41",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cabo",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "(As requested by Rohan Mahy and others)",
       "createdAt": "2025-09-25T15:40:04Z",
-      "updatedAt": "2025-09-25T15:40:04Z",
+      "updatedAt": "2025-09-28T07:35:17Z",
       "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
       "baseRefName": "main",
       "baseRefOid": "5dbfef85b174944d7916fcf74db3a08304d5f75d",
       "headRepository": "cbor-wg/draft-ietf-cbor-cde",
       "headRefName": "updates",
       "headRefOid": "642d36fa7a61eeabd282f80b8814c636b9875a98",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-28T07:35:17Z",
+      "mergedAt": "2025-09-28T07:35:17Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "5c53341151545a57e43c1ca7d34f961e5d451a31"
+      },
       "comments": [],
       "reviews": []
     }
