@@ -665,12 +665,17 @@ This is only a validity requirement as enforcing this requires the
 encoder to be aware of all map keys at the same time, which may be
 particularly difficult to implement for streaming encoders.
 The `lexicographic-map-sorting` encoding constraint does require such
-awareness already as a prerequisite to sorting the entries by map key;
-the check therefore becomes trivial, as multiple entries with the same
-map key would be consecutive.
-Given this opportunity, the encoding constraint therefore is
+awareness already as a prerequisite to sorting the entries by map key.
+In combination with the other CDE encoding constraints
+`preferred-serialization` and `definite-length-only`, the check
+therefore becomes trivial: multiple entries with the same
+map key would have the same (deterministic) map key serialization and
+would therefore be consecutive when sorted.
+Given this opportunity, the `lexicographic-map-sorting` encoding constraint
+therefore is
 deliberately phrased to require consecutive entries to have strictly
-increasing map keys; this prevents encoding multiple entries that have
+increasing map keys; with the other CDE encoding constraints, this prevents
+encoding multiple entries that have
 the same key.
 
 
