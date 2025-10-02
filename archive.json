@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-30T01:22:18.054715+00:00",
+  "timestamp": "2025-10-02T01:20:06.102922+00:00",
   "repo": "cbor-wg/draft-ietf-cbor-cde",
   "labels": [
     {
@@ -641,7 +641,31 @@
       "labels": [],
       "body": "From 2025-09-17 interim:\nPlease see: <https://mailarchive.ietf.org/arch/msg/cbor/tTMFfyKiZyYM0Yy7j-o9NUKAlp4>\n\nValidity is not a CDE subject by itself at all, but if we refine terms such as generic encoder/decoder (e.g., to discuss the \"checking\" feature of a decoder some more), validity might be addressed as well.\n\nOr we could decide to note the subject and handle it in a different document.\n",
       "createdAt": "2025-09-18T13:38:39Z",
-      "updatedAt": "2025-09-18T13:38:39Z",
+      "updatedAt": "2025-09-30T10:00:00Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "One decision we have to take is whether validity is required in CDE.\nThere are two basic validity requirements:\n\n* It is trivial to reject duplicate keys once you do map sorting, so I'd expect we consider this to be part of the map sorting encoding constraints.\n\n* It is not trivial to enforce valid UTF-8, so we have to make a decision here whether checking all text strings for UTF-8 both at encoder and checking-decoder side is part of CDE or not.",
+          "createdAt": "2025-09-30T10:00:00Z",
+          "updatedAt": "2025-09-30T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "I_kwDOJ8fYd87PDvuA",
+      "title": "Ensure that comparing encoded keys is adequate for duplicate key detection",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/issues/43",
+      "state": "OPEN",
+      "author": "hildjj",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "When decoding maps, and checking for duplicate keys, worry about this:\n\n```\n{\n  {\"b\": 1, \"a\": 2}: true,\n  {\"a\": 2, \"b\": 1}: false\n}\n```\n\nthe two keys are equivalent by section 5.6.1 of 8949.  If you aren't doing sorted maps, then checking the encoded version will not show a duplicate.",
+      "createdAt": "2025-10-01T14:31:38Z",
+      "updatedAt": "2025-10-01T14:31:38Z",
       "closedAt": null,
       "comments": []
     }
@@ -1771,6 +1795,32 @@
       "mergeCommit": {
         "oid": "5c53341151545a57e43c1ca7d34f961e5d451a31"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 42,
+      "id": "PR_kwDOJ8fYd86rZokf",
+      "title": "Disentangle the coding choices",
+      "url": "https://github.com/cbor-wg/draft-ietf-cbor-cde/pull/42",
+      "state": "OPEN",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Cherry pick from #10, close #10\r\nDon't aggregate encoding constraints except where natural \r\nLots of editorial clarifications",
+      "createdAt": "2025-09-30T18:41:11Z",
+      "updatedAt": "2025-09-30T18:41:11Z",
+      "baseRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "baseRefName": "main",
+      "baseRefOid": "5c53341151545a57e43c1ca7d34f961e5d451a31",
+      "headRepository": "cbor-wg/draft-ietf-cbor-cde",
+      "headRefName": "disentangle",
+      "headRefOid": "90b7590a2537b05642f266857072f3c153d11927",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
