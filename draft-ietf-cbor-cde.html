@@ -1968,13 +1968,22 @@ This is only a validity requirement as enforcing this requires the
 encoder to be aware of all map keys at the same time, which may be
 particularly difficult to implement for streaming encoders.
 The <code>lexicographic-map-sorting</code> encoding constraint does require such
-awareness already as a prerequisite to sorting the entries by map key;
-the check therefore becomes trivial, as multiple entries with the same
-map key would be consecutive.
-Given this opportunity, the encoding constraint therefore is
+awareness already as a prerequisite to sorting the entries by map key.
+In combination with the other CDE encoding constraints
+<code>preferred-serialization</code> and <code>definite-length-only</code>, the check
+therefore becomes trivial: multiple entries with the same
+map key would have the same (deterministic) map key serialization and
+would therefore be consecutive when sorted.
+Given this opportunity, the <code>lexicographic-map-sorting</code> encoding constraint
+therefore is
 deliberately phrased to require consecutive entries to have strictly
-increasing map keys; this prevents encoding multiple entries that have
-the same key.<a href="#section-3.3-4.1" class="pilcrow">¶</a></p>
+increasing map keys; with the other CDE encoding constraints, this prevents
+encoding multiple entries that have
+the same key.
+Note that Section <a href="https://rfc-editor.org/rfc/rfc8949#section-5.6.1" class="relref">5.6.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> lists one specific case
+"(specifically, -0.0 is equal to 0.0)" where two different keys are
+considered equivalent for the purpose of duplicate map keys; this
+needs to be checked with extra code for a full validity checker.<a href="#section-3.3-4.1" class="pilcrow">¶</a></p>
 </aside>
 </section>
 </div>
