@@ -677,6 +677,10 @@ deliberately phrased to require consecutive entries to have strictly
 increasing map keys; with the other CDE encoding constraints, this prevents
 encoding multiple entries that have
 the same key.
+Note that {{Section 5.6.1 of RFC8949@-cbor}} lists one specific case
+"(specifically, -0.0 is equal to 0.0)" where two different keys are
+considered equivalent for the purpose of duplicate map keys; this
+needs to be checked with extra code for a full validity checker.
 
 
 # CDDL support
