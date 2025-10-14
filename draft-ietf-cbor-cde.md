@@ -121,9 +121,8 @@ informative:
 
 [^status]
 
-[^status]: This is a draft pull request.
-    It needs further editing, but could be useful as
-    input for the discussion of directions to be taken at 2025-cbor-17 interim on 2025-10-01.
+[^status]: This revision -13 merges all active pull requests in
+    preparation for the 2025-cbor-17 interim on 2025-10-15.
 
 --- middle
 
