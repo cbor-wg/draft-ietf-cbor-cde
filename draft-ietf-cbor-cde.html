@@ -27,26 +27,24 @@ application protocol and media type definitions.
 clarifications and definitions of additional terms as well as more
 examples and explanatory text; it does not make technical changes
 to RFC 8949. 
-       This is a draft pull request.
-It needs further editing, but could be useful as
-input for the discussion of directions to be taken at 2025-cbor-17 interim on 2025-10-01. 
+       This revision -13 merges all active pull requests in
+preparation for the 2025-cbor-17 interim on 2025-10-15. 
     ' name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="draft-ietf-cbor-cde-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 5.3.1
-    platformdirs 4.4.0
+    lxml 6.0.2
+    platformdirs 4.5.1
     pycountry 24.6.1
-    PyYAML 6.0.2
+    PyYAML 6.0.3
     requests 2.32.5
-    setuptools 80.9.0
-    wcwidth 0.2.14
+    wcwidth 0.3.0
 -->
 <link href="draft-ietf-cbor-cde.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -187,7 +185,7 @@ input for the discussion of directions to be taken at 2025-cbor-17 interim on 20
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -195,7 +193,8 @@ input for the discussion of directions to be taken at 2025-cbor-17 interim on 20
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -587,6 +586,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -657,7 +657,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1065,11 +1065,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CBOR CDE</td>
-<td class="right">October 2025</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann</td>
-<td class="center">Expires 16 April 2026</td>
+<td class="center">Expires 2 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1085,12 +1085,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc8949" class="eref">8949</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-13" class="published">13 October 2025</time>
+<time datetime="2026-03-01" class="published">1 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-16">16 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-02">2 September 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1123,9 +1123,8 @@ application protocol and media type definitions.<a href="#section-abstract-3" cl
 clarifications and definitions of additional terms as well as more
 examples and explanatory text; it does not make technical changes
 to RFC 8949.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
-<p id="section-abstract-5"><span class="cref" id="status">This is a draft pull request.
-It needs further editing, but could be useful as
-input for the discussion of directions to be taken at 2025-cbor-17 interim on 2025-10-01.</span><a href="#section-abstract-5" class="pilcrow">¶</a></p>
+<p id="section-abstract-5"><span class="cref" id="status">This revision -13 merges all active pull requests in
+preparation for the 2025-cbor-17 interim on 2025-10-15.</span><a href="#section-abstract-5" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1161,7 +1160,7 @@ input for the discussion of directions to be taken at 2025-cbor-17 interim on 20
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 2 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1170,7 +1169,7 @@ input for the discussion of directions to be taken at 2025-cbor-17 interim on 20
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -2157,15 +2156,15 @@ This revision of the standard is widely known as C23. Technically equivalent spe
 <dd class="break"></dd>
 <dt id="I-D.bormann-dispatch-modern-network-unicode">[I-D.bormann-dispatch-modern-network-unicode]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Modern Network Unicode"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-dispatch-modern-network-unicode-07</span>, <time datetime="2025-08-30" class="refDate">30 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-07">https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Modern Network Unicode"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-dispatch-modern-network-unicode-08</span>, <time datetime="2026-03-01" class="refDate">1 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-08">https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-18</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-18">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-18</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-19</span>, <time datetime="2025-10-16" class="refDate">16 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-19">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-19</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.mcnally-deterministic-cbor">[I-D.mcnally-deterministic-cbor]</dt>
         <dd>
-<span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">L. Lundblade</span>, <span class="refTitle">"dCBOR: A Deterministic CBOR Application Profile"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-13</span>, <time datetime="2025-08-10" class="refDate">10 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-13">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-13</a>&gt;</span>. </dd>
+<span class="refAuthor">McNally, W.</span>, <span class="refAuthor">Allen, C.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">L. Lundblade</span>, <span class="refTitle">"dCBOR: Deterministic CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mcnally-deterministic-cbor-17</span>, <time datetime="2026-02-11" class="refDate">11 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-17">https://datatracker.ietf.org/doc/html/draft-mcnally-deterministic-cbor-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7493">[RFC7493]</dt>
         <dd>
@@ -2763,7 +2762,7 @@ emitting duplicate keys in a major type 5 map as well as emitting
 only valid UTF-8 in major type 3 text strings.<a href="#appendix-C.3.1-1.3.1" class="pilcrow">¶</a></p>
 <p id="appendix-C.3.1-1.3.2">
 Note also that CDE does NOT include a requirement for Unicode
-normalization <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span>; <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-07#appendix-C" class="relref">Appendix C</a> of [<a href="#I-D.bormann-dispatch-modern-network-unicode" class="cite xref">I-D.bormann-dispatch-modern-network-unicode</a>]</span> contains some
+normalization <span>[<a href="#UAX-15" class="cite xref">UAX-15</a>]</span>; <span><a href="https://datatracker.ietf.org/doc/html/draft-bormann-dispatch-modern-network-unicode-08#appendix-C" class="relref">Appendix C</a> of [<a href="#I-D.bormann-dispatch-modern-network-unicode" class="cite xref">I-D.bormann-dispatch-modern-network-unicode</a>]</span> contains some
 rationale that went into not requiring routine use of Unicode normalization
 processes.<a href="#appendix-C.3.1-1.3.2" class="pilcrow">¶</a></p>
 </li>
